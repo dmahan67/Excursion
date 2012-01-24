@@ -219,6 +219,10 @@ class Excursion {
 	
 	function Hook($hook)
 	{
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 56c531a8a91f95df5879ee85180c9897a890b045
 		global $plugins;
 
 		$extplugins = array();
@@ -237,6 +241,10 @@ class Excursion {
 		}
 
 		return $extplugins;
+<<<<<<< HEAD
+=======
+		
+>>>>>>> 56c531a8a91f95df5879ee85180c9897a890b045
 	}
 	
 }
