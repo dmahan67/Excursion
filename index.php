@@ -14,6 +14,13 @@ require_once 'core/header.php';
 
 $xtpl = new XTemplate('themes/bootstrap/index.xtpl');
 
+/* === Hook === */
+foreach ($excursion->Hook('index.tags') as $pl)
+{
+ include $pl;
+}
+/* ===== */
+
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');
 
