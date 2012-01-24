@@ -32,6 +32,7 @@
 				<ul class="nav">
 					<li><a href="index.php">Home</a></li>
 					<li><a href="users.php">Users</a></li>
+					<li><a href="https://github.com/dmahan67/Excursion">Github</a></li>
 				</ul>
 				
 				<ul class="nav secondary-nav">
