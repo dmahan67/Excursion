@@ -217,6 +217,30 @@ class Excursion {
 	
 	}
 	
+	function Hook($hook)
+	{
+		
+		global $plugins;
+
+		$extplugins = array();
+
+		if (isset($plugins[$hook]) && is_array($plugins[$hook]))
+		{
+			foreach($plugins[$hook] as $k)
+			{
+				
+				$cat = 'plug';
+				$opt = $k['code'];
+			
+				$extplugins[] = 'plugins/' . $k['file'];
+				
+			}
+		}
+
+		return $extplugins;
+		
+	}
+	
 }
 
 ?>
