@@ -1,0 +1,17 @@
+<!-- BEGIN: MAIN -->
+		<div class="content">
+		
+			<div class="page-header">
+				<h1>{MESSAGE_TITLE} <small>{MESSAGE_SUBTITLE}</small></h1>
+			</div>
+			
+			<div class="row">
+			
+				<div class="span16">
+					<p>{MESSAGE_TEXT}</p>
+				</div>
+				
+			</div>
+			
+		</div>
+<!-- END: MAIN -->

@@ -1,0 +1,70 @@
+<!-- BEGIN: MAIN -->
+		<div class="content">
+		
+			<div class="page-header">
+				<h1>Recovery <small>Forgot password or resend validation email</small></h1>
+			</div>
+			
+			<div class="row">
+			
+				<div class="span14">
+					<ul class="breadcrumb">
+						<li><img src="themes/bootstrap/images/home.png" height="12" width="12" /></li>
+						<li><a href="index.php">Home</a> <span class="divider">/</span></li>
+						<li><a href="users.php">Users</a> <span class="divider">/</span></li>
+						<li class="active">Recovery Tools</li>
+					</ul>
+				</div>
+			
+				<div class="span7">
+				
+					<h5>Recover lost password</h5>
+					
+					<p>Have your password reset, and emailed to you.</p>
+
+					<form action="users.php?action=recover&m=lostpass" method="post" class="form-stacked">
+						<fieldset>
+							<div class="clearfix">
+								<label for="email">Email Address</label>
+								<div class="input">
+									<input class="xlarge" id="email" name="email" size="30" type="text" />
+								</div>
+							</div>
+							<div class="clearfix">
+								<div class="input">
+									<button class="btn primary">Submit</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+						
+				</div>
+				
+				<div class="span7">
+				
+					<h5>Resend account validation email</h5>
+					
+					<p>Have an account validation email sent to you.</p>
+					
+					<form action="users.php?action=recover&m=validation" method="post" class="form-stacked">
+						<fieldset>
+							<div class="clearfix">
+								<label for="email">Email Address</label>
+								<div class="input">
+									<input class="xlarge" id="email" name="email" size="30" type="text" />
+								</div>
+							</div>
+							<div class="clearfix">
+								<div class="input">
+									<button class="btn primary">Submit</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+
+				</div>
+				
+			</div>
+			
+		</div>
+<!-- END: MAIN -->

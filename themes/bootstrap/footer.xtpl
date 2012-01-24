@@ -1,0 +1,17 @@
+<!-- BEGIN: FOOTER -->
+		<footer class="footer">
+		
+			<div class="container">
+			
+				<p class="pull-right"><a href="#">Back to top</a></p>
+				<p class="pull-left">&copy; Copyright 2012 Excursion Team</p>	
+				
+			</div>
+			
+		</footer>
+
+	</div>
+
+</body>
+</html>
+<!-- END: FOOTER -->

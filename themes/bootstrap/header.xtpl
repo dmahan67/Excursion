@@ -1,0 +1,67 @@
+<!-- BEGIN: HEADER -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8">
+	<title>Excursion - Content Management System</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript" src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-dropdown.js"></script>
+	<script type="text/javascript" src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-alerts.js"></script>
+	<script type="text/javascript" src="http://autobahn.tablesorter.com/jquery.tablesorter.min.js"></script>
+	<script >$(function() {$("table#sortTable").tablesorter({ sortList: [[0,0]] });});</script>
+	
+	<link href="themes/bootstrap/css/style.css" rel="stylesheet">
+
+</head>
+<body>
+
+	<div class="topbar" data-dropdown="dropdown">
+
+		<div class="fill">
+
+			<div class="container">
+			
+				<a class="brand" name="top">Excursion</a>
+				
+				<ul class="nav">
+					<li><a href="index.php">Home</a></li>
+					<li><a href="users.php">Users</a></li>
+				</ul>
+				
+				<ul class="nav secondary-nav">
+					<li class="dropdown">
+						<!-- BEGIN: GUEST -->
+						<a href="#" class="dropdown-toggle">Welcome, Guest</a>
+						<ul class="dropdown-menu">
+							<li><a href="login.php">Login</a></li>
+							<li><a href="register.php">Register</a></li>
+							<li class="divider"></li>
+							<li><a href="users.php?action=recover">Recover Password</a></li>
+						</ul>
+						<!-- END: GUEST -->
+						<!-- BEGIN: USER -->
+						<a href="#" class="dropdown-toggle">Welcome, {PHP.user.name}</a>
+						<ul class="dropdown-menu">
+							<!-- IF {PHP.user.group} == '4' --><li><a href="">Admin Panel</a></li><!-- ENDIF -->
+							<li><a href="">Update Profile</a></li>
+							<li class="divider"></li>
+							<li><a href="logout.php">Logout</a></li>
+						</ul>
+						<!-- END: USER -->
+					</li>
+				</ul>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="container">
+<!-- END: HEADER -->
