@@ -17,11 +17,7 @@ $xtpl = new XTemplate('themes/bootstrap/index.xtpl');
 /* === Hook === */
 foreach ($excursion->Hook('index.tags') as $pl)
 {
-<<<<<<< HEAD
 	include $pl;
-=======
- include $pl;
->>>>>>> 56c531a8a91f95df5879ee85180c9897a890b045
 }
 /* ===== */
 

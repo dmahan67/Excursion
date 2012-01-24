@@ -35,3 +35,6 @@ CREATE TABLE `plugins` (
   `active` tinyint unsigned NOT NULL default '1',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `plugins` (`id`, `hook`, `code`, `part`, `title`, `file`, `active`) VALUES
+(1, 'index.tags', 'news', 'main', 'News', 'news/news.php', 1);

@@ -5,6 +5,6 @@ Hooks=index.tags
 [END_PLUGIN]
 ==================== */
 
-// hook code here
+echo "lol";
 
 ?>
