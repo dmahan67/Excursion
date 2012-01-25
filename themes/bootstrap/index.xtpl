@@ -8,7 +8,13 @@
 			<div class="row">
 			
 				<div class="span9">
-					<p>Main content</p>
+					<!-- BEGIN: NEWS -->
+					<h5><a href="page.php?id={NEWS_ID}">{NEWS_TITLE}</a></h5>
+					<p class="desc">Posted by: {NEWS_OWNER} on {NEWS_DATE}</p>
+					
+					{NEWS_TEXT}
+					
+					<!-- END: NEWS -->
 				</div>
 				
 				<div class="span5">

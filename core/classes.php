@@ -217,6 +217,25 @@ class Excursion {
 	
 	}
 	
+	function generateUser($id)
+	{
+	
+		global $db;
+		
+		$is_member = (bool)$db->query("SELECT id FROM members WHERE id = ? LIMIT 1", array($id))->fetch();
+		$member_username = $db->query("SELECT username FROM members WHERE id='$id' LIMIT 1")->fetchColumn();
+		
+		$member = '<a href="users.php?id=' . $id . '">' . $member_username . '</a>';
+		
+		if($is_member)
+		{
+		
+			return $member;
+			
+		}
+	
+	}
+	
 	function Hook($hook)
 	{
 		global $plugins;

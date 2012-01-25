@@ -38,3 +38,37 @@ CREATE TABLE `plugins` (
 
 INSERT INTO `plugins` (`id`, `hook`, `code`, `part`, `title`, `file`, `active`) VALUES
 (1, 'index.tags', 'news', 'main', 'News', 'news/news.php', 1);
+
+CREATE TABLE `categories` (
+  `id` mediumint NOT NULL auto_increment,
+  `code` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+  `path` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+  `title` varchar(128) collate utf8_unicode_ci NOT NULL,
+  `desc` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+  PRIMARY KEY  (`id`),
+  KEY `code` (`code`),
+  KEY `path` (`path`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `categories` (`id`, `code`, `path`, `title`, `desc`) VALUES
+(1, 'news', 1, 'News', 'A list of all important updates');
+
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `state` tinyint(1) unsigned NOT NULL default '0',
+  `cat` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `title` varchar(255) collate utf8_unicode_ci NOT NULL,
+  `desc` varchar(255) collate utf8_unicode_ci default NULL,
+  `text` MEDIUMTEXT collate utf8_unicode_ci NOT NULL,
+  `owner` int(11) NOT NULL default '0',
+  `date` int(11) NOT NULL default '0',
+  `page_file` tinyint(4) default NULL,
+  `page_url` varchar(255) collate utf8_unicode_ci default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `cat` (`cat`),
+  KEY `state` (`state`),
+  KEY `date` (`date`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `pages` (`state`, `cat`, `title`, `desc`, `text`, `owner`, `date`, `page_file`, `page_url`) VALUES
+(1, 'news', 'Welcome!', '', 'Congratulations! Your website has been successfully installed.', 1, UNIX_TIMESTAMP(), '', '');

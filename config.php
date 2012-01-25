@@ -10,9 +10,9 @@ error_reporting (E_ALL ^ E_NOTICE);
 
 /* ========== Main Settings ========== */
 
-$config['main_url'] = 'localhost';			// Full URL without ending in a slash
+$config['main_url'] = 'localhost';									// Full URL without ending in a slash
 $config['title'] = 'Excursion';										// Title of your website
-$config['admin_email'] = 'donotreply@excursion-powered.com';			// Administration email
+$config['admin_email'] = 'donotreply@excursion-powered.com';		// Administration email
 
 /* ========== Time / Date ========== */
 
