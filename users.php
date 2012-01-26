@@ -60,36 +60,71 @@ if(isset($id) && $id > 0)
 	));
 	
 }
+elseif($m == 'profile')
+{
+
+	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.profile.xtpl');
+	
+	if($action == 'send')
+	{
+	
+		echo "do this";
+	
+	}
+	
+	$themes .= "<select class='xlarge' name='themes' id='themes'>";
+	$sql = $db->query("SELECT * FROM categories ORDER BY title ASC");
+	while ($row = $sql->fetch())
+	{
+	
+		$themes .= "<option name='".$row['code']."' value='".$row['code']."'>".$row['title']."</option>";
+		
+	}
+	$themes .= "</select>";
+	
+	$xtpl->assign(array('THEMES' => $themes));
+
+}
 elseif(isset($action) && $action == 'recover')
 {
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.recover.xtpl');
  
-
 	if($m == 'lostpass')
 	{
  
-		if($step == 2) // proccess security question, and do function to update password
+		if($step == 2)
 		{
+		
 			$answer = $db->query("SELECT SQ_Answer FROM members WHERE email='" .$email. "'")->fetchColumn();
-			if(strtoupper(trim($answer)) == strtoupper(trim($_POST['answer']))){
+			
+			if(strtoupper(trim($answer)) == strtoupper(trim($_POST['answer'])))
+			{
+			
 				$member->lostPassword($email);
 				header("Location: message.php?id=104");
+				
 			}
+			
 		}
 		else
 		{
-			// display security question
+		
 			$email_exists = (bool)$db->query("SELECT id FROM members WHERE email='" .$email. "' LIMIT 1")->fetch();
-			if($email_exists){
+			
+			if($email_exists)
+			{
+			
 				$SQ_index = $db->query("SELECT SQ_Index FROM members WHERE email='" .$email. "'")->fetchColumn();
 				$SQ = $db->query("SELECT question FROM security_questions WHERE id='" .$SQ_index. "'")->fetchColumn();
-				
+
 				$xtpl->assign(array(
 					'SECURITY_QUESTION' => $SQ,
 					'EMAIL' => $email)
 				);
+				
 				$xtpl->parse('MAIN.SECURITY_QUESTION');
+				
 			}
 			
 		}
@@ -101,8 +136,11 @@ elseif(isset($action) && $action == 'recover')
 		$member->sendValidationEmail($email);
  
 	}
-	 if(empty($m)){
+	if(empty($m) || $m == 'validation')
+	{
+	
 		$xtpl->parse('MAIN.RECOVERY_OPTIONS');
+		
 	}
  
 }

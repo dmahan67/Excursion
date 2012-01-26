@@ -52,7 +52,7 @@
 						<a href="#" class="dropdown-toggle">Welcome, {PHP.user.name}</a>
 						<ul class="dropdown-menu">
 							<!-- IF {PHP.user.group} == '4' --><li><a href="">Admin Panel</a></li><!-- ENDIF -->
-							<li><a href="">Update Profile</a></li>
+							<li><a href="users.php?m=profile">Update Profile</a></li>
 							<li class="divider"></li>
 							<li><a href="logout.php">Logout</a></li>
 						</ul>

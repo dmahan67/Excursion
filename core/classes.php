@@ -114,7 +114,7 @@ class Members {
 	
 	function sendValidationEmail($email){
 	
-		global $lang, $db, $config;
+		global $lang, $db, $config, $xtpl;
 		
 		$token = $db->query("SELECT token FROM members WHERE email='$email' LIMIT 1")->fetchColumn();
 		$username = $db->query("SELECT username FROM members WHERE email='$email' LIMIT 1")->fetchColumn();
@@ -122,10 +122,10 @@ class Members {
 		$email_exists = (bool)$db->query("SELECT id FROM members WHERE email = ? LIMIT 1", array($email))->fetch();
 		$is_inactive = (bool)$db->query("SELECT groupid FROM members WHERE token = ? AND groupid = ? LIMIT 1", array($token, '1'))->fetch();
 		
-		if (!strlen($token) == 16) $error .= $lang['token_not_exist'].'<br />';	
 		if (!$email_exists) $error .= $lang['reg_email_exists'].'<br />';
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL )) $error .= $lang['reg_email_format'].'<br />';
 		if ($user_group > 1) $error .= $lang['validation_active'].'<br />';
+		if (!strlen($token) == 16) $error = $lang['token_not_exist'].'<br />';	
 		
 		if(empty($error))
 		{
@@ -145,6 +145,15 @@ class Members {
 			
 			header('Location: message.php?id=103');
 	
+		}
+		else
+		{
+		
+			$xtpl->assign(array(
+				'ERRORS_TEXT' => $error
+			));
+			$xtpl->parse('MAIN.RECOVERY_OPTIONS.VALIDATION_ERRORS');
+		
 		}
 		
 	}

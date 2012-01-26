@@ -42,6 +42,11 @@ if($id == 105){
 	$subtitle =  $lang['message_105_subtitle'];
 	$message =  $lang['message_105_text'];
 }
+if($id == 106){
+	$title = $lang['message_106_title'];
+	$subtitle =  $lang['message_106_subtitle'];
+	$message =  $lang['message_106_text'];
+}
 
 require_once 'core/header.php';
 

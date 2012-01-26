@@ -1,0 +1,55 @@
+<!-- BEGIN: MAIN -->
+		<div class="content">
+		
+			<div class="page-header">
+				<h1>Profile <small>Update your account information</small></h1>
+			</div>
+			
+			<div class="row">
+			
+				<div class="span14">
+				
+					<!-- BEGIN: ERRORS -->
+					<div class="alert-message block-message error fade in" data-alert="alert" >
+						<a class="close" href="#">&times;</a>
+						<p>{ERRORS_TEXT}</p>
+					</div>
+					<!-- END: ERRORS -->
+				
+					<form action="users.php?m=profile&action=send" method="post">
+					<table class="borderless-table">
+						<tbody>
+							<tr>
+								<th>Theme</th>
+								<td>{THEMES}</td>
+							</tr>
+							<tr>
+								<th>Password</th>
+								<td>
+									<input class="xlarge" type="password" id="current_password" name="current_password" size="32" />
+									<span class="help-block">First enter your current password</span>
+									
+									<table style="width:590px;margin-left:-10px;" class="borderless-table">
+										<tr>
+											<td><input class="xlarge" type="password" id="new_password1" name="new_password1" size="32" /></td>
+											<td><input class="xlarge" type="password" id="new_password2" name="new_password2" size="32" /></td>
+										</tr>
+										<tr>
+											<td colspan="2"><span class="help-block">Then enter your new password twice</span></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"><button class="btn primary">Submit</button></td>
+							</tr>
+						</tbody>
+					</table>
+					</form>
+				
+				</div>
+				
+			</div>
+			
+		</div>
+<!-- END: MAIN -->

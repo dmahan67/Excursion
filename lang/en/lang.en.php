@@ -31,6 +31,10 @@ $lang['message_105_title'] = 'Error';
 $lang['message_105_subtitle'] = 'You are not allowed to do this';
 $lang['message_105_text'] = 'You do not have sufficient rights to perform this action.';
 
+$lang['message_106_title'] = 'Error';
+$lang['message_106_subtitle'] = 'User account does not exist';
+$lang['message_106_text'] = '';
+
 $lang['message_10_title'] = '';
 $lang['message_10_subtitle'] = '';
 $lang['message_10_text'] = '';
@@ -63,7 +67,7 @@ $lang['validation_admin'] = '<br /><br />Feel free to contact an administrator i
 $lang['validation_reg'] = 'Registration';
 $lang['validation_activate'] = 'Activate Account';
 $lang['validation_deactivate'] = 'Remove Account';
-$lang['token_not_exist'] = 'Fatal error occured when trying to retrieve your user authentication token.';
+$lang['token_not_exist'] = 'Error retrieving authentication token (user does not exist).';
 $lang['validation_active'] = 'Your account is already active.';
 $lang['reset_email'] = 'Hi %1$s,<br /><br />
 						Your account has recently had a password reset. The new password is:

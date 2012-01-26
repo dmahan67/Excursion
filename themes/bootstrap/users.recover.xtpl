@@ -43,6 +43,13 @@
 				
 				<div class="span7">
 				
+					<!-- BEGIN: VALIDATION_ERRORS -->
+					<div class="alert-message block-message error fade in" data-alert="alert" >
+						<a class="close" href="#">&times;</a>
+						<p>{ERRORS_TEXT}</p>
+					</div>
+					<!-- END: VALIDATION_ERRORS -->
+				
 					<h5>Resend account validation email</h5>
 					
 					<p>Have an account validation email sent to you.</p>
