@@ -60,7 +60,10 @@ $lang['validation_activate'] = 'Activate Account';
 $lang['validation_deactivate'] = 'Remove Account';
 $lang['token_not_exist'] = 'Fatal error occured when trying to retrieve your user authentication token.';
 $lang['validation_active'] = 'Your account is already active.';
-
+$lang['reset_email'] = 'Hi %1$s,<br /><br />
+						Your account has recently had a password reset. The new password is:
+						%2$s<br /><br />
+						If this was a mistake, you may want to contact the administrator.';
 $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';

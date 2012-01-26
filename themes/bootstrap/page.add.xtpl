@@ -1,0 +1,50 @@
+<!-- BEGIN: MAIN -->
+		<div class="content">
+		
+			<div class="page-header">
+				<h1>Submit Page <small>Create a new page</small></h1>
+			</div>
+			
+			<div class="row">
+			
+				<div class="span14">
+				
+					<form action="page.php?m=add&action=send" method="post">
+					<table class="borderless-table">
+						<tbody>
+							<tr>
+								<th>Title</th>
+								<td><input class="xlarge" id="title" name="title" type="text" size="32" /></td>
+							</tr>
+							<tr>
+								<th>Description</th>
+								<td><input class="xlarge" id="desc" name="desc" type="text" size="32" /></td>
+							</tr>
+							<tr>
+								<th>Category</th>
+								<td>{CATEGORY}</td>
+							</tr>
+							<tr>
+								<th>Page File</th>
+								<td><input type="checkbox" id="pagefile" name="pagefile" value="option2" /></td>
+							</tr>
+							<tr>
+								<th>File URL</th>
+								<td><input class="xlarge" id="pageurl" name="pageurl" type="text" size="32" /></td>
+							</tr>
+							<tr>
+								<td colspan="2"><textarea class="ckeditor" id="text" name="text"></textarea></td>
+							</tr>
+							<tr>
+								<td colspan="2"><button class="btn primary">Submit</button></td>
+							</tr>
+						</tbody>
+					</table>
+					</form>
+				
+				</div>
+				
+			</div>
+			
+		</div>
+<!-- END: MAIN -->

@@ -15,6 +15,7 @@
 	<script type="text/javascript" src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-alerts.js"></script>
 	<script type="text/javascript" src="http://autobahn.tablesorter.com/jquery.tablesorter.min.js"></script>
 	<script >$(function() {$("table#sortTable").tablesorter({ sortList: [[0,0]] });});</script>
+	<script type="text/javascript" src="themes/bootstrap/js/ckeditor.js"></script>
 	
 	<link href="themes/bootstrap/css/style.css" rel="stylesheet">
 
@@ -32,6 +33,7 @@
 				<ul class="nav">
 					<li><a href="index.php">Home</a></li>
 					<li><a href="users.php">Users</a></li>
+					<li><a href="list.php?c=news">News</a></li>
 					<li><a href="https://github.com/dmahan67/Excursion">Github</a></li>
 				</ul>
 				

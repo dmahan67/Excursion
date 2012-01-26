@@ -1,4 +1,4 @@
-CREATE TABLE `members` (
+CREATE TABLE IF NOT EXISTS `members` (
   `id` int NOT NULL auto_increment,
   `groupid` int NOT NULL default '1',
   `username` varchar(100) collate utf8_unicode_ci NOT NULL,
@@ -6,12 +6,14 @@ CREATE TABLE `members` (
   `email` varchar(64) collate utf8_unicode_ci NOT NULL default '',
   `regdate` int NOT NULL default '0',
   `token` char(16) collate utf8_unicode_ci NOT NULL default '',
+  `SQ_Index` int(2) NOT NULL,
+  `SQ_Answer` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `password` (`password`),
   KEY `regdate` (`regdate`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE `groups` (
+CREATE TABLE IF NOT EXISTS `groups` (
   `id` int NOT NULL auto_increment,
   `title` varchar(64) collate utf8_unicode_ci NOT NULL default '',
   `desc` varchar(255) collate utf8_unicode_ci NOT NULL default '',
@@ -25,7 +27,7 @@ INSERT INTO `groups` (`id`, `title`, `desc`, `icon`) VALUES
 (3, 'Members', 'Members', ''),
 (4, 'Administrators', 'Administrators', '');
 
-CREATE TABLE `plugins` (
+CREATE TABLE IF NOT EXISTS `plugins` (
   `id` mediumint NOT NULL auto_increment,
   `hook` varchar(64) collate utf8_unicode_ci NOT NULL default '',
   `code` varchar(64) collate utf8_unicode_ci NOT NULL default '',
@@ -39,7 +41,7 @@ CREATE TABLE `plugins` (
 INSERT INTO `plugins` (`id`, `hook`, `code`, `part`, `title`, `file`, `active`) VALUES
 (1, 'index.tags', 'news', 'main', 'News', 'news/news.php', 1);
 
-CREATE TABLE `categories` (
+CREATE TABLE IF NOT EXISTS `categories` (
   `id` mediumint NOT NULL auto_increment,
   `code` varchar(255) collate utf8_unicode_ci NOT NULL default '',
   `path` varchar(255) collate utf8_unicode_ci NOT NULL default '',
@@ -72,3 +74,13 @@ CREATE TABLE IF NOT EXISTS `pages` (
 
 INSERT INTO `pages` (`state`, `cat`, `title`, `desc`, `text`, `owner`, `date`, `page_file`, `page_url`) VALUES
 (1, 'news', 'Welcome!', '', 'Congratulations! Your website has been successfully installed.', 1, UNIX_TIMESTAMP(), '', '');
+
+CREATE TABLE IF NOT EXISTS `security_questions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `question` varchar(255) NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `security_questions` (`question`) VALUES
+('What is the town you grew up in?'),
+('What is your favorite musician?');

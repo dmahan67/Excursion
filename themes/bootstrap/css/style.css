@@ -46,3 +46,12 @@ body {
 .topbar .btn {
 	border: 0;
 }
+
+table.borderless-table td {
+  vertical-align: top;
+  border-top: 0px;
+}
+table.borderless-table tbody th {
+  border-top: 0px;
+  vertical-align: top;
+}

@@ -1,0 +1,53 @@
+<!-- BEGIN: MAIN -->
+		<div class="content">
+		
+			<div class="page-header">
+				<h1>{TITLE} <small>{DESC}</small></h1>
+			</div>
+			
+			<div class="row">
+			
+				<div class="span14">
+					<ul class="breadcrumb">
+						<li><img src="themes/bootstrap/images/home.png" height="12" width="12" /></li>
+						<li><a href="index.php">Home</a> <span class="divider">/</span></li>
+						<li><a href="list.php?c={CAT}">{CAT}</a> <span class="divider">/</span></li>
+						<li class="active">{TITLE}</li>
+					</ul>
+				</div>
+			
+				<div class="span9">
+				
+					{TEXT}
+
+				</div>
+				
+				<div class="span5">
+				
+					<h4>Page Information</h4>
+					
+					<table class="borderless-table">
+						<tbody>
+							<tr>
+								<th>Author</th>
+								<td>{OWNER}</td>
+							</tr>
+							<tr>
+								<th>Date</th>
+								<td>{DATE}</td>
+							</tr>
+						</tbody>
+					</table>	
+					
+					<!-- BEGIN: PAGE_FILE -->
+					<h4>Download</h4>
+					
+					<p><a href="{FILE_URL}">{TITLE}</a></p>	
+					<!-- END: PAGE_FILE -->
+				
+				</div>
+				
+			</div>
+			
+		</div>
+<!-- END: MAIN -->
