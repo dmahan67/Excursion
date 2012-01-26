@@ -17,7 +17,7 @@ class Members {
 	 * @ GROUP 4 - Administrator
 	 */
 
-	function Register($un, $pwd, $pwd2, $email){
+	function Register($un, $pwd, $pwd2, $email, $sq, $sq_answer){
 	
 		global $db, $xtpl, $lang, $excursion, $member;
 		
@@ -32,6 +32,7 @@ class Members {
 		if (mb_strlen($email) < 10) $error .= $lang['reg_email_length'].'<br />';		
 		if ($email_exists) $error .= $lang['reg_email_exists'].'<br />';
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL )) $error .= $lang['reg_email_format'].'<br />';
+		if (mb_strlen($sq_answer) < 2) $error .= $lang['reg_sq_length'].'<br />';
 		
 		if(empty($error))
 		{
@@ -42,8 +43,8 @@ class Members {
 			$insert['email'] = $email;
 			$insert['regdate'] = (int)time();
 			$insert['token'] = $excursion->generateToken(16);
-			$insert['SQ_Index'] = 1;
-			$insert['SQ_Answer'] = "Testing";
+			$insert['SQ_Index'] = $sq;
+			$insert['SQ_Answer'] = $sq_answer;
 
 			
 			$db->insert('members', $insert);
