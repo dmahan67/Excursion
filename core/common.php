@@ -58,18 +58,25 @@ if (isset($_SESSION['user_id']))
 
 if (!$plugins)
 {
-	$sql = $db->query("SELECT code, file, hook FROM plugins
-		WHERE active = 1 ORDER BY hook ASC");
+
+	$sql = $db->query("SELECT code, file, hook FROM plugins WHERE active = 1 ORDER BY hook ASC");
 	$plugins_active = array();
+	
 	if ($sql->rowCount() > 0)
 	{
+	
 		while ($row = $sql->fetch())
 		{
+	
 			$plugins[$row['hook']][] = $row;
 			$plugins_active[$row['code']] = true;
+	
 		}
-        $sql->closeCursor();
+	
+		$sql->closeCursor();
+	
 	}
+	
 }
 
 ?>

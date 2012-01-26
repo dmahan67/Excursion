@@ -68,18 +68,51 @@ elseif($m == 'profile')
 	if($action == 'send')
 	{
 	
-		echo "do this";
+		$insert['theme'] = $_POST['themes'];
+		$old_pass = $_POST['current_password'];
+		$new_pass1 = $_POST['new_password1'];
+		$new_pass2 = $_POST['new_password1'];
+		
+		// working here 
 	
 	}
+	
+	$handle = opendir('themes');
+	while ($f = readdir($handle))
+	{
+		if (mb_strpos($f, '.') === FALSE && is_dir("themes/$f") && $f != "admin")
+		{
+			$themelist[] = $f;
+		}
+	}
+	closedir($handle);
+	sort($themelist);
+
+	$values = array();
+	$titles = array();
 	
 	$themes .= "<select class='xlarge' name='themes' id='themes'>";
-	$sql = $db->query("SELECT * FROM categories ORDER BY title ASC");
-	while ($row = $sql->fetch())
+	
+	foreach ($themelist as $i => $x)
 	{
 	
-		$themes .= "<option name='".$row['code']."' value='".$row['code']."'>".$row['title']."</option>";
+		if($x == $user['theme'])
+		{
+		
+			$selected = "selected='selected'";
+			
+		}
+		else
+		{
+		
+			$selected = "";
+			
+		}
+	
+		$themes .= "<option name='$x' value='$x' ".$selected.">$x</option>";
 		
 	}
+	
 	$themes .= "</select>";
 	
 	$xtpl->assign(array('THEMES' => $themes));
