@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   `username` varchar(100) collate utf8_unicode_ci NOT NULL,
   `password` varchar(32) collate utf8_unicode_ci NOT NULL default '',
   `email` varchar(64) collate utf8_unicode_ci NOT NULL default '',
+  `theme` varchar(64) collate utf8_unicode_ci NOT NULL default 'bootstrap',
   `regdate` int NOT NULL default '0',
   `token` char(16) collate utf8_unicode_ci NOT NULL default '',
   `SQ_Index` int(2) NOT NULL,
@@ -83,4 +84,9 @@ CREATE TABLE IF NOT EXISTS `security_questions` (
 
 INSERT INTO `security_questions` (`question`) VALUES
 ('What is the town you grew up in?'),
+('What is your fathers middle name?'),
+('What is your mothers maiden name?'),
+('What was/is your highschool mascot?'),
+('What state were you born in?'),
+('What was the make/model of your first car?'),
 ('What is your favorite musician?');

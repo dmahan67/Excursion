@@ -9,6 +9,13 @@
 			
 				<div class="span14">
 				
+					<!-- BEGIN: ERRORS -->
+					<div class="alert-message block-message error fade in" data-alert="alert" >
+						<a class="close" href="#">&times;</a>
+						<p>{ERRORS_TEXT}</p>
+					</div>
+					<!-- END: ERRORS -->
+				
 					<form action="page.php?m=add&action=send" method="post">
 					<table class="borderless-table">
 						<tbody>

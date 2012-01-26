@@ -6,7 +6,7 @@
  * @author Dyllon Mahan, Brock Burkholder
  */
  
-$xtpl = new XTemplate('themes/bootstrap/footer.xtpl');
+$xtpl = new XTemplate('themes/'.$user['theme'].'/footer.xtpl');
 
 $xtpl->parse('FOOTER');
 $xtpl->out('FOOTER');

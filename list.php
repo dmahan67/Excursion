@@ -14,7 +14,7 @@ $c = $_GET['c'];
 
 require_once 'core/header.php';
 
-$xtpl = new XTemplate('themes/bootstrap/list.xtpl');
+$xtpl = new XTemplate('themes/'.$user['theme'].'/list.xtpl');
 
 if(!empty($c))
 {

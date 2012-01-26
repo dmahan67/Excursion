@@ -46,7 +46,7 @@ require_once 'core/header.php';
 if(isset($id) && $id > 0)
 {
 
-	$xtpl = new XTemplate('themes/bootstrap/users.details.xtpl');
+	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.details.xtpl');
 	
 	$sql = $db->query("SELECT * FROM members WHERE id = $id LIMIT 1");
 	$row = $sql->fetch();
@@ -63,7 +63,7 @@ if(isset($id) && $id > 0)
 elseif(isset($action) && $action == 'recover')
 {
 
-	$xtpl = new XTemplate('themes/bootstrap/users.recover.xtpl');
+	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.recover.xtpl');
  
 
 	if($m == 'lostpass')
@@ -109,7 +109,7 @@ elseif(isset($action) && $action == 'recover')
 else
 {
 
-	$xtpl = new XTemplate('themes/bootstrap/users.xtpl');
+	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.xtpl');
 
 	$sql = $db->query("SELECT * FROM members ORDER BY id DESC LIMIT 10");
 	while ($row = $sql->fetch())

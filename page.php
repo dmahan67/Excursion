@@ -20,6 +20,8 @@ require_once 'core/header.php';
 if($m == 'add' && $user['group'] == 4)
 {
 
+	$xtpl = new XTemplate('themes/'.$user['theme'].'/page.add.xtpl');
+
 	if($action == 'send' && $user['group'] == 4)
 	{
 	
@@ -33,16 +35,36 @@ if($m == 'add' && $user['group'] == 4)
 		$insert['date'] = (int)time();
 		$insert['state'] = (int)1;
 		
-		$db->insert('pages', $insert);
-		$id = $db->lastInsertId();
+		if (mb_strlen($insert['title']) < 4) $error .= $lang['page_error_title_length'].'<br />';
+		if (mb_strlen($insert['cat']) < 2) $error .= $lang['page_error_cat_missing'].'<br />';
+		if (mb_strlen($insert['text']) < 4) $error .= $lang['page_error_text_length'].'<br />';
 		
-		header('Location: page.php?id='.$id.'');
+		if(empty($error))
+		{
+		
+			$db->insert('pages', $insert);
+			$id = $db->lastInsertId();
+			
+			header('Location: page.php?id='.$id.'');
+			
+		}
+		if(!empty($error))
+		{
+		
+			$xtpl->assign(array(
+				'ERRORS_TEXT' => $error
+			));
+			$xtpl->parse('MAIN.ERRORS');
+			
+		}
 	
 	}
-
-	$xtpl = new XTemplate('themes/bootstrap/page.add.xtpl');
+	if($action == 'send' && $user['group'] != 4)
+	{
 	
-	
+		header('Location: message.php?id=105');
+		
+	}	
 	
 	$category .= "<select name='category' id='category'>";
 	$sql = $db->query("SELECT * FROM categories ORDER BY title ASC");
@@ -57,11 +79,17 @@ if($m == 'add' && $user['group'] == 4)
 	$xtpl->assign(array('CATEGORY' => $category));
 
 }
+if($m == 'add' && $user['group'] != 4)
+{
+	
+	header('Location: message.php?id=105');
+	
+}
 
 if(isset($id) && $id > 0 && empty($m))
 {
 
-	$xtpl = new XTemplate('themes/bootstrap/page.xtpl');
+	$xtpl = new XTemplate('themes/'.$user['theme'].'/page.xtpl');
 	
 	$sql = $db->query("SELECT * FROM pages WHERE id = $id LIMIT 1");
 	$row = $sql->fetch();

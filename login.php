@@ -16,7 +16,7 @@ $pwd = $_POST['password'];
 
 require_once 'core/header.php';
 
-$xtpl = new XTemplate('themes/bootstrap/login.xtpl');
+$xtpl = new XTemplate('themes/'.$user['theme'].'/login.xtpl');
 
 if($action == 'send'){
 

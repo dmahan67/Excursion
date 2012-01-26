@@ -12,7 +12,7 @@ require_once 'core/common.php';
 
 require_once 'core/header.php';
 
-$xtpl = new XTemplate('themes/bootstrap/index.xtpl');
+$xtpl = new XTemplate('themes/'.$user['theme'].'/index.xtpl');
 
 /* === Hook === */
 foreach ($excursion->Hook('index.tags') as $pl)

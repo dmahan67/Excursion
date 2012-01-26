@@ -9,7 +9,7 @@
 session_start();
 
 require_once 'core/database.php';
-require_once 'lang/en/lang.en.php';
+require_once 'lang/'.$config['default_language'].'/lang.'.$config['default_language'].'.php';
 require_once 'core/classes.php';
 
 /* ========== CONNECT TO DATABASE ========== */
@@ -26,15 +26,15 @@ catch (PDOException $e)
 		MySQL error : '.$e->getMessage());
 }
 
-/* ========== Excursion Class ========== */
+/* ========== Instance Classes ========== */
 
 $excursion = new Excursion();
-
-/* ========== Members Class ========== */
-
 $member = new Members();
 
+/* ========== Guest/User ========== */
+
 $user['id'] = 0;
+$user['theme'] = $config['default_theme'];
 
 if (isset($_SESSION['user_id']))
 {
@@ -48,6 +48,7 @@ if (isset($_SESSION['user_id']))
 		$user['name'] = $row['username'];
 		$user['email'] = $row['email'];
 		$user['group'] = $row['groupid'];
+		$user['theme'] = $row['theme'];
 		
 	}
 	
@@ -70,6 +71,5 @@ if (!$plugins)
         $sql->closeCursor();
 	}
 }
-
 
 ?>

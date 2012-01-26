@@ -37,10 +37,15 @@ if($id == 104){
 	$subtitle =  $lang['message_104_subtitle'];
 	$message =  $lang['message_104_text'];
 }
+if($id == 105){
+	$title = $lang['message_105_title'];
+	$subtitle =  $lang['message_105_subtitle'];
+	$message =  $lang['message_105_text'];
+}
 
 require_once 'core/header.php';
 
-$xtpl = new XTemplate('themes/bootstrap/message.xtpl');
+$xtpl = new XTemplate('themes/'.$user['theme'].'/message.xtpl');
 
 $xtpl->assign(array(
 	'MESSAGE_TITLE' => $title,

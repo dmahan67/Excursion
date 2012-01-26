@@ -8,7 +8,7 @@
  
 ob_start();
 
-$xtpl = new XTemplate('themes/bootstrap/header.xtpl');
+$xtpl = new XTemplate('themes/'.$user['theme'].'/header.xtpl');
 
 if ($user['id'] > 0)
 {

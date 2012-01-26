@@ -20,7 +20,7 @@ $sq_answer = $_POST['sq_answer'];
 
 require_once 'core/header.php';
 
-$xtpl = new XTemplate('themes/bootstrap/register.xtpl');
+$xtpl = new XTemplate('themes/'.$user['theme'].'/register.xtpl');
 
 if($action == 'send'){
 

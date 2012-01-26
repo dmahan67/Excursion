@@ -27,6 +27,10 @@ $lang['message_104_title'] = 'Success';
 $lang['message_104_subtitle'] = 'Password has been reset';
 $lang['message_104_text'] = 'We have reset your password, and emailed it to you.';
 
+$lang['message_105_title'] = 'Error';
+$lang['message_105_subtitle'] = 'You are not allowed to do this';
+$lang['message_105_text'] = 'You do not have sufficient rights to perform this action.';
+
 $lang['message_10_title'] = '';
 $lang['message_10_subtitle'] = '';
 $lang['message_10_text'] = '';
@@ -65,7 +69,12 @@ $lang['reset_email'] = 'Hi %1$s,<br /><br />
 						Your account has recently had a password reset. The new password is:
 						%2$s<br /><br />
 						If this was a mistake, you may want to contact the administrator.';
-$lang[''] = '';
+						
+/* ========== PAGES ========== */
+$lang['page_error_title_length'] = 'Page title is too short';
+$lang['page_error_cat_missing'] = 'Page category is missing';
+$lang['page_error_text_length'] = 'Page text is too short';
+
 $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';
