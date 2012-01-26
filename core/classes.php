@@ -42,6 +42,9 @@ class Members {
 			$insert['email'] = $email;
 			$insert['regdate'] = (int)time();
 			$insert['token'] = $excursion->generateToken(16);
+			$insert['SQ_Index'] = 1;
+			$insert['SQ_Answer'] = "Testing";
+
 			
 			$db->insert('members', $insert);
 			
@@ -113,6 +116,7 @@ class Members {
 		global $lang, $db, $config;
 		
 		$token = $db->query("SELECT token FROM members WHERE email='$email' LIMIT 1")->fetchColumn();
+		$username = $db->query("SELECT username FROM members WHERE email='$email' LIMIT 1")->fetchColumn();
 		$user_group = $db->query("SELECT groupid FROM members WHERE email='$email' LIMIT 1")->fetchColumn();
 		$email_exists = (bool)$db->query("SELECT id FROM members WHERE email = ? LIMIT 1", array($email))->fetch();
 		$is_inactive = (bool)$db->query("SELECT groupid FROM members WHERE token = ? AND groupid = ? LIMIT 1", array($token, '1'))->fetch();
@@ -177,9 +181,22 @@ class Members {
 		
 	}
 	
-	function lostPassword(){
+	function lostPassword($email){
 	
-		global $db;
+		global $lang, $db, $config, $excursion;
+		
+		$password = $excursion->generateToken();
+		
+		$db->update('members', array('password' => md5($password)), 'email="'.$email.'"');
+		$username = $db->query("SELECT username FROM members WHERE email='$email' LIMIT 1")->fetchColumn();
+		
+		$subject = $config['title'].' - '.$lang['validation_reg'];
+		
+		$body = sprintf($lang['reset_email'], $username, $password);
+		$headers = 'From: '. $config['admin_email'] . "\r\n" 
+					   .'MIME-Version: 1.0' . "\r\n"
+			           .'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		mail($email, $subject, $body, $headers);
 	
 	}
 	

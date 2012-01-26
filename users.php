@@ -15,6 +15,7 @@ $action = $_GET['action'];
 $token = $_GET['token'];
 $m = $_GET['m'];
 $email = $_POST['email'];
+$step = $_GET['step'];
 
 if($action == 'validate')
 {
@@ -62,21 +63,48 @@ if(isset($id) && $id > 0)
 elseif(isset($action) && $action == 'recover')
 {
 
+	$xtpl = new XTemplate('themes/bootstrap/users.recover.xtpl');
+ 
+
 	if($m == 'lostpass')
 	{
-	
-		$member->lostPassword($token);
-	
+ 
+		if($step == 2) // proccess security question, and do function to update password
+		{
+			$answer = $db->query("SELECT SQ_Answer FROM members WHERE email='" .$email. "'")->fetchColumn();
+			if(strtoupper(trim($answer)) == strtoupper(trim($_POST['answer']))){
+				$member->lostPassword($email);
+				header("Location: message.php?id=104");
+			}
+		}
+		else
+		{
+			// display security question
+			$email_exists = (bool)$db->query("SELECT id FROM members WHERE email='" .$email. "' LIMIT 1")->fetch();
+			if($email_exists){
+				$SQ_index = $db->query("SELECT SQ_Index FROM members WHERE email='" .$email. "'")->fetchColumn();
+				$SQ = $db->query("SELECT question FROM security_questions WHERE id='" .$SQ_index. "'")->fetchColumn();
+				
+				$xtpl->assign(array(
+					'SECURITY_QUESTION' => $SQ,
+					'EMAIL' => $email)
+				);
+				$xtpl->parse('MAIN.SECURITY_QUESTION');
+			}
+			
+		}
+ 
 	}
 	if($m == 'validation')
 	{
-	
+ 
 		$member->sendValidationEmail($email);
-	
+ 
 	}
-
-	$xtpl = new XTemplate('themes/bootstrap/users.recover.xtpl');
-	
+	 if(empty($m)){
+		$xtpl->parse('MAIN.RECOVERY_OPTIONS');
+	}
+ 
 }
 else
 {

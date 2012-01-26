@@ -16,6 +16,7 @@
 					</ul>
 				</div>
 			
+				<!-- BEGIN: RECOVERY_OPTIONS -->
 				<div class="span7">
 				
 					<h5>Recover lost password</h5>
@@ -63,6 +64,34 @@
 					</form>
 
 				</div>
+				<!-- END: RECOVERY_OPTIONS -->
+				
+				<!-- BEGIN: SECURITY_QUESTION -->
+				<div class="span14">
+				
+					<h5>Security Question</h5>
+					
+					<p>For your protection, we must ask that you enter the answer to your security question.</p>
+
+					<form action="users.php?action=recover&m=lostpass&step=2" method="post" class="form-stacked">
+						<fieldset>
+							<div class="clearfix">
+								<label for="answer">{SECURITY_QUESTION}</label>
+								<div class="input">
+									<input class="xlarge" id="answer" name="answer" size="30" type="text" />
+									<input id="email" name="email" size="30" type="hidden" value="{EMAIL}" />
+								</div>
+							</div>
+							<div class="clearfix">
+								<div class="input">
+									<button class="btn primary">Submit</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+						
+				</div>
+				<!-- END: SECURITY_QUESTION -->
 				
 			</div>
 			
