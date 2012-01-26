@@ -52,6 +52,19 @@
 								</div>
 							</div>
 							<div class="clearfix">
+								<label for="email">Security Question</label>
+								<div class="input">
+									{QUESTIONS}
+								</div>
+							</div>
+							<div class="clearfix">
+								<label for="email">Answer</label>
+								<div class="input">
+									<input class="xlarge" id="sq_answer" name="sq_answer" size="30" type="text" />
+									<span class="help-block">Please write this down in case of emergency</span>
+								</div>
+							</div>
+							<div class="clearfix">
 								<label for="username"></label>
 								<div class="input">
 									<button class="btn primary">Submit</button>

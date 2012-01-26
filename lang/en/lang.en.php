@@ -40,6 +40,7 @@ $lang['reg_pwd_nomatch'] = 'The passwords do not match';
 $lang['reg_email_length'] = 'Email address must be greater than 10 characters';
 $lang['reg_email_exists'] = 'Email already exists';
 $lang['reg_email_format'] = 'Email address is not in the correct format example@domain.com';
+$lang['reg_sq_length'] = 'The answer to your security question was too short';
 
 /* ========== LOGIN ERRORS ========== */
 $lang['login_un_empty'] = 'Username field was left blank';
