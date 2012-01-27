@@ -10,7 +10,7 @@ require_once 'config.php';
 require_once 'core/xtemplate.class.php';
 require_once 'core/common.php';
 
-$c = $_GET['c'];
+$c = $excursion->import('c', 'G', 'TXT');
 
 require_once 'core/header.php';
 
@@ -28,7 +28,7 @@ if(!empty($c))
 			'TITLE' => $row['title'],
 			'DESC' => $row['desc'],
 			'CAT' => $row['cat'],
-			'OWNER' => $excursion->generateUser($row['id']),
+			'OWNER' => $excursion->generateUser($row['owner']),
 			'DATE' => date($config['date_medium'], $row['date']),
 			'TEXT' => $row['text']
 		));

@@ -10,11 +10,6 @@ require_once 'config.php';
 require_once 'core/xtemplate.class.php';
 require_once 'core/common.php';
 
-$id = (int)$_GET['id'];
-$action = $_GET['action'];
-$m = $_GET['m'];
-$c = $_GET['c'];
-
 require_once 'core/header.php';
 
 if($m == 'add' && $user['group'] == 4)
@@ -25,12 +20,12 @@ if($m == 'add' && $user['group'] == 4)
 	if($action == 'send' && $user['group'] == 4)
 	{
 	
-		$insert['title'] = $_POST['title'];
-		$insert['desc'] = $_POST['desc'];
-		$insert['cat'] = $_POST['category'];
-		$insert['page_file'] = (int)$_POST['pagefile'];
-		$insert['page_url'] = $_POST['pageurl'];
-		$insert['text'] = $_POST['text'];
+		$insert['title'] = $excursion->import('title', 'P', 'TXT');
+		$insert['desc'] = $excursion->import('desc', 'P', 'TXT');
+		$insert['cat'] = $excursion->import('category', 'P', 'TXT');
+		$insert['page_file'] = intval($excursion->import('pagefile', 'P', 'INT'));
+		$insert['page_url'] = $excursion->import('pageurl', 'P', 'TXT');
+		$insert['text'] = $excursion->import('text', 'P', 'HTM');
 		$insert['owner'] = (int)$user['id'];
 		$insert['date'] = (int)time();
 		$insert['state'] = (int)1;
@@ -99,17 +94,27 @@ if(isset($id) && $id > 0 && empty($m))
 		'TITLE' => $row['title'],
 		'DESC' => $row['desc'],
 		'CAT' => $db->query("SELECT title FROM categories WHERE code='".$row['cat']."' LIMIT 1")->fetchColumn(),
-		'OWNER' => $excursion->generateUser($row['id']),
+		'OWNER' => $excursion->generateUser($row['owner']),
 		'DATE' => date($config['date_medium'], $row['date']),
 		'TEXT' => $row['text']
 	));
 	
 	if($row['page_file'] > 0)
 	{
-		$xtpl->assign(array(
-			'FILE_URL' => $row['page_url']
-		));
-		$xtpl->parse('MAIN.PAGE_FILE');
+		if($row['page_file'] == 1)
+		{
+			$xtpl->assign(array(
+				'FILE_URL' => $row['page_url']
+			));
+			$xtpl->parse('MAIN.PAGE_FILE');
+		}
+		if($row['page_file'] == 2 && $user['id'] != 0)
+		{
+			$xtpl->assign(array(
+				'FILE_URL' => $row['page_url']
+			));
+			$xtpl->parse('MAIN.PAGE_FILE');
+		}
 	}
 	
 }

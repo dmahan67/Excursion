@@ -31,6 +31,13 @@ catch (PDOException $e)
 $excursion = new Excursion();
 $member = new Members();
 
+/* ======== Common Variables ======== */
+
+$m = $excursion->import('m', 'G', 'ALP', 24);
+$action = $excursion->import('action', 'G', 'ALP', 24);
+$id = $excursion->import('id','G','INT');
+$step = $excursion->import('step','G','INT');
+
 /* ========== Guest/User ========== */
 
 $user['id'] = 0;
@@ -46,6 +53,7 @@ if (isset($_SESSION['user_id']))
 
 		$user['id'] = $row['id'];
 		$user['name'] = $row['username'];
+		$user['password'] = $row['password'];
 		$user['email'] = $row['email'];
 		$user['group'] = $row['groupid'];
 		$user['theme'] = $row['theme'];

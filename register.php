@@ -10,13 +10,12 @@ require_once 'config.php';
 require_once 'core/xtemplate.class.php';
 require_once 'core/common.php';
 
-$action = $_GET['m'];
-$un = $_POST['username'];
-$pwd = $_POST['password'];
-$pwd2 = $_POST['password2'];
-$email = $_POST['email'];
-$sq = $_POST['sq'];
-$sq_answer = $_POST['sq_answer'];
+$un = $excursion->import('username', 'P', 'TXT');
+$pwd = $excursion->import('password', 'P', 'TXT');
+$pwd2 = $excursion->import('password2', 'P', 'TXT');
+$email = $excursion->import('email', 'P', 'TXT');
+$sq = $excursion->import('sq', 'P', 'INT');
+$sq_answer = $excursion->import('sq_answer', 'P', 'TXT');
 
 require_once 'core/header.php';
 

@@ -10,9 +10,8 @@ require_once 'config.php';
 require_once 'core/xtemplate.class.php';
 require_once 'core/common.php';
 
-$action = $_GET['m'];
-$un = $_POST['username'];
-$pwd = $_POST['password'];
+$un = $excursion->import('username', 'P', 'TXT');
+$pwd = $excursion->import('password', 'P', 'TXT');
 
 require_once 'core/header.php';
 

@@ -24,7 +24,7 @@
 					</div>
 					<!-- END: ERRORS -->
 					<h2>Register a new account</h2>
-					<form action="register.php?m=send" method="post">
+					<form action="register.php?action=send" method="post">
 						<fieldset>
 							<div class="clearfix">
 								<label for="username">Username</label>

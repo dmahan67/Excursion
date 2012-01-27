@@ -10,12 +10,8 @@ require_once 'config.php';
 require_once 'core/xtemplate.class.php';
 require_once 'core/common.php';
 
-$id = (int)$_GET['id'];
-$action = $_GET['action'];
-$token = $_GET['token'];
-$m = $_GET['m'];
-$email = $_POST['email'];
-$step = $_GET['step'];
+$token = $excursion->import('token','G','TXT');
+$email = $excursion->import('email','P','TXT',64, TRUE);
 
 if($action == 'validate')
 {
@@ -68,22 +64,35 @@ elseif($m == 'profile')
 	if($action == 'send')
 	{
 	
-		$insert['theme'] = $_POST['themes'];
-		$old_pass = $_POST['current_password'];
-		$new_pass1 = $_POST['new_password1'];
-		$new_pass2 = $_POST['new_password2'];
+		$insert['theme'] = $excursion->import('themes','P','TXT');
+		$old_pass = $excursion->import('current_password','P','TXT');
+		$new_pass1 = $excursion->import('new_password1','P','TXT',16);
+		$new_pass2 = $excursion->import('new_password2','P','TXT',16);
 		
-		$md5_pass = md5($old_pass);
-		$pw = $db->query("SELECT password FROM members WHERE id='".$user['id']."' LIMIT 1")->fetchColumn();
+		if(!empty($old_pass))
+		{
 		
-		if (!empty($md5_pass) && $md5_pass != $pw) $error = $lang['profile_error_nomatch'].'<br />';
-		if ($new_pass1 != $new_pass2) $error = $lang['profile_error_nosame'].'<br />';
-		if (mb_strlen($new_pass1) < 4) $error .= $lang['reg_pwd_length'].'<br />';
+			if ($new_pass1 != $new_pass2) $error = $lang['profile_error_nosame'].'<br />';
+			if (mb_strlen($new_pass1) < 4) $error .= $lang['reg_pwd_length'].'<br />';
+			if (md5($old_pass) != $user['password']) $error = $lang['profile_error_nomatch'].'<br />';
+			
+		}
 		
 		if(empty($error))
 		{
 		
-			echo "worked";
+			if(!empty($old_pass) && !empty($new_pass1) && !empty($new_pass2))
+			{
+			
+				$db->update('members', array('password' => md5($new_pass1)), "id='".$user['id']."'");
+			
+			}
+		
+			$db->update('members', array(
+				'theme' => $insert['theme']
+			), "id='".$user['id']."'");
+			
+			header('Location: users.php?id='.$user['id']);
 		
 		}
 		else
@@ -154,7 +163,7 @@ elseif(isset($action) && $action == 'recover')
 		
 			$answer = $db->query("SELECT SQ_Answer FROM members WHERE email='" .$email. "'")->fetchColumn();
 			
-			if(strtoupper(trim($answer)) == strtoupper(trim($_POST['answer'])))
+			if(strtoupper(trim($answer)) == strtoupper(trim($excursion->import('answer','P','TXT'))))
 			{
 			
 				$member->lostPassword($email);

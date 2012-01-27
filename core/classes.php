@@ -6,6 +6,8 @@
  * @author Dyllon Mahan, Brock Burkholder
  */
  
+$import_filters = array();
+ 
 class Members {
 
 	/**
@@ -220,6 +222,225 @@ class Members {
 }
 
 class Excursion {
+
+	function import_buffered($name, $value, $null = '')
+	{
+		if ($value === '' || $value === null)
+		{
+			if (isset($_SESSION['buffer'][$name]) && !is_array($_SESSION['buffer'][$name]))
+			{
+				return $_SESSION['buffer'][$name];
+			}
+			else
+			{
+				return $null;
+			}
+		}
+		else
+		{
+			return $value;
+		}
+	}
+	
+	function alphaonly($text)
+	{
+		return(preg_replace('/[^a-zA-Z0-9\-_]/', '', $text));
+	}
+
+	function import($name, $source, $filter, $maxlen = 0, $dieonerror = false, $buffer = false)
+	{
+		global $import_filters;
+
+		switch($source)
+		{
+			case 'G':
+				$v = (isset($_GET[$name])) ? $_GET[$name] : NULL;
+				$log = TRUE;
+				break;
+
+			case 'P':
+				$v = (isset($_POST[$name])) ? $_POST[$name] : NULL;
+				$log = TRUE;
+				if ($filter=='ARR')
+				{
+					if ($buffer)
+					{
+						$v = $this->import_buffered($name, $v, null);
+					}
+					return($v);
+				}
+				break;
+
+			case 'R':
+				$v = (isset($_REQUEST[$name])) ? $_REQUEST[$name] : NULL;
+				$log = TRUE;
+				break;
+
+			case 'C':
+				$v = (isset($_COOKIE[$name])) ? $_COOKIE[$name] : NULL;
+				$log = TRUE;
+				break;
+
+			case 'D':
+				$v = $name;
+				$log = FALSE;
+				break;
+
+			default:
+				die('Unknown source for a variable : <br />Name = '.$name.'<br />Source = '.$source.' ? (must be G, P, C or D)');
+				break;
+		}
+
+		if (MQGPC && ($source=='G' || $source=='P' || $source=='C') && $v != NULL && $filter != 'ARR')
+		{
+			$v = stripslashes($v);
+		}
+
+		if (($v === '' || $v === NULL) && $buffer)
+		{
+			$v = $this->import_buffered($name, $v, null);
+			return $v;
+		}
+		
+		if ($v === null)
+		{
+			return null;
+		}
+
+		if ($maxlen>0)
+		{
+			$v = mb_substr($v, 0, $maxlen);
+		}
+
+		$pass = FALSE;
+		$defret = NULL;
+
+		if (is_array($import_filters[$filter]))
+		{
+			foreach ($import_filters[$filter] as $func)
+			{
+				$v = $func($v, $name);
+			}
+			return $v;
+		}
+
+		switch($filter)
+		{
+			case 'INT':
+				if (is_numeric($v) && floor($v)==$v)
+				{
+					$pass = TRUE;
+					$v = (int) $v;
+				}
+				break;
+
+			case 'NUM':
+				if (is_numeric($v))
+				{
+					$pass = TRUE;
+					$v = (float) $v;
+				}
+				break;
+
+			case 'TXT':
+				$v = trim($v);
+				if (mb_strpos($v, '<')===FALSE)
+				{
+					$pass = TRUE;
+				}
+				else
+				{
+					$defret = str_replace('<', '&lt;', $v);
+				}
+				break;
+
+			case 'ALP':
+				$v = trim($v);
+				$f = $this->alphaonly($v);
+				if ($v == $f)
+				{
+					$pass = TRUE;
+				}
+				else
+				{
+					$defret = $f;
+				}
+				break;
+
+			case 'PSW':
+				$v = trim($v);
+				$f = preg_replace('#[\'"&<>]#', '', $v);
+				$f = mb_substr($f, 0 ,32);
+
+				if ($v == $f)
+				{
+					$pass = TRUE;
+				}
+				else
+				{
+					$defret = $f;
+				}
+				break;
+
+			case 'HTM':
+				$v = trim($v);
+				$pass = TRUE;
+				break;
+
+			case 'ARR':
+				$pass = TRUE;
+				break;
+
+			case 'BOL':
+				if ($v == '1' || $v == 'on')
+				{
+					$pass = TRUE;
+					$v = TRUE;
+				}
+				elseif ($v=='0' || $v=='off')
+				{
+					$pass = TRUE;
+					$v = FALSE;
+				}
+				else
+				{
+					$defret = FALSE;
+				}
+				break;
+
+			case 'NOC':
+				$pass = TRUE;
+				break;
+
+			default:
+				die('Unknown filter for a variable : <br />Var = '.$cv_v.'<br />Filter = &quot;'.$filter.'&quot; ?');
+				break;
+		}
+
+		if (!$pass || !in_array($filter, array('INT', 'NUM', 'BOL', 'ARR')))
+		{
+			$v = preg_replace('/(&#\d+)(?![\d;])/', '$1;', $v);
+		}
+		if ($pass)
+		{
+			return $v;
+		}
+		else
+		{
+			if ($log)
+			{
+				
+			}
+			if ($dieonerror)
+			{
+				die('Wrong input.');
+			}
+			else
+			{
+				return $defret;
+			}
+		}
+	}
 
 	function generateToken($length = 16)
 	{

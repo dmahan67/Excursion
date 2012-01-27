@@ -10,8 +10,6 @@ require_once 'config.php';
 require_once 'core/xtemplate.class.php';
 require_once 'core/common.php';
 
-$id = (int)$_GET['id'];
-
 if(empty($id) || $id == 0){
 	$title = $lang['message_blank_title'];
 	$subtitle = $lang['message_blank_subtitle'];

@@ -33,7 +33,7 @@
 							</tr>
 							<tr>
 								<th>Page File</th>
-								<td><input type="checkbox" id="pagefile" name="pagefile" value="option2" /></td>
+								<td><select name="pagefile"><option value="0">No</option><option value="1">Yes</option><option value="2">Members only</option></select></td>
 							</tr>
 							<tr>
 								<th>File URL</th>
