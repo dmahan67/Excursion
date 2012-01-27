@@ -71,9 +71,32 @@ elseif($m == 'profile')
 		$insert['theme'] = $_POST['themes'];
 		$old_pass = $_POST['current_password'];
 		$new_pass1 = $_POST['new_password1'];
-		$new_pass2 = $_POST['new_password1'];
+		$new_pass2 = $_POST['new_password2'];
 		
-		// working here 
+		$md5_pass = md5($old_pass);
+		$pw = $db->query("SELECT password FROM members WHERE id='".$user['id']."' LIMIT 1")->fetchColumn();
+		
+		if (!empty($md5_pass) && $md5_pass != $pw) $error = $lang['profile_error_nomatch'].'<br />';
+		if ($new_pass1 != $new_pass2) $error = $lang['profile_error_nosame'].'<br />';
+		if (mb_strlen($new_pass1) < 4) $error .= $lang['reg_pwd_length'].'<br />';
+		
+		if(empty($error))
+		{
+		
+			echo "worked";
+		
+		}
+		else
+		{
+		
+			$xtpl->assign(array(
+				'ERRORS_TEXT' => $error
+			));
+			
+			$xtpl->parse('MAIN.ERRORS');
+		
+		}
+		
 	
 	}
 	

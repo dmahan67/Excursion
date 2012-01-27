@@ -79,8 +79,9 @@ $lang['page_error_title_length'] = 'Page title is too short';
 $lang['page_error_cat_missing'] = 'Page category is missing';
 $lang['page_error_text_length'] = 'Page text is too short';
 
-$lang[''] = '';
-$lang[''] = '';
+/* ========== PROFILE ========== */
+$lang['profile_error_nomatch'] = 'Your current password was incorrect';
+$lang['profile_error_nosame'] = 'You did not enter matching passwords';
 $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';

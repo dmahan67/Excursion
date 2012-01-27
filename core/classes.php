@@ -56,10 +56,13 @@ class Members {
 		}
 		else
 		{
+		
 			$xtpl->assign(array(
 				'ERRORS_TEXT' => $error
 			));
+			
 			$xtpl->parse('MAIN.ERRORS');
+			
 		}
 		
 	}
@@ -91,10 +94,13 @@ class Members {
 		}
 		else
 		{
+		
 			$xtpl->assign(array(
 				'ERRORS_TEXT' => $error
 			));
+			
 			$xtpl->parse('MAIN.ERRORS');
+			
 		}
 		
 	}
@@ -152,6 +158,7 @@ class Members {
 			$xtpl->assign(array(
 				'ERRORS_TEXT' => $error
 			));
+			
 			$xtpl->parse('MAIN.RECOVERY_OPTIONS.VALIDATION_ERRORS');
 		
 		}
