@@ -5,7 +5,7 @@ Hooks=index.tags
 [END_PLUGIN]
 ==================== */
 
-$sql = $db->query("SELECT * FROM pages WHERE cat = 'news' ORDER BY id DESC LIMIT 10");
+$sql = $db->query("SELECT * FROM pages WHERE cat = 'news' AND state > 0 ORDER BY id DESC LIMIT 10");
 while ($row = $sql->fetch())
 {
 
