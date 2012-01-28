@@ -32,7 +32,7 @@
 						<!-- BEGIN: LIST -->
 							<tr>
 								<td>{ID}</td>
-								<td><a href="page.php?id={ID}">{TITLE}</a><br />{DESC}</td>
+								<td><a href="page.php?id={ID}">{TITLE}</a></td>
 								<td>{OWNER}</td>
 								<td>{DATE}</td>
 							</tr>

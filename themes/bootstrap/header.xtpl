@@ -32,9 +32,9 @@
 				
 				<ul class="nav">
 					<li><a href="index.php">Home</a></li>
-					<li><a href="users.php">Users</a></li>
 					<li><a href="list.php?c=news">News</a></li>
-					<li><a href="https://github.com/dmahan67/Excursion">Github</a></li>
+					<li><a href="list.php?c=articles">Articles</a></li>
+					<li><a href="list.php?c=downloads">Downloads</a></li>
 				</ul>
 				
 				<ul class="nav secondary-nav">
@@ -52,6 +52,7 @@
 						<a href="#" class="dropdown-toggle">Welcome, {PHP.user.name}</a>
 						<ul class="dropdown-menu">
 							<!-- IF {PHP.user.group} == '4' --><li><a href="">Admin Panel</a></li><!-- ENDIF -->
+							<li><a href="users.php">Members list</a></li>
 							<li><a href="users.php?m=profile">Update Profile</a></li>
 							<li class="divider"></li>
 							<li><a href="logout.php">Logout</a></li>

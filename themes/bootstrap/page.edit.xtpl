@@ -1,0 +1,57 @@
+<!-- BEGIN: MAIN -->
+		<div class="content">
+		
+			<div class="page-header">
+				<h1>{TITLE} <small>Edit page</small></h1>
+			</div>
+			
+			<div class="row">
+			
+				<div class="span14">
+				
+					<!-- BEGIN: ERRORS -->
+					<div class="alert-message block-message error fade in" data-alert="alert" >
+						<a class="close" href="#">&times;</a>
+						<p>{ERRORS_TEXT}</p>
+					</div>
+					<!-- END: ERRORS -->
+				
+					<form action="page.php?id={ID}&m=edit&action=send" method="post">
+					<table class="borderless-table">
+						<tbody>
+							<tr>
+								<th>Title</th>
+								<td><input class="xlarge" id="title" value="{TITLE}" name="title" type="text" size="32" /></td>
+							</tr>
+							<tr>
+								<th>Description</th>
+								<td><input class="xlarge" id="desc" value="{DESC}" name="desc" type="text" size="32" /></td>
+							</tr>
+							<tr>
+								<th>Category</th>
+								<td>{CATEGORY}</td>
+							</tr>
+							<tr>
+								<th>Page File</th>
+								<td>{SELECT_FILE}</td>
+							</tr>
+							<tr>
+								<th>File URL</th>
+								<td><input class="xlarge" id="pageurl" value="{PAGE_URL}" name="pageurl" type="text" size="32" /></td>
+							</tr>
+							<tr>
+								<td colspan="2"><textarea class="ckeditor" id="text" name="text">{TEXT}</textarea></td>
+							</tr>
+							<tr>
+								<td colspan="2"><button class="btn primary">Submit</button></td>
+							</tr>
+						</tbody>
+					</table>
+					</form>
+				
+				</div>
+				
+			</div>
+			
+		</div>
+<!-- END: MAIN -->

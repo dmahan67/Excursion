@@ -54,7 +54,9 @@ CREATE TABLE IF NOT EXISTS `categories` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `categories` (`id`, `code`, `path`, `title`, `desc`) VALUES
-(1, 'news', 1, 'News', 'A list of all important updates');
+(1, 'news', 1, 'News', 'A list of all important updates'),
+(2, 'articles', 2, 'Articles', 'Interesting reads around the web'),
+(3, 'downloads', 3, 'Downloads', 'Files available for download';
 
 CREATE TABLE IF NOT EXISTS `pages` (
   `id` int(11) unsigned NOT NULL auto_increment,
