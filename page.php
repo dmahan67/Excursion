@@ -13,13 +13,32 @@ require_once 'core/common.php';
 if($action == 'remove' && $user['group'] == 4)
 {
 
-	echo "remove";
+	$page_cat = $db->query("SELECT cat FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
+	$sql_page_delete = $db->delete('pages', "id=$id");
+	header('Location: list.php?c='.$page_cat.'');
 
 }
 if($action == 'queue' && $user['group'] == 4)
 {
 
-	echo "queue";
+	$page_state = $db->query("SELECT state FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
+	$page_cat = $db->query("SELECT cat FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
+
+	if($page_state > 0)
+	{
+	
+		$insert['state'] = 0;
+	
+		$sql_update_page_state = $db->update('pages', $insert, 'id=?', array($id));
+		header('Location: list.php?c='.$page_cat.'');
+		
+	}
+	else
+	{
+	
+		header('Location: message.php');
+	
+	}
 
 }
 

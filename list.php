@@ -19,7 +19,7 @@ $xtpl = new XTemplate('themes/'.$user['theme'].'/list.xtpl');
 if(!empty($c))
 {
 
-	$sql = $db->query("SELECT * FROM pages WHERE cat = '$c' LIMIT 10");
+	$sql = $db->query("SELECT * FROM pages WHERE cat = '$c' AND state > 0 LIMIT 10");
 	while ($row = $sql->fetch())
 	{
 

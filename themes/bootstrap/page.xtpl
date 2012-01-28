@@ -51,7 +51,7 @@
 					<ul>
 						<li><a href="page.php?id={ID}&action=queue">Put in validation queue</a></li>
 						<li><a href="page.php?id={ID}&m=edit">Edit Page</a></li>
-						<li><a href="page.php?id={ID}&action=remove">Remove page</a></li>
+						<li><a href="page.php?id={ID}&action=remove" onclick="return confirm('Are you sure you would like to remove this page?');">Remove page</a></li>
 					</ul>
 					<!-- ENDIF -->
 				
