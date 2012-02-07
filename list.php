@@ -19,9 +19,23 @@ $xtpl = new XTemplate('themes/'.$user['theme'].'/list.xtpl');
 if(!empty($c))
 {
 
+	/* === Hook === */
+	foreach ($excursion->Hook('list.first') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
+
 	$sql = $db->query("SELECT * FROM pages WHERE cat = '$c' AND state > 0 LIMIT 10");
 	while ($row = $sql->fetch())
 	{
+	
+		/* === Hook === */
+		foreach ($excursion->Hook('list.loop.tags') as $pl)
+		{
+			include $pl;
+		}
+		/* ===== */
 
 		$xtpl->assign(array(
 			'ID' => (int) $row['id'],
@@ -35,6 +49,13 @@ if(!empty($c))
 		$xtpl->parse('MAIN.LIST');	
 		
 	}
+	
+	/* === Hook === */
+	foreach ($excursion->Hook('list.last') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
 
 }
 else
@@ -53,6 +74,13 @@ $xtpl->assign(array(
 	'DESC' => $cat['desc'],
 	'CODE' => $cat['code']
 ));
+
+/* === Hook === */
+foreach ($excursion->Hook('list.tags') as $pl)
+{
+	include $pl;
+}
+/* ===== */
 
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');

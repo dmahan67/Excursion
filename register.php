@@ -23,6 +23,13 @@ $xtpl = new XTemplate('themes/'.$user['theme'].'/register.xtpl');
 
 if($action == 'send'){
 
+	/* === Hook === */
+	foreach ($excursion->Hook('register.send.action') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
+
 	$member->Register($un, $pwd, $pwd2, $email, $sq, $sq_answer);
 	
 }
@@ -38,6 +45,13 @@ while ($row = $sql->fetch())
 $questions .= "</select>";
 
 $xtpl->assign(array('QUESTIONS' => $questions));
+
+/* === Hook === */
+foreach ($excursion->Hook('register.tags') as $pl)
+{
+	include $pl;
+}
+/* ===== */
 
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');

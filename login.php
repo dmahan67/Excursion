@@ -19,9 +19,23 @@ $xtpl = new XTemplate('themes/'.$user['theme'].'/login.xtpl');
 
 if($action == 'send'){
 
+	/* === Hook === */
+	foreach ($excursion->Hook('login.send.action') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
+
 	$member->Login($un, $pwd);
 	
 }
+
+/* === Hook === */
+foreach ($excursion->Hook('login.tags') as $pl)
+{
+	include $pl;
+}
+/* ===== */
 
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');

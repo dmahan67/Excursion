@@ -13,6 +13,13 @@ require_once 'core/common.php';
 if($action == 'remove' && $user['group'] == 4)
 {
 
+	/* === Hook === */
+	foreach ($excursion->Hook('page.remove.action') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
+
 	$page_cat = $db->query("SELECT cat FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
 	$sql_page_delete = $db->delete('pages', "id=$id");
 	header('Location: list.php?c='.$page_cat.'');
@@ -21,11 +28,25 @@ if($action == 'remove' && $user['group'] == 4)
 if($action == 'queue' && $user['group'] == 4)
 {
 
+	/* === Hook === */
+	foreach ($excursion->Hook('page.queue.action.first') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
+
 	$page_state = $db->query("SELECT state FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
 	$page_cat = $db->query("SELECT cat FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
 
 	if($page_state > 0)
 	{
+	
+		/* === Hook === */
+		foreach ($excursion->Hook('page.queue.action.loop') as $pl)
+		{
+			include $pl;
+		}
+		/* ===== */
 	
 		$insert['state'] = 0;
 	
@@ -49,8 +70,22 @@ if($m == 'edit' && $user['group'] == 4)
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/page.edit.xtpl');
 	
+	/* === Hook === */
+	foreach ($excursion->Hook('page.edit.action.first') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
+	
 	if($action == 'send' && $user['group'] == 4)
 	{
+	
+		/* === Hook === */
+		foreach ($excursion->Hook('page.edit.action.loop') as $pl)
+		{
+			include $pl;
+		}
+		/* ===== */
 	
 		$insert['title'] = $excursion->import('title', 'P', 'TXT');
 		$insert['desc'] = $excursion->import('desc', 'P', 'TXT');
@@ -122,6 +157,13 @@ if($m == 'edit' && $user['group'] == 4)
 		'CATEGORY' => $category,
 		'SELECT_FILE' => $select_file
 	));
+	
+	/* === Hook === */
+	foreach ($excursion->Hook('page.edit.action.tags') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
 
 }
 if($m == 'add' && $user['group'] == 4)

@@ -16,16 +16,38 @@ $email = $excursion->import('email','P','TXT',64, TRUE);
 if($action == 'validate')
 {
 
+	/* === Hook === */
+	foreach ($excursion->Hook('user.validate.action') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
+
 	$member->validate($token);
 
 }
 if($action == 'remove')
 {
 
+	/* === Hook === */
+	foreach ($excursion->Hook('user.remove.action.first') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
+
 	$group_id = $db->query("SELECT groupid FROM members WHERE token='$token' LIMIT 1")->fetchColumn();
 
 	if($group_id == 1)
 	{
+	
+		/* === Hook === */
+		foreach ($excursion->Hook('user.remove.action.loop') as $pl)
+		{
+			include $pl;
+		}
+		/* ===== */
+	
 		$member->remove($token);
 	}
 	else
@@ -54,6 +76,13 @@ if(isset($id) && $id > 0)
 		'EMAIL' => $row['email'],
 		'REGDATE' => date($config['date_medium'], $row['regdate'])
 	));
+	
+	/* === Hook === */
+	foreach ($excursion->Hook('user.details.tags') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
 	
 }
 elseif($m == 'profile')
@@ -105,7 +134,6 @@ elseif($m == 'profile')
 			$xtpl->parse('MAIN.ERRORS');
 		
 		}
-		
 	
 	}
 	

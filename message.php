@@ -56,6 +56,13 @@ $xtpl->assign(array(
 	'MESSAGE_TEXT' => $message,
 ));
 
+/* === Hook === */
+foreach ($excursion->Hook('message.tags') as $pl)
+{
+	include $pl;
+}
+/* ===== */
+
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');
 
