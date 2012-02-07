@@ -28,7 +28,7 @@
 
 			<div class="container">
 			
-				<a class="brand" name="top">Excursion</a>
+				<a class="brand" name="top">Excursion <sup><span class="label success">beta</span></sup></a>
 				
 				<ul class="nav">
 					<li><a href="index.php">Home</a></li>
