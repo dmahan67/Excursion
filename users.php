@@ -7,7 +7,7 @@
  */
  
 require_once 'config.php';
-require_once 'core/xtemplate.class.php';
+require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
 $token = $excursion->import('token','G','TXT');
@@ -74,6 +74,7 @@ if(isset($id) && $id > 0)
 		'USERNAME' => $row['username'],
 		'GROUP' => $excursion->generateGroup($row['groupid']),
 		'EMAIL' => $row['email'],
+		'AVATAR' => $row['avatar'],
 		'REGDATE' => date($config['date_medium'], $row['regdate'])
 	));
 	
@@ -94,9 +95,41 @@ elseif($m == 'profile')
 	{
 	
 		$insert['theme'] = $excursion->import('themes','P','TXT');
+		$insert['gender'] = $excursion->import('gender','P','TXT');
+		$insert['birthdate'] = (int) $excursion->import_date('birthdate', false);
 		$old_pass = $excursion->import('current_password','P','TXT');
 		$new_pass1 = $excursion->import('new_password1','P','TXT',16);
 		$new_pass2 = $excursion->import('new_password2','P','TXT',16);
+			
+		$insert['birthdate'] = ($insert['birthdate'] > $sys['now_offset']) ? ($sys['now_offset'] - 31536000) : $insert['birthdate'];
+		$insert['birthdate'] = ($insert['birthdate'] == '0') ? '0000-00-00' : $excursion->stamptodate($insert['birthdate']);
+		
+		if($_FILES['avatar'])
+		{
+		
+			$file = $_FILES['avatar'];
+		
+			$gd_supported = array('jpg', 'jpeg', 'png', 'gif');
+			$file_ext = strtolower(end(explode(".", $file['name'])));
+			$fcheck = $excursion->file_check($file['tmp_name'], $file['name'], $file_ext);
+			if(in_array($file_ext, $gd_supported) && $fcheck == 1)
+			{
+			    $file['name']= $excursion->safename($file['name'], true);
+				$filename_full = $user['id'].'-'.strtolower($file['name']);
+				$filepath = 'assets/avatars/'.$filename_full;
+
+				if(file_exists($filepath))
+				{
+					unlink($filepath);
+				}
+
+				move_uploaded_file($file['tmp_name'], $filepath);
+				$excursion->imageresize($filepath, $filepath, 100, 100, 'fit', '', 100);
+				@chmod($filepath, $cfg['file_perms']);
+				$sql = $db->update('members', array("avatar" => $filepath), "id='".$user['id']."'");
+			}
+			
+		}
 		
 		if(!empty($old_pass))
 		{
@@ -118,7 +151,11 @@ elseif($m == 'profile')
 			}
 		
 			$db->update('members', array(
-				'theme' => $insert['theme']
+				'theme' => $insert['theme'],
+				'gender' => $insert['gender'],
+				'birthdate' => $insert['birthdate'],
+				'avatar' => $insert['avatar']
+				
 			), "id='".$user['id']."'");
 			
 			header('Location: users.php?id='.$user['id']);
@@ -135,47 +172,18 @@ elseif($m == 'profile')
 		
 		}
 	
-	}
+	}	
 	
-	$handle = opendir('themes');
-	while ($f = readdir($handle))
-	{
-		if (mb_strpos($f, '.') === FALSE && is_dir("themes/$f") && $f != "admin")
-		{
-			$themelist[] = $f;
-		}
-	}
-	closedir($handle);
-	sort($themelist);
-
-	$values = array();
-	$titles = array();
-	
-	$themes .= "<select class='xlarge' name='themes' id='themes'>";
-	
-	foreach ($themelist as $i => $x)
-	{
-	
-		if($x == $user['theme'])
-		{
-		
-			$selected = "selected='selected'";
-			
-		}
-		else
-		{
-		
-			$selected = "";
-			
-		}
-	
-		$themes .= "<option name='$x' value='$x' ".$selected.">$x</option>";
-		
-	}
-	
-	$themes .= "</select>";
-	
-	$xtpl->assign(array('THEMES' => $themes));
+	$xtpl->assign(array(
+		'FORM_ACTION' => $excursion->url('users', 'm=profile&action=send'),
+		'FORM_THEMES' => $excursion->selectbox_theme($user['theme'], 'themes'),
+		'FORM_GENDER' => $excursion->selectbox_gender($user['gender'] ,'gender'),
+		'FORM_PASSWORD' => $excursion->inputbox('password', 'current_password', '', array('size' => 12, 'maxlength' => 32)),
+		'FORM_NEWPASSWORD' => $excursion->inputbox('password', 'new_password1', '', array('size' => 12, 'maxlength' => 32)),
+		'FORM_REPEAT_NEWPASSWORD' => $excursion->inputbox('password', 'new_password2', '', array('size' => 12, 'maxlength' => 32)),
+		'FORM_AVATAR' => $excursion->inputbox('file', 'avatar', '', array('size' => 24)),
+		'FORM_BIRTHDATE' => $excursion->selectbox_date($excursion->datetostamp($user['birthdate']), 'short', 'birthdate', $excursion->date('Y', $sys['now_offset']), $excursion->date('Y', $sys['now_offset']) - 77, false),
+	));
 
 }
 elseif(isset($action) && $action == 'recover')

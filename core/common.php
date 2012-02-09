@@ -10,7 +10,9 @@ session_start();
 
 require_once 'core/database.php';
 require_once 'lang/'.$config['default_language'].'/lang.'.$config['default_language'].'.php';
+require_once 'core/resources.php';
 require_once 'core/classes.php';
+
 
 /* ========== CONNECT TO DATABASE ========== */
 
@@ -42,6 +44,7 @@ $step = $excursion->import('step','G','INT');
 
 $user['id'] = 0;
 $user['theme'] = $config['default_theme'];
+$user['timezone'] = 0;
 
 if (isset($_SESSION['user_id']))
 {
@@ -57,10 +60,15 @@ if (isset($_SESSION['user_id']))
 		$user['email'] = $row['email'];
 		$user['group'] = $row['groupid'];
 		$user['theme'] = $row['theme'];
+		$user['gender'] = $row['gender'];
+		$user['birthdate'] = $row['birthdate'];
+		$user['avatar'] = $row['avatar'];
 		
 	}
 	
 }
+
+require_once 'themes/'.$user['theme'].'/'.$user['theme'].'.lang.php';
 
 /* ========== Plugins ========== */
 

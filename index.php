@@ -7,7 +7,7 @@
  */
  
 require_once 'config.php';
-require_once 'core/xtemplate.class.php';
+require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
 require_once 'core/header.php';

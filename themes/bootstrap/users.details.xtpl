@@ -2,7 +2,7 @@
 		<div class="content">
 		
 			<div class="page-header">
-				<h1>{USERNAME}'s <small>Profile page</small></h1>
+				<h1>{USERNAME}'s <small>{PHP.lang.profilepage}</small></h1>
 			</div>
 			
 			<div class="row">
@@ -23,7 +23,7 @@
 						<div id="profile-elements" class="row">
 							
 							<div id="profile-avatar" class="span2">
-								<img id="profile-avatar-image" src="http://graph.facebook.com/100002292833325/picture?type=normal" alt="photo">
+								<img id="profile-avatar-image" src="{AVATAR}" alt="photo">
 							</div>
 							
 							<div id="profile-bio" class="span9">
@@ -37,7 +37,7 @@
 								
 							</div>
 							
-							<div id="profile-stats" class="span2">
+							<div id="profile-stats" class="span3">
 							
 								<div id="profile-stats-content">
 								
@@ -66,8 +66,8 @@
 							<div id="lower-frame-left" class="span9 column">
 							
 								<ul id="profile-tabs" class="tabs" data-tabs="tabs">
-									<li class="active"><a href="#wall">User Wall</a></li>
-									<li><a id="tab-favorite" href="#info">Information</a></li>
+									<li class="active"><a href="#wall">{PHP.lang.uwall}</a></li>
+									<li><a id="tab-favorite" href="#info">{PHP.lang.uinfo}</a></li>
 								</ul>
 
 								<div id="my-tab-content" class="tab-content">
@@ -85,20 +85,20 @@
 											<table class="borderless-table">
 												<tbody>
 													<tr>
-														<th>Username</th>
+														<th>{PHP.lang.username}</th>
 														<td>{USERNAME}</td>
 													</tr>
 													<tr>
-														<th>Group</th>
+														<th>{PHP.lang.group}</th>
 														<td>{GROUP}</td>
 													</tr>
 													<tr>
 
-														<th>Email</th>
+														<th>{PHP.lang.email}</th>
 														<td><a href="mailto:{EMAIL}">{EMAIL}</a></td>
 													</tr>
 													<tr>
-														<th>Register Date</th>
+														<th>{PHP.lang.regdate}</th>
 														<td>{REGDATE}</td>
 													</tr>
 
@@ -115,7 +115,7 @@
 
 							<div id="lower-frame-right" class="span5 column">
 								<ul class="tabs" data-tabs="tabs">
-									<li class="active"><a id="tab-following">Friends list</a></li>
+									<li class="active"><a id="tab-following">{PHP.lang.uflist}</a></li>
 								</ul>
 
 								<div id="my-tab-content-2" class="tab-content">

@@ -10,7 +10,7 @@
 				<div class="span9">
 					<!-- BEGIN: NEWS -->
 					<h5><a href="page.php?id={NEWS_ID}">{NEWS_TITLE}</a></h5>
-					<p class="desc">Posted by: {NEWS_OWNER} on {NEWS_DATE}</p>
+					<p class="desc">{PHP.lang.postby}: {NEWS_OWNER} {PHP.lang.on} {NEWS_DATE}</p>
 					
 					{NEWS_TEXT}
 					

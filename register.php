@@ -7,7 +7,7 @@
  */
  
 require_once 'config.php';
-require_once 'core/xtemplate.class.php';
+require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
 $un = $excursion->import('username', 'P', 'TXT');
@@ -44,7 +44,15 @@ while ($row = $sql->fetch())
 }
 $questions .= "</select>";
 
-$xtpl->assign(array('QUESTIONS' => $questions));
+$xtpl->assign(array(
+	'FORM_ACTION' => $excursion->url('register', 'action=send'),
+	'FORM_USERNAME' => $excursion->inputbox('text', 'username', $insert['username'], array('size' => 24, 'maxlength' => 100)),
+	'FORM_PASSWORD' => $excursion->inputbox('password', 'password', '', array('size' => 8, 'maxlength' => 32)),
+	'FORM_REPEAT_PASSWORD' => $excursion->inputbox('password', 'password2', '', array('size' => 8, 'maxlength' => 32)),
+	'FORM_EMAIL' => $excursion->inputbox('text', 'email', $insert['email'], array('size' => 24, 'maxlength' => 64)),
+	'QUESTIONS' => $questions,
+	'FORM_SQ_ANSWER' => $excursion->inputbox('text', 'sq_answer', $insert['sq_answer'], array('size' => 24, 'maxlength' => 64))
+));
 
 /* === Hook === */
 foreach ($excursion->Hook('register.tags') as $pl)

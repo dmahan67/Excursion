@@ -2,7 +2,7 @@
 		<div class="content">
 		
 			<div class="page-header">
-				<h1>Profile <small>Update your account information</small></h1>
+				<h1>{PHP.lang.profile} <small>{PHP.lang.upinfo}</small></h1>
 			</div>
 			
 			<div class="row">
@@ -16,32 +16,44 @@
 					</div>
 					<!-- END: ERRORS -->
 				
-					<form action="users.php?m=profile&action=send" method="post">
+					<form action="{FORM_ACTION}" enctype="multipart/form-data" method="post">
 					<table class="borderless-table">
 						<tbody>
 							<tr>
-								<th>Theme</th>
-								<td>{THEMES}</td>
+								<th>{PHP.lang.birthday}</th>
+								<td>{FORM_BIRTHDATE}</td>
 							</tr>
 							<tr>
-								<th>Password</th>
+								<th>{PHP.lang.gender}</th>
+								<td>{FORM_GENDER}</td>
+							</tr>
+							<tr>
+								<th>{PHP.lang.avatar}</th>
+								<td><img id="profile-avatar-image" src="{PHP.user.avatar}"><br />{FORM_AVATAR}</td>
+							</tr>
+							<tr>
+								<th>{PHP.lang.theme}</th>
+								<td>{FORM_THEMES}</td>
+							</tr>
+							<tr>
+								<th>{PHP.lang.password}</th>
 								<td>
-									<input class="xlarge" type="password" id="current_password" name="current_password" size="32" />
-									<span class="help-block">First enter your current password</span>
+									{FORM_PASSWORD}
+									<span class="help-block">{PHP.lang.enterpw}</span>
 									
 									<table style="width:590px;margin-left:-10px;" class="borderless-table">
 										<tr>
-											<td><input class="xlarge" type="password" id="new_password1" name="new_password1" size="32" /></td>
-											<td><input class="xlarge" type="password" id="new_password2" name="new_password2" size="32" /></td>
+											<td>{FORM_NEWPASSWORD}</td>
+											<td>{FORM_REPEAT_NEWPASSWORD}</td>
 										</tr>
 										<tr>
-											<td colspan="2"><span class="help-block">Then enter your new password twice</span></td>
+											<td colspan="2"><span class="help-block">{PHP.lang.pwtwice}</span></td>
 										</tr>
 									</table>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2"><button class="btn primary">Submit</button></td>
+								<td colspan="2"><button class="btn primary">{PHP.lang.submit}</button></td>
 							</tr>
 						</tbody>
 					</table>

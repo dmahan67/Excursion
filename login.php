@@ -7,7 +7,7 @@
  */
  
 require_once 'config.php';
-require_once 'core/xtemplate.class.php';
+require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
 $un = $excursion->import('username', 'P', 'TXT');
@@ -29,6 +29,12 @@ if($action == 'send'){
 	$member->Login($un, $pwd);
 	
 }
+
+$xtpl->assign(array(
+	'FORM_ACTION' => $excursion->url('login', 'action=send'),
+	'FORM_USERNAME' => $excursion->inputbox('text', 'username', $insert['username'], array('size' => 24, 'maxlength' => 100)),
+	'FORM_PASSWORD' => $excursion->inputbox('password', 'password', '', array('size' => 8, 'maxlength' => 32))
+));
 
 /* === Hook === */
 foreach ($excursion->Hook('login.tags') as $pl)

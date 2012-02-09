@@ -21,6 +21,9 @@ $config['default_language'] = 'en';										// Default language
 $config['date_short'] = 'm/d/y';										// 01/19/10
 $config['date_medium'] = 'F j, Y';										// January 19, 2010
 $config['date_long'] = 'F j, Y, g:i a';									// January 19, 2010 at 5:30 pm
+$sys['day'] = @date('Y-m-d');
+$sys['now'] = time();
+$sys['now_offset'] = $sys['now'];
 
 /* ========== Database Settings ========== */
 

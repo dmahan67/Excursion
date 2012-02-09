@@ -5,8 +5,9 @@
 
 	<meta charset="utf-8">
 	<title>Excursion - Content Management System</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<meta name="description" content="Open Source PHP Content Management System">
+	<meta name="keywords" content="excursion, cms, php, mysql, website, engine">
+	<meta name="author" content="Dyllon Mahan & Brock Burkholder">
 	
 	<link href="{PHP.theme.dir}/css/bootstrap.min.css" rel="stylesheet">	
 	<link href="{PHP.theme.dir}/css/style.css" rel="stylesheet">
@@ -29,31 +30,31 @@
 				<a class="brand" name="top">Excursion <sup><span class="label success">beta</span></sup></a>
 				
 				<ul class="nav">
-					<li><a href="index.php">Home</a></li>
-					<li><a href="list.php?c=news">News</a></li>
-					<li><a href="list.php?c=articles">Articles</a></li>
-					<li><a href="list.php?c=downloads">Downloads</a></li>
+					<li><a href="index.php">{PHP.lang.home}</a></li>
+					<li><a href="list.php?c=news">{PHP.lang.news}</a></li>
+					<li><a href="list.php?c=articles">{PHP.lang.articles}</a></li>
+					<li><a href="list.php?c=downloads">{PHP.lang.downloads}</a></li>
 				</ul>
 				
 				<ul class="nav secondary-nav">
 					<li class="dropdown">
 						<!-- BEGIN: GUEST -->
-						<a href="#" class="dropdown-toggle">Welcome, Guest</a>
+						<a href="#" class="dropdown-toggle">{PHP.lang.welcome}, {PHP.lang.guest}</a>
 						<ul class="dropdown-menu">
-							<li><a href="login.php">Login</a></li>
-							<li><a href="register.php">Register</a></li>
+							<li><a href="login.php">{PHP.lang.login}</a></li>
+							<li><a href="register.php">{PHP.lang.register}</a></li>
 							<li class="divider"></li>
-							<li><a href="users.php?action=recover">Recover Password</a></li>
+							<li><a href="users.php?action=recover">{PHP.lang.recover}</a></li>
 						</ul>
 						<!-- END: GUEST -->
 						<!-- BEGIN: USER -->
-						<a href="#" class="dropdown-toggle">Welcome, {PHP.user.name}</a>
+						<a href="#" class="dropdown-toggle">{PHP.lang.welcome}, {PHP.user.name}</a>
 						<ul class="dropdown-menu">
-							<!-- IF {PHP.user.group} == '4' --><li><a href="">Admin Panel</a></li><!-- ENDIF -->
-							<li><a href="users.php">Members list</a></li>
-							<li><a href="users.php?m=profile">Update Profile</a></li>
+							<!-- IF {PHP.user.group} == '4' --><li><a href="">{PHP.lang.admin}</a></li><!-- ENDIF -->
+							<li><a href="users.php">{PHP.lang.memberslist}</a></li>
+							<li><a href="users.php?m=profile">{PHP.lang.updateprofile}</a></li>
 							<li class="divider"></li>
-							<li><a href="logout.php">Logout</a></li>
+							<li><a href="logout.php">{PHP.lang.logout}</a></li>
 						</ul>
 						<!-- END: USER -->
 					</li>

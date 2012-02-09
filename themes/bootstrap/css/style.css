@@ -74,3 +74,4 @@ table.borderless-table tbody th {
 #profile-bio-content{display:table-cell;vertical-align:middle;border-right:1px solid #e1e1e1;}
 #profile-bio-name{color:#333;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:40px;font-weight:normal;line-height:16px;font-weight:300;}
 #profile-bio-text{color:#049cd9;margin-top:15px;margin-right:25px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;font-weight:normal;line-height:18px;}
+#profile-follow-container{text-align:center;vertical-align:middle;padding-right:15px;}

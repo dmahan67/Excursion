@@ -7,7 +7,7 @@
  */
  
 require_once 'config.php';
-require_once 'core/xtemplate.class.php';
+require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
 $c = $excursion->import('c','G','TXT');
@@ -129,35 +129,14 @@ if($m == 'edit' && $user['group'] == 4)
 	$sql = $db->query("SELECT * FROM pages WHERE id = $id LIMIT 1");
 	$row = $sql->fetch();
 	
-	$category .= "<select name='category' id='category'>";
-	$category_sql = $db->query("SELECT * FROM categories ORDER BY title ASC");
-	while ($cat = $category_sql->fetch())
-	{
-	
-		if($cat['code'] == $row['cat']){ $selected = "selected='selected'"; }else{$selected = "";}
-	
-		$category .= "<option name='".$cat['code']."' value='".$cat['code']."' ".$selected.">".$cat['title']."</option>";
-		
-	}
-	$category .= "</select>";
-	
-	$select_file .= "<select name='pagefile'>";
-	if($row['page_file'] == 0){ $select_file0 = "<option value='0' selected='selected'>No</option>"; } else { $select_file0 = "<option value='0'>No</option>";}
-	if($row['page_file'] == 1){ $select_file1 = "<option value='1' selected='selected'>Yes</option>"; } else { $select_file1 = "<option value='1'>Yes</option>";}
-	if($row['page_file'] == 2){ $select_file2 = "<option value='2' selected='selected'>Members only</option>"; } else { $select_file2 = "<option value='2'>Members only</option>";}
-	$select_file .= "".$select_file0."".$select_file1."".$select_file2."";
-	$select_file .= "</select>";
-	
 	$xtpl->assign(array(
-		'ID' => $row['id'],
-		'TITLE' => $row['title'],
-		'CAT' => $row['cat'],
-		'DESC' => $row['desc'],
-		'TEXT' => $row['text'],
-		'PAGE_FILE' => $row['page_file'],
-		'PAGE_URL' => $row['page_url'],
-		'CATEGORY' => $category,
-		'SELECT_FILE' => $select_file
+		'FORM_ACTION' => $excursion->url('page', 'id='.$id.'&m=edit&action=send'),
+		'FORM_TITLE' => $excursion->inputbox('text', 'title', $row['title'], array('size' => '64', 'maxlength' => '255')),
+		'FORM_DESC' => $excursion->inputbox('text', 'desc', $row['desc'], array('size' => '64', 'maxlength' => '255')),
+		'FORM_CAT' => $excursion->selectbox_categories($row['cat'], 'category'),
+		'FORM_PAGEFILE' => $excursion->selectbox($row['page_file'], 'pagefile', range(0, 2), array($lang['no'], $lang['yes'], $lang['members_only']), false),
+		'FORM_PAGEURL' => $excursion->inputbox('text', 'pageurl', $row['page_url'], array('size' => '64', 'maxlength' => '255')),
+		'FORM_TEXT' => $excursion->textarea('text', $row['text'], 24, 120, '', 'input_textarea_editor')
 	));
 	
 	/* === Hook === */
@@ -217,19 +196,15 @@ if($m == 'add' && $user['group'] == 4)
 		
 	}	
 	
-	$category .= "<select name='category' id='category'>";
-	$sql = $db->query("SELECT * FROM categories ORDER BY title ASC");
-	while ($row = $sql->fetch())
-	{
-	
-		if($row['code'] == $c){ $selected = "selected='selected'"; }else{$selected = "";}
-	
-		$category .= "<option name='".$row['code']."' value='".$row['code']."' ".$selected.">".$row['title']."</option>";
-		
-	}
-	$category .= "</select>";
-	
-	$xtpl->assign(array('CATEGORY' => $category));
+	$xtpl->assign(array(
+		'FORM_ACTION' => $excursion->url('page', 'm=add&action=send'),
+		'FORM_TITLE' => $excursion->inputbox('text', 'title', $insert['title'], array('size' => '64', 'maxlength' => '255')),
+		'FORM_DESC' => $excursion->inputbox('text', 'desc', $insert['desc'], array('size' => '64', 'maxlength' => '255')),
+		'FORM_CAT' => $excursion->selectbox_categories($c, 'category'),
+		'FORM_PAGEFILE' => $excursion->selectbox($insert['pagefile'], 'pagefile', range(0, 2), array($lang['no'], $lang['yes'], $lang['members_only']), false),
+		'FORM_PAGEURL' => $excursion->inputbox('text', 'pageurl', $insert['pageurl'], array('size' => '64', 'maxlength' => '255')),
+		'FORM_TEXT' => $excursion->textarea('text', $insert['text'], 24, 120, '', 'input_textarea_editor'),
+	));
 
 }
 if($m == 'add' && $user['group'] != 4)

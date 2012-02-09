@@ -6,6 +6,53 @@
  * @author Dyllon Mahan, Brock Burkholder
  */
  
+/* ========== GLOBAL ========== */
+
+$lang['no'] = 'No';
+$lang['yes'] = 'Yes';
+$lang['members_only'] = 'Members Only';
+ 
+/* ========== DATE/TIME ========== */
+
+$lang['Monday'] = 'Monday';
+$lang['Tuesday'] = 'Tuesday';
+$lang['Wednesday'] = 'Wednesday';
+$lang['Thursday'] = 'Thursday';
+$lang['Friday'] = 'Friday';
+$lang['Saturday'] = 'Saturday';
+$lang['Sunday'] = 'Sunday';
+$lang['Monday_s'] = 'Mon';
+$lang['Tuesday_s'] = 'Tue';
+$lang['Wednesday_s'] = 'Wed';
+$lang['Thursday_s'] = 'Thu';
+$lang['Friday_s'] = 'Fri';
+$lang['Saturday_s'] = 'Sat';
+$lang['Sunday_s'] = 'Sun';
+$lang['January'] = 'January';
+$lang['February'] = 'February';
+$lang['March'] = 'March';
+$lang['April'] = 'April';
+$lang['May'] = 'May';
+$lang['June'] = 'June';
+$lang['July'] = 'July';
+$lang['August'] = 'August';
+$lang['September'] = 'September';
+$lang['October'] = 'October';
+$lang['November'] = 'November';
+$lang['December'] = 'December';
+$lang['January_s'] = 'Jan';
+$lang['February_s'] = 'Feb';
+$lang['March_s'] = 'Mar';
+$lang['April_s'] = 'Apr';
+$lang['May_s'] = 'May';
+$lang['June_s'] = 'Jun';
+$lang['July_s'] = 'Jul';
+$lang['August_s'] = 'Aug';
+$lang['September_s'] = 'Sep';
+$lang['October_s'] = 'Oct';
+$lang['November_s'] = 'Nov';
+$lang['December_s'] = 'Dec';
+ 
 /* ========== MESSAGES ========== */
 $lang['message_blank_title'] = 'Error';
 $lang['message_blank_subtitle'] = 'Fatal error encountered';
@@ -82,9 +129,9 @@ $lang['page_error_text_length'] = 'Page text is too short';
 /* ========== PROFILE ========== */
 $lang['profile_error_nomatch'] = 'Your current password was incorrect';
 $lang['profile_error_nosame'] = 'You did not enter matching passwords';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
+$lang['gender_U'] = 'Unknown';
+$lang['gender_M'] = 'Male';
+$lang['gender_F'] = 'Female';
 $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';
