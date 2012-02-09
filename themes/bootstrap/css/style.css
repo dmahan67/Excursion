@@ -48,10 +48,29 @@ body {
 }
 
 table.borderless-table td {
-  vertical-align: top;
-  border-top: 0px;
+	vertical-align: top;
+	border-top: 0px;
 }
+
 table.borderless-table tbody th {
-  border-top: 0px;
-  vertical-align: top;
+	border-top: 0px;
+	vertical-align: top;
 }
+
+#profile-header {
+	position:relative;
+	margin-top:5px;
+	background-color:#e7e7e7;
+	-webkit-border-radius:6px 6px 6px 6px;
+	-moz-border-radius:6px 6px 6px 6px;
+	border-radius:6px 6px 6px 6px;
+	z-index:30;
+}
+#profile-avatar{text-align:center;}
+#profile-avatar-image{max-height:100px;max-width:100px;margin:5px 0 0 5px;}
+#profile-stats{display:table;height:55px;overflow:hidden;}
+#profile-stats-content{display:table-cell;vertical-align:middle;}
+#profile-bio{position:relative;display:table;height:100px;overflow:hidden;}
+#profile-bio-content{display:table-cell;vertical-align:middle;border-right:1px solid #e1e1e1;}
+#profile-bio-name{color:#333;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:40px;font-weight:normal;line-height:16px;font-weight:300;}
+#profile-bio-text{color:#049cd9;margin-top:15px;margin-right:25px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;font-weight:normal;line-height:18px;}

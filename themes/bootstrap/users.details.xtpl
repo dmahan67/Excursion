@@ -9,7 +9,7 @@
 			
 				<div class="span14">
 					<ul class="breadcrumb">
-						<li><img src="themes/bootstrap/images/home.png" height="12" width="12" /></li>
+						<li><img src="{PHP.theme.dir}/img/home.png" height="12" width="12" /></li>
 						<li><a href="index.php">Home</a> <span class="divider">/</span></li>
 						<li><a href="users.php">Users</a> <span class="divider">/</span></li>
 						<li class="active">{USERNAME}</li>
@@ -18,26 +18,121 @@
 			
 				<div class="span14">
 
-					<table>
-						<tbody>
-							<tr>
-								<th>Username</th>
-								<td>{USERNAME}</td>
-							</tr>
-							<tr>
-								<th>Group</th>
-								<td>{GROUP}</td>
-							</tr>
-							<tr>
-								<th>Email</th>
-								<td><a href="mailto:{EMAIL}">{EMAIL}</a></td>
-							</tr>
-							<tr>
-								<th>Register Date</th>
-								<td>{REGDATE}</td>
-							</tr>
-						</tbody>
-					</table>				
+					<div id="profile-header">
+						
+						<div id="profile-elements" class="row">
+							
+							<div id="profile-avatar" class="span2">
+								<img id="profile-avatar-image" src="http://graph.facebook.com/100002292833325/picture?type=normal" alt="photo">
+							</div>
+							
+							<div id="profile-bio" class="span9">
+							
+								<div id="profile-bio-content">
+								
+									<div id="profile-bio-name">{USERNAME}</div>
+									<div id="profile-bio-text">{GROUP}</div>
+									
+								</div>
+								
+							</div>
+							
+							<div id="profile-stats" class="span2">
+							
+								<div id="profile-stats-content">
+								
+									<div id="profile-follow-container">
+										<a id="follow-button" href="#" class="btn small primary">Friend Request</a>
+									</div>
+									
+								</div>
+								
+							</div>
+							
+						</div>
+
+					</div>
+					
+					<br />
+					
+					<div id="lower-frame">
+    
+						<div id="rainbowContainerWrapper" class="row">
+							<div id="profileRainbowContainer" class="span9 column"></div>
+						</div>
+
+						<div class="row">
+						
+							<div id="lower-frame-left" class="span9 column">
+							
+								<ul id="profile-tabs" class="tabs" data-tabs="tabs">
+									<li class="active"><a href="#wall">User Wall</a></li>
+									<li><a id="tab-favorite" href="#info">Information</a></li>
+								</ul>
+
+								<div id="my-tab-content" class="tab-content">
+								
+									<div class="active" id="wall">
+										<div id="no-odes-message" class="span9">
+											<h6>wall</h6>
+										</div>  
+									</div>
+									
+									<div id="info">
+									
+										<div id="no-odes-message" class="span9">
+
+											<table class="borderless-table">
+												<tbody>
+													<tr>
+														<th>Username</th>
+														<td>{USERNAME}</td>
+													</tr>
+													<tr>
+														<th>Group</th>
+														<td>{GROUP}</td>
+													</tr>
+													<tr>
+
+														<th>Email</th>
+														<td><a href="mailto:{EMAIL}">{EMAIL}</a></td>
+													</tr>
+													<tr>
+														<th>Register Date</th>
+														<td>{REGDATE}</td>
+													</tr>
+
+												</tbody>
+											</table>
+										
+										</div>  
+										
+									</div>
+									
+								</div>
+								
+							</div>
+
+							<div id="lower-frame-right" class="span5 column">
+								<ul class="tabs" data-tabs="tabs">
+									<li class="active"><a id="tab-following">Friends list</a></li>
+								</ul>
+
+								<div id="my-tab-content-2" class="tab-content">
+								
+									<div class="active" id="following">
+
+										<h6>FRIENDS LIST</h6>
+									
+									</div>
+									
+								</div>
+
+							</div>
+
+						</div>
+					
+					</div>
 				
 				</div>
 				

@@ -11,8 +11,8 @@ error_reporting (E_ALL ^ E_NOTICE);
 /* ========== Main Settings ========== */
 
 $config['main_url'] = 'localhost';										// Full URL without ending in a slash
-$config['title'] = 'Excursion';											// Title of your website
-$config['admin_email'] = 'donotreply@excursion-powered.com';			// Administration email
+$config['title'] = '';													// Title of your website
+$config['admin_email'] = '';											// Administration email
 $config['default_theme'] = 'bootstrap';									// Default theme unless set by user
 $config['default_language'] = 'en';										// Default language
 
@@ -28,7 +28,7 @@ $config['mysqlhost'] = 'localhost';
 $config['mysqlport'] = '';	
 $config['mysqluser'] = 'root';	
 $config['mysqlpassword'] = '';
-$config['mysqldb'] = 'excursion';
+$config['mysqldb'] = '';
 
 $config['mysqlcharset'] = 'utf8';
 $config['mysqlcollate'] = 'utf8_unicode_ci';

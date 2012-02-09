@@ -9,7 +9,7 @@
 			
 				<div class="span14">
 					<ul class="breadcrumb">
-						<li><img src="themes/bootstrap/images/home.png" height="12" width="12" /></li>
+						<li><img src="{PHP.theme.dir}/img/home.png" height="12" width="12" /></li>
 						<li><a href="index.php">Home</a> <span class="divider">/</span></li>
 						<li class="active">{TITLE}</li>
 					</ul>
@@ -17,7 +17,7 @@
 			
 				<div class="span14">
 				
-					<!-- IF {PHP.user.group} == 4 --><p class="pull-right"><a href="page.php?m=add">Submit new page</a></p><!-- ENDIF -->
+					<!-- IF {PHP.user.group} == 4 --><p class="pull-right"><a href="page.php?m=add&c={PHP.c}">Submit new page</a></p><!-- ENDIF -->
 
 					<table class="zebra-striped" id="sortTable">
 						<thead>

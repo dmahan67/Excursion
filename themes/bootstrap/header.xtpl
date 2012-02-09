@@ -8,17 +8,15 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
-	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+	<link href="{PHP.theme.dir}/css/bootstrap.min.css" rel="stylesheet">	
+	<link href="{PHP.theme.dir}/css/style.css" rel="stylesheet">
+	<script src="{PHP.theme.dir}/js/app.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-	<script type="text/javascript" src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-dropdown.js"></script>
-	<script type="text/javascript" src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-alerts.js"></script>
-	<script type="text/javascript" src="http://autobahn.tablesorter.com/jquery.tablesorter.min.js"></script>
-	<script >$(function() {$("table#sortTable").tablesorter({ sortList: [[0,0]] });});</script>
-	<script type="text/javascript" src="themes/bootstrap/js/ckeditor/ckeditor.js"></script>
+	<script src="{PHP.theme.dir}/js/bootstrap-alerts.js" type="text/javascript"></script>
+	<script src="{PHP.theme.dir}/js/tablesorter.min.js" type="text/javascript"></script>
+	<script>$(function() {$("table#sortTable").tablesorter({ sortList: [[0,0]] });});</script>
+	<script src="{PHP.theme.dir}/js/ckeditor/ckeditor.js" type="text/javascript"></script>
 	
-	<link href="themes/bootstrap/css/style.css" rel="stylesheet">
-
 </head>
 <body>
 

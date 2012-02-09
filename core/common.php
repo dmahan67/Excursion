@@ -87,4 +87,8 @@ if (!$plugins)
 	
 }
 
+/* ========== Global Tags ========== */
+
+$theme['dir'] = 'themes/'.$user['theme'];
+
 ?>

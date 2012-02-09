@@ -10,6 +10,8 @@ require_once 'config.php';
 require_once 'core/xtemplate.class.php';
 require_once 'core/common.php';
 
+$c = $excursion->import('c','G','TXT');
+
 if($action == 'remove' && $user['group'] == 4)
 {
 
@@ -220,7 +222,9 @@ if($m == 'add' && $user['group'] == 4)
 	while ($row = $sql->fetch())
 	{
 	
-		$category .= "<option name='".$row['code']."' value='".$row['code']."'>".$row['title']."</option>";
+		if($row['code'] == $c){ $selected = "selected='selected'"; }else{$selected = "";}
+	
+		$category .= "<option name='".$row['code']."' value='".$row['code']."' ".$selected.">".$row['title']."</option>";
 		
 	}
 	$category .= "</select>";
