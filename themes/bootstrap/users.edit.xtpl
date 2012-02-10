@@ -1,0 +1,73 @@
+<!-- BEGIN: MAIN -->
+		<div class="content">
+		
+			<div class="page-header">
+				<h1>{PHP.lang.editut} <small>{PHP.lang.editud}</small></h1>
+			</div>
+			
+			<div class="row">
+			
+				<div class="span14">
+				
+					<!-- BEGIN: ERRORS -->
+					<div class="alert-message block-message error fade in" data-alert="alert" >
+						<a class="close" href="#">&times;</a>
+						<p>{ERRORS_TEXT}</p>
+					</div>
+					<!-- END: ERRORS -->
+				
+					<form action="{FORM_ACTION}" enctype="multipart/form-data" method="post">
+					<table class="borderless-table">
+						<tbody>
+							<tr>
+								<th>{PHP.lang.username}</th>
+								<td>{FORM_USERNAME}</td>
+							</tr>
+							<tr>
+								<th>{PHP.lang.email}</th>
+								<td>{FORM_EMAIL}</td>
+							</tr>
+							<tr>
+								<th>{PHP.lang.group}</th>
+								<td>{FORM_GROUP}</td>
+							</tr>
+							<tr>
+								<th>{PHP.lang.birthday}</th>
+								<td>{FORM_BIRTHDATE}</td>
+							</tr>
+							<tr>
+								<th>{PHP.lang.gender}</th>
+								<td>{FORM_GENDER}</td>
+							</tr>
+							<tr>
+								<th>{PHP.lang.avatar}</th>
+								<td><img id="profile-avatar-image" src="{PHP.row.avatar}"><br />{FORM_AVATAR}</td>
+							</tr>
+							<tr>
+								<th>{PHP.lang.theme}</th>
+								<td>{FORM_THEMES}</td>
+							</tr>
+							<tr>
+								<th>{PHP.lang.password}</th>
+								<td>
+									<table style="width:590px;margin-left:-10px;margin-top:-15px;" class="borderless-table">
+										<tr>
+											<td>{FORM_NEWPASSWORD}</td>
+											<td>{FORM_REPEAT_NEWPASSWORD}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"><button class="btn primary">{PHP.lang.submit}</button></td>
+							</tr>
+						</tbody>
+					</table>
+					</form>
+				
+				</div>
+				
+			</div>
+			
+		</div>
+<!-- END: MAIN -->

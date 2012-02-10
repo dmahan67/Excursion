@@ -1157,7 +1157,7 @@ class Excursion {
 	
 	function selectbox_categories($check, $name, $subcat = '', $hideprivate = true)
 	{
-		global $db, $lang, $R;
+		global $db;
 
 		$sql = $db->query("SELECT code, title FROM categories ORDER BY title ASC");
 		$count = $db->countRows('categories');
@@ -1177,6 +1177,38 @@ class Excursion {
 			{
 			
 				$result_value .= $row['code'].',';
+				$result_title .= $row['title'].',';
+				
+			}
+			
+		}
+		$result = $this->selectbox($check, $name, $result_value, $result_title, false);
+
+		return($result);
+	}
+	
+	function selectbox_groups($check, $name)
+	{
+		global $db;
+
+		$sql = $db->query("SELECT id, title FROM groups ORDER BY title ASC");
+		$count = $db->countRows('groups');
+		$jj = 0;
+		while ($row = $sql->fetch())
+		{
+		
+			$jj++;
+			
+			if($jj > ($count - 1)){
+			
+				$result_value .= $row['id'];
+				$result_title .= $row['title'];
+				
+			}
+			else
+			{
+			
+				$result_value .= $row['id'].',';
 				$result_title .= $row['title'].',';
 				
 			}

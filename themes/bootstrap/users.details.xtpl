@@ -42,7 +42,9 @@
 								<div id="profile-stats-content">
 								
 									<div id="profile-follow-container">
-										<a id="follow-button" href="#" class="btn small primary">Friend Request</a>
+										
+										<!-- IF {PHP.user.group} == '4' --><a href="users.php?m=edit&id={ID}" class="btn small primary">{PHP.lang.edituser}</a><!-- ENDIF -->
+										
 									</div>
 									
 								</div>
@@ -56,29 +58,18 @@
 					<br />
 					
 					<div id="lower-frame">
-    
-						<div id="rainbowContainerWrapper" class="row">
-							<div id="profileRainbowContainer" class="span9 column"></div>
-						</div>
 
 						<div class="row">
 						
 							<div id="lower-frame-left" class="span9 column">
 							
 								<ul id="profile-tabs" class="tabs" data-tabs="tabs">
-									<li class="active"><a href="#wall">{PHP.lang.uwall}</a></li>
-									<li><a id="tab-favorite" href="#info">{PHP.lang.uinfo}</a></li>
+									<li class="active"><a href="#info">{PHP.lang.uinfo}</a></li>
 								</ul>
 
 								<div id="my-tab-content" class="tab-content">
-								
-									<div class="active" id="wall">
-										<div id="no-odes-message" class="span9">
-											<h6>wall</h6>
-										</div>  
-									</div>
-									
-									<div id="info">
+							
+									<div class="active" id="info">
 									
 										<div id="no-odes-message" class="span9">
 
@@ -91,6 +82,14 @@
 													<tr>
 														<th>{PHP.lang.group}</th>
 														<td>{GROUP}</td>
+													</tr>
+													<tr>
+														<th>Gender</th>
+														<td>{GENDER}</td>
+													</tr>
+													<tr>
+														<th>Birthday</th>
+														<td>{BIRTHDATE}</td>
 													</tr>
 													<tr>
 

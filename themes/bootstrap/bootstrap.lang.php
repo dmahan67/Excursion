@@ -78,6 +78,31 @@ $lang['rpstep2'] = 'An email will be sent to the address given with a link to va
 $lang['rpstep3'] = 'Your account will become activated, and you may update additional profile details.';
 $lang['complismem'] = 'Complete list of our members';
 $lang['users'] = 'Users';
+$lang['edituser'] = 'Edit This User';
+
+/* ========== EDIT USER ========== */
+$lang['editut'] = 'Edit User';
+$lang['editud'] = 'Update users profile information';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
+$lang[''] = '';
 
 /* ========== PAGES ========== */
 $lang['editpage'] = 'Edit page';
