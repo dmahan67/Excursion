@@ -16,6 +16,8 @@ $email = $excursion->import('email','P','TXT',64, TRUE);
 if($action == 'validate')
 {
 
+	$ex['location'] = 'users.validate';
+
 	/* === Hook === */
 	foreach ($excursion->Hook('user.validate.action') as $pl)
 	{
@@ -28,6 +30,8 @@ if($action == 'validate')
 }
 if($action == 'remove')
 {
+
+	$ex['location'] = 'users.remove';
 
 	/* === Hook === */
 	foreach ($excursion->Hook('user.remove.action.first') as $pl)
@@ -64,6 +68,8 @@ require_once 'core/header.php';
 if(isset($id) && $id > 0 && empty($m))
 {
 
+	$ex['location'] = 'users.details';
+
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.details.xtpl');
 	
 	$sql = $db->query("SELECT * FROM members WHERE id = $id LIMIT 1");
@@ -90,6 +96,8 @@ if(isset($id) && $id > 0 && empty($m))
 }
 elseif($m == 'profile')
 {
+
+	$ex['location'] = 'users.profile';
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.profile.xtpl');
 	
@@ -127,7 +135,7 @@ elseif($m == 'profile')
 
 				move_uploaded_file($file['tmp_name'], $filepath);
 				$excursion->imageresize($filepath, $filepath, 100, 100, 'fit', '', 100);
-				@chmod($filepath, $cfg['file_perms']);
+				@chmod($filepath, $config['file_perms']);
 				$sql = $db->update('members', array("avatar" => $filepath), "id='".$user['id']."'");
 			}
 			
@@ -191,6 +199,8 @@ elseif($m == 'profile')
 elseif($m == 'edit' && $user['group'] == '4')
 {
 
+	$ex['location'] = 'users.edit';
+
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.edit.xtpl');
 	
 	$sql = $db->query("SELECT * FROM members WHERE id = ".$id);
@@ -232,7 +242,7 @@ elseif($m == 'edit' && $user['group'] == '4')
 
 				move_uploaded_file($file['tmp_name'], $filepath);
 				$excursion->imageresize($filepath, $filepath, 100, 100, 'fit', '', 100);
-				@chmod($filepath, $cfg['file_perms']);
+				@chmod($filepath, $config['file_perms']);
 				$sql = $db->update('members', array("avatar" => $filepath), "id='".$row['id']."'");
 			}
 			
@@ -299,6 +309,8 @@ elseif($m == 'edit' && $user['group'] == '4')
 elseif(isset($action) && $action == 'recover')
 {
 
+	$ex['location'] = 'users.recover';
+
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.recover.xtpl');
  
 	if($m == 'lostpass')
@@ -357,6 +369,8 @@ elseif(isset($action) && $action == 'recover')
 }
 else
 {
+
+	$ex['location'] = 'users';
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.xtpl');
 

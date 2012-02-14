@@ -35,5 +35,9 @@ $config['mysqldb'] = '';
 
 $config['mysqlcharset'] = 'utf8';
 $config['mysqlcollate'] = 'utf8_unicode_ci';
+
+/* ========== Images ========== */
+
+$config['file_perms'] = 0664;
  
 ?>
