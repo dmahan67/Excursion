@@ -13,7 +13,7 @@ $R['input_default'] = '<input type="{$type}" class="xlarge" name="{$name}" value
 $R['input_option'] = '<option value="{$value}"{$selected}>{$title}</option>';
 $R['input_radio'] = '<label><input type="radio" name="{$name}" value="{$value}"{$checked}{$attrs} /> {$title}</label>';
 $R['input_radio_separator'] = ' ';
-$R['input_select'] = '<select name="{$name}"{$attrs}>{$options}</select>{$error}';
+$R['input_select'] = '<select name="{$name}" class="xlarge" {$attrs}>{$options}</select>{$error}';
 $R['input_text'] = '<input type="text" class="xlarge" name="{$name}" value="{$value}" {$attrs} />{$error}';
 $R['input_textarea'] = '<textarea name="{$name}" rows="{$rows}" cols="{$cols}"{$attrs}>{$value}</textarea>{$error}';
 $R['input_textarea_editor'] =  '<textarea class="ckeditor" name="{$name}" rows="{$rows}" cols="{$cols}"{$attrs}>{$value}</textarea>{$error}';

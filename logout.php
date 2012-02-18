@@ -10,6 +10,15 @@ require_once 'config.php';
 require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
+$ex['location'] = 'logout';
+
+/* === Hook === */
+foreach ($excursion->Hook('logout') as $pl)
+{
+	include $pl;
+}
+/* ===== */
+
 $member->Logout();
 
 ?>

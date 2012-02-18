@@ -15,6 +15,8 @@ $c = $excursion->import('c','G','TXT');
 if($action == 'remove' && $user['group'] == 4)
 {
 
+	$ex['location'] = 'page.remove';
+
 	/* === Hook === */
 	foreach ($excursion->Hook('page.remove.action') as $pl)
 	{
@@ -29,6 +31,8 @@ if($action == 'remove' && $user['group'] == 4)
 }
 if($action == 'queue' && $user['group'] == 4)
 {
+	
+	$ex['location'] = 'page.queue';
 
 	/* === Hook === */
 	foreach ($excursion->Hook('page.queue.action.first') as $pl)
@@ -69,6 +73,8 @@ require_once 'core/header.php';
 
 if($m == 'edit' && $user['group'] == 4)
 {
+
+	$ex['location'] = 'page.edit';
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/page.edit.xtpl');
 	
@@ -150,6 +156,8 @@ if($m == 'edit' && $user['group'] == 4)
 if($m == 'add' && $user['group'] == 4)
 {
 
+	$ex['location'] = 'page.add';
+
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/page.add.xtpl');
 
 	if($action == 'send' && $user['group'] == 4)
@@ -213,9 +221,10 @@ if($m == 'add' && $user['group'] != 4)
 	header('Location: message.php?id=105');
 	
 }
-
 if((isset($id) && $id > 0) && empty($m))
 {
+
+	$ex['location'] = 'page';
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/page.xtpl');
 	

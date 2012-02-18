@@ -11,6 +11,7 @@ require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
 $c = $excursion->import('c', 'G', 'TXT');
+$ex['location'] = 'list';
 
 require_once 'core/header.php';
 

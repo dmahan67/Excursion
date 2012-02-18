@@ -13,11 +13,14 @@ require_once 'core/common.php';
 $un = $excursion->import('username', 'P', 'TXT');
 $pwd = $excursion->import('password', 'P', 'TXT');
 
+$ex['location'] = 'login';
+
 require_once 'core/header.php';
 
 $xtpl = new XTemplate('themes/'.$user['theme'].'/login.xtpl');
 
-if($action == 'send'){
+if($action == 'send')
+{
 
 	/* === Hook === */
 	foreach ($excursion->Hook('login.send.action') as $pl)

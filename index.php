@@ -10,6 +10,8 @@ require_once 'config.php';
 require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
+$ex['location'] = 'index';
+
 require_once 'core/header.php';
 
 $xtpl = new XTemplate('themes/'.$user['theme'].'/index.xtpl');

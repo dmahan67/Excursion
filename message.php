@@ -10,6 +10,8 @@ require_once 'config.php';
 require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
+$ex['location'] = 'message';
+
 if(empty($id) || $id == 0){
 	$title = $lang['message_blank_title'];
 	$subtitle = $lang['message_blank_subtitle'];

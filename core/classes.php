@@ -1219,6 +1219,38 @@ class Excursion {
 		return($result);
 	}
 	
+	function selectbox_security_questions($check, $name)
+	{
+		global $db;
+
+		$sql = $db->query("SELECT id, question FROM security_questions ORDER BY id ASC");
+		$count = $db->countRows('security_questions');
+		$jj = 0;
+		while ($row = $sql->fetch())
+		{
+		
+			$jj++;
+			
+			if($jj > ($count - 1)){
+			
+				$result_value .= $row['id'];
+				$result_title .= $row['question'];
+				
+			}
+			else
+			{
+			
+				$result_value .= $row['id'].',';
+				$result_title .= $row['question'].',';
+				
+			}
+			
+		}
+		$result = $this->selectbox($check, $name, $result_value, $result_title, false);
+
+		return($result);
+	}
+	
 	function url($name, $params = '', $tail = '', $htmlspecialchars_bypass = false, $ignore_appendix = false)
 	{
 		global $config, $url_appendix;
