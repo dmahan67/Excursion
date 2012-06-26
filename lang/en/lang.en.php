@@ -11,6 +11,7 @@
 $lang['no'] = 'No';
 $lang['yes'] = 'Yes';
 $lang['members_only'] = 'Members Only';
+$lang['del'] = 'Delete';
  
 /* ========== DATE/TIME ========== */
 

@@ -913,7 +913,7 @@ class Excursion {
 			}
 		}
 
-		return $this->selectbox("$selected_theme:$selected_scheme", $input_name, $values, $titles, false);
+		return $this->selectbox($selected_theme, $input_name, $values, $titles, false);
 	}
 	
 	function checkbox($chosen, $name, $title = '', $attrs = '', $value = '1', $custom_rc = '')
@@ -1541,6 +1541,18 @@ class Excursion {
 			imagedestroy($canvas);
 			return $result;
 		}
+	}
+	
+	function buildAvatar($userid, $code){
+	
+		global $db;
+	
+		$src = $db->query("SELECT avatar FROM members WHERE id='$userid' LIMIT 1")->fetchColumn();
+		
+		if(empty($code)){ $class = 'avatar'; }else{ $class = $code; }
+	
+		return $this->rc("member_image", array('src' => $src, 'class' => $class));
+	
 	}
 
 }

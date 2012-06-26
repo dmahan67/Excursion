@@ -12,10 +12,10 @@ require_once 'core/common.php';
 
 $c = $excursion->import('c','G','TXT');
 
+$ex['location'] = 'page';
+
 if($action == 'remove' && $user['group'] == 4)
 {
-
-	$ex['location'] = 'page.remove';
 
 	/* === Hook === */
 	foreach ($excursion->Hook('page.remove.action') as $pl)
@@ -32,8 +32,6 @@ if($action == 'remove' && $user['group'] == 4)
 if($action == 'queue' && $user['group'] == 4)
 {
 	
-	$ex['location'] = 'page.queue';
-
 	/* === Hook === */
 	foreach ($excursion->Hook('page.queue.action.first') as $pl)
 	{
@@ -73,8 +71,6 @@ require_once 'core/header.php';
 
 if($m == 'edit' && $user['group'] == 4)
 {
-
-	$ex['location'] = 'page.edit';
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/page.edit.xtpl');
 	
@@ -224,8 +220,6 @@ if($m == 'add' && $user['group'] != 4)
 if((isset($id) && $id > 0) && empty($m))
 {
 
-	$ex['location'] = 'page';
-
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/page.xtpl');
 	
 	$sql = $db->query("SELECT * FROM pages WHERE id = $id LIMIT 1");
@@ -237,6 +231,7 @@ if((isset($id) && $id > 0) && empty($m))
 		'DESC' => $row['desc'],
 		'CAT' => $db->query("SELECT title FROM categories WHERE code='".$row['cat']."' LIMIT 1")->fetchColumn(),
 		'OWNER' => $excursion->generateUser($row['owner']),
+		'AVATAR' => $excursion->buildAvatar($row['owner'], 'avatar'),
 		'DATE' => date($config['date_medium'], $row['date']),
 		'TEXT' => $row['text']
 	));
@@ -258,6 +253,13 @@ if((isset($id) && $id > 0) && empty($m))
 			$xtpl->parse('MAIN.PAGE_FILE');
 		}
 	}
+	
+	/* === Hook === */
+	foreach ($excursion->Hook('page.tags') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
 	
 }
 if((empty($id) || $id == 0) && empty($m))

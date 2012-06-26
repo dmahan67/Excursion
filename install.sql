@@ -42,9 +42,6 @@ CREATE TABLE IF NOT EXISTS `plugins` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `plugins` (`id`, `hook`, `code`, `part`, `title`, `file`, `active`) VALUES
-(1, 'index.tags', 'news', 'main', 'News', 'news/news.php', 1);
-
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` mediumint NOT NULL auto_increment,
   `code` varchar(255) collate utf8_unicode_ci NOT NULL default '',

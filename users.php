@@ -10,13 +10,13 @@ require_once 'config.php';
 require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
+$ex['location'] = 'users';
+
 $token = $excursion->import('token','G','TXT');
 $email = $excursion->import('email','P','TXT',64, TRUE);
 
 if($action == 'validate')
 {
-
-	$ex['location'] = 'users.validate';
 
 	/* === Hook === */
 	foreach ($excursion->Hook('user.validate.action') as $pl)
@@ -30,8 +30,6 @@ if($action == 'validate')
 }
 if($action == 'remove')
 {
-
-	$ex['location'] = 'users.remove';
 
 	/* === Hook === */
 	foreach ($excursion->Hook('user.remove.action.first') as $pl)
@@ -68,8 +66,6 @@ require_once 'core/header.php';
 if(isset($id) && $id > 0 && empty($m))
 {
 
-	$ex['location'] = 'users.details';
-
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.details.xtpl');
 	
 	$sql = $db->query("SELECT * FROM members WHERE id = $id LIMIT 1");
@@ -96,8 +92,6 @@ if(isset($id) && $id > 0 && empty($m))
 }
 elseif($m == 'profile')
 {
-
-	$ex['location'] = 'users.profile';
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.profile.xtpl');
 	
@@ -188,7 +182,7 @@ elseif($m == 'profile')
 		'FORM_ACTION' => $excursion->url('users', 'm=profile&action=send'),
 		'FORM_THEMES' => $excursion->selectbox_theme($user['theme'], 'themes'),
 		'FORM_GENDER' => $excursion->selectbox_gender($user['gender'] ,'gender'),
-		'FORM_PASSWORD' => $excursion->inputbox('password', 'current_password', '', array('size' => 12, 'maxlength' => 32)),
+		'FORM_PASSWORD' => $excursion->inputbox('password', 'curr_password', '', array('size' => 12, 'maxlength' => 32)),
 		'FORM_NEWPASSWORD' => $excursion->inputbox('password', 'new_password1', '', array('size' => 12, 'maxlength' => 32)),
 		'FORM_REPEAT_NEWPASSWORD' => $excursion->inputbox('password', 'new_password2', '', array('size' => 12, 'maxlength' => 32)),
 		'FORM_AVATAR' => $excursion->inputbox('file', 'avatar', '', array('size' => 24)),
@@ -198,8 +192,6 @@ elseif($m == 'profile')
 }
 elseif($m == 'edit' && $user['group'] == '4')
 {
-
-	$ex['location'] = 'users.edit';
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.edit.xtpl');
 	
@@ -309,8 +301,6 @@ elseif($m == 'edit' && $user['group'] == '4')
 elseif(isset($action) && $action == 'recover')
 {
 
-	$ex['location'] = 'users.recover';
-
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.recover.xtpl');
  
 	if($m == 'lostpass')
@@ -370,11 +360,9 @@ elseif(isset($action) && $action == 'recover')
 else
 {
 
-	$ex['location'] = 'users';
-
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.xtpl');
 
-	$sql = $db->query("SELECT * FROM members ORDER BY id DESC LIMIT 10");
+	$sql = $db->query("SELECT * FROM members ORDER BY id ASC LIMIT 25");
 	while ($row = $sql->fetch())
 	{
 
