@@ -1,0 +1,103 @@
+<!-- BEGIN: MAIN -->
+					<h1 class="page-title"><i class="icon-home"></i> Dashboard</h1>
+					
+					<div class="stat-container">
+
+						<div class="stat-holder">
+
+							<div class="stat">
+
+								<span>{PHP.totalusers}</span>
+								Total Members
+
+							</div>
+
+						</div>
+						
+						<div class="stat-holder">
+
+							<div class="stat">
+
+								<span>0</span>
+								Monthly Traffic
+
+							</div>
+
+						</div>
+						
+					</div>
+					
+					<div class="row">
+					
+						<div class="span5">
+					
+							<div class="widget widget-table">
+
+								<div class="widget-header">
+							
+									<i class="icon-th-list"></i><h3>Excursion</h3>
+									
+								</div>
+
+								<div class="widget-content">
+
+									<table class="table table-striped table-bordered">
+										<tbody>
+											<tr>
+												<th>Version</th>
+												<td>{PHP.cfg.version}</td>
+											</tr>
+											<tr>
+												<th>Plugins</th>
+												<td>{PHP.totalplugins}</td>
+											</tr>
+											<tr>
+												<th>Members</th>
+												<td>{PHP.totalusers}</td>
+											</tr>
+										</tbody>
+									</table>
+									
+								</div>
+
+							</div>
+							
+						</div>
+						
+						<div class="span4">
+						
+							<div class="widget widget-table">
+
+								<div class="widget-header">
+							
+									<i class="icon-user"></i><h3>Latest Members</h3>
+									
+								</div>
+
+								<div class="widget-content">
+
+									<table class="table table-striped table-bordered">
+										<thead>
+											<tr>
+												<th>Username</th>
+												<th>Join Date</th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- BEGIN: NEW_USERS -->
+											<tr>
+												<td>{USERNAME}</td>
+												<td>{DATE}</td>
+											</tr>
+											<!-- END: NEW_USERS -->
+										</tbody>
+									</table>
+									
+								</div>
+
+							</div>
+						
+						</div>
+						
+					</div>
+<!-- END: MAIN -->

@@ -1,3 +1,17 @@
+CREATE TABLE IF NOT EXISTS `config` (
+  `part` varchar(24) collate utf8_unicode_ci NOT NULL default 'core',
+  `title` varchar(64) collate utf8_unicode_ci NOT NULL default '',
+  `order` char(2) collate utf8_unicode_ci NOT NULL default '00',
+  `value` varchar(64) collate utf8_unicode_ci NOT NULL default '',
+  `default` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+  `varients` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+  `text` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+   KEY (`part`, `title`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `config` (`part`, `title`, `order`, `value`, `default`, `varients`, `text`) VALUES
+('core', 'version', '1', '0.5.0', '', '', '');
+
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int NOT NULL auto_increment,
   `groupid` int NOT NULL default '1',

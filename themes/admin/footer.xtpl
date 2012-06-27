@@ -1,0 +1,33 @@
+<!-- BEGIN: ADMIN_FOOTER -->
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div id="footer">
+
+		<div class="container">	
+		
+			<hr>
+			
+			<p>Copyright &copy; 2012 Excursion</p>
+			
+		</div>
+
+	</div>
+
+	<script src="themes/admin/js/jquery-1.7.2.min.js"></script>
+	<script src="themes/admin/js/excanvas.min.js"></script>
+	<script src="themes/admin/js/jquery.flot.js"></script>
+	<script src="themes/admin/js/jquery.flot.pie.js"></script>
+	<script src="themes/admin/js/jquery.flot.orderBars.js"></script>
+	<script src="themes/admin/js/jquery.flot.resize.js"></script>
+	<script src="themes/admin/js/bootstrap.js"></script>
+	<script src="themes/admin/js/charts/bar.js"></script>
+
+</body>
+</html>
+<!-- END: ADMIN_FOOTER -->

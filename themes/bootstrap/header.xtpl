@@ -50,7 +50,7 @@
 						<!-- BEGIN: USER -->
 						<a href="#" class="dropdown-toggle">{PHP.lang.welcome}, {PHP.user.name}</a>
 						<ul class="dropdown-menu">
-							<!-- IF {PHP.user.group} == '4' --><li><a href="">{PHP.lang.admin}</a></li><!-- ENDIF -->
+							<!-- IF {PHP.user.group} == '4' --><li><a href="admin.php">{PHP.lang.admin}</a></li><!-- ENDIF -->
 							<li><a href="users.php">{PHP.lang.memberslist}</a></li>
 							<li><a href="users.php?m=profile">{PHP.lang.updateprofile}</a></li>
 							<li class="divider"></li>

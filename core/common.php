@@ -59,10 +59,12 @@ if (isset($_SESSION['user_id']))
 		$user['password'] = $row['password'];
 		$user['email'] = $row['email'];
 		$user['group'] = $row['groupid'];
+		$user['group_built'] = $excursion->generateGroup($row['groupid']);
 		$user['theme'] = $row['theme'];
 		$user['gender'] = $row['gender'];
 		$user['birthdate'] = $row['birthdate'];
 		$user['avatar'] = $row['avatar'];
+		$user['avatar_built'] = $excursion->buildAvatar($row['id'], 'avatar');
 		
 	}
 	

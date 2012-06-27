@@ -1,0 +1,99 @@
+<!-- BEGIN: ADMIN_HEADER -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8">
+	<title>Excursion - Content Management System</title>
+
+	<link href="themes/admin/css/bootstrap.min.css" rel="stylesheet">
+	<link href="themes/admin/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+	<link href="themes/admin/css/font-awesome.css" rel="stylesheet">
+	<link href="themes/admin/css/admin.css" rel="stylesheet"> 
+	<link href="themes/admin/css/admin-responsive.css" rel="stylesheet"> 
+	<link href="themes/admin/css/dashboard.css" rel="stylesheet"> 
+	<!--[if lt IE 9]>
+	<link href="themes/admin/css/font-awesome-ie7.css" rel="stylesheet">
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+
+	<div class="navbar navbar-fixed-top">
+
+		<div class="navbar-inner">
+
+			<div class="container">
+
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 				
+				</a>
+
+				<a class="brand" href="index.php">Excursion <sup><span class="label success">beta</span></sup></a>
+
+				<div class="nav-collapse">
+
+					<ul class="nav pull-right">
+						<li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle " href="#">{PHP.user.name} <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="users.php"><i class="icon-user"></i> Members List</a></li>
+								<li><a href="users.php?m=profile"><i class="icon-edit"></i> Update Profile</a></li>
+								<li class="divider"></li>
+								<li><a href="logout.php"><i class="icon-off"></i> Logout</a></li>
+							</ul>
+						</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div id="content">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="span3">
+
+					<div class="account-container">
+
+						<div class="account-avatar">
+							<img src="{PHP.user.avatar}" alt="" class="thumbnail" />
+						</div>
+
+						<div class="account-details">
+
+							<span class="account-name">{PHP.user.name}</span>
+							<span class="account-role">{PHP.user.group_built}</span>
+							<span class="account-actions">
+								<a href="users.php?id={PHP.user.id}">Profile</a> |
+								<a href="users.php?m=profile">Update Profile</a>
+							</span>
+
+						</div>
+
+					</div>
+
+					<hr />
+
+					<ul id="main-nav" class="nav nav-tabs nav-stacked">
+						<li><a href="admin.php"><i class="icon-home"></i> Dashboard</a></li>
+						<li><a href="admin.php?m=config"><i class="icon-pushpin"></i> Congifuration</a></li>
+						<li><a href="admin.php?m=pages"><i class="icon-folder-open"></i> Pages</a></li>
+						<li><a href="admin.php?m=plugins"><i class="icon-th-large"></i> Plugins</a></li>
+						<li><a href="admin.php?m=members"><i class="icon-user"></i> Members</a></li>
+					</ul>	
+
+				</div>
+
+				<div class="span9">
+<!-- END: ADMIN_HEADER -->
