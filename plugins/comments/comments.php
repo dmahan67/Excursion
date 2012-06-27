@@ -36,7 +36,7 @@ if($user['group'] >= 3)
 
 	$xtpl->assign(array(
 		'FORM_ACTION' => $excursion->url('page', 'id='.$row['id'].'&action=send'),
-		'FORM_TEXT' => $excursion->textarea('text', $insert['text'], 24, 120, '', 'input_textarea_editor')
+		'FORM_TEXT' => $excursion->textarea('text', $insert['text'], 24, 120, '', 'input_textarea_minieditor')
 	));
 	
 	$xtpl->parse('MAIN.COMMENTS.REPLY');

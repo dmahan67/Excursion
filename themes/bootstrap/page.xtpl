@@ -19,6 +19,71 @@
 				<div class="span9">
 				
 					{TEXT}
+					
+					<!-- BEGIN: COMMENTS -->
+					
+					<div id="comments">
+		  
+						<!-- IF {PHP.user.group} >= 3 --><a href="#post_comment" class="btn small postcommentlink"><span>Post a comment</span></a><!-- ENDIF -->
+		  
+						<h5>Reponses <span>({COM_COUNT})</span></h5>
+						
+						<br />
+												
+						<!-- BEGIN: ROW -->
+						<div class="comment row">
+		
+							<a name="com-{COM_ID}"></a>
+							<div class="span2">
+								<div class="comment_meta">
+									<p>
+										{COM_AVATAR}
+										<br />By {COM_OWNER}          
+									</p>
+								</div>
+							</div>
+		
+							<div class="span7">
+								<div class="comment_text">
+									
+									{COM_TEXT}
+			
+								</div>
+		
+								<div class="comment_reply">
+									<p>
+										<em>{COM_DATE}</em> {COM_ADMIN}        
+									</p>
+								</div>
+							</div>
+	  
+						</div> 
+						
+						<br />
+						<!-- END: ROW -->
+						
+					</div>
+					
+					<a name="section"></a>
+					<!-- BEGIN: ERRORS -->
+					<div class="alert-message block-message error fade in" data-alert="alert" >
+						<a class="close" href="#">&times;</a>
+						<p>{ERRORS_TEXT}</p>
+					</div>
+					<!-- END: ERRORS -->
+
+					<!-- BEGIN: REPLY -->
+			
+					<h5>Leave a Response</h5>  
+						
+					<form method="post" action="{FORM_ACTION}">
+						{FORM_TEXT}
+						<br />
+						<button class="btn primary">{PHP.lang.submit}</button>
+					</form>
+					<!-- END: REPLY -->
+
+					<!-- END: COMMENTS -->
 
 				</div>
 				
@@ -51,7 +116,7 @@
 					<ul>
 						<li><a href="page.php?id={ID}&action=queue">{PHP.lang.pvq}</a></li>
 						<li><a href="page.php?id={ID}&m=edit">{PHP.lang.editpage}</a></li>
-						<li><a href="page.php?id={ID}&action=remove" onclick="return confirm('{PHP.lang.premoveconfirm}');">{PHP.lang.removepage}</a></li>
+						<li><a href="page.php?id={ID}&action=remove" onclick="return confirm_delete()">{PHP.lang.removepage}</a></li>
 					</ul>
 					<!-- ENDIF -->
 				

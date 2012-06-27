@@ -61,7 +61,7 @@
 
 						<div class="row">
 						
-							<div id="lower-frame-left" class="span9 column">
+							<div id="lower-frame-left" class="span14 column">
 							
 								<ul id="profile-tabs" class="tabs" data-tabs="tabs">
 									<li class="active"><a href="#info">{PHP.lang.uinfo}</a></li>
@@ -110,23 +110,6 @@
 									
 								</div>
 								
-							</div>
-
-							<div id="lower-frame-right" class="span5 column">
-								<ul class="tabs" data-tabs="tabs">
-									<li class="active"><a id="tab-following">{PHP.lang.uflist}</a></li>
-								</ul>
-
-								<div id="my-tab-content-2" class="tab-content">
-								
-									<div class="active" id="following">
-
-										<h6>FRIENDS LIST</h6>
-									
-									</div>
-									
-								</div>
-
 							</div>
 
 						</div>

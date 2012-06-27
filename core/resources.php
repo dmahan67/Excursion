@@ -18,7 +18,7 @@ $R['input_select'] = '<select name="{$name}" class="span3" {$attrs}>{$options}</
 $R['input_text'] = '<input type="text" class="span3" name="{$name}" value="{$value}" {$attrs} />{$error}';
 $R['input_textarea'] = '<textarea name="{$name}" rows="{$rows}" cols="{$cols}"{$attrs}>{$value}</textarea>{$error}';
 $R['input_textarea_editor'] =  '<textarea class="ckeditor" name="{$name}" rows="{$rows}" cols="{$cols}"{$attrs}>{$value}</textarea>{$error}';
-$R['input_textarea_minieditor'] =  '<textarea name="minieditor" id="minieditor" rows="{$rows}" cols="{$cols}"{$attrs}>{$value}</textarea>{$error}';
+$R['input_textarea_minieditor'] =  '<textarea class="ckeditor" name="{$name}" id="minieditor" rows="{$rows}" cols="{$cols}"{$attrs}>{$value}</textarea>{$error}';
 $R['input_file'] = '<input type="file" class="span3" name="{$name}" {$attrs} />{$error}';
 $R['input_file_empty'] = '<input type="file" name="{$name}" {$attrs} />{$error}';
 $R['input_date'] =  '{$day} {$month} {$year} {$hour}: {$minute}';
