@@ -104,8 +104,6 @@ $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
 
 /* ========== PAGES ========== */
 $lang['editpage'] = 'Edit page';

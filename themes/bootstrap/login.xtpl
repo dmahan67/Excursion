@@ -38,8 +38,8 @@
 					<!-- END: ERRORS -->
 					
 					<h2>{PHP.lang.logintoaccount}</h2>
-					
-					<form action="{FORM_ACTION}" method="post">
+					   
+					<form action="{FORM_ACTION}" method="post" class="AdvancedForm">
 						<fieldset>
 							<div class="clearfix">
 								<label for="username">{PHP.lang.username}</label>
@@ -56,7 +56,7 @@
 							<div class="clearfix">
 								<label for="username"></label>
 								<div class="input">
-									<button class="btn primary">{PHP.lang.submit}</button>
+									<button class="btn primary" id="FormSubmit">{PHP.lang.submit}</button>
 								</div>
 							</div>
 						</fieldset>
