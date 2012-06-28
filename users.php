@@ -101,7 +101,7 @@ elseif($m == 'profile')
 		$insert['theme'] = $excursion->import('themes','P','TXT');
 		$insert['gender'] = $excursion->import('gender','P','TXT');
 		$insert['birthdate'] = (int) $excursion->import_date('birthdate', false);
-		$old_pass = $excursion->import('current_password','P','TXT');
+		$old_pass = $excursion->import('curr_password','P','TXT');
 		$new_pass1 = $excursion->import('new_password1','P','TXT',16);
 		$new_pass2 = $excursion->import('new_password2','P','TXT',16);
 			
