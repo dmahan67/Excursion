@@ -79,6 +79,10 @@ table.borderless-table tbody th {
 .fright {float:right;}	
 .fleft {float:left;}
 
+.padding10 {padding:10px;}
+.padding20 {padding:20px;}
+.padding30 {padding:30px;}
+
 .postcommentlink {float:right;padding:20px 0 0 0;}
 	
 .avatar-60{

@@ -10,6 +10,13 @@ require_once 'config.php';
 require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
+if($config['disablereg']=='yes')
+{
+
+	header('Location: message.php?id=107');
+
+}
+
 $un = $excursion->import('username', 'P', 'TXT');
 $pwd = $excursion->import('password', 'P', 'TXT');
 $pwd2 = $excursion->import('password2', 'P', 'TXT');

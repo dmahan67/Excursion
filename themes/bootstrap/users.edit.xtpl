@@ -43,10 +43,12 @@
 								<th>{PHP.lang.avatar}</th>
 								<td><img id="profile-avatar-image" src="{PHP.row.avatar}"><br />{FORM_AVATAR}</td>
 							</tr>
+							<!-- IF {PHP.config.forcetheme} == 'no' -->
 							<tr>
 								<th>{PHP.lang.theme}</th>
 								<td>{FORM_THEMES}</td>
 							</tr>
+							<!-- ENDIF -->
 							<tr>
 								<th>{PHP.lang.password}</th>
 								<td>

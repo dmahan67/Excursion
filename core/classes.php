@@ -27,45 +27,69 @@ class Members {
 		
 		$user_exists = (bool)$db->query("SELECT id FROM members WHERE username = ? LIMIT 1", array($un))->fetch();
 		$email_exists = (bool)$db->query("SELECT id FROM members WHERE email = ? LIMIT 1", array($email))->fetch();
+		$cfg['disablereg'] = $db->query("SELECT value FROM config WHERE title='disablereg'")->fetchColumn();
+		$cfg['disableval'] = $db->query("SELECT value FROM config WHERE title='disableval'")->fetchColumn();
+		$cfg['valnew'] = $db->query("SELECT value FROM config WHERE title='valnew'")->fetchColumn();
 		
-		if ($user_exists) $error .= $lang['reg_un_exists'].'<br />';
-		if (preg_match('/&#\d+;/', $u) || preg_match('/[<>#\'"\/]/', $un)) $error .= $lang['reg_un_format'].'<br />';
-		if (mb_strlen($un) < 2) $error .= $lang['reg_un_length'].'<br />';
-		if (mb_strlen($pwd) < 4) $error .= $lang['reg_pwd_length'].'<br />';
-		if ($pwd != $pwd2) $error .= $lang['reg_pwd_nomatch'].'<br />';
-		if (mb_strlen($email) < 10) $error .= $lang['reg_email_length'].'<br />';		
-		if ($email_exists) $error .= $lang['reg_email_exists'].'<br />';
-		if (!filter_var($email, FILTER_VALIDATE_EMAIL )) $error .= $lang['reg_email_format'].'<br />';
-		if (mb_strlen($sq_answer) < 2) $error .= $lang['reg_sq_length'].'<br />';
-		
-		if(empty($error))
+		if($cfg['disablereg']=='no')
 		{
-			$pwd = md5($pwd);
 			
-			$insert['username'] = $un;
-			$insert['password'] = $pwd;
-			$insert['email'] = $email;
-			$insert['regdate'] = (int)time();
-			$insert['token'] = $excursion->generateToken(16);
-			$insert['SQ_Index'] = $sq;
-			$insert['SQ_Answer'] = $sq_answer;
+			if ($user_exists) $error .= $lang['reg_un_exists'].'<br />';
+			if (preg_match('/&#\d+;/', $u) || preg_match('/[<>#\'"\/]/', $un)) $error .= $lang['reg_un_format'].'<br />';
+			if (mb_strlen($un) < 2) $error .= $lang['reg_un_length'].'<br />';
+			if (mb_strlen($pwd) < 4) $error .= $lang['reg_pwd_length'].'<br />';
+			if ($pwd != $pwd2) $error .= $lang['reg_pwd_nomatch'].'<br />';
+			if (mb_strlen($email) < 10) $error .= $lang['reg_email_length'].'<br />';		
+			if ($email_exists) $error .= $lang['reg_email_exists'].'<br />';
+			if (!filter_var($email, FILTER_VALIDATE_EMAIL )) $error .= $lang['reg_email_format'].'<br />';
+			if (mb_strlen($sq_answer) < 2) $error .= $lang['reg_sq_length'].'<br />';
+			
+			if(empty($error))
+			{
+				$pwd = md5($pwd);
+				
+				$insert['username'] = $un;
+				$insert['password'] = $pwd;
+				if($cfg['disableval']=='yes' && $cfg['valnew']=='no'){$insert['groupid'] = 3;}
+				$insert['email'] = $email;
+				$insert['regdate'] = (int)time();
+				$insert['token'] = $excursion->generateToken(16);
+				$insert['SQ_Index'] = $sq;
+				$insert['SQ_Answer'] = $sq_answer;
 
+				$db->insert('members', $insert);
+				
+				if($cfg['disableval']=='no' && $cfg['valnew']=='no'){
+				
+					$member->sendValidationEmail($insert['email']);
+					header('Location: message.php?id=101');
+					
+				}
+				
+				if($cfg['valnew']=='yes')
+				{
+				
+					header('Location: message.php?id=109');
+				
+				}
+				
+				if($cfg['disableval']=='yes' && $cfg['valnew']=='no'){
+				
+					header('Location: message.php?id=108');
+					
+				}		
+				
+			}
+			else
+			{
 			
-			$db->insert('members', $insert);
-			
-			$member->sendValidationEmail($insert['email']);
-			
-			header('Location: message.php?id=101');
-			
-		}
-		else
-		{
-		
-			$xtpl->assign(array(
-				'ERRORS_TEXT' => $error
-			));
-			
-			$xtpl->parse('MAIN.ERRORS');
+				$xtpl->assign(array(
+					'ERRORS_TEXT' => $error
+				));
+				
+				$xtpl->parse('MAIN.ERRORS');
+				
+			}
 			
 		}
 		

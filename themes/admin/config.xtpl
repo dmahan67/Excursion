@@ -1,0 +1,194 @@
+<!-- BEGIN: MAIN -->
+					<h1 class="page-title"><i class="icon-pushpin"></i> Configuration</h1>
+				
+					<div class="row">
+					
+						<div class="span9">
+				
+							<div class="widget">
+							
+								<div class="widget-header">
+								
+									<h3>Configuration Settings</h3>
+							
+								</div>
+									
+								<div class="widget-content">
+								
+									<div class="tabbable">
+						
+										<ul class="nav nav-tabs">
+											<li class="active"><a href="#1" data-toggle="tab">Main Settings</a></li>
+											<li><a href="#2" data-toggle="tab">Themes</a></li>
+											<li><a href="#3" data-toggle="tab">Members</a></li>
+											<li><a href="#4" data-toggle="tab">Maintenance</a></li>
+										</ul>
+						
+										<br />
+						
+										<div class="tab-content">
+								
+											<div class="tab-pane active" id="1">
+
+												<form action="{FORM_ACTION}" method="post" id="main" class="form-horizontal">
+													<fieldset>
+										
+														<div class="control-group">											
+															<label class="control-label" for="title">Website Title</label>
+															<div class="controls">
+																{FORM_TITLE}
+															</div>				
+														</div>
+
+														<br />
+
+														<div class="control-group">											
+															<label class="control-label" for="subtitle">Subtitle</label>
+															<div class="controls">
+																{FORM_SUBTITLE}
+															</div>				
+														</div>
+
+														<br />
+														
+														<div class="control-group">											
+															<label class="control-label" for="keywords">Meta Keywords</label>
+															<div class="controls">
+																{FORM_KEYWORDS}
+																<p class="help-block">Seperate each keyword with a comma.</p>
+															</div>				
+
+														</div>
+
+														<br />
+
+														<div class="form-actions">
+															<button type="submit" class="btn btn-primary">Save</button> 
+															<button class="btn">Cancel</button>
+														</div>
+													</fieldset>
+												</form>
+												
+											</div>
+
+											<div class="tab-pane" id="2">
+									
+												<form action="{FORM_ACTION}" method="post" id="theme" class="form-horizontal">
+													<fieldset>
+													
+														<div class="control-group">
+															<label class="control-label" for="forcetheme">Force Default Theme</label>
+															<div class="controls">
+																<label class="radio">
+																	{FORM_FORCETHEME}
+																</label>
+															</div>
+														</div>
+														
+														<br />
+														
+														<div class="form-actions">
+															<button type="submit" class="btn btn-primary">Save</button> 
+															<button class="btn">Cancel</button>
+														</div>
+													</fieldset>
+												</form>
+								
+											</div>
+
+											<div class="tab-pane" id="3">
+									
+												<form action="{FORM_ACTION}" method="post" id="members" class="form-horizontal">
+													<fieldset>
+													
+														<div class="control-group">
+															<label class="control-label" for="disablereg">Disable Registration</label>
+															<div class="controls">
+																<label class="radio">
+																	{FORM_DISABLEREG}
+																</label>
+															</div>
+														</div>
+
+														<br />
+
+														<div class="control-group">
+															<label class="control-label" for="valnew">Validate New Accounts</label>
+															<div class="controls">
+																<label class="radio">
+																	{FORM_VALNEW}
+																</label>
+																<p class="help-block">Administrators must validate newly registered accounts.</p>
+															</div>
+														</div>
+														
+														<br />
+																											
+														<div class="control-group">
+															<label class="control-label" for="disableval">Skip Email Validation</label>
+															<div class="controls">
+																<label class="radio">
+																	{FORM_DISABLEVAL}
+																</label>
+																<p class="help-block">Skip the email validation process for new accounts.</p>
+															</div>
+														</div>
+														
+														<br />
+														
+														<div class="form-actions">
+															<button type="submit" class="btn btn-primary">Save</button> 
+															<button class="btn">Cancel</button>
+														</div>
+													</fieldset>
+												</form>
+								
+											</div>
+											
+											<div class="tab-pane" id="4">
+									
+												<form action="{FORM_ACTION}" method="post" id="maintenance" class="form-horizontal">
+													<fieldset>
+													
+														<div class="control-group">
+															<label class="control-label" for="maintenance">Maintenance Mode</label>
+															<div class="controls">
+																<label class="radio">
+																	{FORM_MAINTENANCE}
+																</label>
+															</div>
+														</div>
+														
+														<br />
+														
+														<div class="control-group">											
+															<label class="control-label" for="reason">Reason</label>
+															<div class="controls">
+																{FORM_REASON}
+																<p class="help-block">Only required if maintenance mode is set to <em>On</em>.</p>
+															</div>				
+														</div>
+														
+														<br />
+											
+														<div class="form-actions">
+															<button type="submit" class="btn btn-primary">Save</button> 
+															<button class="btn">Cancel</button>
+														</div>
+													</fieldset>
+												</form>
+								
+											</div>
+										
+										</div>
+						  
+									</div>
+								
+								</div>
+							
+							</div>
+						
+						</div>
+					
+					</div>
+<!-- END: MAIN -->

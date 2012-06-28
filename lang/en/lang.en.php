@@ -80,12 +80,20 @@ $lang['message_105_subtitle'] = 'You are not allowed to do this';
 $lang['message_105_text'] = 'You do not have sufficient rights to perform this action.';
 
 $lang['message_106_title'] = 'Error';
-$lang['message_106_subtitle'] = 'User account does not exist';
-$lang['message_106_text'] = '';
+$lang['message_106_subtitle'] = 'Account does not exist';
+$lang['message_106_text'] = 'The requested member account does not exist in our database.';
 
-$lang['message_10_title'] = '';
-$lang['message_10_subtitle'] = '';
-$lang['message_10_text'] = '';
+$lang['message_107_title'] = 'Error';
+$lang['message_107_subtitle'] = 'Registration disabled';
+$lang['message_107_text'] = 'The registration process has been disabled by the system administrator.';
+
+$lang['message_108_title'] = 'Success';
+$lang['message_108_subtitle'] = 'Registration complete';
+$lang['message_108_text'] = 'Your account has been successfully created, and you may now log in.';
+
+$lang['message_109_title'] = 'Success';
+$lang['message_109_subtitle'] = 'Registration complete';
+$lang['message_109_text'] = 'Your account has been successfully created; however, system administrators require that they manually validate every account. You will be unable to login until your account has been validated.';
 
 /* ========== REGISTRATION ERRORS ========== */
 $lang['reg_un_format'] = 'Invalid username format';
@@ -115,7 +123,7 @@ $lang['validation_admin'] = '<br /><br />Feel free to contact an administrator i
 $lang['validation_reg'] = 'Registration';
 $lang['validation_activate'] = 'Activate Account';
 $lang['validation_deactivate'] = 'Remove Account';
-$lang['token_not_exist'] = 'Error retrieving authentication token (user does not exist).';
+$lang['token_not_exist'] = 'Error retrieving authentication token (member does not exist).';
 $lang['validation_active'] = 'Your account is already active.';
 $lang['reset_email'] = 'Hi %1$s,<br /><br />
 						Your account has recently had a password reset. The new password is:

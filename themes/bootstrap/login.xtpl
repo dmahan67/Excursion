@@ -15,6 +15,18 @@
 						<li class="active">Login</li>
 					</ul>
 				</div>
+				
+				<!-- BEGIN: MAINTENANCE -->
+				
+				<div class="span14">
+					<div class="alert-message block-message info fade in" data-alert="alert" >
+						<h5>{PHP.lang.maint}</h5>
+						<p class="padding10"><strong>{PHP.lang.reason}:</strong> {PHP.config.reason}</p>
+						<p><em>{PHP.lang.maintdesc}</em></p>
+					</div>
+				</div>
+				
+				<!-- END: MAINTENANCE -->
 			
 				<div class="span9">
 				

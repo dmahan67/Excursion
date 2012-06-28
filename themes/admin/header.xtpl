@@ -4,7 +4,8 @@
 <head>
 
 	<meta charset="utf-8">
-	<title>Excursion - Content Management System</title>
+	<title>{PHP.config.title} - {PHP.config.subtitle}</title>
+	<meta name="keywords" content="{PHP.config.keywords}">
 
 	<link href="themes/admin/css/bootstrap.min.css" rel="stylesheet">
 	<link href="themes/admin/css/bootstrap-responsive.min.css" rel="stylesheet">

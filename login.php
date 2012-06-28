@@ -8,12 +8,11 @@
  
 require_once 'config.php';
 require_once 'core/xtemplate.php';
+$ex['location'] = 'login';
 require_once 'core/common.php';
 
 $un = $excursion->import('username', 'P', 'TXT');
 $pwd = $excursion->import('password', 'P', 'TXT');
-
-$ex['location'] = 'login';
 
 require_once 'core/header.php';
 
@@ -45,6 +44,13 @@ foreach ($excursion->Hook('login.tags') as $pl)
 	include $pl;
 }
 /* ===== */
+
+if($config['maintenance']=='yes')
+{
+
+	$xtpl->parse('MAIN.MAINTENANCE');
+
+}
 
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');

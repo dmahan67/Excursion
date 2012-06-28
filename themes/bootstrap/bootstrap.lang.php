@@ -52,6 +52,9 @@ $lang['logintoaccount'] = 'Login to your account';
 $lang['troubleshooting'] = 'Troubleshooting';
 $lang['troublemessage'] = 'Having trouble accessing your account? Use the <a href="users.php?action=recover">Lost Password</a> 
 						tool to recover your login information. Your credentials will be sent to you via the email address used when creating your account.';
+$lang['maint'] = 'Maintenance Mode';
+$lang['maintdesc'] = 'During maintenance, only system administrators may login. Visitors will be redirected to this page until maintenance is complete.';
+$lang['reason'] = 'Reason';
 
 /* ========== USER DETIALS ========== */						
 $lang['profilepage'] = 'Profile page';

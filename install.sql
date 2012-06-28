@@ -10,7 +10,15 @@ CREATE TABLE IF NOT EXISTS `config` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `config` (`part`, `title`, `order`, `value`, `default`, `varients`, `text`) VALUES
-('core', 'version', '1', '0.5.0', '', '', '');
+('core', 'version', '1', '0.5.0', '', '', ''),
+('core', 'title', '2', '', '', '', ''),
+('core', 'subtitle', '3', '', '', '', ''),
+('core', 'keywords', '4', '', '', '', ''),
+('core', 'forcetheme', '5', 'no', '', '', ''),
+('core', 'disablereg', '6', 'no', '', '', ''),
+('core', 'valnew', '7', 'no', '', '', ''),
+('core', 'disableval', '8', 'no', '', '', ''),
+('core', 'maintenance', '9', 'no', '', '', '');
 
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int NOT NULL auto_increment,

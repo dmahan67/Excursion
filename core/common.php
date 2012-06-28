@@ -40,6 +40,18 @@ $action = $excursion->import('action', 'G', 'ALP', 24);
 $id = $excursion->import('id','G','INT');
 $step = $excursion->import('step','G','INT');
 
+/* ========== Config Tags ========== */
+
+$config['title'] = $db->query("SELECT value FROM config WHERE title='title'")->fetchColumn();
+$config['subtitle'] = $db->query("SELECT value FROM config WHERE title='subtitle'")->fetchColumn();
+$config['keywords'] = $db->query("SELECT value FROM config WHERE title='keywords'")->fetchColumn();
+$config['forcetheme'] = $db->query("SELECT value FROM config WHERE title='forcetheme'")->fetchColumn();
+$config['disablereg'] = $db->query("SELECT value FROM config WHERE title='disablereg'")->fetchColumn();
+$config['disableval'] = $db->query("SELECT value FROM config WHERE title='disableval'")->fetchColumn();
+$config['valnew'] = $db->query("SELECT value FROM config WHERE title='valnew'")->fetchColumn();
+$config['maintenance'] = $db->query("SELECT value FROM config WHERE title='maintenance'")->fetchColumn();
+$config['reason'] = $db->query("SELECT text FROM config WHERE title='maintenance'")->fetchColumn();
+
 /* ========== Guest/User ========== */
 
 $user['id'] = 0;
@@ -60,7 +72,7 @@ if (isset($_SESSION['user_id']))
 		$user['email'] = $row['email'];
 		$user['group'] = $row['groupid'];
 		$user['group_built'] = $excursion->generateGroup($row['groupid']);
-		$user['theme'] = $row['theme'];
+		if($config['forcetheme'] == 'yes'){$user['theme'] = $config['default_theme'];}else{$user['theme'] = $row['theme'];}
 		$user['gender'] = $row['gender'];
 		$user['birthdate'] = $row['birthdate'];
 		$user['avatar'] = $row['avatar'];
@@ -100,5 +112,12 @@ if (!$plugins)
 /* ========== Global Tags ========== */
 
 $theme['dir'] = 'themes/'.$user['theme'];
+
+if($config['maintenance']=='yes' && $ex['location']!='login' && $user['group']!=4)
+{
+
+	header('Location: login.php');
+
+}
 
 ?>

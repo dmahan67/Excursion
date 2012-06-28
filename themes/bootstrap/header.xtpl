@@ -4,9 +4,9 @@
 <head>
 
 	<meta charset="utf-8">
-	<title>Excursion - Content Management System</title>
+	<title>{PHP.config.title} - {PHP.config.subtitle}</title>
 	<meta name="description" content="Open Source PHP Content Management System">
-	<meta name="keywords" content="excursion, cms, php, mysql, website, engine">
+	<meta name="keywords" content="{PHP.config.keywords}">
 	<meta name="author" content="Dyllon Mahan & Brock Burkholder">
 	
 	<link href="{PHP.theme.dir}/css/bootstrap.min.css" rel="stylesheet">	
