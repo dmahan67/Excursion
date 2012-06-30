@@ -14,10 +14,12 @@
 	<link href="themes/admin/css/admin.css" rel="stylesheet"> 
 	<link href="themes/admin/css/admin-responsive.css" rel="stylesheet"> 
 	<link href="themes/admin/css/dashboard.css" rel="stylesheet"> 
+	<script type="text/javascript">function confirm_delete() {return confirm('Are you sure you would like to follow through with this action?');}</script>
 	<!--[if lt IE 9]>
 	<link href="themes/admin/css/font-awesome-ie7.css" rel="stylesheet">
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	{PHP.config.header_tags}
 
 </head>
 <body>
@@ -89,7 +91,7 @@
 					<ul id="main-nav" class="nav nav-tabs nav-stacked">
 						<li><a href="admin.php"><i class="icon-home"></i> Dashboard</a></li>
 						<li><a href="admin.php?m=config"><i class="icon-pushpin"></i> Congifuration</a></li>
-						<li><a href="admin.php?m=pages"><i class="icon-folder-open"></i> Pages</a></li>
+						<li><a href="admin.php?m=pages"><i class="icon-folder-open"></i> Page Structure</a></li>
 						<li><a href="admin.php?m=plugins"><i class="icon-th-large"></i> Plugins</a></li>
 						<li><a href="admin.php?m=members"><i class="icon-user"></i> Members</a></li>
 					</ul>	

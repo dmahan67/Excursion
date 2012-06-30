@@ -11,9 +11,8 @@
 		</footer>
 
 	</div>
-
-<script src="{PHP.theme.dir}/js/ckeditor/ckeditor.js" type="text/javascript"></script>
-<script src="{PHP.theme.dir}/js/ckeditor/editor_themes.js" type="text/javascript"></script>
+	
+{PHP.config.footer_tags}
 
 </body>
 </html>

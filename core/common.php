@@ -120,4 +120,17 @@ if($config['maintenance']=='yes' && $ex['location']!='login' && $user['group']!=
 
 }
 
+$header_tags .= $excursion->createTags('css', 'validate', 'core/plugins/validate/jquery.validate.css', '');
+$header_tags .= $excursion->createTags('javascript', 'jquery', 'core/plugins/lib/jquery-1.3.2.js', '');
+$header_tags .= $excursion->createTags('javascript', 'validate', 'core/plugins/validate/jquery.validate.js', '');
+$header_tags .= $excursion->createTags('javascript', 'validate.functions', 'core/plugins/validate/jquery.validation.functions.js', '');
+$header_tags .= $excursion->createTags('javascript', 'validate.forms', 'core/plugins/validate/jquery.validate.forms.js', '');
+
+$config['header_tags'] = $header_tags;
+
+$footer_tags .= $excursion->createTags('javascript', '', 'core/plugins/ckeditor/ckeditor.js', '');
+$footer_tags .= $excursion->createTags('javascript', '', 'core/plugins/ckeditor/editor_themes.js', '');
+
+$config['footer_tags'] = $footer_tags;
+
 ?>

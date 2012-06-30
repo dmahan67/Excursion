@@ -337,8 +337,12 @@ input {
 
 .table .action-td {
 	width: 80px;
-	
 	text-align: center;
 }
-
+table .span1n5 {
+  float: none;
+  width: 94px;
+  margin-left: 0;
+}
 .center {vertical-align:center;text-align:center;}
+

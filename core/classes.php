@@ -762,6 +762,26 @@ class Excursion {
 			. $res . $R['code_msg_end'];
 	}
 	
+	function createTags($type, $name, $value = '', $custom_rc)
+	{
+		global $R;
+		
+		$rc_name = preg_match('#^(\w+)\[(.*?)\]$#', $name, $mt) ? $mt[1] : $name;
+		$rc = empty($custom_rc)
+			? (empty($R["{$type}_{$rc_name}"]) ? "$type" : "{$type}_{$rc_name}")
+			: $custom_rc;
+		if (!isset($R[$rc]))
+		{
+			$rc = 'default';
+		}
+
+		return $this->rc($rc, array(
+			'type' => $type,
+			'name' => $name,
+			'value' => htmlspecialchars($this->import_buffered($name, $value))
+		));
+	}
+	
 	function inputbox($type, $name, $value = '', $attrs = '', $custom_rc = '')
 	{
 		global $R, $config;

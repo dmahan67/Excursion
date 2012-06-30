@@ -1,0 +1,129 @@
+<!-- BEGIN: MAIN -->
+					<h1 class="page-title"><i class="icon-folder-open"></i> Page Structure</h1>
+				
+					<div class="row">
+					
+						<div class="span9">
+				
+							<div class="widget">
+							
+								<div class="widget-header">
+								
+									<h3>Categories</h3>
+							
+								</div>
+									
+								<div class="widget-content">
+								
+									<form action="{FORM_ACTION_UPDATE}" method="post" class="form-horizontal">
+								
+										<table class="table borderless-table">
+											<thead>
+												<tr>
+													<th>Path</th>
+													<th>Code</th>
+													<th>Title</th>
+													<th>Description</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<!-- BEGIN: ROW -->
+												<tr>
+													<td>{FORM_PATH}</td>
+													<td>{FORM_CODE}</td>
+													<td>{FORM_TITLE}</td>
+													<td>{FORM_DESC}</td>
+													<td class="action-td">
+														<a href="list.php?c={CODE}" alt="open" target="_new" class="btn btn-small">
+															<i class="icon-share-alt"></i>							
+														</a>						
+														<a href="admin.php?m=pages&action=remove&id={ID}" onclick="return confirm_delete()" class="btn btn-small btn-danger">
+															<i class="icon-remove"></i>			
+														</a>
+													</td>
+												</tr>
+												<!-- END: ROW -->
+											<tbody>
+										</table>
+											
+										<div class="form-actions">
+											<button type="submit" class="btn btn-primary">Update</button> 
+										</div>
+									
+									</form>
+								
+								</div>
+							
+							</div>
+							
+							<div class="widget">
+							
+								<div class="widget-header">
+								
+									<h3>Create Category</h3>
+							
+								</div>
+									
+								<div class="widget-content">
+								
+									<!-- BEGIN: ERRORS -->
+									<div class="alert-message block-message error fade in" data-alert="alert" >
+										<a class="close" href="admin.php?m=pages">&times;</a>
+										<p>{ERRORS_TEXT}</p>
+									</div>
+									<!-- END: ERRORS -->
+								
+									<form action="{FORM_ACTION_SAVE}" method="post" class="AdvancedForm form-horizontal">
+										<fieldset>
+							
+											<div class="control-group">											
+												<label class="control-label" for="path">Path</label>
+												<div class="controls">
+													{FORM_PATH}
+												</div>				
+											</div>
+
+											<br />
+
+											<div class="control-group">											
+												<label class="control-label" for="code">Code</label>
+												<div class="controls">
+													{FORM_CODE}
+												</div>				
+											</div>
+
+											<br />
+
+											<div class="control-group">											
+												<label class="control-label" for="title">Title</label>
+												<div class="controls">
+													{FORM_TITLE}
+												</div>				
+											</div>
+
+											<br />
+
+											<div class="control-group">											
+												<label class="control-label" for="description">Description</label>
+												<div class="controls">
+													{FORM_DESC}
+												</div>				
+											</div>
+
+											<br />
+
+											<div class="form-actions">
+												<button type="submit" class="btn btn-primary">Save</button> 
+											</div>
+										</fieldset>
+									</form>
+								
+								</div>
+							
+							</div>
+						
+						</div>
+					
+					</div>
+<!-- END: MAIN -->

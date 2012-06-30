@@ -27,6 +27,7 @@
 	<script src="themes/admin/js/jquery.flot.resize.js"></script>
 	<script src="themes/admin/js/bootstrap.js"></script>
 	<script src="themes/admin/js/charts/bar.js"></script>
+	{PHP.config.footer_tags}
 
 </body>
 </html>

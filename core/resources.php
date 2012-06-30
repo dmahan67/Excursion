@@ -16,6 +16,10 @@ $R['input_radio'] = '<label><input type="radio" name="{$name}" id="{$name}" valu
 $R['input_radio_separator'] = ' ';
 $R['input_select'] = '<select name="{$name}" id="{$name}" class="span3" {$attrs}>{$options}</select>{$error}';
 $R['input_text'] = '<input type="text" class="span3" name="{$name}" id="{$name}" value="{$value}" {$attrs} />{$error}';
+$R['input_text_disabled'] = '<input type="text" class="span2 disabled" name="{$name}" id="{$name}" value="{$value}" disabled {$attrs} />{$error}';
+$R['input_text_medium'] = '<input type="text" class="span2" name="{$name}" id="{$name}" value="{$value}" {$attrs} />{$error}';
+$R['input_text_small'] = '<input type="text" class="span1" name="{$name}" id="{$name}" value="{$value}" {$attrs} />{$error}';
+$R['input_text_custom'] = '<input type="text" class="span1n5" name="{$name}" id="{$name}" value="{$value}" {$attrs} />{$error}';
 $R['input_password'] = '<input type="password" class="span3" name="{$name}" id="{$name}" value="{$value}" {$attrs} />{$error}';
 $R['input_textarea'] = '<textarea name="{$name}" id="{$name}" rows="{$rows}" cols="{$cols}"{$attrs}>{$value}</textarea>{$error}';
 $R['input_textarea_editor'] =  '<textarea class="ckeditor" name="{$name}" rows="{$rows}" cols="{$cols}"{$attrs}>{$value}</textarea>{$error}';
@@ -25,5 +29,7 @@ $R['input_file_empty'] = '<input type="file" name="{$name}" {$attrs} />{$error}'
 $R['input_date'] =  '{$day} {$month} {$year} {$hour}: {$minute}';
 $R['input_date_short'] =  '{$day} {$month} {$year}';
 $R['link_deletecom'] = '<a href="{$url}">'.$lang['del'].'</a>';
+$R['javascript'] = '<script src="{$value}" type="text/javascript"></script>';
+$R['css'] = '<link href="{$value}" rel="stylesheet">';
 
 ?>

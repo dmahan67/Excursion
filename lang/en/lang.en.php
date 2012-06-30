@@ -141,6 +141,13 @@ $lang['profile_error_nosame'] = 'You did not enter matching passwords';
 $lang['gender_U'] = 'Unknown';
 $lang['gender_M'] = 'Male';
 $lang['gender_F'] = 'Female';
+
+/* ========== ADMIN ========== */
+$lang['admin_error_title_missing'] = 'Title is missing';
+$lang['admin_error_desc_missing'] = 'Description is missing';
+$lang['admin_error_path_missing'] = 'Path is missing';
+$lang['admin_error_code_missing'] = 'Code is missing';
+
 $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';

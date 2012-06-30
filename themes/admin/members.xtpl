@@ -1,0 +1,120 @@
+<!-- BEGIN: MAIN -->
+					<h1 class="page-title"><i class="icon-user"></i> Members</h1>
+				
+					<div class="row">
+					
+						<div class="span9">
+				
+							<div class="widget">
+							
+								<div class="widget-header">
+								
+									<h3>Groups</h3>
+							
+								</div>
+									
+								<div class="widget-content">
+								
+									<form action="{FORM_ACTION_UPDATE}" method="post" class="form-horizontal">
+								
+										<table class="table borderless-table">
+											<thead>
+												<tr>
+													<th>Title</th>
+													<th>Description</th>
+													<th>Icon</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<!-- BEGIN: ROW -->
+												<tr>
+													<td>{FORM_TITLE}</td>
+													<td>{FORM_DESC}</td>
+													<td>{FORM_ICON}</td>
+													<td class="action-td">
+														<a href="users.php?grpid={ID}" alt="open" target="_new" class="btn btn-small">
+															<i class="icon-share-alt"></i>							
+														</a>&nbsp;						
+														<!-- IF {ID} > 4 -->
+														<a href="admin.php?m=members&action=remove&id={ID}" onclick="return confirm_delete()" class="btn btn-small btn-danger">
+															<i class="icon-remove"></i>			
+														</a>
+														<!-- ENDIF -->
+													</td>
+												</tr>
+												<!-- END: ROW -->
+											<tbody>
+										</table>
+											
+										<div class="form-actions">
+											<button type="submit" class="btn btn-primary">Update</button> 
+										</div>
+									
+									</form>
+								
+								</div>
+							
+							</div>
+							
+							<div class="widget">
+							
+								<div class="widget-header">
+								
+									<h3>Create Group</h3>
+							
+								</div>
+									
+								<div class="widget-content">
+								
+									<!-- BEGIN: ERRORS -->
+									<div class="alert-message block-message error fade in" data-alert="alert" >
+										<a class="close" href="admin.php?m=members">&times;</a>
+										<p>{ERRORS_TEXT}</p>
+									</div>
+									<!-- END: ERRORS -->
+								
+									<form action="{FORM_ACTION_SAVE}" method="post" class="AdvancedForm form-horizontal">
+										<fieldset>
+							
+											<div class="control-group">											
+												<label class="control-label" for="title">Title</label>
+												<div class="controls">
+													{FORM_TITLE}
+												</div>				
+											</div>
+
+											<br />
+
+											<div class="control-group">											
+												<label class="control-label" for="desc">Description</label>
+												<div class="controls">
+													{FORM_DESC}
+												</div>				
+											</div>
+
+											<br />
+
+											<div class="control-group">											
+												<label class="control-label" for="icon">Icon</label>
+												<div class="controls">
+													{FORM_ICON}
+												</div>				
+											</div>
+
+											<br />
+
+											<div class="form-actions">
+												<button type="submit" class="btn btn-primary">Save</button> 
+											</div>
+										</fieldset>
+									</form>
+								
+								</div>
+							
+							</div>
+						
+						</div>
+					
+					</div>
+<!-- END: MAIN -->

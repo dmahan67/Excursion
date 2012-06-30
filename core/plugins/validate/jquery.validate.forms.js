@@ -20,5 +20,21 @@ jQuery(function(){
 		expression: "if (VAL.length >= 2 && VAL) return true; else return false;",
 		message: "Required field"
 	});
+	jQuery("#path").validate({
+		expression: "if (VAL.length >= 2 && VAL) return true; else return false;",
+		message: "Required field"
+	});
+	jQuery("#code").validate({
+		expression: "if (VAL.length >= 2 && VAL) return true; else return false;",
+		message: "Required field"
+	});
+	jQuery("#title").validate({
+		expression: "if (VAL.length >= 2 && VAL) return true; else return false;",
+		message: "Required field"
+	});
+	jQuery("#desc").validate({
+		expression: "if (VAL.length >= 2 && VAL) return true; else return false;",
+		message: "Required field"
+	});
 });
 /* ]]> */
