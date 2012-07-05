@@ -2,23 +2,24 @@ CREATE TABLE IF NOT EXISTS `config` (
   `part` varchar(24) collate utf8_unicode_ci NOT NULL default 'core',
   `title` varchar(64) collate utf8_unicode_ci NOT NULL default '',
   `order` char(2) collate utf8_unicode_ci NOT NULL default '00',
+  `type` int NOT NULL default '0',
   `value` varchar(64) collate utf8_unicode_ci NOT NULL default '',
   `default` varchar(255) collate utf8_unicode_ci NOT NULL default '',
-  `varients` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+  `variants` varchar(255) collate utf8_unicode_ci NOT NULL default '',
   `text` varchar(255) collate utf8_unicode_ci NOT NULL default '',
    KEY (`part`, `title`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `config` (`part`, `title`, `order`, `value`, `default`, `varients`, `text`) VALUES
-('core', 'version', '1', '0.5.0', '', '', ''),
-('core', 'title', '2', '', '', '', ''),
-('core', 'subtitle', '3', '', '', '', ''),
-('core', 'keywords', '4', '', '', '', ''),
-('core', 'forcetheme', '5', 'no', '', '', ''),
-('core', 'disablereg', '6', 'no', '', '', ''),
-('core', 'valnew', '7', 'no', '', '', ''),
-('core', 'disableval', '8', 'no', '', '', ''),
-('core', 'maintenance', '9', 'no', '', '', '');
+INSERT INTO `config` (`part`, `title`, `order`, `type`, `value`, `default`, `variants`, `text`) VALUES
+('core', 'version', '1', '0', '0.5.0', '', '', ''),
+('core', 'title', '2', '0', '', '', '', ''),
+('core', 'subtitle', '3', '0', '', '', '', ''),
+('core', 'keywords', '4', '0', '', '', '', ''),
+('core', 'forcetheme', '5', '0', 'no', '', '', ''),
+('core', 'disablereg', '6', '0', 'no', '', '', ''),
+('core', 'valnew', '7', '0', 'no', '', '', ''),
+('core', 'disableval', '8', '0', 'no', '', '', ''),
+('core', 'maintenance', '9', '0', 'no', '', '', '');
 
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int NOT NULL auto_increment,
@@ -57,8 +58,8 @@ CREATE TABLE IF NOT EXISTS `plugins` (
   `id` mediumint NOT NULL auto_increment,
   `hook` varchar(64) collate utf8_unicode_ci NOT NULL default '',
   `code` varchar(64) collate utf8_unicode_ci NOT NULL default '',
+  `owner` varchar(64) collate utf8_unicode_ci NOT NULL default 'core',
   `part` varchar(32) collate utf8_unicode_ci NOT NULL default '',
-  `title` varchar(255) collate utf8_unicode_ci NOT NULL default '',
   `file` varchar(255) collate utf8_unicode_ci NOT NULL default '',
   `active` tinyint unsigned NOT NULL default '1',
   PRIMARY KEY  (`id`)

@@ -1,0 +1,136 @@
+<!-- BEGIN: MAIN -->
+					<h1 class="page-title"><i class="icon-th-large"></i> Plugins</h1>
+				
+					<!-- BEGIN: DEFAULT -->
+					<div class="row">
+					
+						<div class="span9">
+							
+							<div class="widget">
+							
+								<div class="widget-header">
+								
+									<h3>Plugins</h3>
+							
+								</div>
+									
+								<div class="widget-content">
+								
+									<table class="table borderless-table">
+										<thead>
+											<tr>
+												<th style="width:32px;">&nbsp;</th>
+												<th>Name (click to edit)</th>
+												<th class="span1">Version</th>
+												<th class="span1">Status</th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- BEGIN: ROW -->
+											<tr>
+												<td><img src="{ICON}"></td>
+												<td><a href="{DETAILS_URL}">{NAME}</a><br /><small>{DESC}</small></td>
+												<td class="center">{VERSION}</td>
+												<td class="center"><img src="assets/images/icon-{STATUS}.gif" alt="{STATUS}" /></td>
+											</tr>
+											<!-- END: ROW -->
+										<tbody>
+									</table>
+								
+								</div>
+							
+							</div>
+						
+						</div>
+					
+					</div>
+					<!-- END: DEFAULT -->
+					
+					<!-- BEGIN: DETAILS -->
+					<div class="row">
+					
+						<div class="span9">
+				
+							<div class="widget">
+							
+								<div class="widget-header">
+								
+									<h3>{NAME}</h3>
+							
+								</div>
+									
+								<div class="widget-content">
+								
+									<div class="tabbable">
+						
+										<ul class="nav nav-tabs">
+											<li class="active"><a href="#1" data-toggle="tab">Plugin Information</a></li>
+											<li><a href="#2" data-toggle="tab">Configuration</a></li>
+										</ul>
+						
+										<br />
+						
+										<div class="tab-content">
+								
+											<div class="tab-pane active" id="1">
+											
+												<table class="table">
+													<tr>
+														<th class="span2">Name:</th>
+														<td>{NAME}</td>
+													</tr>
+													<tr>
+														<th class="span2">Code:</th>
+														<td>{CODE}</td>
+													</tr>
+													<tr>
+														<th class="span2">Description:</th>
+														<td>{DESC}</td>
+													</tr>
+													<tr>
+														<th class="span2">Status:</th>
+														<td>{STATUS}</td>
+													</tr>
+													<tr>
+														<th class="span2">Version:</th>
+														<td>{VERSION}</td>
+													</tr>
+												</table>
+												
+												<div class="form-actions">
+												
+													<!-- BEGIN: ACTIVE -->
+													<a href="{UNINSTALL_URL}sdfsdfsdf" class="btn btn-small btn-danger">
+														Un-install		
+													</a>
+													<!-- END: ACTIVE -->
+													
+													<!-- BEGIN: INACTIVE -->
+													<a href="{INSTALL_URL}" class="btn btn-small btn-success">
+														Install		
+													</a>
+													<!-- END: INACTIVE -->
+													
+												</div>
+
+											</div>
+
+											<div class="tab-pane" id="2">
+									
+												
+								
+											</div>
+										
+										</div>
+						  
+									</div>
+								
+								</div>
+							
+							</div>
+						
+						</div>
+					
+					</div>
+					<!-- END: DETAILS -->
+<!-- END: MAIN -->

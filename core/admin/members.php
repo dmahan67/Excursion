@@ -65,7 +65,6 @@ if($action == 'remove')
 	if($id <= 4)
 	{
 	
-		die("here");
 		$error = 'true'; // cannot delete required groups (inactive, banned, members, administrators)
 		
 	}

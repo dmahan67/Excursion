@@ -7,6 +7,3 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `text` MEDIUMTEXT collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-INSERT INTO `plugins` (`hook`, `code`, `part`, `title`, `file`, `active`) VALUES
-('page.tags', 'comments', 'main', 'Comments', 'comments/comments.php', 1);

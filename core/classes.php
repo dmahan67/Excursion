@@ -9,6 +9,15 @@
 $import_filters = array();
 $textarea_count = 0;
 $url_appendix = array();
+
+define('CONFIG_TYPE_TEXT', 0);
+define('CONFIG_TYPE_STRING', 1);
+define('CONFIG_TYPE_SELECT', 2);
+define('CONFIG_TYPE_RADIO', 3);
+define('CONFIG_TYPE_CALLBACK', 4);
+define('CONFIG_TYPE_HIDDEN', 5);
+define('CONFIG_TYPE_SEPARATOR', 6);
+define('CONFIG_TYPE_RANGE', 7);
  
 class Members {
 
@@ -1597,6 +1606,76 @@ class Excursion {
 	
 		return $this->rc("member_image", array('src' => $src, 'class' => $class));
 	
+	}
+	
+	function compile_plugin_info($dir)
+	{
+		$ext_list = array();
+
+		$dp = opendir($dir);
+		while ($f = readdir($dp))
+		{
+			$path = $dir . '/' . $f;
+			if ($f[0] != '.' && is_dir($path) && file_exists("$path/$f.config.php"))
+			{
+				$info = $this->infoget("$path/$f.config.php", 'PLUGIN_CONFIG');
+
+				$ext_list[$f] = $info;
+			}
+		}
+		closedir($dp);
+		return $ext_list;
+	}
+	
+	function parseConfig($info_cfg)
+	{
+		$options = array();
+		if (is_array($info_cfg))
+		{
+			foreach ($info_cfg as $i => $x)
+			{
+				$line = explode(':', $x);
+				if (is_array($line) && !empty($line[1]) && !empty($i))
+				{
+					switch ($line[1])
+					{
+						case 'string':
+							$line['Type'] = CONFIG_TYPE_STRING;
+							break;
+						case 'select':
+							$line['Type'] = CONFIG_TYPE_SELECT;
+							break;
+						case 'radio':
+							$line['Type'] = CONFIG_TYPE_RADIO;
+							break;
+						case 'callback':
+							$line['Type'] = CONFIG_TYPE_CALLBACK;
+							break;
+						case 'hidden':
+							$line['Type'] = CONFIG_TYPE_HIDDEN;
+							break;
+						case 'separator':
+							$line['Type'] = CONFIG_TYPE_SEPARATOR;
+							break;
+						case 'range':
+							$line['Type'] = CONFIG_TYPE_RANGE;
+							break;
+						default:
+							$line['Type'] = CONFIG_TYPE_TEXT;
+							break;
+					}
+					$options[] = array(
+						'name' => $i,
+						'order' => $line[0],
+						'type' => $line['Type'],
+						'variants' => $line[2],
+						'default' => $line[3],
+						'text' => $line[4]
+					);
+				}
+			}
+		}
+		return $options;
 	}
 
 }

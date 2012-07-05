@@ -10,7 +10,7 @@ ob_start();
 
 $xtpl = new XTemplate('themes/admin/header.xtpl');
 
-if ($user['id'] <= 0 || $user['group'] < 4)
+if ($user['id'] <= 0 || $user['group'] != 4)
 {
 
 	header('Location: message.php?id=105');
