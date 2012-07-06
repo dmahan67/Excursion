@@ -74,8 +74,9 @@
 
 					<!-- BEGIN: REPLY -->
 			
+					<a name="post_comment"></a>
 					<h5>Leave a Response</h5>  
-						
+					
 					<form method="post" action="{FORM_ACTION}">
 						{FORM_TEXT}
 						<br />

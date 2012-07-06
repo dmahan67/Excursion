@@ -23,13 +23,106 @@ switch($a)
 		$ext_options = $dir . '/' . $plugin . '/' . $plugin . '.options.php';
 		$plugin_path = "plugins/$plugin";
 		$ignore_parts = array('options', 'install', 'config', 'uninstall');
-	
+		$options_exists = file_exists($ext_options);
+		$config_exists = file_exists($ext_config);
+		
+		$plug['options'] = (($options_exists) ? true : false);
+		
+		if($options_exists)
+		{
+		
+			$sql = $db->query("SELECT * FROM config  WHERE part = '$plugin'");
+			
+			while ($row = $sql->fetch())
+			{
+
+				if ($row['type'] == $config['type_string'])
+				{
+				
+					$field = $excursion->inputbox('text', $row['title'], $row['value']);
+					
+				}
+				elseif ($row['type'] == $config['type_select'])
+				{
+				
+					if (!empty($row['variants']))
+					{
+					
+						$cfg_params = explode(',', $row['variants']);
+						$cfg_params_titles = (isset($L['cfg_'.$config_name.'_params'])
+							&& is_array($L['cfg_'.$config_name.'_params']))
+								? $L['cfg_'.$config_name.'_params'] : $cfg_params;
+								
+					}
+					
+					$field = (is_array($cfg_params))
+						? $excursion->selectbox($row['value'], $row['title'], $cfg_params, $cfg_params_titles, false)
+						: $excursion->inputbox('text', $row['title'], $row['value']);
+						
+				}
+				elseif ($row['type'] == $config['type_radio'])
+				{
+				
+					$field = $excursion->radiobox($row['value'], $row['title'], array(1, 0), array('Yes', 'No'), '', ' ');
+					
+				}
+				elseif ($row['type'] == $config['type_text'])
+				{
+				
+					$field = $excursion->textarea($row['title'], $row['value'], 8, 56);
+					
+				}
+				elseif ($config_type == $config['type_range'])
+				{
+				
+					$range_params = preg_split('#\s*,\s*#', $row['variants']);
+					$cfg_params = count($range_params) == 3 ? range($range_params[0], $range_params[1], $range_params[2])
+						: range($range_params[0], $range_params[1]);
+					$field = $excursion->selectbox($row['value'], $row['title'], $cfg_params, $cfg_params, false);
+					
+				}
+			
+				$xtpl->assign(array(
+					'TITLE' => $row['text'],
+					'FORM_OPTION' => $field
+				));
+				
+				$xtpl->parse('MAIN.DETAILS.OPTIONS_ROW');
+				
+			}
+			
+			$xtpl->assign('FORM_OPTIONS_ACTION', $excursion->url('admin', 'm=plugins&a=details&plugin='.$plugin.'&action=save'));
+			
+		}
+		
+		if($action == 'save')
+		{
+		
+			$sql = $db->query("SELECT * FROM config  WHERE part = '$plugin'");
+			
+			while ($row = $sql->fetch())
+			{
+			
+				$option_value = $excursion->import($row['title'], 'P', 'NOC');
+				$db->update(config, array('value' => $option_value), 
+					"title = '".$row['title']."' AND part = '".$plugin."'");
+			
+			}
+			
+			header('Location: admin.php?m=plugins&a=details&plugin='.$plugin);
+		
+		}
 		if($action == 'install')
 		{
 		
-			$exists = file_exists($ext_options);
+			if (file_exists("plugins/".$plugin."/setup/install.sql"))
+			{
+			
+				$db->runScript(file_get_contents("plugins/".$plugin."/setup/install.sql"));
+				
+			}
 		
-			if($exists)
+			if($options_exists)
 			{
 			
 				$info_cfg = $excursion->infoget($ext_options, 'PLUGIN_OPTIONS');
@@ -123,13 +216,27 @@ switch($a)
 		if($action == 'uninstall')
 		{
 		
+			if($options_exists)
+			{
 			
+				$sql = $db->delete('config', "part='$plugin'");
+			
+			}
+			
+			if (file_exists("plugins/".$plugin."/setup/uninstall.sql"))
+			{
+			
+				$db->runScript(file_get_contents("plugins/".$plugin."/setup/uninstall.sql"));
+				
+			}
+			
+			$sql = $db->delete('plugins', "code='$plugin'");
+			
+			header('Location: admin.php?m=plugins&a=details&plugin='.$plugin);
 		
 		}
-	
-		$exists = file_exists($ext_config);
 		
-		if ($exists)
+		if ($config_exists)
 		{
 		
 			$info = $excursion->infoget($ext_config, 'PLUGIN_CONFIG');
@@ -149,15 +256,15 @@ switch($a)
 		if($status=='active')
 		{
 		
-			$xtpl->assign(array('UNINSTALL_URL' => $excursion->url('admin', "m=plugins&a=details&plugin=$plugin&action=uninstall")));
-			$xtpl->parse('MAIN.DETAILS.ACTIVE');
+			$xtpl->assign('UNINSTALL_URL', $excursion->url('admin', "m=plugins&a=details&plugin=$plugin&action=uninstall"));
+			$plug['status'] = true;
 			
 		}
 		else
 		{
 			
-			$xtpl->assign(array('INSTALL_URL' => $excursion->url('admin', "m=plugins&a=details&plugin=$plugin&action=install")));
-			$xtpl->parse('MAIN.DETAILS.INACTIVE');
+			$xtpl->assign('INSTALL_URL', $excursion->url('admin', "m=plugins&a=details&plugin=$plugin&action=install"));
+			$plug['status'] = false;
 			
 		}
 

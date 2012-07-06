@@ -65,7 +65,7 @@
 						
 										<ul class="nav nav-tabs">
 											<li class="active"><a href="#1" data-toggle="tab">Plugin Information</a></li>
-											<li><a href="#2" data-toggle="tab">Configuration</a></li>
+											<!-- IF {PHP.plug.options} AND {PHP.plug.status} --><li><a href="#2" data-toggle="tab">Configuration</a></li><!-- ENDIF -->
 										</ul>
 						
 										<br />
@@ -99,27 +99,48 @@
 												
 												<div class="form-actions">
 												
-													<!-- BEGIN: ACTIVE -->
-													<a href="{UNINSTALL_URL}sdfsdfsdf" class="btn btn-small btn-danger">
+													<!-- IF {PHP.plug.status} -->
+													<a href="{UNINSTALL_URL}" onclick="return confirm_delete()" class="btn btn-small btn-danger">
 														Un-install		
 													</a>
-													<!-- END: ACTIVE -->
+													<!-- ENDIF -->
 													
-													<!-- BEGIN: INACTIVE -->
+													<!-- IF !{PHP.plug.status} -->
 													<a href="{INSTALL_URL}" class="btn btn-small btn-success">
 														Install		
 													</a>
-													<!-- END: INACTIVE -->
+													<!-- ENDIF -->
 													
 												</div>
 
 											</div>
 
+											<!-- IF {PHP.plug.options} AND {PHP.plug.status} -->
 											<div class="tab-pane" id="2">
 									
+												<form action="{FORM_OPTIONS_ACTION}" method="post" id="main" class="form-horizontal">
+													<fieldset>
+														
+														<!-- BEGIN: OPTIONS_ROW -->
+														<div class="control-group">											
+															<label class="control-label">{TITLE}</label>
+															<div class="controls">
+																{FORM_OPTION}
+															</div>				
+
+														</div>
+
+														<br />
+														<!-- END: OPTIONS_ROW -->
+
+														<div class="form-actions">
+															<button type="submit" class="btn btn-primary">Save</button> 
+														</div>
+													</fieldset>
+												</form>
 												
-								
 											</div>
+											<!-- ENDIF -->
 										
 										</div>
 						  

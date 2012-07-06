@@ -7,7 +7,7 @@ Hooks=page.tags
 
 $totalcom = $db->query("SELECT COUNT(*) FROM comments WHERE area = 'page' AND area_id = '".$row['id']."'")->fetchColumn();
 
-$sql_com = $db->query("SELECT * FROM comments WHERE area = 'page' AND area_id = '".$row['id']."' ORDER BY id ASC LIMIT 10");
+$sql_com = $db->query("SELECT * FROM comments WHERE area = 'page' AND area_id = '".$row['id']."' ORDER BY date DESC LIMIT " . $config['plugin']['comments']['maxcomments']);
 while ($com = $sql_com->fetch())
 {
 
@@ -89,19 +89,17 @@ if($action == 'send' && $user['group'] >= 3)
 	if(!empty($error))
 	{
 	
-		$xtpl->assign(array(
-			'ERRORS_TEXT' => $error
-		));
+		$xtpl->assign('ERRORS_TEXT', $error);
 		$xtpl->parse('MAIN.COMMENTS.ERRORS');
 		
 	}
 	
 }
 
-$xtpl->assign(array('COM_COUNT' => (int) $totalcom));
+$xtpl->assign('COM_COUNT', (int) $totalcom);
 
 $xtpl->parse('MAIN.COMMENTS');
 
-$xtpl->assign(array('COMMENTS' => (int) $totalcom));
+$xtpl->assign('COMMENTS', (int) $totalcom);
 
 ?>

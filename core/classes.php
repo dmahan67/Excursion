@@ -10,14 +10,11 @@ $import_filters = array();
 $textarea_count = 0;
 $url_appendix = array();
 
-define('CONFIG_TYPE_TEXT', 0);
-define('CONFIG_TYPE_STRING', 1);
-define('CONFIG_TYPE_SELECT', 2);
-define('CONFIG_TYPE_RADIO', 3);
-define('CONFIG_TYPE_CALLBACK', 4);
-define('CONFIG_TYPE_HIDDEN', 5);
-define('CONFIG_TYPE_SEPARATOR', 6);
-define('CONFIG_TYPE_RANGE', 7);
+$config['type_text'] = '0';
+$config['type_string'] = '1';
+$config['type_select'] = '2';
+$config['type_radio'] = '3';
+$config['type_range'] = '4';
  
 class Members {
 
@@ -1629,6 +1626,9 @@ class Excursion {
 	
 	function parseConfig($info_cfg)
 	{
+	
+		global $config;
+		
 		$options = array();
 		if (is_array($info_cfg))
 		{
@@ -1640,28 +1640,19 @@ class Excursion {
 					switch ($line[1])
 					{
 						case 'string':
-							$line['Type'] = CONFIG_TYPE_STRING;
+							$line['Type'] = $config['type_string'];
 							break;
 						case 'select':
-							$line['Type'] = CONFIG_TYPE_SELECT;
+							$line['Type'] = $config['type_select'];
 							break;
 						case 'radio':
-							$line['Type'] = CONFIG_TYPE_RADIO;
-							break;
-						case 'callback':
-							$line['Type'] = CONFIG_TYPE_CALLBACK;
-							break;
-						case 'hidden':
-							$line['Type'] = CONFIG_TYPE_HIDDEN;
-							break;
-						case 'separator':
-							$line['Type'] = CONFIG_TYPE_SEPARATOR;
+							$line['Type'] = $config['type_radio'];
 							break;
 						case 'range':
-							$line['Type'] = CONFIG_TYPE_RANGE;
+							$line['Type'] = $config['type_range'];
 							break;
 						default:
-							$line['Type'] = CONFIG_TYPE_TEXT;
+							$line['Type'] = $config['type_text'];
 							break;
 					}
 					$options[] = array(

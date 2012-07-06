@@ -41,18 +41,6 @@ $action = $excursion->import('action', 'G', 'ALP', 24);
 $id = $excursion->import('id','G','INT');
 $step = $excursion->import('step','G','INT');
 
-/* ========== Config Tags ========== */
-
-$config['title'] = $db->query("SELECT value FROM config WHERE title='title'")->fetchColumn();
-$config['subtitle'] = $db->query("SELECT value FROM config WHERE title='subtitle'")->fetchColumn();
-$config['keywords'] = $db->query("SELECT value FROM config WHERE title='keywords'")->fetchColumn();
-$config['forcetheme'] = $db->query("SELECT value FROM config WHERE title='forcetheme'")->fetchColumn();
-$config['disablereg'] = $db->query("SELECT value FROM config WHERE title='disablereg'")->fetchColumn();
-$config['disableval'] = $db->query("SELECT value FROM config WHERE title='disableval'")->fetchColumn();
-$config['valnew'] = $db->query("SELECT value FROM config WHERE title='valnew'")->fetchColumn();
-$config['maintenance'] = $db->query("SELECT value FROM config WHERE title='maintenance'")->fetchColumn();
-$config['reason'] = $db->query("SELECT text FROM config WHERE title='maintenance'")->fetchColumn();
-
 /* ========== Guest/User ========== */
 
 $user['id'] = 0;
@@ -109,6 +97,27 @@ if (!$plugins)
 	}
 	
 }
+
+
+$sql_config = $db->query("SELECT * FROM config");
+while ($row = $sql_config->fetch())
+{
+	if ($row['part'] == 'core')
+	{
+	
+		$config[$row['title']] = $row['value'];
+		
+	}
+	else
+	{
+	
+		$config['plugin'][$row['part']][$row['title']] = $row['value'];
+		
+	}
+	
+}
+$sql_config->closeCursor();
+mb_internal_encoding('UTF-8');
 
 /* ========== Global Tags ========== */
 
