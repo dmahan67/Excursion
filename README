@@ -16,11 +16,11 @@ steps; your Excursion website will be up and running in no time.
 		database), and run install.sql
 		
 	3.	Open the configuration file in the main directory. 
-		(excursion/config.php). Update the configuration settings to 
-		your likings.
+		(excursion/config.php). Update the configuration 
+		settings to your likings.
 		
-	4.	Visit your website, and create an account. By default the 
-		first member account is given administrator rights.
+	4.	Visit your website, and create an account. By default 
+		the first member account is given administrator rights.
 -------------------------------------------------------------------
 
 -------------------------------------------------------------------
