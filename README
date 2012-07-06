@@ -1,12 +1,12 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Excursion Content Management System			     *
- *												     *
+ * Excursion Content Management System               *
+ *                                                   *
  * @Authors Dyllon Mahan, Brock Burkholder           *
  * @Copyright Copyright (c) Excursion Team 2011-2012 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * *
  
 1. Installation		2. Configuration		3. Credits
-------------------------------------------------------
+----------------------------------------------------------------
 Installing Excursion is easier than ever! By following
 these few steps; your Excursion website will be up and
 running in no time.
@@ -23,9 +23,9 @@ running in no time.
 	4.	Visit your website, and create an account.
 		By default the first member account is given
 		administrator rights.
-------------------------------------------------------
+----------------------------------------------------------------
 
-------------------------------------------------------
+----------------------------------------------------------------
 Xtemplate 	- 	http://www.phpxtemplate.org/
 Bootstrap 	- 	http://twitter.github.com/bootstrap/
 CKEditor 	- 	http://ckeditor.com/
