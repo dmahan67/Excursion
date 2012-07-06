@@ -62,6 +62,10 @@
 						<br />
 						<!-- END: ROW -->
 						
+						<!-- IF {PAGINATION} -->
+						{PAGINATION}<br />
+						<!-- ENDIF -->
+						
 					</div>
 					
 					<a name="section"></a>

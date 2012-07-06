@@ -7,17 +7,22 @@
 			
 			<div class="row">
 			
-				<div class="span9">
+				<div class="span8">
 					<!-- BEGIN: NEWS -->
+					
+					<!-- BEGIN: ROW -->
 					<h5><a href="page.php?id={NEWS_ID}">{NEWS_TITLE}</a></h5>
 					<p class="desc">{PHP.lang.postby}: {NEWS_OWNER} {PHP.lang.on} {NEWS_DATE}</p>
 					
 					{NEWS_TEXT}
+					<!-- END: ROW -->
+					
+					{PAGINATION}
 					
 					<!-- END: NEWS -->
 				</div>
 				
-				<div class="span5">
+				<div class="span6">
      
 					Secondary content
 	 

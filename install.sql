@@ -11,15 +11,16 @@ CREATE TABLE IF NOT EXISTS `config` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `config` (`part`, `title`, `order`, `type`, `value`, `default`, `variants`, `text`) VALUES
-('core', 'version', '1', '0', '0.5.0', '', '', ''),
-('core', 'title', '2', '0', '', '', '', ''),
-('core', 'subtitle', '3', '0', '', '', '', ''),
+('core', 'version', '1', '0', '0.5.0', '0.5.0', '', ''),
+('core', 'title', '2', '0', 'Excursion', 'Excursion', '', ''),
+('core', 'subtitle', '3', '0', 'Content management system', 'Content management system', '', ''),
 ('core', 'keywords', '4', '0', '', '', '', ''),
-('core', 'forcetheme', '5', '0', 'no', '', '', ''),
-('core', 'disablereg', '6', '0', 'no', '', '', ''),
-('core', 'valnew', '7', '0', 'no', '', '', ''),
-('core', 'disableval', '8', '0', 'no', '', '', ''),
-('core', 'maintenance', '9', '0', 'no', '', '', '');
+('core', 'forcetheme', '5', '0', 'no', 'no', '', ''),
+('core', 'disablereg', '6', '0', 'no', 'no', '', ''),
+('core', 'valnew', '7', '0', 'no', 'no', '', ''),
+('core', 'disableval', '8', '0', 'no', 'no', '', ''),
+('core', 'maintenance', '9', '0', 'no', 'no', '', ''),
+('core', 'maxpages', '10', '0', '10', '10', '', '');
 
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int NOT NULL auto_increment,

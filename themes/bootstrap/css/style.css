@@ -79,9 +79,12 @@ table.borderless-table tbody th {
 .fright {float:right;}	
 .fleft {float:left;}
 
-.padding10 {padding:10px;}
-.padding20 {padding:20px;}
-.padding30 {padding:30px;}
+.padding10 {padding:10px 0;}
+.padding10b {padding:0 0 10px 0;}
+.padding20 {padding:20px 0;}
+.padding20b {padding:0 0 20px 0;}
+.padding30 {padding:30px 0;}
+.padding30b {padding:0 0 30px 0;}
 
 .postcommentlink {float:right;padding:20px 0 0 0;}
 	
@@ -96,3 +99,8 @@ table.borderless-table tbody th {
   padding-top:10px;
   margin-bottom: 38px;
   margin-top: 30px; }
+  
+table td.center {
+	text-align:center;
+	vertical-align:center;
+}

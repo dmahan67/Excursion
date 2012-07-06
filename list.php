@@ -10,12 +10,17 @@ require_once 'config.php';
 require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
-$c = $excursion->import('c', 'G', 'TXT');
 $ex['location'] = 'list';
 
 require_once 'core/header.php';
 
 $xtpl = new XTemplate('themes/'.$user['theme'].'/list.xtpl');
+
+$total_pages = $db->query("SELECT COUNT(*) FROM pages WHERE cat = '$c' AND state > 0")->fetchColumn();
+$pagination->setLink("list.php?c=$c&page=%s");
+$pagination->setPage($page);
+$pagination->setSize($config['maxpages']);
+$pagination->setTotalRecords($total_pages);
 
 if(!empty($c))
 {
@@ -26,8 +31,8 @@ if(!empty($c))
 		include $pl;
 	}
 	/* ===== */
-
-	$sql = $db->query("SELECT * FROM pages WHERE cat = '$c' AND state > 0 LIMIT 10");
+	
+	$sql = $db->query("SELECT * FROM pages WHERE cat = '$c' AND state > 0 ORDER BY date DESC " . $pagination->getLimitSql());
 	while ($row = $sql->fetch())
 	{
 	
@@ -68,12 +73,14 @@ else
 
 $sql_cat = $db->query("SELECT * FROM categories WHERE code = '$c' LIMIT 1");
 $cat = $sql_cat->fetch();
+$navigation = $pagination->create_links();
 
 $xtpl->assign(array(
 	'ID' => (int) $cat['id'],
 	'TITLE' => $cat['title'],
 	'DESC' => $cat['desc'],
-	'CODE' => $cat['code']
+	'CODE' => $cat['code'],
+	'PAGINATION' => $navigation
 ));
 
 /* === Hook === */

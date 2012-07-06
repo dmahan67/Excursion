@@ -29,7 +29,14 @@ foreach ($categories as $v)
 	
 }
 
-$sql = $db->query("SELECT * FROM pages WHERE $sql_stmt AND state > 0 ORDER BY date DESC LIMIT " . $config['plugin']['news']['maxpages']);
+$totalpage = $db->query("SELECT COUNT(*) FROM pages WHERE $sql_stmt AND state > 0")->fetchColumn();
+if(empty($page)){$page = 1;}
+$pagination->setLink("index.php?page=%s");
+$pagination->setPage($page);
+$pagination->setSize($config['plugin']['news']['maxpages']);
+$pagination->setTotalRecords($totalpage);
+
+$sql = $db->query("SELECT * FROM pages WHERE $sql_stmt AND state > 0 ORDER BY date DESC " . $pagination->getLimitSql());
 while ($row = $sql->fetch())
 {
 
@@ -40,8 +47,13 @@ while ($row = $sql->fetch())
 		'NEWS_DATE' => date($config['date_medium'], $row['date']),
 		'NEWS_TEXT' => $row['text']
 	));
-	$xtpl->parse('MAIN.NEWS');	
+	$xtpl->parse('MAIN.NEWS.ROW');	
 	
 }
+
+$navigation = $pagination->create_links();
+$xtpl->assign('PAGINATION', $navigation);
+
+$xtpl->parse('MAIN.NEWS');
 
 ?>

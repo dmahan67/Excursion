@@ -32,14 +32,17 @@ catch (PDOException $e)
 
 $excursion = new Excursion();
 $member = new Members();
+$pagination = new Pagination();
 
 /* ======== Common Variables ======== */
 
-$m = $excursion->import('m', 'G', 'ALP', 24);
 $a = $excursion->import('a', 'G', 'ALP', 24);
+$c = $excursion->import('c', 'G', 'TXT');
+$m = $excursion->import('m', 'G', 'ALP', 24);
 $action = $excursion->import('action', 'G', 'ALP', 24);
 $id = $excursion->import('id','G','INT');
 $step = $excursion->import('step','G','INT');
+$page = $excursion->import('page', 'G', 'INT');
 
 /* ========== Guest/User ========== */
 
@@ -73,7 +76,7 @@ if (isset($_SESSION['user_id']))
 
 require_once 'themes/'.$user['theme'].'/'.$user['theme'].'.lang.php';
 
-/* ========== Plugins ========== */
+/* ========== Plugins & Configuration ========== */
 
 if (!$plugins)
 {

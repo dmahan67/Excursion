@@ -17,15 +17,15 @@
 			
 				<div class="span14">
 				
-					<!-- IF {PHP.user.group} == 4 --><p class="pull-right"><a href="page.php?m=add&c={PHP.c}">{PHP.lang.submitpage}</a></p><!-- ENDIF -->
+					<!-- IF {PHP.user.group} == 4 --><p class="pull-right padding10b"><a href="page.php?m=add&c={PHP.c}" class="btn">{PHP.lang.submitpage}</a></p><!-- ENDIF -->
 
-					<table class="zebra-striped" id="sortTable">
+					<table class="table zebra-striped" id="sortTable">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th class="span1">#</th>
 								<th>{PHP.lang.title}</th>
-								<th>{PHP.lang.author}</th>
-								<th>{PHP.lang.date}</th>
+								<th class="span4">{PHP.lang.author}</th>
+								<th class="span4">{PHP.lang.date}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -37,9 +37,16 @@
 								<td>{DATE}</td>
 							</tr>
 						<!-- END: LIST -->
+						<!-- IF {PHP.total_pages} == 0 -->
+							<tr>
+								<td colspan="4" class="center">{PHP.lang.list_empty}</td>
+							</tr>
+						<!-- ENDIF -->
 						</tbody>
 					</table>
-				
+					
+					{PAGINATION}
+					
 				</div>
 				
 			</div>

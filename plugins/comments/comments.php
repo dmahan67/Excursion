@@ -6,8 +6,13 @@ Hooks=page.tags
 ==================== */
 
 $totalcom = $db->query("SELECT COUNT(*) FROM comments WHERE area = 'page' AND area_id = '".$row['id']."'")->fetchColumn();
+if(empty($page)){$page = 1;}
+$pagination->setLink("page.php?id=$id&page=%s");
+$pagination->setPage($page);
+$pagination->setSize($config['plugin']['comments']['maxcomments']);
+$pagination->setTotalRecords($totalcom);
 
-$sql_com = $db->query("SELECT * FROM comments WHERE area = 'page' AND area_id = '".$row['id']."' ORDER BY date DESC LIMIT " . $config['plugin']['comments']['maxcomments']);
+$sql_com = $db->query("SELECT * FROM comments WHERE area = 'page' AND area_id = '".$row['id']."' ORDER BY date DESC " . $pagination->getLimitSql());
 while ($com = $sql_com->fetch())
 {
 
@@ -96,7 +101,12 @@ if($action == 'send' && $user['group'] >= 3)
 	
 }
 
-$xtpl->assign('COM_COUNT', (int) $totalcom);
+$navigation = $pagination->create_links();
+
+$xtpl->assign(array(
+	'COM_COUNT' => (int) $totalcom,
+	'PAGINATION' => $navigation
+));
 
 $xtpl->parse('MAIN.COMMENTS');
 
