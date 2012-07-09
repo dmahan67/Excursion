@@ -25,6 +25,10 @@ switch ($m)
 	case 'members':
 	require('core/admin/members.php');
 	break;
+	
+	case 'queue':
+	require('core/admin/queue.php');
+	break;
 
 	default:
 	require('core/admin/home.php');

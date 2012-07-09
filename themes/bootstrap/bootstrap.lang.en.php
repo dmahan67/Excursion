@@ -100,9 +100,6 @@ $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
 
 /* ========== PAGES ========== */
 $lang['list_empty'] = 'This category is empty';

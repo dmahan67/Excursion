@@ -10,9 +10,7 @@ error_reporting (E_ALL ^ E_NOTICE);
 
 /* ========== Main Settings ========== */
 
-$config['main_url'] = 'localhost';										// Full URL without ending in a slash
-$config['title'] = '';													// Title of your website
-$config['admin_email'] = '';											// Administration email
+$config['main_url'] = 'http://localhost';								// Full URL without ending in a slash
 $config['default_theme'] = 'bootstrap';									// Default theme unless set by user
 $config['default_language'] = 'en';										// Default language
 
@@ -31,7 +29,7 @@ $config['mysqlhost'] = 'localhost';
 $config['mysqlport'] = '';	
 $config['mysqluser'] = 'root';	
 $config['mysqlpassword'] = '';
-$config['mysqldb'] = '';
+$config['mysqldb'] = 'excursion';
 
 $config['mysqlcharset'] = 'utf8';
 $config['mysqlcollate'] = 'utf8_unicode_ci';

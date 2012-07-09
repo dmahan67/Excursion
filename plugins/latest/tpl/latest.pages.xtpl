@@ -1,0 +1,19 @@
+<!-- BEGIN: MAIN -->
+
+<table class="borderless-table" width="100%">
+<!-- BEGIN: PAGE_ROW -->
+	<tr>
+		<td>
+			<a href="page.php?id={ID}">{TITLE}</a><br />
+			<span class="desc">posted by {OWNER} on {DATE}</span>
+		</td>
+	</tr>
+<!-- END: PAGE_ROW -->
+<!-- BEGIN: NO_PAGES_FOUND -->
+	<tr>
+		<td class="centerall">{PHP.lang.latest_empty}</td>
+	</tr>
+<!-- END: NO_PAGES_FOUND -->
+</table>
+
+<!-- END: MAIN -->

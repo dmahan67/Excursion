@@ -7,6 +7,7 @@
  */
  
 require_once 'config.php';
+require_once 'core/classes.php';
 require_once 'core/xtemplate.php';
 $ex['location'] = 'login';
 require_once 'core/common.php';

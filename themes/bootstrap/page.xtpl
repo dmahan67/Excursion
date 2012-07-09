@@ -92,7 +92,18 @@
 
 				</div>
 				
-				<div class="span5">
+				<div class="span4n5">
+				
+					<!-- IF {CART_PRICE} > 0 -->
+					<div class="well">
+						<span class="fright padding10left"><a href="" class="btn"><i class="icon-shopping-cart"></i> Add</a></span>
+						
+						<strong>{TITLE}</strong>
+						<br />
+						Price: ${CART_PRICE}
+						
+					</div>
+					<!-- ENDIF -->
 				
 					<h4>{PHP.lang.pinfo}</h4>
 					

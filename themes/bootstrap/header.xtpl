@@ -36,6 +36,9 @@
 					<li><a href="list.php?c=articles">{PHP.lang.articles}</a></li>
 					<li><a href="list.php?c=downloads">{PHP.lang.downloads}</a></li>
 				</ul>
+<form class="navbar-search pull-left">
+    <input type="text" class="search-query" placeholder="Search">
+    </form>
 				
 				<ul class="nav secondary-nav">
 					<li class="dropdown">

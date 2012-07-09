@@ -20,7 +20,8 @@ INSERT INTO `config` (`part`, `title`, `order`, `type`, `value`, `default`, `var
 ('core', 'valnew', '7', '0', 'no', 'no', '', ''),
 ('core', 'disableval', '8', '0', 'no', 'no', '', ''),
 ('core', 'maintenance', '9', '0', 'no', 'no', '', ''),
-('core', 'maxpages', '10', '0', '10', '10', '', '');
+('core', 'maxpages', '10', '0', '10', '10', '', ''),
+('core', 'apikey', '11', '0', '', '', '', '');
 
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int NOT NULL auto_increment,
@@ -31,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   `theme` varchar(64) collate utf8_unicode_ci NOT NULL default 'bootstrap',
   `birthdate` DATE NOT NULL DEFAULT '0000-00-00',
   `gender` char(1) collate utf8_unicode_ci NOT NULL default 'U',
+  `lang` varchar(16) collate utf8_unicode_ci NOT NULL default '',
   `avatar` varchar(225) collate utf8_unicode_ci NOT NULL default 'assets/avatars/blank_avatar.jpg',
   `regdate` int NOT NULL default '0',
   `token` char(16) collate utf8_unicode_ci NOT NULL default '',

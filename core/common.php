@@ -9,9 +9,7 @@
 session_start();
 
 require_once 'core/database.php';
-require_once 'lang/'.$config['default_language'].'/lang.'.$config['default_language'].'.php';
 require_once 'core/resources.php';
-require_once 'core/classes.php';
 
 
 /* ========== CONNECT TO DATABASE ========== */
@@ -48,6 +46,7 @@ $page = $excursion->import('page', 'G', 'INT');
 
 $user['id'] = 0;
 $user['theme'] = $config['default_theme'];
+$user['lang'] = $config['default_language'];
 $user['timezone'] = 0;
 
 if (isset($_SESSION['user_id']))
@@ -63,6 +62,7 @@ if (isset($_SESSION['user_id']))
 		$user['password'] = $row['password'];
 		$user['email'] = $row['email'];
 		$user['group'] = $row['groupid'];
+		$user['lang'] = $row['lang'];
 		$user['group_built'] = $excursion->generateGroup($row['groupid']);
 		if($config['forcetheme'] == 'yes'){$user['theme'] = $config['default_theme'];}else{$user['theme'] = $row['theme'];}
 		$user['gender'] = $row['gender'];
@@ -74,7 +74,8 @@ if (isset($_SESSION['user_id']))
 	
 }
 
-require_once 'themes/'.$user['theme'].'/'.$user['theme'].'.lang.php';
+require_once $excursion->import_langfile('main', 'core', $user['lang']);
+require_once $excursion->import_langfile($user['theme'], 'theme', $user['lang']);
 
 /* ========== Plugins & Configuration ========== */
 
@@ -101,6 +102,18 @@ if (!$plugins)
 	
 }
 
+$sql_config = $db->query("SELECT * FROM plugins");
+while ($row = $sql_config->fetch())
+{
+
+	if(@file_exists("plugins/".$row['code']."/lang/".$row['code'].".lang.".$user['lang'].".php"))
+	{
+	
+		require_once $excursion->import_langfile($row['code'], 'plug', $user['lang']);
+		
+	}
+
+}
 
 $sql_config = $db->query("SELECT * FROM config");
 while ($row = $sql_config->fetch())
@@ -121,6 +134,7 @@ while ($row = $sql_config->fetch())
 }
 $sql_config->closeCursor();
 mb_internal_encoding('UTF-8');
+$excursion->load_pageStructure();
 
 /* ========== Global Tags ========== */
 
@@ -144,5 +158,12 @@ $footer_tags .= $excursion->createTags('javascript', '', 'core/plugins/ckeditor/
 $footer_tags .= $excursion->createTags('javascript', '', 'core/plugins/ckeditor/editor_themes.js', '');
 
 $config['footer_tags'] = $footer_tags;
+
+/* === Hook === */
+foreach ($excursion->Hook('global') as $pl)
+{
+	include $pl;
+}
+/* ===== */
 
 ?>

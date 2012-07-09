@@ -12,6 +12,7 @@ $lang['no'] = 'No';
 $lang['yes'] = 'Yes';
 $lang['members_only'] = 'Members Only';
 $lang['del'] = 'Delete';
+$lang['system_error'] = 'A system error has occurred';
  
 /* ========== DATE/TIME ========== */
 
@@ -134,6 +135,7 @@ $lang['reset_email'] = 'Hi %1$s,<br /><br />
 $lang['page_error_title_length'] = 'Page title is too short';
 $lang['page_error_cat_missing'] = 'Page category is missing';
 $lang['page_error_text_length'] = 'Page text is too short';
+$lang['spam_error'] = 'System has flagged this comment as spam';
 
 /* ========== PROFILE ========== */
 $lang['profile_error_nomatch'] = 'Your current password was incorrect';
@@ -148,7 +150,6 @@ $lang['admin_error_desc_missing'] = 'Description is missing';
 $lang['admin_error_path_missing'] = 'Path is missing';
 $lang['admin_error_code_missing'] = 'Code is missing';
 
-$lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';

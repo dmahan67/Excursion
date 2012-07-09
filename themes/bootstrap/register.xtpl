@@ -77,7 +77,7 @@
 					</form>
 				</div>
 				
-				<div class="span5">
+				<div class="span4n5">
 					<h4>{PHP.lang.regprocess}</h4>
 					<ol>
 						<li>{PHP.lang.rpstep1}</li>

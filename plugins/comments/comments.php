@@ -6,7 +6,7 @@ Hooks=page.tags
 ==================== */
 
 $totalcom = $db->query("SELECT COUNT(*) FROM comments WHERE area = 'page' AND area_id = '".$row['id']."'")->fetchColumn();
-if(empty($page)){$page = 1;}
+$page = (!empty($page) ? $page : '1');
 $pagination->setLink("page.php?id=$id&page=%s");
 $pagination->setPage($page);
 $pagination->setSize($config['plugin']['comments']['maxcomments']);
@@ -80,17 +80,68 @@ if($action == 'send' && $user['group'] >= 3)
 	$insert['date'] = (int)time();
 	$insert['text'] = $excursion->import('text', 'P', 'HTM');
 	
-	if (mb_strlen($insert['text']) < 4) $error .= $lang['page_error_text_length'].'<br />';
-
-	if(empty($error))
+	if (mb_strlen($insert['text']) < 4) $error .= $lang['page_error_text_length'] . '<br />';
+	
+	$comment = array(
+		'body' => $insert['text']
+	);
+	        
+	$akismet = new Akismet($config['main_url'], $config['apikey'], $comment);
+	
+	if (!$akismet->errorsExist()) 
 	{
 	
-		$db->insert('comments', $insert);
-		$id = $db->lastInsertId();
-		
-		header('Location: page.php?id='.$row['id'].'#com-'.$id.'');
+        $akismet->submitSpam();
 		
 	}
+
+	if($akismet->errorsExist()) {
+	
+		if($akismet->isError('AKISMET_INVALID_KEY')) {
+		
+			$error .= $lang['system_error'] . '<br />';
+
+        } 
+		elseif($akismet->isError('AKISMET_RESPONSE_FAILED')) 
+		{
+
+			$error .= $lang['system_error'] . '<br />';
+			
+        } 
+		elseif($akismet->isError('AKISMET_SERVER_NOT_FOUND')) 
+		{
+
+			$error .= $lang['system_error'] . '<br />';
+			
+        }
+
+	} 
+	else 
+	{
+
+        if ($akismet->isSpam()) 
+		{
+
+			$error .= $lang['spam_error'] . '<br />';
+			
+        } 
+		else 
+		{
+
+			if(empty($error))
+			{
+	
+				$db->insert('comments', $insert);
+				$id = $db->lastInsertId();
+				
+				header('Location: page.php?id='.$row['id'].'#com-'.$id.'');
+				
+			}
+			
+        }
+		
+	}
+	
 	if(!empty($error))
 	{
 	

@@ -1,0 +1,120 @@
+<!-- BEGIN: MAIN -->
+					<h1 class="page-title"><i class="icon-time"></i> Queue</h1>
+
+					<div class="row">
+					
+						<div class="span9">
+				
+							<div class="widget">
+							
+								<div class="widget-header">
+								
+									<h3>Queue</h3>
+							
+								</div>
+									
+								<div class="widget-content">
+								
+									<div class="tabbable">
+						
+										<ul class="nav nav-tabs">
+											<li class="active"><a href="#1" data-toggle="tab">Pages ({PHP.queue.total_pages})</a></li>
+											<!-- IF {PHP.config.valnew} == 'yes' --><li><a href="#2" data-toggle="tab">Members ({PHP.queue.total_members})</a></li><!-- ENDIF -->
+										</ul>
+						
+										<br />
+						
+										<div class="tab-content">
+								
+											<div class="tab-pane active" id="1">
+											
+												<table class="table borderless-table">
+													<thead>
+														<tr>
+															<th>Title</th>
+															<th class="span2">Date</th>
+															<th class="span2">Category</th>
+															<th class="span1n5">Actions</th>
+														</tr>
+													</thead>
+													<tbody>
+														<!-- BEGIN: PAGE_ROW -->
+														<tr>
+															<td><a href="page.php?id={ID}" target="_new">{TITLE}</a></td>
+															<td>{DATE}</td>
+															<td>{CAT}</td>
+															<td class="center">
+																<a href="admin.php?m=queue&action=approve&c=page&id={ID}" class="btn btn-small btn-success">
+																	<i class="icon-ok"></i>			
+																</a>
+																<a href="admin.php?m=queue&action=remove&c=page&id={ID}" onclick="return confirm_delete()" class="btn btn-small btn-danger">
+																	<i class="icon-remove"></i>			
+																</a>
+																&nbsp;&nbsp;&nbsp;&nbsp;
+															</td>
+														</tr>
+														<!-- END: PAGE_ROW -->
+														<!-- IF {PHP.queue.total_pages} == '0' -->
+														<tr>
+															<td colspan="4" class="center">
+															Page validation queue is empty
+															</td>
+														</tr>
+														<!-- ENDIF -->
+													<tbody>
+												</table>
+											
+											</div>
+
+											<!-- IF {PHP.config.valnew} == 'yes' -->
+											<div class="tab-pane" id="2">
+									
+												<table class="table borderless-table">
+													<thead>
+														<tr>
+															<th>Username</th>
+															<th class="span2">Date</th>
+															<th class="span1n5">Actions</th>
+														</tr>
+													</thead>
+													<tbody>
+														<!-- BEGIN: USER_ROW -->
+														<tr>
+															<td>{USER}</td>
+															<td>{DATE}</td>
+															<td class="center">
+																<a href="admin.php?m=queue&action=approve&c=user&id={ID}" class="btn btn-small btn-success">
+																	<i class="icon-ok"></i>			
+																</a>
+																<a href="admin.php?m=queue&action=remove&c=user&id={ID}" onclick="return confirm_delete()" class="btn btn-small btn-danger">
+																	<i class="icon-remove"></i>			
+																</a>
+																&nbsp;&nbsp;&nbsp;&nbsp;
+															</td>
+														</tr>
+														<!-- END: USER_ROW -->
+														<!-- IF {PHP.queue.total_members} == '0' -->
+														<tr>
+															<td colspan="4" class="center">
+															Member validation queue is empty
+															</td>
+														</tr>
+														<!-- ENDIF -->
+													<tbody>
+												</table>
+												
+											</div>
+											<!-- ENDIF -->
+										
+										</div>
+						  
+									</div>
+								
+								</div>
+							
+							</div>
+						
+						</div>
+					
+					</div>
+<!-- END: MAIN -->

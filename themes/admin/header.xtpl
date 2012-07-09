@@ -92,6 +92,7 @@
 						<li><a href="admin.php"><i class="icon-home"></i> Dashboard</a></li>
 						<li><a href="admin.php?m=config"><i class="icon-pushpin"></i> Congifuration</a></li>
 						<li><a href="admin.php?m=pages"><i class="icon-folder-open"></i> Page Structure</a></li>
+						<li><a href="admin.php?m=queue"><i class="icon-time"></i> Queue</a></li>
 						<li><a href="admin.php?m=plugins"><i class="icon-th-large"></i> Plugins</a></li>
 						<li><a href="admin.php?m=members"><i class="icon-user"></i> Members</a></li>
 					</ul>	

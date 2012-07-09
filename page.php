@@ -7,6 +7,7 @@
  */
  
 require_once 'config.php';
+require_once 'core/classes.php';
 require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
@@ -18,7 +19,7 @@ if($action == 'remove' && $user['group'] == 4)
 {
 
 	/* === Hook === */
-	foreach ($excursion->Hook('page.remove.action') as $pl)
+	foreach ($excursion->Hook('page.remove') as $pl)
 	{
 		include $pl;
 	}
@@ -33,7 +34,7 @@ if($action == 'queue' && $user['group'] == 4)
 {
 	
 	/* === Hook === */
-	foreach ($excursion->Hook('page.queue.action.first') as $pl)
+	foreach ($excursion->Hook('page.queue.first') as $pl)
 	{
 		include $pl;
 	}
@@ -46,7 +47,7 @@ if($action == 'queue' && $user['group'] == 4)
 	{
 	
 		/* === Hook === */
-		foreach ($excursion->Hook('page.queue.action.loop') as $pl)
+		foreach ($excursion->Hook('page.queue') as $pl)
 		{
 			include $pl;
 		}
@@ -85,7 +86,7 @@ if($m == 'edit' && $user['group'] == 4)
 	{
 	
 		/* === Hook === */
-		foreach ($excursion->Hook('page.edit.action.loop') as $pl)
+		foreach ($excursion->Hook('page.edit.send') as $pl)
 		{
 			include $pl;
 		}
@@ -142,7 +143,7 @@ if($m == 'edit' && $user['group'] == 4)
 	));
 	
 	/* === Hook === */
-	foreach ($excursion->Hook('page.edit.action.tags') as $pl)
+	foreach ($excursion->Hook('page.edit.tags') as $pl)
 	{
 		include $pl;
 	}
@@ -158,7 +159,14 @@ if($m == 'add' && $user['group'] == 4)
 
 	if($action == 'send' && $user['group'] == 4)
 	{
-	
+		
+		/* === Hook === */
+		foreach ($excursion->Hook('page.add.send') as $pl)
+		{
+			include $pl;
+		}
+		/* ===== */
+		
 		$insert['title'] = $excursion->import('title', 'P', 'TXT');
 		$insert['desc'] = $excursion->import('desc', 'P', 'TXT');
 		$insert['cat'] = $excursion->import('category', 'P', 'TXT');
@@ -209,6 +217,13 @@ if($m == 'add' && $user['group'] == 4)
 		'FORM_PAGEURL' => $excursion->inputbox('text', 'pageurl', $insert['pageurl'], array('size' => '64', 'maxlength' => '255')),
 		'FORM_TEXT' => $excursion->textarea('text', $insert['text'], 24, 120, '', 'input_textarea_editor'),
 	));
+	
+	/* === Hook === */
+	foreach ($excursion->Hook('page.add.tags') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
 
 }
 if($m == 'add' && $user['group'] != 4)
@@ -224,6 +239,13 @@ if((isset($id) && $id > 0) && empty($m))
 	
 	$sql = $db->query("SELECT * FROM pages WHERE id = $id LIMIT 1");
 	$row = $sql->fetch();
+	
+	if($row['state'] == '0' && $user['group'] != '4' || $row['owner'] != $user['id'])
+	{
+	
+		header('Location: message.php');
+	
+	}
 	
 	$xtpl->assign(array(
 		'ID' => (int) $row['id'],

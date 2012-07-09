@@ -7,6 +7,7 @@
  */
  
 require_once 'config.php';
+require_once 'core/classes.php';
 require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
@@ -16,6 +17,7 @@ require_once 'core/header.php';
 
 $xtpl = new XTemplate('themes/'.$user['theme'].'/list.xtpl');
 
+$page = (!empty($page) ? $page : '1');
 $total_pages = $db->query("SELECT COUNT(*) FROM pages WHERE cat = '$c' AND state > 0")->fetchColumn();
 $pagination->setLink("list.php?c=$c&page=%s");
 $pagination->setPage($page);

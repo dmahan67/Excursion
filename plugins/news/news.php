@@ -40,6 +40,11 @@ $sql = $db->query("SELECT * FROM pages WHERE $sql_stmt AND state > 0 ORDER BY da
 while ($row = $sql->fetch())
 {
 
+	if ((int)$config['plugin']['news']['text_length'] > 0 && mb_strlen($row['text']) > $config['plugin']['news']['text_length'])
+	{
+		$row['text'] = ($excursion->truncate($row['text'], $config['plugin']['news']['text_length'], true)) . "";
+	}
+
 	$xtpl->assign(array(
 		'NEWS_ID' => (int) $row['id'],
 		'NEWS_TITLE' => $row['title'],

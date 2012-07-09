@@ -20,7 +20,7 @@
 					<table class="borderless-table">
 						<tbody>
 							<tr>
-								<th>{PHP.lang.title}</th>
+								<th class="span3">{PHP.lang.title}</th>
 								<td>{FORM_TITLE}</td>
 							</tr>
 							<tr>
