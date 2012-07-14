@@ -21,7 +21,7 @@ if($action == 'save')
 	$insert['maintenance'] = $excursion->import('maintenance','P','TXT');
 	$insert['reason'] = $excursion->import('reason','P','TXT');
 	$insert['maxpages'] = $excursion->import('maxpages','P','INT');
-	$insert['apikey'] = $excursion->import('apikey','P','TXT');
+	$insert['admin_email'] = $excursion->import('admin_email','P','TXT');
 	
 	$db->update('config', array('value' => $insert['title']), "title='title'");
 	$db->update('config', array('value' => $insert['subtitle']), "title='subtitle'");
@@ -33,7 +33,7 @@ if($action == 'save')
 	$db->update('config', array('value' => $insert['maintenance']), "title='maintenance'");
 	$db->update('config', array('text' => $insert['reason']), "title='maintenance'");
 	$db->update('config', array('value' => $insert['maxpages']), "title='maxpages'");
-	$db->update('config', array('value' => $insert['apikey']), "title='apikey'");
+	$db->update('config', array('value' => $insert['admin_email']), "title='admin_email'");
 	
 	header('Location: admin.php?m=config');
 
@@ -53,7 +53,7 @@ $xtpl->assign(array(
 	'FORM_MAINTENANCE' => $excursion->radiobox($config['maintenance'], 'maintenance', array('yes', 'no'), array($lang['yes'], $lang['no'])),
 	'FORM_REASON' => $excursion->inputbox('text', 'reason', $config['reason'], array('size' => 24, 'maxlength' => 64)),
 	'FORM_MAXPAGES' => $excursion->inputbox('text', 'maxpages', $config['maxpages'], array('size' => 24, 'maxlength' => 64)),
-	'FORM_APIKEY' => $excursion->inputbox('text', 'apikey', $config['apikey'], array('size' => 24, 'maxlength' => 64))
+	'FORM_ADMIN_EMAIL' => $excursion->inputbox('text', 'admin_email', $config['admin_email'], array('size' => 24, 'maxlength' => 64))
 ));
 
 $xtpl->parse('MAIN');

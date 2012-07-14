@@ -1,0 +1,56 @@
+<!-- BEGIN: MAIN -->
+<div class="content">
+
+	<div class="result-text">{PHP.lang.profile}</div>
+	
+	<div class="post">
+		<div class="content">
+			<div class="login" id="theme-my-login">
+			
+				<!-- BEGIN: ERRORS -->
+				<p class="error">
+					{ERRORS_TEXT}
+				</p>
+				<!-- END: ERRORS -->	
+				<!-- BEGIN: MAINTENANCE -->
+				<p class="message">
+					<strong>{PHP.lang.maint}</strong><br />
+					{PHP.config.reason}
+				</p>				
+				<!-- END: MAINTENANCE -->
+							
+				<form name="page_form" id="page_form" action="{FORM_ACTION}" method="post">
+					<p>
+						<label for="birthdate">{PHP.lang.birthday}</label>
+						{FORM_BIRTHDATE}
+					</p>
+					<p>
+						<label for="gender">{PHP.lang.gender}</label>
+						{FORM_GENDER}
+					</p>
+					<p>
+						<label for="gender">{PHP.lang.password}</label>
+						{FORM_PASSWORD}
+						
+						<br />
+						<span class="help-block">{PHP.lang.enterpw}</span>
+						
+						<table width="100%" class="borderless-table">
+							<tr>
+								<td><input type="password" class="update_pass" name="new_password1" id="new_password1" value="" maxlength="32" /></td>
+								<td><input type="password" class="update_pass" name="new_password2" id="new_password2" value="" maxlength="32" /></td>
+							</tr>
+							<tr>
+								<td colspan="2"><span class="help-block">{PHP.lang.pwtwice}</span></td>
+							</tr>
+						</table>
+					</p>
+					<p class="submit">
+						<input type="submit" name="submit" id="submit" value="{PHP.lang.submit}" tabindex="100" />
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END: MAIN -->

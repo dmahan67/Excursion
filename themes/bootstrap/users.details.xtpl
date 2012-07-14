@@ -10,8 +10,8 @@
 				<div class="span14">
 					<ul class="breadcrumb">
 						<li><img src="{PHP.theme.dir}/img/home.png" height="12" width="12" /></li>
-						<li><a href="index.php">Home</a> <span class="divider">/</span></li>
-						<li><a href="users.php">Users</a> <span class="divider">/</span></li>
+						<li><a href="index.php">{PHP.lang.home}</a> <span class="divider">/</span></li>
+						<li><a href="users.php">{PHP.lang.memberslist}</a> <span class="divider">/</span></li>
 						<li class="active">{USERNAME}</li>
 					</ul>
 				</div>
@@ -31,7 +31,7 @@
 								<div id="profile-bio-content">
 								
 									<div id="profile-bio-name">{USERNAME}</div>
-									<div id="profile-bio-text">{GROUP}</div>
+									<div id="profile-bio-text"><a href="pm.php?m=send&id={ID}"><i class="icon-envelope"></i></a> {GROUP}</div>
 									
 								</div>
 								

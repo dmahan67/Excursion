@@ -1,0 +1,70 @@
+<!-- BEGIN: MAIN -->
+		<div class="content">
+		
+			<div class="page-header">
+				<h1>{PHP.lang.pm} <small>{PHP.lang.pmdetails}</small></h1>
+			</div>
+			
+			<div class="row">
+			
+				<div class="span14">
+					<ul class="breadcrumb">
+						<li><img src="{PHP.theme.dir}/img/home.png" height="12" width="12" /></li>
+						<li><a href="index.php">{PHP.lang.home}</a> <span class="divider">/</span></li>
+						<li><a href="pm.php">{PHP.lang.pm}</a> <span class="divider">/</span></li>
+						<li class="active">{TITLE}</li>
+					</ul>
+				</div>
+			
+				<div class="span14">
+						
+					<ul id="profile-tabs" class="tabs" data-tabs="tabs">
+						<!-- IF {TOUSER_ID} == {PHP.user.id} -->
+						<li class="active"><a href="pm.php?f=inbox">{PHP.lang.inbox}</a></li>
+						<li><a href="pm.php?f=sentbox">{PHP.lang.sentbox}</a></li>
+						<!-- ENDIF -->
+						<!-- IF {FROMUSER_ID} == {PHP.user.id} -->
+						<li><a href="pm.php?f=inbox">{PHP.lang.inbox}</a></li>
+						<li class="active"><a href="pm.php?f=sentbox">{PHP.lang.sentbox}</a></li>
+						<!-- ENDIF -->
+						<li><a href="pm.php?m=send">{PHP.lang.pmsend}</a></li>
+					</ul>
+					
+				</div>
+				
+			</div>
+			
+			<div class="row">
+			
+				<div class="span2">
+					<ul class="thumbnails">
+						<li class="span2">
+							<div class="thumbnail">
+								{AVATAR}
+								<br />
+								<span class="user_title">{FROMUSER}</span>
+								<p>{GROUP}</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			
+				<div class="span12">
+				
+				<span class="pull-left title">{TITLE}</span>
+				<span class="pull-right">{DATE}</span>
+				
+				<hr>
+					
+					{TEXT}
+					
+					<hr />
+					
+					<p class="pull-right"><a href="pm.php?m=send&id={FROMUSER_ID}&title=Re: {TITLE}" class="btn">{PHP.lang.replytomessage}</a></p>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+<!-- END: MAIN -->

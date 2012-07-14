@@ -23,7 +23,6 @@
 											<li><a href="#3" data-toggle="tab">Members</a></li>
 											<li><a href="#4" data-toggle="tab">Maintenance</a></li>
 											<li><a href="#5" data-toggle="tab">Pagination</a></li>
-											<li><a href="#6" data-toggle="tab">Spam Blocker</a></li>
 										</ul>
 						
 										<br />
@@ -59,7 +58,15 @@
 																{FORM_KEYWORDS}
 																<p class="help-block">Seperate each keyword with a comma.</p>
 															</div>				
+														</div>
 
+														<br />
+														
+														<div class="control-group">											
+															<label class="control-label" for="admin_email">Administrator Email</label>
+															<div class="controls">
+																{FORM_ADMIN_EMAIL}
+															</div>				
 														</div>
 
 														<br />
@@ -186,29 +193,6 @@
 															<label class="control-label" for="maxpages">Maximum pages displayed in a list</label>
 															<div class="controls">
 																{FORM_MAXPAGES}
-															</div>				
-														</div>
-														
-														<br />
-
-														<div class="form-actions">
-															<button type="submit" class="btn btn-primary">Save</button> 
-														</div>
-													</fieldset>
-												</form>
-												
-											</div>
-											
-											<div class="tab-pane active" id="6">
-
-												<form action="{FORM_ACTION}" method="post" id="main" class="form-horizontal">
-													<fieldset>
-										
-														<div class="control-group">											
-															<label class="control-label" for="apikey">API Key</label>
-															<div class="controls">
-																{FORM_APIKEY}
-																<p class="help-block"><a href="https://akismet.com/signup/">Learn More</a> about akismet, and sign up for an API Key.</p>
 															</div>				
 														</div>
 														

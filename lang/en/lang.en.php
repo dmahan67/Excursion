@@ -150,6 +150,15 @@ $lang['admin_error_desc_missing'] = 'Description is missing';
 $lang['admin_error_path_missing'] = 'Path is missing';
 $lang['admin_error_code_missing'] = 'Code is missing';
 
+/* ========== INSTALL ========== */
+$lang['install_writable'] = 'Writable';
+$lang['Found'] = 'Found';
+$lang['nf'] = 'Not Found';
+$lang['Available'] = 'Available';
+$lang['na'] = 'Not Available';
+$lang['Plugins'] = 'Plugins';
+
+
 $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';

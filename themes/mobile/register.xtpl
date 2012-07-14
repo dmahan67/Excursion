@@ -1,0 +1,50 @@
+<!-- BEGIN: MAIN -->
+<div class="content">
+
+	<div class="result-text">{PHP.lang.registration}</div>
+	
+	<div class="post">
+		<div class="content">
+		
+			<!-- BEGIN: ERRORS -->
+			<p class="error">
+				{ERRORS_TEXT}
+			</p>
+			<!-- END: ERRORS -->
+						
+			<form name="page_form" id="page_form" action="{FORM_ACTION}" method="post">
+				<p>
+					<label for="user_login">{PHP.lang.username}</label>
+					{FORM_USERNAME}
+				</p>
+				<p>
+					<label for="user_pass">{PHP.lang.password}</label>
+					{FORM_PASSWORD}
+				</p>
+				<p>
+					<label for="user_pass_repeat">{PHP.lang.reppassword}</label>
+					{FORM_REPEAT_PASSWORD}
+				</p>
+				<p>
+					<label for="email">{PHP.lang.eadd}</label>
+					{FORM_EMAIL}
+					<span class="help-block">{PHP.lang.reqfor}</span>
+				</p>
+				<p>
+					<label for="question">{PHP.lang.secq}</label>
+					{QUESTIONS}
+				</p>
+				<p>
+					<label for="answer">{PHP.lang.seca}</label>
+					{FORM_SQ_ANSWER}
+					<span class="help-block">{PHP.lang.helpblock}</span>
+				</p>
+				<p class="submit">
+					<input type="submit" name="submit" id="submit" value="Log In" tabindex="100" />
+				</p>
+			</form>
+
+		</div>
+	</div>
+</div>
+<!-- END: MAIN -->

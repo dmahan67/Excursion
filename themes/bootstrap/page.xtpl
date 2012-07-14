@@ -10,7 +10,7 @@
 				<div class="span14">
 					<ul class="breadcrumb">
 						<li><img src="{PHP.theme.dir}/img/home.png" height="12" width="12" /></li>
-						<li><a href="index.php">Home</a> <span class="divider">/</span></li>
+						<li><a href="index.php">{PHP.lang.home}</a> <span class="divider">/</span></li>
 						<li><a href="list.php?c={CAT}">{CAT}</a> <span class="divider">/</span></li>
 						<li class="active">{TITLE}</li>
 					</ul>
@@ -26,7 +26,7 @@
 		  
 						<!-- IF {PHP.user.group} >= 3 --><a href="#post_comment" class="btn small postcommentlink"><span>Post a comment</span></a><!-- ENDIF -->
 		  
-						<h5>Reponses <span>({COM_COUNT})</span></h5>
+						<h5>{PHP.lang.responses} <span>({COM_COUNT})</span></h5>
 						
 						<br />
 												
@@ -38,7 +38,7 @@
 								<div class="comment_meta">
 									<p>
 										{COM_AVATAR}
-										<br />By {COM_OWNER}          
+										<br />{PHP.lang.by} {COM_OWNER}          
 									</p>
 								</div>
 							</div>
@@ -79,7 +79,7 @@
 					<!-- BEGIN: REPLY -->
 			
 					<a name="post_comment"></a>
-					<h5>Leave a Response</h5>  
+					<h5>{PHP.lang.leaveresponse}</h5>  
 					
 					<form method="post" action="{FORM_ACTION}">
 						{FORM_TEXT}
@@ -95,16 +95,20 @@
 				<div class="span4n5">
 				
 					<!-- IF {CART_PRICE} > 0 -->
-					<div class="well">
-						<span class="fright padding10left"><a href="" class="btn"><i class="icon-shopping-cart"></i> Add</a></span>
-						
-						<strong>{TITLE}</strong>
-						<br />
-						Price: ${CART_PRICE}
+					<div class="well simpleCart_shelfItem">
+										
+						<h5 class="item_name">{TITLE}</h5><span class="item_number hidden">{ID}</span>
+						Price: <span class="item_price">${CART_PRICE}</span><br /><br />
+						<table class="main">
+							<tr>
+								<td><input value="1" class="input-mini item_Quantity" type="text"></td>
+								<td><a class="item_add btn" href="javascript:;"><i class="icon-shopping-cart"></i> Add to Cart</a></td>
+							</tr>
+						</table>
 						
 					</div>
 					<!-- ENDIF -->
-				
+					
 					<h4>{PHP.lang.pinfo}</h4>
 					
 					<table class="borderless-table">

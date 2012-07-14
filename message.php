@@ -64,6 +64,13 @@ if($id == 109){
 	$message =  $lang['message_109_text'];
 }
 
+/* === Hook === */
+foreach ($excursion->Hook('message.case') as $pl)
+{
+	include $pl;
+}
+/* ===== */
+
 require_once 'core/header.php';
 
 $xtpl = new XTemplate('themes/'.$user['theme'].'/message.xtpl');

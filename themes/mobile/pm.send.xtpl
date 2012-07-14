@@ -1,0 +1,29 @@
+<!-- BEGIN: MAIN -->
+<div class="content">
+
+	<div class="result-text">{PHP.lang.pm} &rsaquo; {PHP.lang.pmsend}</div>
+	
+	<div class="post">
+		<div class="content">	
+						
+			<form name="page_form" id="page_form" action="{FORM_ACTION}" method="post">
+				<p>
+					<label for="touser">{PHP.lang.touser}</label>
+					{FORM_TOUSER}
+				</p>
+				<p>
+					<label for="title">{PHP.lang.title}</label>
+					{FORM_TITLE}
+				</p>
+				<p>
+					<textarea name="text" id="comment" tabindex="4"></textarea>
+				</p>
+				<p class="submit">
+					<input type="submit" name="submit" id="submit" value="Send" tabindex="100" />
+				</p>
+			</form>
+
+		</div>
+	</div>
+</div>
+<!-- END: MAIN -->

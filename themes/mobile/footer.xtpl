@@ -1,0 +1,15 @@
+<!-- BEGIN: FOOTER -->
+<div id="footer">
+	
+	<p>{PHP.lang.copyright}</p>
+	<p>Powered by <a href="">Excursion</a></p>
+	
+	<script type='text/javascript' src='http://localhost/wordpress/wp-includes/js/jquery/jquery.form.js?ver=2.73'></script>
+	<script src="core/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
+	<script src="core/plugins/ckeditor/editor_themes.js" type="text/javascript"></script>
+
+</div>
+
+</body>
+</html>
+<!-- END: FOOTER -->

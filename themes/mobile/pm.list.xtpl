@@ -1,0 +1,32 @@
+<!-- BEGIN: MAIN -->
+<div class="content single">
+
+	<div class="result-text">{PHP.lang.pm}</div>
+	
+	<form action="pm.php?m=remove" method="post" name="update" id="update">
+		<!-- BEGIN: ROW -->
+		<div class="post">
+			<div class="archive-top">
+				<div id="arc-top" class="archive-top-left month-05">
+					<input type="checkbox" class="checkbox" name="msg[{ID}]" /> {DATE}		 
+				</div>
+			</div>
+			<a class="h2" href="pm.php?m=details&id={ID}">{TITLE}</a>
+			<div class="post-author">
+				<span class="lead">From</span> {FROMUSER}<br />
+			</div>	
+			<div class="clearer"></div>	
+		</div>
+		<!-- END: ROW -->
+
+		<button type="submit" style="margin-left:10px">{PHP.lang.remove_selected}</button>
+		
+	</form>
+	<br />
+	
+	<!-- IF {PAGINATION} -->
+	{PAGINATION}
+	<!-- ENDIF -->
+
+</div>
+<!-- END:MAIN -->

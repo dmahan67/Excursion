@@ -10,8 +10,8 @@
 				<div class="span14">
 					<ul class="breadcrumb">
 						<li><img src="{PHP.theme.dir}/img/home.png" height="12" width="12" /></li>
-						<li><a href="index.php">Home</a> <span class="divider">/</span></li>
-						<li class="active">{PHP.lang.users}</li>
+						<li><a href="index.php">{PHP.lang.home}</a> <span class="divider">/</span></li>
+						<li class="active">{PHP.lang.memberslist}</li>
 					</ul>
 				</div>
 			
@@ -20,7 +20,7 @@
 					<table class="zebra-striped" id="sortTable">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th></th>
 								<th>{PHP.lang.username}</th>
 								<th>{PHP.lang.group}</th>
 								<th>{PHP.lang.email}</th>
@@ -30,7 +30,7 @@
 						<tbody>
 						<!-- BEGIN: USERS_LIST -->
 							<tr>
-								<td>{ID}</td>
+								<td class="center"><a href="pm.php?m=send&id={ID}"><i class="icon-envelope"></i></a></td>
 								<td><a href="users.php?id={ID}">{USERNAME}</a></td>
 								<td>{GROUP}</td>
 								<td><a href="mailto:{EMAIL}">{EMAIL}</a></td>
@@ -39,6 +39,14 @@
 						<!-- END: USERS_LIST -->
 						</tbody>
 					</table>
+					
+					<!-- IF {PAGINATION} -->
+					<div class="pull-right">
+					
+						{PAGINATION}
+						
+					</div>
+					<!-- ENDIF -->
 				
 				</div>
 				

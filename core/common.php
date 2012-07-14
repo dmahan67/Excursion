@@ -9,7 +9,14 @@
 session_start();
 
 require_once 'core/database.php';
-require_once 'core/resources.php';
+
+/* ========== REDIRECTS ========== */
+
+if($config['maintenance']=='yes' && $ex['location']!='login' && $user['group']!=4)
+{
+	header('Location: login.php');
+	exit;
+}
 
 
 /* ========== CONNECT TO DATABASE ========== */
@@ -35,8 +42,9 @@ $pagination = new Pagination();
 /* ======== Common Variables ======== */
 
 $a = $excursion->import('a', 'G', 'ALP', 24);
-$c = $excursion->import('c', 'G', 'TXT');
+$c = $excursion->import('c', 'G', 'ALP', 24);
 $m = $excursion->import('m', 'G', 'ALP', 24);
+$f = $excursion->import('f', 'G', 'ALP', 24);
 $action = $excursion->import('action', 'G', 'ALP', 24);
 $id = $excursion->import('id','G','INT');
 $step = $excursion->import('step','G','INT');
@@ -64,7 +72,8 @@ if (isset($_SESSION['user_id']))
 		$user['group'] = $row['groupid'];
 		$user['lang'] = $row['lang'];
 		$user['group_built'] = $excursion->generateGroup($row['groupid']);
-		if($config['forcetheme'] == 'yes'){$user['theme'] = $config['default_theme'];}else{$user['theme'] = $row['theme'];}
+		$user['pm'] = $db->query("SELECT COUNT(*) FROM pm WHERE touser = ".$user['id']." AND tostate = 0")->fetchColumn();
+		$user['theme'] = ($config['forcetheme'] == 'yes' ? $config['default_theme'] : $row['theme']);
 		$user['gender'] = $row['gender'];
 		$user['birthdate'] = $row['birthdate'];
 		$user['avatar'] = $row['avatar'];
@@ -76,6 +85,8 @@ if (isset($_SESSION['user_id']))
 
 require_once $excursion->import_langfile('main', 'core', $user['lang']);
 require_once $excursion->import_langfile($user['theme'], 'theme', $user['lang']);
+
+require_once 'core/resources.php';
 
 /* ========== Plugins & Configuration ========== */
 
@@ -136,28 +147,33 @@ $sql_config->closeCursor();
 mb_internal_encoding('UTF-8');
 $excursion->load_pageStructure();
 
-/* ========== Global Tags ========== */
+/* ========== CHECKPOINTS ========== */
 
-$theme['dir'] = 'themes/'.$user['theme'];
-
-if($config['maintenance']=='yes' && $ex['location']!='login' && $user['group']!=4)
+if($user['id'] > 0 && $user['group'] == 1)
 {
 
-	header('Location: login.php');
-
+	if (isset($_SESSION['user_id'])){
+	
+		session_destroy();
+		header('Location: index.php');
+		
+	}
+	
 }
 
-$header_tags .= $excursion->createTags('css', 'validate', 'core/plugins/validate/jquery.validate.css', '');
-$header_tags .= $excursion->createTags('javascript', 'validate', 'core/plugins/validate/jquery.validate.js', '');
-$header_tags .= $excursion->createTags('javascript', 'validate.functions', 'core/plugins/validate/jquery.validation.functions.js', '');
-$header_tags .= $excursion->createTags('javascript', 'validate.forms', 'core/plugins/validate/jquery.validate.forms.js', '');
+if($user['id'] > 0 && $user['group'] == 2)
+{
 
-$config['header_tags'] = $header_tags;
+	if (isset($_SESSION['user_id'])){
+	
+		session_destroy();
+		header('Location: login.php');
+		
+	}
+	
+}
 
-$footer_tags .= $excursion->createTags('javascript', '', 'core/plugins/ckeditor/ckeditor.js', '');
-$footer_tags .= $excursion->createTags('javascript', '', 'core/plugins/ckeditor/editor_themes.js', '');
-
-$config['footer_tags'] = $footer_tags;
+/* ========== Global Tags ========== */
 
 /* === Hook === */
 foreach ($excursion->Hook('global') as $pl)
@@ -165,5 +181,15 @@ foreach ($excursion->Hook('global') as $pl)
 	include $pl;
 }
 /* ===== */
+
+$config['header_tags'] .= $excursion->createTags('css', 'validate', 'core/plugins/validate/jquery.validate.css', '');
+$config['header_tags'] .= $excursion->createTags('javascript', 'validate', 'core/plugins/validate/jquery.validate.js', '');
+$config['header_tags'] .= $excursion->createTags('javascript', 'validate.functions', 'core/plugins/validate/jquery.validation.functions.js', '');
+$config['header_tags'] .= $excursion->createTags('javascript', 'validate.forms', 'core/plugins/validate/jquery.validate.forms.js', '');
+
+$config['footer_tags'] .= $excursion->createTags('javascript', '', 'core/plugins/ckeditor/ckeditor.js', '');
+$config['footer_tags'] .= $excursion->createTags('javascript', '', 'core/plugins/ckeditor/editor_themes.js', '');
+
+$theme['dir'] = 'themes/'.$user['theme'];
 
 ?>

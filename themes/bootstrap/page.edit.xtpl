@@ -42,6 +42,12 @@
 							<tr>
 								<td colspan="2">{FORM_TEXT}</td>
 							</tr>
+							<!-- IF {PHP.config.cart.installed} -->
+							<tr>
+								<th>{PHP.lang.cart_price}</th>
+								<td>{FORM_CART_PRICE}</td>
+							</tr>
+							<!-- ENDIF -->
 							<tr>
 								<td colspan="2"><button class="btn primary">{PHP.lang.submit}</button></td>
 							</tr>

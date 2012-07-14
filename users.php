@@ -16,6 +16,13 @@ $ex['location'] = 'users';
 $token = $excursion->import('token','G','TXT');
 $email = $excursion->import('email','P','TXT',64, TRUE);
 
+$page = (!empty($page) ? $page : '1');
+$total_users = $db->query("SELECT COUNT(*) FROM members")->fetchColumn();
+$pagination->setLink("users.php?page=%s");
+$pagination->setPage($page);
+$pagination->setSize($config['maxpages']);
+$pagination->setTotalRecords($total_users);
+
 if($action == 'validate')
 {
 
@@ -363,7 +370,7 @@ else
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/users.xtpl');
 
-	$sql = $db->query("SELECT * FROM members ORDER BY id ASC LIMIT 25");
+	$sql = $db->query("SELECT * FROM members ORDER BY id ASC " . $pagination->getLimitSql());
 	while ($row = $sql->fetch())
 	{
 
@@ -377,6 +384,10 @@ else
 		$xtpl->parse('MAIN.USERS_LIST');	
 		
 	}
+	
+	$navigation = $pagination->create_links();
+
+	$xtpl->assign('PAGINATION', $navigation);
 	
 }
 	

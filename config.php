@@ -16,6 +16,7 @@ $config['default_language'] = 'en';										// Default language
 
 /* ========== Time / Date ========== */
 
+date_default_timezone_set('America/New_York');							// Default time zone, check www.php.net/manual/en/timezones.php for a list
 $config['date_short'] = 'm/d/y';										// 01/19/10
 $config['date_medium'] = 'F j, Y';										// January 19, 2010
 $config['date_long'] = 'F j, Y, g:i a';									// January 19, 2010 at 5:30 pm

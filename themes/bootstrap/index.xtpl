@@ -2,7 +2,7 @@
 		<div class="content">
 		
 			<div class="page-header">
-				<h1>Page name <small>Supporting text or tagline</small></h1>
+				<h1>{PHP.config.title} <small>{PHP.config.subtitle}</small></h1>
 			</div>
 			
 			<div class="row">
@@ -17,16 +17,22 @@
 					{NEWS_TEXT}
 					<!-- END: ROW -->
 					
+					<br />
+					
 					{PAGINATION}
 					
 					<!-- END: NEWS -->
 				</div>
 				
 				<div class="span4n5">
+				
+					<!-- IF {PHP.plugin.latest_pages} -->
      
-					<h6>Latest Pages</h6>
+					<h6>{PHP.lang.latest_pages}</h6>
 					
 					{PHP.plugin.latest_pages}
+					
+					<!-- ENDIF -->
 	 
 				</div>
 				

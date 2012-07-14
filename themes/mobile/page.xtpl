@@ -1,0 +1,104 @@
+<!-- BEGIN: MAIN -->
+<div class="content single">
+	<div class="post">
+		<a class="sh2" href="" rel="bookmark" title="">{TITLE}</a>
+		<div class="single-post-meta-top">{DATE} &rsaquo; {OWNER}<br />
+			<a href="#com-head">&darr; Skip to comments</a>
+		</div>
+	</div>
+
+	<div class="clearer"></div>
+
+	<div class="post" id="post-{ID}">
+		<div id="singlentry" class="left-justified">
+			{TEXT}
+		</div>  
+		<div class="single-post-meta-bottom">
+			Category: <a href="list.php?c={CAT_CODE}">{CAT}</a>			      
+		</div>   
+		<ul id="post-options">
+			<script language="javascript">
+				function addBookmark()
+				{
+					bookmarkurl = "{PHP.config.main_url}/page.php?id={ID}";
+					bookmarktitle="{PHP.config.title} - {TITLE}";
+					if (document.all)
+						window.external.AddFavorite(bookmarkurl,bookmarktitle)
+					else if ( window.sidebar ) {
+						window.sidebar.addPanel(bookmarktitle, bookmarkurl,"");
+					}
+				}
+			</script>
+			<li><a href="javascript:addBookmark();" id="obook"></a></li>
+		</ul>
+	</div>
+
+	<!-- BEGIN: COMMENTS -->
+	<div id="comment_wrapper">
+		<h3 onclick="bnc_showhide_coms_toggle();" id="com-head"><img id="com-arrow" src="{PHP.theme.dir}/img/com_arrow.png" alt="arrow" />{COM_COUNT} Responses</h3>
+		<ol class="commentlist" id="commentlist">
+			<!-- BEGIN: ROW -->
+			<li class="" id="comment-{ID}">
+				<div class="comwrap">
+					<div class="comtop">		
+						<img alt='' src='{COM_AVATAR_URL}' class='avatar avatar-64 photo avatar-default' height='64' width='64' />									
+						<div class="com-author">
+							{COM_OWNER}
+						</div> 											
+						<div class="comdater">
+							<span>{COM_ADMIN}</span>
+							{COM_DATE}	
+						</div>									
+					</div>
+					<div class="combody">  
+						<p>{COM_TEXT}</p>
+					</div>
+				</div>
+			</li>
+			<!-- END: ROW -->
+		</ol>
+		
+		<!-- BEGIN: REPLY -->
+		<div id="textinputwrap">
+			<div id="refresher" style="display:none;">
+				<img src="{PHP.theme.dir}/img/good.png" alt="checkmark" />
+				<h3>Success! Comment added.</h3>
+				<a href="javascript:this.location.reload();">Refresh the page to see your comment.</a>
+			</div>
+			<form action="{FORM_ACTION}" method="post" id="commentform">
+				<p class="logged"  id="respond">Logged in as {PHP.user.name}:</p>
+				<p><textarea name="text" id="comment" tabindex="4"></textarea></p>
+				<p>
+					<input name="submit" type="submit" id="submit" tabindex="5" value="Publish" />
+					<div id="loading" style="display:none">
+						<img src="{PHP.theme.dir}/img/comment-ajax-loader.gif" alt="" /> 
+						<p>Publishing...</p>
+					</div>
+				</p>
+			</form>
+		</div>
+		<!-- END: REPLY -->
+	</div>
+	<!-- END: COMMENTS -->
+
+	<script type="text/javascript">
+	jQuery(document).ready( function() {
+		var formoptions = { 
+			beforeSubmit: function() {$wpt("#loading").fadeIn(400);},
+			success:  function() {
+				$wpt("#commentform").hide();
+				$wpt("#loading").fadeOut(400);
+				$wpt("#refresher").fadeIn(400);
+			},
+			error:  function() {
+				$wpt('#errors').show();
+				$wpt("#loading").fadeOut(400);
+			}
+		}
+		$wpt('#commentform').ajaxForm(formoptions);
+	});
+	</script>
+	
+</div>
+
+<!-- END:MAIN -->

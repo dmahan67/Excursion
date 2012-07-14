@@ -15,10 +15,6 @@ $config['type_string'] = '1';
 $config['type_select'] = '2';
 $config['type_radio'] = '3';
 $config['type_range'] = '4';
-
-define("AKISMET_SERVER_NOT_FOUND",	0);
-define("AKISMET_RESPONSE_FAILED",	1);
-define("AKISMET_INVALID_KEY",		2);
  
 class Members {
 
@@ -37,11 +33,12 @@ class Members {
 		
 		$user_exists = (bool)$db->query("SELECT id FROM members WHERE username = ? LIMIT 1", array($un))->fetch();
 		$email_exists = (bool)$db->query("SELECT id FROM members WHERE email = ? LIMIT 1", array($email))->fetch();
-		$cfg['disablereg'] = $db->query("SELECT value FROM config WHERE title='disablereg'")->fetchColumn();
-		$cfg['disableval'] = $db->query("SELECT value FROM config WHERE title='disableval'")->fetchColumn();
-		$cfg['valnew'] = $db->query("SELECT value FROM config WHERE title='valnew'")->fetchColumn();
+		$config['disablereg'] = $db->query("SELECT value FROM config WHERE title='disablereg'")->fetchColumn();
+		$config['disableval'] = $db->query("SELECT value FROM config WHERE title='disableval'")->fetchColumn();
+		$config['valnew'] = $db->query("SELECT value FROM config WHERE title='valnew'")->fetchColumn();
+		$totalusers = $db->countRows('members');
 		
-		if($cfg['disablereg']=='no')
+		if($config['disablereg']=='no')
 		{
 			
 			if ($user_exists) $error .= $lang['reg_un_exists'].'<br />';
@@ -57,10 +54,29 @@ class Members {
 			if(empty($error))
 			{
 				$pwd = md5($pwd);
+
+				if($totalusers == '0')
+				{
 				
+					$insert['groupid'] = 4;
+					$firstaccount = true;
+				
+				}
+				elseif ($config['disableval'] == 'yes' && $config['valnew'] == 'no')
+				{
+				
+					$insert['groupid'] = 3;
+				
+				}
+				elseif ($config['valnew'] == 'yes' && $config['disableval'] == 'no')
+				{
+				
+					$insert['groupid'] = 1;
+				
+				}
+								
 				$insert['username'] = $un;
 				$insert['password'] = $pwd;
-				if($cfg['disableval']=='yes' && $cfg['valnew']=='no'){$insert['groupid'] = 3;}
 				$insert['email'] = $email;
 				$insert['regdate'] = (int)time();
 				$insert['token'] = $excursion->generateToken(16);
@@ -69,25 +85,32 @@ class Members {
 
 				$db->insert('members', $insert);
 				
-				if($cfg['disableval']=='no' && $cfg['valnew']=='no'){
+				if($config['disableval']=='no' && $config['valnew']=='no' && !$firstaccount){
 				
 					$member->sendValidationEmail($insert['email']);
 					header('Location: message.php?id=101');
 					
 				}
 				
-				if($cfg['valnew']=='yes')
+				if($config['valnew']=='yes')
 				{
 				
 					header('Location: message.php?id=109');
 				
 				}
 				
-				if($cfg['disableval']=='yes' && $cfg['valnew']=='no'){
+				if($config['disableval']=='yes' && $config['valnew']=='no'){
 				
 					header('Location: message.php?id=108');
 					
-				}		
+				}	
+
+				if($firstaccount)
+				{
+				
+					header('Location: message.php?id=108');
+				
+				}
 				
 			}
 			else
@@ -230,7 +253,7 @@ class Members {
 		{
 		
 			$db->delete('members', "token='".$token."'");
-			header('Location: index.php.php');
+			header('Location: index.php');
 		
 		}
 		
@@ -258,6 +281,30 @@ class Members {
 }
 
 class Excursion {
+
+	function checkAuth($group, $section)
+	{
+	
+		if($group >= 3)
+		{
+		
+			// null for now
+		
+		}
+		else
+		{
+		
+			header('Location: message.php?id=105');
+		
+		}
+	
+	}
+
+	function install_config_replace(&$file_contents, $config_name, $config_value)
+	{
+		$file_contents = preg_replace("#^\\\$config\['$config_name'\]\s*=\s*'.*?';#m",
+			"\$config['$config_name'] = '$config_value';", $file_contents);
+	}
 
 	function import_langfile($name, $type = 'plug', $default = 'en', $lang = null)
 	{
@@ -1993,8 +2040,8 @@ class Pagination
 
 		$output = null;
 				
-		$loopStart = 1; 
-		$loopEnd = $totalPages;
+		$loopStart = ($currentPage == 1 ? $currentPage : $currentPage - 1);
+		$loopEnd = ($currentPage == 1 ? $currentPage + 2 : $currentPage + 1);
 
 		if ($totalPages > 5)
 		{
@@ -2010,8 +2057,8 @@ class Pagination
 			}
 			else
 			{
-				$loopStart = $currentPage - 2;
-				$loopEnd = $currentPage + 2;
+				$loopStart = $currentPage - 1;
+				$loopEnd = $currentPage + 1;
 			}
 		}
 
@@ -2026,7 +2073,7 @@ class Pagination
 		for ($i = $loopStart; $i <= $loopEnd; $i++)
 		{
 			if ($i == $currentPage){
-				$output .= '<li class="current">' . $i . '</li> ';
+				$output .= '<li class="active">' . $i . '</li> ';
 			} else {
 				$output .= sprintf('<li><a href="' . $link . '">', $i) . $i . '</a></li> ';
 			}
@@ -2040,223 +2087,7 @@ class Pagination
 			$output .= sprintf('<li class="nextpage"><a href="' . $link . '">&#187;</a></li>', $totalPages);
 		}
 
-		return '<div class="pagination"><ul>' . $output . '</ul></div>';
-	}
-	
-}
-
-class AkismetObject {
-	var $errors = array();
-	
-	function setError($name, $message) {
-		$this->errors[$name] = $message;
-	}
-	
-	function getError($name) {
-		if($this->isError($name)) {
-			return $this->errors[$name];
-		} else {
-			return false;
-		}
-	}
-	
-	function getErrors() {
-		return (array)$this->errors;
-	}
-	
-	function isError($name) {
-		return isset($this->errors[$name]);
-	}
-
-	function errorsExist() {
-		return (count($this->errors) > 0);
-	}
-	
-	
-}
-
-class AkismetHttpClient extends AkismetObject {
-	var $akismetVersion = '1.1';
-	var $con;
-	var $host;
-	var $port;
-	var $apiKey;
-	var $blogUrl;
-	var $errors = array();
-	
-	function AkismetHttpClient($host, $blogUrl, $apiKey, $port = 80) {
-		$this->host = $host;
-		$this->port = $port;
-		$this->blogUrl = $blogUrl;
-		$this->apiKey = $apiKey;
-	}
-	
-	function getResponse($request, $path, $type = "post", $responseLength = 1160) {
-		$this->_connect();
-		
-		if($this->con && !$this->isError(AKISMET_SERVER_NOT_FOUND)) {
-			$request  = 
-					strToUpper($type)." /{$this->akismetVersion}/$path HTTP/1.0\r\n" .
-					"Host: ".((!empty($this->apiKey)) ? $this->apiKey."." : null)."{$this->host}\r\n" .
-					"Content-Type: application/x-www-form-urlencoded; charset=utf-8\r\n" .
-					"Content-Length: ".strlen($request)."\r\n" .
-					"User-Agent: Akismet PHP4 Class\r\n" .
-					"\r\n" .
-					$request
-				;
-			$response = "";
-
-			@fwrite($this->con, $request);
-
-			while(!feof($this->con)) {
-				$response .= @fgets($this->con, $responseLength);
-			}
-
-			$response = explode("\r\n\r\n", $response, 2);
-			return $response[1];
-		} else {
-			$this->setError(AKISMET_RESPONSE_FAILED, "The response could not be retrieved.");
-		}
-		
-		$this->_disconnect();
-	}
-	
-	function _connect() {
-		if(!($this->con = @fsockopen($this->host, $this->port))) {
-			$this->setError(AKISMET_SERVER_NOT_FOUND, "Could not connect to akismet server.");
-		}
-	}
-	
-	function _disconnect() {
-		@fclose($this->con);
-	}
-	
-	
-}
-
-class Akismet extends AkismetObject {
-	var $apiPort = 80;
-	var $akismetServer = 'rest.akismet.com';
-	var $akismetVersion = '1.1';
-	var $http;
-	
-	var $ignore = array(
-			'HTTP_COOKIE',
-			'HTTP_X_FORWARDED_FOR',
-			'HTTP_X_FORWARDED_HOST',
-			'HTTP_MAX_FORWARDS',
-			'HTTP_X_FORWARDED_SERVER',
-			'REDIRECT_STATUS',
-			'SERVER_PORT',
-			'PATH',
-			'DOCUMENT_ROOT',
-			'SERVER_ADMIN',
-			'QUERY_STRING',
-			'PHP_SELF',
-			'argv'
-		);
-	
-	var $blogUrl = "";
-	var $apiKey  = "";
-	var $comment = array();
-
-	function Akismet($blogUrl, $apiKey, $comment = array()) {
-		$this->blogUrl = $blogUrl;
-		$this->apiKey  = $apiKey;
-		$this->setComment($comment);
-		
-		$this->http = new AkismetHttpClient($this->akismetServer, $blogUrl, $apiKey);
-		if($this->http->errorsExist()) {
-			$this->errors = array_merge($this->errors, $this->http->getErrors());
-		}
-		
-		if(!$this->_isValidApiKey($apiKey)) {
-			$this->setError(AKISMET_INVALID_KEY, "Your Akismet API key is not valid.");
-		}
-	}
-	
-	function isSpam() {
-		$response = $this->http->getResponse($this->_getQueryString(), 'comment-check');
-		
-		return ($response == "true");
-	}
-	
-	function submitSpam() {
-		$this->http->getResponse($this->_getQueryString(), 'submit-spam');
-	}
-	
-	function submitHam() {
-		$this->http->getResponse($this->_getQueryString(), 'submit-ham');
-	}
-	
-	function setComment($comment) {
-		$this->comment = $comment;
-		if(!empty($comment)) {
-			$this->_formatCommentArray();
-			$this->_fillCommentValues();
-		}
-	}
-	
-	function getComment() {
-		return $this->comment;
-	}
-	
-	function _isValidApiKey($key) {
-		$keyCheck = $this->http->getResponse("key=".$this->apiKey."&blog=".$this->blogUrl, 'verify-key');
-			
-		return ($keyCheck == "valid");
-	}
-	
-	function _formatCommentArray() {
-		$format = array(
-				'type' => 'comment_type',
-				'author' => 'comment_author',
-				'email' => 'comment_author_email',
-				'website' => 'comment_author_url',
-				'body' => 'comment_content'
-			);
-		
-		foreach($format as $short => $long) {
-			if(isset($this->comment[$short])) {
-				$this->comment[$long] = $this->comment[$short];
-				unset($this->comment[$short]);
-			}
-		}
-	}
-	
-	function _fillCommentValues() {
-		if(!isset($this->comment['user_ip'])) {
-			$this->comment['user_ip'] = ($_SERVER['REMOTE_ADDR'] != getenv('SERVER_ADDR')) ? $_SERVER['REMOTE_ADDR'] : getenv('HTTP_X_FORWARDED_FOR');
-		}
-		if(!isset($this->comment['user_agent'])) {
-			$this->comment['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-		}
-		if(!isset($this->comment['referrer'])) {
-			$this->comment['referrer'] = $_SERVER['HTTP_REFERER'];
-		}
-		if(!isset($this->comment['blog'])) {
-			$this->comment['blog'] = $this->blogUrl;
-		}
-	}
-	
-	function _getQueryString() {
-		foreach($_SERVER as $key => $value) {
-			if(!in_array($key, $this->ignore)) {
-				if($key == 'REMOTE_ADDR') {
-					$this->comment[$key] = $this->comment['user_ip'];
-				} else {
-					$this->comment[$key] = $value;
-				}
-			}
-		}
-
-		$query_string = '';
-
-		foreach($this->comment as $key => $data) {
-			$query_string .= $key . '=' . urlencode(stripslashes($data)) . '&';
-		}
-
-		return $query_string;
+		return '<div class="pagination pull-right"><ul>' . $output . '</ul></div>';
 	}
 	
 }

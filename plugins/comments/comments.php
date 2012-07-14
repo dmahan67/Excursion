@@ -28,6 +28,7 @@ while ($com = $sql_com->fetch())
 		'COM_ID' => (int) $com['id'],
 		'COM_OWNER' => $excursion->generateUser($com['userid']),
 		'COM_AVATAR' => $excursion->buildAvatar($com['userid'], 'avatar avatar-60 photo'),
+		'COM_AVATAR_URL' => $db->query("SELECT avatar FROM members WHERE id='".$com['userid']."' LIMIT 1")->fetchColumn(),
 		'COM_DATE' => date($config['date_medium'], $com['date']),
 		'COM_TEXT' => $com['text'],
 		'COM_ADMIN' => $com_admin
@@ -85,60 +86,21 @@ if($action == 'send' && $user['group'] >= 3)
 	$comment = array(
 		'body' => $insert['text']
 	);
-	        
-	$akismet = new Akismet($config['main_url'], $config['apikey'], $comment);
 	
-	if (!$akismet->errorsExist()) 
+	/* === Hook === */
+	foreach ($excursion->Hook('comments.send') as $pl)
 	{
-	
-        $akismet->submitSpam();
-		
+		include $pl;
 	}
-
-	if($akismet->errorsExist()) {
-	
-		if($akismet->isError('AKISMET_INVALID_KEY')) {
-		
-			$error .= $lang['system_error'] . '<br />';
-
-        } 
-		elseif($akismet->isError('AKISMET_RESPONSE_FAILED')) 
-		{
-
-			$error .= $lang['system_error'] . '<br />';
-			
-        } 
-		elseif($akismet->isError('AKISMET_SERVER_NOT_FOUND')) 
-		{
-
-			$error .= $lang['system_error'] . '<br />';
-			
-        }
-
-	} 
-	else 
+	/* ===== */
+	        
+	if(empty($error))
 	{
 
-        if ($akismet->isSpam()) 
-		{
-
-			$error .= $lang['spam_error'] . '<br />';
-			
-        } 
-		else 
-		{
-
-			if(empty($error))
-			{
-	
-				$db->insert('comments', $insert);
-				$id = $db->lastInsertId();
-				
-				header('Location: page.php?id='.$row['id'].'#com-'.$id.'');
-				
-			}
-			
-        }
+		$db->insert('comments', $insert);
+		$id = $db->lastInsertId();
+		
+		header('Location: page.php?id='.$row['id'].'#com-'.$id.'');
 		
 	}
 	

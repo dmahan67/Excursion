@@ -12,6 +12,8 @@ $lang['on'] = 'on';
 $lang['username'] = 'Username';
 $lang['password'] = 'Password';
 $lang['administration'] = 'Administration';
+$lang['removeconfirm'] = 'Are you sure you would like to complete this action?';
+$lang['by'] = 'By';
 
 /* ========== HEADER ========== */
 $lang['home'] = 'Home';
@@ -86,23 +88,25 @@ $lang['edituser'] = 'Edit This User';
 /* ========== EDIT USER ========== */
 $lang['editut'] = 'Edit User';
 $lang['editud'] = 'Update users profile information';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
+
+/* ========== PM ========== */
+$lang['pm'] = 'Private Messages';
+$lang['pmlist'] = 'List of messages';
+$lang['pmsend'] = 'Send a message';
+$lang['pmdetails'] = 'Message details';
+$lang['inbox'] = 'Inbox';
+$lang['sentbox'] = 'Sent-box';
+$lang['touser'] = 'Recipient';
+$lang['remove_selected'] = 'Remove Selected';
+$lang['message'] = 'Message';
+$lang['from'] = 'From';
+$lang['date'] = 'Date';
+$lang['replytomessage'] = 'Reply to this message';
 $lang[''] = '';
 
-/* ========== PAGES ========== */
-$lang['list_empty'] = 'This category is empty';
+
+/* ========== PLUGINS ========== */
+$lang['latest_pages'] = 'Latest Pages';
 
 /* ========== PAGES ========== */
 $lang['editpage'] = 'Edit page';
@@ -119,7 +123,9 @@ $lang['download'] = 'Download';
 $lang['pinfo'] = 'Page Information';
 $lang['pvq'] = 'Put in validation queue';
 $lang['editpage'] = 'Edit Page';
-$lang['premoveconfirm'] = 'Are you sure you would like to remove this page?';
 $lang['removepage'] = 'Remove Page';
+$lang['list_empty'] = 'This category is empty';
+$lang['responses'] = 'Reponses';
+$lang['leaveresponse'] = 'Leave a Response';
 
 ?>

@@ -1,0 +1,85 @@
+<!-- BEGIN: MAIN -->
+		<div class="content">
+		
+			<div class="page-header">
+				<h1>{PHP.lang.pm} <small>{PHP.lang.pmlist}</small></h1>
+			</div>
+			
+			<div class="row">
+			
+				<div class="span14">
+					<ul class="breadcrumb">
+						<li><img src="{PHP.theme.dir}/img/home.png" height="12" width="12" /></li>
+						<li><a href="index.php">{PHP.lang.home}</a> <span class="divider">/</span></li>
+						<li class="active">{PHP.lang.pm}</li>
+					</ul>
+				</div>
+			
+				<div class="span14">
+				
+					<ul id="profile-tabs" class="tabs" data-tabs="tabs">
+						<!-- IF {PHP.f} == 'inbox' -->
+						<li class="active"><a href="pm.php?f=inbox">{PHP.lang.inbox}</a></li>
+						<li><a href="pm.php?f=sentbox">{PHP.lang.sentbox}</a></li>
+						<!-- ENDIF -->
+						<!-- IF {PHP.f} == 'sentbox' -->
+						<li><a href="pm.php?f=inbox">{PHP.lang.inbox}</a></li>
+						<li class="active"><a href="pm.php?f=sentbox">{PHP.lang.sentbox}</a></li>
+						<!-- ENDIF -->
+						<li><a href="pm.php?m=send">{PHP.lang.pmsend}</a></li>
+					</ul>
+
+					<form action="pm.php?m=remove" method="post" name="update" id="update">
+					
+						<table class="zebra-striped" id="sortTable">
+							<thead>
+								<tr>
+									<th class="span1"></th>
+									<th>{PHP.lang.message}</th>
+									<th class="span3">{PHP.lang.from}</th>
+									<th class="span3">{PHP.lang.date}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- BEGIN: ROW -->
+								<tr>
+									<td class="center"><input type="checkbox" class="checkbox" name="msg[{ID}]" /></td>
+									<!-- IF {PHP.f} == 'inbox' -->
+									<!-- IF {TOSTATE} == 0 -->
+									<td><a href="pm.php?m=details&id={ID}" class="strong">{TITLE}</a></td>
+									<!-- ELSE -->
+									<td><a href="pm.php?m=details&id={ID}">{TITLE}</a></td>
+									<!-- ENDIF -->
+									<!-- ENDIF -->
+									<!-- IF {PHP.f} == 'sentbox' -->
+									<!-- IF {FROMSTATE} == 0 -->
+									<td><a href="pm.php?m=details&id={ID}" class="strong">{TITLE}</a></td>
+									<!-- ELSE -->
+									<td><a href="pm.php?m=details&id={ID}">{TITLE}</a></td>
+									<!-- ENDIF -->
+									<!-- ENDIF -->
+									<td>{FROMUSER}</td>
+									<td>{DATE}</td>
+								</tr>
+								<!-- END: ROW -->
+							</tbody>
+						</table>
+						
+						<!-- IF {PAGINATION} -->
+						
+							<div class="pull-right">{PAGINATION}</div>
+							
+						<!-- ENDIF -->
+					
+						<br />
+						
+						<button type="submit" class="btn">{PHP.lang.remove_selected}</button>
+					
+					</form>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+<!-- END: MAIN -->

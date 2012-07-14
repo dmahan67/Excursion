@@ -15,6 +15,13 @@ $c = $excursion->import('c','G','TXT');
 
 $ex['location'] = 'page';
 
+/* === Hook === */
+foreach ($excursion->Hook('page.actions') as $pl)
+{
+	include $pl;
+}
+/* ===== */
+
 if($action == 'remove' && $user['group'] == 4)
 {
 
@@ -240,10 +247,15 @@ if((isset($id) && $id > 0) && empty($m))
 	$sql = $db->query("SELECT * FROM pages WHERE id = $id LIMIT 1");
 	$row = $sql->fetch();
 	
-	if($row['state'] == '0' && $user['group'] != '4' || $row['owner'] != $user['id'])
+	if($row['state'] == '0')
 	{
 	
-		header('Location: message.php');
+		if($user['group'] != '4' || $row['owner'] != $user['id'])
+		{
+	
+			header('Location: message.php');
+			
+		}
 	
 	}
 	
@@ -252,6 +264,7 @@ if((isset($id) && $id > 0) && empty($m))
 		'TITLE' => $row['title'],
 		'DESC' => $row['desc'],
 		'CAT' => $db->query("SELECT title FROM categories WHERE code='".$row['cat']."' LIMIT 1")->fetchColumn(),
+		'CAT_CODE' => $db->query("SELECT code FROM categories WHERE code='".$row['cat']."' LIMIT 1")->fetchColumn(),
 		'OWNER' => $excursion->generateUser($row['owner']),
 		'AVATAR' => $excursion->buildAvatar($row['owner'], 'avatar'),
 		'DATE' => date($config['date_medium'], $row['date']),

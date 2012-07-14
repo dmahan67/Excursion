@@ -1,0 +1,53 @@
+<!-- BEGIN: MAIN -->
+		<div class="content">
+		
+			<div class="page-header">
+				<h1>{PHP.lang.pm} <small>{PHP.lang.pmsend}</small></h1>
+			</div>
+			
+			<div class="row">
+			
+				<div class="span14">
+					<ul class="breadcrumb">
+						<li><img src="{PHP.theme.dir}/img/home.png" height="12" width="12" /></li>
+						<li><a href="index.php">{PHP.lang.home}</a> <span class="divider">/</span></li>
+						<li><a href="pm.php">{PHP.lang.pm}</a> <span class="divider">/</span></li>
+						<li class="active">{PHP.lang.pmsend}</li>
+					</ul>
+				</div>
+			
+				<div class="span14">
+						
+					<ul id="profile-tabs" class="tabs" data-tabs="tabs">
+						<li><a href="pm.php?f=inbox">{PHP.lang.inbox}</a></li>
+						<li><a href="pm.php?f=sentbox">{PHP.lang.sentbox}</a></li>
+						<li class="active"><a href="pm.php?m=send">{PHP.lang.pmsend}</a></li>
+					</ul>
+
+					<form action="{FORM_ACTION}" method="post">
+					<table class="borderless-table">
+						<tbody>
+							<tr>
+								<th class="span3">{PHP.lang.touser}</th>
+								<td>{FORM_TOUSER}</td>
+							</tr>
+							<tr>
+								<th class="span3">{PHP.lang.title}</th>
+								<td>{FORM_TITLE}</td>
+							</tr>
+							<tr>
+								<td colspan="2">{FORM_TEXT}</td>
+							</tr>
+							<tr>
+								<td colspan="2"><button class="btn primary">{PHP.lang.submit}</button></td>
+							</tr>
+						</tbody>
+					</table>
+					</form>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+<!-- END: MAIN -->
