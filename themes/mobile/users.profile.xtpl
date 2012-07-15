@@ -51,7 +51,7 @@
 						</table>
 					</p>
 					<p class="submit">
-						<input type="submit" name="submit" id="submit" value="{PHP.lang.submit}" tabindex="100" />
+						<input type="submit" name="submit" id="submit" value="{PHP.lang.update}" tabindex="100" />
 					</p>
 				</form>
 			</div>

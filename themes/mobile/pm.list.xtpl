@@ -18,8 +18,16 @@
 			<div class="clearer"></div>	
 		</div>
 		<!-- END: ROW -->
+		
+		<!-- IF {PHP.total_pm} == 0 -->
+			<div class="post">
+				<p class="center">{PHP.lang.pm_empty}</p>
+			</div>
+		<!-- ENDIF -->
 
+		<!-- IF {PHP.total_pm} > 0 -->
 		<button type="submit" style="margin-left:10px">{PHP.lang.remove_selected}</button>
+		<!-- ENDIF -->
 		
 	</form>
 	<br />

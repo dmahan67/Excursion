@@ -44,7 +44,7 @@
 					<span class="help-block">{PHP.lang.helpblock}</span>
 				</p>
 				<p class="submit">
-					<input type="submit" name="submit" id="submit" value="Log In" tabindex="100" />
+					<input type="submit" name="submit" id="submit" value="Register account" tabindex="100" />
 				</p>
 			</form>
 

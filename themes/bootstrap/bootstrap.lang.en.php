@@ -8,6 +8,7 @@
  
 /* ========== GLOBAL ========== */
 $lang['submit'] = 'Submit';
+$lang['update'] = 'Update';
 $lang['on'] = 'on';
 $lang['username'] = 'Username';
 $lang['password'] = 'Password';
@@ -102,8 +103,7 @@ $lang['message'] = 'Message';
 $lang['from'] = 'From';
 $lang['date'] = 'Date';
 $lang['replytomessage'] = 'Reply to this message';
-$lang[''] = '';
-
+$lang['pm_empty'] = 'You have no private messages';
 
 /* ========== PLUGINS ========== */
 $lang['latest_pages'] = 'Latest Pages';
