@@ -4972,3 +4972,18 @@ table.table td.centerall {
 	text-align:center;
 	vertical-align:center;
 }
+.container { 
+	width:800px;
+}
+body {
+	padding-top: 20px;
+	padding-bottom: 40px;
+}
+.help-block {
+	background: url(../img/help-block.png) no-repeat 0 50%;
+	font-size: 11px;
+	padding:10px 40px;
+}
+.help {
+	font-size: 10px;
+}

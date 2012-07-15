@@ -180,23 +180,39 @@ $lang['ext_bindings_installed'] = 'Installed {$cnt} hook bindings';
 $lang['ext_config_installed'] = 'Installed configuration';
 $lang['ext_config_error'] = 'Configuration setup failed';
 $lang['ext_executed_sql'] = 'Executed SQL handler part: {$ret}';
+$lang['install_well_desc'] = 'A premier content management system with modular functionality. 
+							Built with a sleek design, both internally and externally, Excursion is ideal 
+							for webmasters with any website knowledge.';
+$lang['install_continue'] = 'Continue Installation';
+$lang['install_plugins'] = 'Plugins';
+$lang['install_serverinfo'] = 'Server Information';
+$lang['install_php'] = 'PHP';
+$lang['install_mbstring'] = 'mbstring';
+$lang['install_hash'] = 'hash';
+$lang['install_mysql'] = 'MySQL';
+$lang['install_permission'] = 'File/Folder Permissions';
+$lang['install_step1_desc'] = 'It&#39;s important to make sure that all of the above information is correct&#44; and marked as valid 
+							(represented by <span class="valid">green</span>). If not&#44; your installation may fail&#44; or present problems later on.';
+$lang['install_step2_desc'] = 'First you need to create a blank database with the above name on your server, if this user has no permission 
+							to create new databases.';
+$lang['install_dbhost'] = 'Database host';
+$lang['install_dbport'] = 'Database port';
+$lang['install_dbport_desc'] = 'Only if it is other than default';
+$lang['install_dbuser'] = 'Database user';
+$lang['install_dbpass'] = 'Database password';
+$lang['install_dbname'] = 'Database name';
+$lang['install_createadmin'] = 'Create administrator account';
+$lang['install_username'] = 'Username';
+$lang['install_pw'] = 'Password';
+$lang['install_pwrep'] = 'Repeat Password';
+$lang['install_email'] = 'Email';
+$lang['install_sq'] = 'Security Question';
+$lang['install_sa'] = 'Answer';
+$lang['install_complete'] = 'Installation Complete!';
+$lang['install_comptext'] = 'Excursion web installer is complete. Please remove install.php from your directory.';
+$lang['install_log'] = 'Log-in to your account';
 
 /* ========== PM ========== */
 $lang['pm_error_touser_notexist'] = 'Recipient doesnt exist';
 
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
-$lang[''] = '';
 ?>

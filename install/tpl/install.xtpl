@@ -6,20 +6,8 @@
 	<meta charset="utf-8">
 	<title>Excursion - Web Installer</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
 
 	<link href="install/tpl/css/bootstrap.css" rel="stylesheet">
-	<style type="text/css">
-		.container { 
-		width:800px;
-		}
-		body {
-		padding-top: 20px;
-		padding-bottom: 40px;
-		}
-	</style>
-
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -33,8 +21,7 @@
 
 			<h1>Excursion</h1>
 
-			<p>A premier content management system with modular functionality. Built with a sleek design, both internally and externally, Excursion
-			is ideal for webmasters with any website knowledge.</p>
+			<p>{PHP.lang.install_well_desc}</p>
 
 		</div>
 		
@@ -53,52 +40,49 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th colspan="2" class="title">Server Information</th>
+					<th colspan="2" class="title">{PHP.lang.install_serverinfo}</th>
 				</tr>
 			</thead>
 			<tr>
-				<th><span class="php">PHP</span></th>
+				<th><span class="php">{PHP.lang.install_php}</span></th>
 				<td class="align-right">{INSTALL_PHP_VER}</td>
 			</tr>
 			<tr>
-				<th><span class="mbstring">mbstring</span></th>
+				<th><span class="mbstring">{PHP.lang.install_mbstring}</span></th>
 				<td class="align-right">{INSTALL_MBSTRING}</td>
 			</tr>
 			<tr>
-				<th><span class="mbstring">hash</span></th>
+				<th><span class="mbstring">{PHP.lang.install_hash}</span></th>
 				<td class="align-right">{INSTALL_HASH}</td>
 			</tr>
 			<tr>
-				<th><span class="mysql">MySQL</span></th>
+				<th><span class="mysql">{PHP.lang.install_mysql}</span></th>
 				<td class="align-right">{INSTALL_MYSQL}</td>
 			</tr>
 			<thead>
 				<tr>
-					<th colspan="2" class="title">File/Folder Permissions</th>
+					<th colspan="2" class="title">{PHP.lang.install_permission}</th>
 				</tr>
 			</thead>
 			<tr>
-				<th><span class="file">./config.php</span></th>
-				<td class="align-right">{INSTALL_CONFIG}</td>
-			</tr>
-			<tr>
-				<th><span class="file">./install/install.sql</span></th>
-				<td class="align-right">{INSTALL_SQL_FILE}</td>
-			</tr>
-			<tr>
-				<th><span class="folder">./assets/avatars/</span></th>
+				<th><span class="folder">assets/avatars/</span></th>
 				<td class="align-right">{INSTALL_AV_DIR}</td>
 			</tr>
 			<tr>
+				<th><span class="file">install/install.sql</span></th>
+				<td class="align-right">{INSTALL_SQL_FILE}</td>
+			</tr>
+			<tr>
+				<th><span class="file">config.php</span></th>
+				<td class="align-right">{INSTALL_CONFIG}</td>
+			</tr>
+			<tr>
 				<td colspan="2">
-					It's important to make sure that all of the above information is correct, and marked as valid (represented by green).
-					If not, your installation may fail, or present problems later on. If you are encountering problems during your installation,
-					check through our <a href="">knowledge database</a>, and if your answers are not located there you may contact an 
-					<a href="">Excursion Team Member</a> directly.
+					<p class="help-block">{PHP.lang.install_step1_desc}</p>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><button type="submit" name="submit">Continue Installation</button></td>
+				<td colspan="2"><button type="submit" name="submit">{PHP.lang.install_continue}</button></td>
 			</tr>
 		</table>
 		<!-- END: STEP1 -->
@@ -107,31 +91,31 @@
 		<form action="install.php?action=send" method="post">
 			<table class="table">
 				<tr>
-					<th>Database host</th>
+					<th>{PHP.lang.install_dbhost}</th>
 					<td><input type="text" name="db_host" value="{INSTALL_DB_HOST}" size="32" /></td>
 				</tr>
 				<tr>
-					<th>Database port</th>
+					<th>{PHP.lang.install_dbport}</th>
 					<td><input type="text" name="db_port" value="{INSTALL_DB_PORT}" size="32" /><br />
-					<span class="help-block">Only if it is other than default</span></td>
+					<span class="help">{PHP.lang.install_dbport_desc}</span></td>
 				</tr>
 				<tr>
-					<th>Database user</th>
+					<th>{PHP.lang.install_dbuser}</th>
 					<td><input type="text" name="db_user" value="{INSTALL_DB_USER}" size="32" /></td>
 				</tr>
 				<tr>
-					<th>Database password</th>
+					<th>{PHP.lang.install_dbpass}</th>
 					<td><input type="password" name="db_pass" size="32" /></td>
 				</tr>
 				<tr>
-					<th>Database name</th>
+					<th>{PHP.lang.install_dbname}</th>
 					<td><input type="text" name="db_name" value="{INSTALL_DB_NAME}" size="32" /></td>
 				</tr>
 				<tr>
-					<td colspan="2">First you need to create a blank database with the above name on your server, if this user has no permission to create new databases.</td>
+					<td colspan="2"><span class="help-block">{PHP.lang.install_step2_desc}</span></td>
 				</tr>
 				<tr>
-					<td colspan="2"><button type="submit" name="submit">Continue Installation</button></td>
+					<td colspan="2"><button type="submit" name="submit">{PHP.lang.install_continue}</button></td>
 				</tr>
 			</table>
 		</form>
@@ -143,7 +127,7 @@
 				<thead>
 					<tr>
 						<th style="width:32px;">&nbsp;</th>
-						<th><span class="plugin">Plugins</span></th>
+						<th><span class="plugin">{PHP.lang.install_plugins}</span></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -154,7 +138,7 @@
 					</tr>
 					<!-- END: ROW -->
 					<tr>
-						<td colspan="2"><button type="submit" name="submit">Continue Installation</button></td>
+						<td colspan="2"><button type="submit" name="submit">{PHP.lang.install_continue}</button></td>
 					</tr>
 				<tbody>
 			</table>
@@ -166,45 +150,45 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th colspan="2" class="title">Create administrator account</th>
+						<th colspan="2" class="title">{PHP.lang.install_createadmin}</th>
 					</tr>
 				</thead>
 				<tr>
-					<th>Username</th>
+					<th>{PHP.lang.install_username}</th>
 					<td>{FORM_USERNAME}</td>
 				</tr>
 				<tr>
-					<th>Password</th>
+					<th>{PHP.lang.install_pw}</th>
 					<td>{FORM_PASSWORD}</td>
 				</tr>
 				<tr>
-					<th>Repeat Password</th>
+					<th>{PHP.lang.install_pwrep}</th>
 					<td>{FORM_REPEAT_PASSWORD}</td>
 				</tr>
 				<tr>
-					<th>Email</th>
+					<th>{PHP.lang.install_email}</th>
 					<td>{FORM_EMAIL}</td>
 				</tr>
 				<tr>
-					<th>Security Question</th>
+					<th>{PHP.lang.install_sq}</th>
 					<td>{QUESTIONS}</td>
 				</tr>
 				<tr>
-					<th>Answer</th>
+					<th>{PHP.lang.install_sa}</th>
 					<td>{FORM_SQ_ANSWER}</td>
 				</tr>
 				<tr>
-					<td colspan="2"><button type="submit" name="submit">Continue Installation</button></td>
+					<td colspan="2"><button type="submit" name="submit">{PHP.lang.install_continue}</button></td>
 				</tr>
 			</table>
 		</form>
 		<!-- END: STEP4 -->
 		
 		<!-- BEGIN: STEP5 -->
-		<h3>Installation Complete!</h3>
-		<p>Excursion web installer is complete. Please remove install.php from your directory.</p>
+		<h3>{PHP.lang.install_complete}</h3>
+		<p>{PHP.lang.install_comptext}</p>
 		<br />
-		<a href="login.php">Log-in to your account</a>
+		<a href="login.php">{PHP.lang.install_log}</a>
 		<!-- END: STEP5 -->
 
 		<hr>
