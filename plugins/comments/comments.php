@@ -81,7 +81,7 @@ if($action == 'send' && $user['group'] >= 3)
 	$insert['date'] = (int)time();
 	$insert['text'] = $excursion->import('text', 'P', 'HTM');
 	
-	if (mb_strlen($insert['text']) < 4) $error .= $lang['page_error_text_length'] . '<br />';
+	if (mb_strlen($insert['text']) < 4) $excursion->reportError('error_text_length');
 	
 	$comment = array(
 		'body' => $insert['text']
@@ -94,21 +94,13 @@ if($action == 'send' && $user['group'] >= 3)
 	}
 	/* ===== */
 	        
-	if(empty($error))
+	if(!$excursion->error_found())
 	{
 
 		$db->insert('comments', $insert);
 		$id = $db->lastInsertId();
 		
 		header('Location: page.php?id='.$row['id'].'#com-'.$id.'');
-		
-	}
-	
-	if(!empty($error))
-	{
-	
-		$xtpl->assign('ERRORS_TEXT', $error);
-		$xtpl->parse('MAIN.COMMENTS.ERRORS');
 		
 	}
 	

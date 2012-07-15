@@ -106,25 +106,15 @@ if($m == 'edit' && $user['group'] == 4)
 		$insert['page_url'] = $excursion->import('pageurl', 'P', 'TXT');
 		$insert['text'] = $excursion->import('text', 'P', 'HTM');
 		
-		if (mb_strlen($insert['title']) < 4) $error .= $lang['page_error_title_length'].'<br />';
-		if (mb_strlen($insert['cat']) < 2) $error .= $lang['page_error_cat_missing'].'<br />';
-		if (mb_strlen($insert['text']) < 4) $error .= $lang['page_error_text_length'].'<br />';
+		if (mb_strlen($insert['title']) < 4) $excursion->reportError('error_title_length');
+		if (mb_strlen($insert['cat']) < 2) $excursion->reportError('page_error_cat_missing');
+		if (mb_strlen($insert['text']) < 4) $excursion->reportError('error_text_length');
 		
-		if(empty($error))
+		if(!$excursion->error_found())
 		{
 		
-			$sql_update_page = $db->update('pages', $insert, 'id=?', array($id));
-			
+			$db->update('pages', $insert, 'id=?', array($id));
 			header('Location: page.php?id='.$id.'');
-			
-		}
-		if(!empty($error))
-		{
-		
-			$xtpl->assign(array(
-				'ERRORS_TEXT' => $error
-			));
-			$xtpl->parse('MAIN.ERRORS');
 			
 		}
 	
@@ -184,26 +174,17 @@ if($m == 'add' && $user['group'] == 4)
 		$insert['date'] = (int)time();
 		$insert['state'] = (int)1;
 		
-		if (mb_strlen($insert['title']) < 4) $error .= $lang['page_error_title_length'].'<br />';
-		if (mb_strlen($insert['cat']) < 2) $error .= $lang['page_error_cat_missing'].'<br />';
-		if (mb_strlen($insert['text']) < 4) $error .= $lang['page_error_text_length'].'<br />';
+		if (mb_strlen($insert['title']) < 4) $excursion->reportError('error_title_length');
+		if (mb_strlen($insert['cat']) < 2) $excursion->reportError('page_error_cat_missing');
+		if (mb_strlen($insert['text']) < 4) $excursion->reportError('error_text_length');
 		
-		if(empty($error))
+		if(!$excursion->error_found())
 		{
 		
 			$db->insert('pages', $insert);
 			$id = $db->lastInsertId();
 			
 			header('Location: page.php?id='.$id.'');
-			
-		}
-		if(!empty($error))
-		{
-		
-			$xtpl->assign(array(
-				'ERRORS_TEXT' => $error
-			));
-			$xtpl->parse('MAIN.ERRORS');
 			
 		}
 	
@@ -303,6 +284,8 @@ if((empty($id) || $id == 0) && empty($m))
 	header('Location: message.php');
 	
 }
+
+$excursion->display_messages($xtpl);
 	
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');

@@ -146,13 +146,13 @@ elseif($m == 'profile')
 		if(!empty($old_pass))
 		{
 		
-			if ($new_pass1 != $new_pass2) $error = $lang['profile_error_nosame'].'<br />';
-			if (mb_strlen($new_pass1) < 4) $error .= $lang['reg_pwd_length'].'<br />';
-			if (md5($old_pass) != $user['password']) $error = $lang['profile_error_nomatch'].'<br />';
+			if (md5($old_pass) != $user['password']) $excursion->reportError('profile_error_nomatch');
+			if ($new_pass1 != $new_pass2) $excursion->reportError('profile_error_nosame');
+			if (mb_strlen($new_pass1) < 4) $excursion->reportError('reg_pwd_length');
 			
 		}
 		
-		if(empty($error))
+		if(!$excursion->error_found())
 		{
 		
 			if(!empty($old_pass) && !empty($new_pass1) && !empty($new_pass2))
@@ -171,16 +171,6 @@ elseif($m == 'profile')
 			), "id='".$user['id']."'");
 			
 			header('Location: users.php?id='.$user['id']);
-		
-		}
-		else
-		{
-		
-			$xtpl->assign(array(
-				'ERRORS_TEXT' => $error
-			));
-			
-			$xtpl->parse('MAIN.ERRORS');
 		
 		}
 	
@@ -251,12 +241,12 @@ elseif($m == 'edit' && $user['group'] == '4')
 		if(!empty($new_pass1) || !empty($new_pass2))
 		{
 		
-			if ($new_pass1 != $new_pass2) $error = $lang['profile_error_nosame'].'<br />';
-			if (mb_strlen($new_pass1) < 4) $error .= $lang['reg_pwd_length'].'<br />';
+			if ($new_pass1 != $new_pass2) $excursion->reportError('profile_error_nosame');
+			if (mb_strlen($new_pass1) < 4) $excursion->reportError('reg_pwd_length');
 			
 		}
 		
-		if(empty($error))
+		if(!$excursion->error_found())
 		{
 		
 			if(!empty($new_pass1) && !empty($new_pass2))
@@ -277,16 +267,6 @@ elseif($m == 'edit' && $user['group'] == '4')
 			), "id='".$row['id']."'");
 			
 			header('Location: users.php?id='.$row['id']);
-		
-		}
-		else
-		{
-		
-			$xtpl->assign(array(
-				'ERRORS_TEXT' => $error
-			));
-			
-			$xtpl->parse('MAIN.ERRORS');
 		
 		}
 	
@@ -390,6 +370,8 @@ else
 	$xtpl->assign('PAGINATION', $navigation);
 	
 }
+
+$excursion->display_messages($xtpl);
 	
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');

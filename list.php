@@ -101,6 +101,8 @@ foreach ($excursion->Hook('list.tags') as $pl)
 }
 /* ===== */
 
+$excursion->display_messages($xtpl);
+
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');
 

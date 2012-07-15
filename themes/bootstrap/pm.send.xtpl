@@ -23,6 +23,17 @@
 						<li><a href="pm.php?f=sentbox">{PHP.lang.sentbox}</a></li>
 						<li class="active"><a href="pm.php?m=send">{PHP.lang.pmsend}</a></li>
 					</ul>
+					
+					<!-- BEGIN: MESSAGE -->
+					<div class="alert-message block-message info fade in" data-alert="alert">
+					<a class="close" href="#">&times;</a>
+						<ul>
+							<!-- BEGIN: ROW -->
+							<li>{ROW_MSG}</li>
+							<!-- END: ROW -->
+						</ul>
+					</div>
+					<!-- END: MESSAGE -->
 
 					<form action="{FORM_ACTION}" method="post">
 					<table class="borderless-table">

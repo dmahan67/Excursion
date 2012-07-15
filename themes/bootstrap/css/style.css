@@ -43,6 +43,9 @@ body {
 .topbar .btn {
 	border: 0;
 }
+
+/* Excursion-specific
+ * ----------------------------------------------------- */
 .pagination .active {
 	float: left;
 	padding: 0 14px;
@@ -52,6 +55,21 @@ body {
 	border-right-color: rgba(0, 0, 0, 0.15);
 	*border-right-color: #ddd;
 	text-decoration: none;
+}
+div.warning { 
+	color:#9f6000; 
+	background-color:#feefb3; 
+	background-image:url(../../../assets/images/warning.png); 
+	border:1px solid #9f6000;
+	line-height:2em; 
+	margin:20px 0; 
+	padding:10px 50px; 
+	background-position:15px 50%; 
+	background-repeat:no-repeat;
+	clear:both;
+}
+.warning { 
+	background-image:url(../../../assets/images/warning.png); 
 }
 
 /* FONT

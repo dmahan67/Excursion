@@ -29,12 +29,16 @@
 			
 				<div class="span9">
 				
-					<!-- BEGIN: ERRORS -->
-					<div class="alert-message block-message error fade in" data-alert="alert" >
-						<a class="close" href="#">&times;</a>
-						<p>{ERRORS_TEXT}</p>
+					<!-- BEGIN: MESSAGE -->
+					<div class="alert-message block-message info fade in" data-alert="alert">
+					<a class="close" href="#">&times;</a>
+						<ul>
+							<!-- BEGIN: ROW -->
+							<li>{ROW_MSG}</li>
+							<!-- END: ROW -->
+						</ul>
 					</div>
-					<!-- END: ERRORS -->
+					<!-- END: MESSAGE -->
 					
 					<h2>{PHP.lang.logintoaccount}</h2>
 					   

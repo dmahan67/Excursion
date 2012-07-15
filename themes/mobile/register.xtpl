@@ -6,11 +6,15 @@
 	<div class="post">
 		<div class="content">
 		
-			<!-- BEGIN: ERRORS -->
-			<p class="error">
-				{ERRORS_TEXT}
-			</p>
-			<!-- END: ERRORS -->
+			<!-- BEGIN: MESSAGE -->
+			<div class="alert-message block-message" data-alert="alert">
+				<ul>
+					<!-- BEGIN: ROW -->
+					<li>{ROW_MSG}</li>
+					<!-- END: ROW -->
+				</ul>
+			</div>
+			<!-- END: MESSAGE -->
 						
 			<form name="page_form" id="page_form" action="{FORM_ACTION}" method="post">
 				<p>

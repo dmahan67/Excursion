@@ -18,12 +18,12 @@ if($config['disablereg']=='yes')
 
 }
 
-$un = $excursion->import('username', 'P', 'TXT');
+$insert['username'] = $excursion->import('username', 'P', 'TXT');
 $pwd = $excursion->import('password', 'P', 'TXT');
 $pwd2 = $excursion->import('password2', 'P', 'TXT');
-$email = $excursion->import('email', 'P', 'TXT');
-$sq = $excursion->import('sq', 'P', 'INT');
-$sq_answer = $excursion->import('sq_answer', 'P', 'TXT');
+$insert['email'] = $excursion->import('email', 'P', 'TXT');
+$insert['SQ_Index'] = $excursion->import('sq', 'P', 'INT');
+$insert['SQ_Answer'] = $excursion->import('sq_answer', 'P', 'TXT');
 
 $ex['location'] = 'register';
 
@@ -41,7 +41,7 @@ if($action == 'send')
 	}
 	/* ===== */
 
-	$member->Register($un, $pwd, $pwd2, $email, $sq, $sq_answer);
+	$member->Register($insert['username'], $pwd, $pwd2, $insert['email'], $insert['SQ_Index'], $insert['SQ_Answer']);
 	
 }
 
@@ -51,8 +51,8 @@ $xtpl->assign(array(
 	'FORM_PASSWORD' => $excursion->inputbox('password', 'password', '', array('size' => 8, 'maxlength' => 32)),
 	'FORM_REPEAT_PASSWORD' => $excursion->inputbox('password', 'password2', '', array('size' => 8, 'maxlength' => 32)),
 	'FORM_EMAIL' => $excursion->inputbox('text', 'email', $insert['email'], array('size' => 24, 'maxlength' => 64)),
-	'QUESTIONS' => $excursion->selectbox_security_questions($sq, 'sq'),
-	'FORM_SQ_ANSWER' => $excursion->inputbox('text', 'sq_answer', $insert['sq_answer'], array('size' => 24, 'maxlength' => 64))
+	'QUESTIONS' => $excursion->selectbox_security_questions($insert['SQ_Index'], 'sq'),
+	'FORM_SQ_ANSWER' => $excursion->inputbox('text', 'sq_answer', $insert['SQ_Answer'], array('size' => 24, 'maxlength' => 64))
 ));
 
 /* === Hook === */
@@ -61,6 +61,8 @@ foreach ($excursion->Hook('register.tags') as $pl)
 	include $pl;
 }
 /* ===== */
+
+$excursion->display_messages($xtpl);
 
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');

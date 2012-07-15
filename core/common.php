@@ -10,11 +10,11 @@ session_start();
 
 require_once 'core/database.php';
 
-/* ========== REDIRECTS ========== */
+/* ========== INSTALL REDIRECT ========== */
 
-if($config['maintenance']=='yes' && $ex['location']!='login' && $user['group']!=4)
+if($config['new_install'] < 5)
 {
-	header('Location: login.php');
+	header('Location: install.php');
 	exit;
 }
 
@@ -147,6 +147,14 @@ $sql_config->closeCursor();
 mb_internal_encoding('UTF-8');
 $excursion->load_pageStructure();
 
+/* ========== MAINTENANCE REDIRECT ========== */
+
+if($config['maintenance']=='yes' && $ex['location']!='login' && $user['group']!=4)
+{
+	header('Location: login.php');
+	exit;
+}
+
 /* ========== CHECKPOINTS ========== */
 
 if($user['id'] > 0 && $user['group'] == 1)
@@ -181,11 +189,6 @@ foreach ($excursion->Hook('global') as $pl)
 	include $pl;
 }
 /* ===== */
-
-$config['header_tags'] .= $excursion->createTags('css', 'validate', 'core/plugins/validate/jquery.validate.css', '');
-$config['header_tags'] .= $excursion->createTags('javascript', 'validate', 'core/plugins/validate/jquery.validate.js', '');
-$config['header_tags'] .= $excursion->createTags('javascript', 'validate.functions', 'core/plugins/validate/jquery.validation.functions.js', '');
-$config['header_tags'] .= $excursion->createTags('javascript', 'validate.forms', 'core/plugins/validate/jquery.validate.forms.js', '');
 
 $config['footer_tags'] .= $excursion->createTags('javascript', '', 'core/plugins/ckeditor/ckeditor.js', '');
 $config['footer_tags'] .= $excursion->createTags('javascript', '', 'core/plugins/ckeditor/editor_themes.js', '');

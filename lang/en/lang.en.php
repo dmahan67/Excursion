@@ -13,6 +13,11 @@ $lang['yes'] = 'Yes';
 $lang['members_only'] = 'Members Only';
 $lang['del'] = 'Delete';
 $lang['system_error'] = 'A system error has occurred';
+$lang['Plugin'] = 'Plugin';
+
+/* ========== GENERAL ERRORS ========== */
+$lang['error_title_length'] = 'Title is too short';
+$lang['error_text_length'] = 'Text is too short';
  
 /* ========== DATE/TIME ========== */
 
@@ -132,10 +137,7 @@ $lang['reset_email'] = 'Hi %1$s,<br /><br />
 						If this was a mistake, you may want to contact the administrator.';
 						
 /* ========== PAGES ========== */
-$lang['page_error_title_length'] = 'Page title is too short';
 $lang['page_error_cat_missing'] = 'Page category is missing';
-$lang['page_error_text_length'] = 'Page text is too short';
-$lang['spam_error'] = 'System has flagged this comment as spam';
 
 /* ========== PROFILE ========== */
 $lang['profile_error_nomatch'] = 'Your current password was incorrect';
@@ -157,9 +159,31 @@ $lang['nf'] = 'Not Found';
 $lang['Available'] = 'Available';
 $lang['na'] = 'Not Available';
 $lang['Plugins'] = 'Plugins';
+$lang['install_ver'] = 'Server Info';
+$lang['install_ver_invalid'] = '{$ver} &mdash; invalid!';
+$lang['install_ver_valid'] = '{$ver} &mdash; valid!';
+$lang['install_error_config'] = 'Could not create or edit config file. Please save config-sample.php as config.php and set CHMOD 777 on it';
+$lang['install_error_sql'] = 'Unable to connect to MySQL database. Please check your settings.';
+$lang['install_error_sql_db'] = 'Unable to select the MySQL database. Please check your settings.';
+$lang['install_error_sql_ext'] = 'Excursion requires PHP extension pdo_mysql to be loaded';
+$lang['install_error_sql_script'] = 'SQL script execution failed: {$msg}';
+$lang['install_error_sql_ver'] = 'Excursion requires MySQL version 5.0.7 or greater. Your version is {$ver}';
+$lang['install_error_mainurl'] = 'You must supply the main URL for your site.';
+$lang['install_error_mbstring'] = 'Excursion requires PHP extension mbstring to be loaded';
+$lang['install_error_missing_file'] = 'Missing {$file}. Please reupload this file to continue.';
+$lang['install_error_php_ver'] = 'Excursion requires PHP version 5.2.3 or greater. Your version is {$ver}';
+$lang['install_error_select_plugin'] = 'Error encountered while importing selected plugins';
+$lang['ext_setup_not_found'] = 'Setup file is not found: {$path}';
+$lang['ext_installing'] = 'Installing {$type} &quot;{$name}&quot;';
+$lang['ext_invalid_format'] = 'This is not a valid Excursion plugin. Please contact the developer';
+$lang['ext_bindings_installed'] = 'Installed {$cnt} hook bindings';
+$lang['ext_config_installed'] = 'Installed configuration';
+$lang['ext_config_error'] = 'Configuration setup failed';
+$lang['ext_executed_sql'] = 'Executed SQL handler part: {$ret}';
 
+/* ========== PM ========== */
+$lang['pm_error_touser_notexist'] = 'Recipient doesnt exist';
 
-$lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';
 $lang[''] = '';

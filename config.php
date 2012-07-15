@@ -14,6 +14,8 @@ $config['main_url'] = 'http://localhost';								// Full URL without ending in a
 $config['default_theme'] = 'bootstrap';									// Default theme unless set by user
 $config['default_language'] = 'en';										// Default language
 
+$config['new_install'] = 1;
+
 /* ========== Time / Date ========== */
 
 date_default_timezone_set('America/New_York');							// Default time zone, check www.php.net/manual/en/timezones.php for a list

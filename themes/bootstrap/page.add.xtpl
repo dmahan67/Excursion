@@ -9,12 +9,16 @@
 			
 				<div class="span14">
 				
-					<!-- BEGIN: ERRORS -->
-					<div class="alert-message block-message error fade in" data-alert="alert" >
-						<a class="close" href="#">&times;</a>
-						<p>{ERRORS_TEXT}</p>
+					<!-- BEGIN: MESSAGE -->
+					<div class="alert-message block-message info fade in" data-alert="alert">
+					<a class="close" href="#">&times;</a>
+						<ul>
+							<!-- BEGIN: ROW -->
+							<li>{ROW_MSG}</li>
+							<!-- END: ROW -->
+						</ul>
 					</div>
-					<!-- END: ERRORS -->
+					<!-- END: MESSAGE -->
 				
 					<form action="{FORM_ACTION}" method="post">
 					<table class="borderless-table">

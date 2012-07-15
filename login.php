@@ -53,6 +53,8 @@ if($config['maintenance']=='yes')
 
 }
 
+$excursion->display_messages($xtpl);
+
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');
 

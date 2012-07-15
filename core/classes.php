@@ -15,6 +15,7 @@ $config['type_string'] = '1';
 $config['type_select'] = '2';
 $config['type_radio'] = '3';
 $config['type_range'] = '4';
+$config['plugin_default_order'] = '10';
  
 class Members {
 
@@ -41,17 +42,17 @@ class Members {
 		if($config['disablereg']=='no')
 		{
 			
-			if ($user_exists) $error .= $lang['reg_un_exists'].'<br />';
-			if (preg_match('/&#\d+;/', $u) || preg_match('/[<>#\'"\/]/', $un)) $error .= $lang['reg_un_format'].'<br />';
-			if (mb_strlen($un) < 2) $error .= $lang['reg_un_length'].'<br />';
-			if (mb_strlen($pwd) < 4) $error .= $lang['reg_pwd_length'].'<br />';
-			if ($pwd != $pwd2) $error .= $lang['reg_pwd_nomatch'].'<br />';
-			if (mb_strlen($email) < 10) $error .= $lang['reg_email_length'].'<br />';		
-			if ($email_exists) $error .= $lang['reg_email_exists'].'<br />';
-			if (!filter_var($email, FILTER_VALIDATE_EMAIL )) $error .= $lang['reg_email_format'].'<br />';
-			if (mb_strlen($sq_answer) < 2) $error .= $lang['reg_sq_length'].'<br />';
+			if ($user_exists) $excursion->reportError('reg_un_exists');
+			if (preg_match('/&#\d+;/', $u) || preg_match('/[<>#\'"\/]/', $un)) $excursion->reportError('reg_un_format');
+			if (mb_strlen($un) < 2) $excursion->reportError('reg_un_length');
+			if (mb_strlen($pwd) < 4) $excursion->reportError('reg_pwd_length');
+			if ($pwd != $pwd2) $excursion->reportError('reg_pwd_nomatch');
+			if (mb_strlen($email) < 10) $excursion->reportError('reg_email_length');	
+			if ($email_exists) $excursion->reportError('reg_email_exists');
+			if (!filter_var($email, FILTER_VALIDATE_EMAIL )) $excursion->reportError('reg_email_format');
+			if (mb_strlen($sq_answer) < 2) $excursion->reportError('reg_sq_length');
 			
-			if(empty($error))
+			if(!$excursion->error_found())
 			{
 				$pwd = md5($pwd);
 
@@ -113,16 +114,6 @@ class Members {
 				}
 				
 			}
-			else
-			{
-			
-				$xtpl->assign(array(
-					'ERRORS_TEXT' => $error
-				));
-				
-				$xtpl->parse('MAIN.ERRORS');
-				
-			}
 			
 		}
 		
@@ -130,38 +121,26 @@ class Members {
 	
 	function Login($un, $pwd){
 		
-		global $db, $xtpl, $lang;
+		global $db, $xtpl, $lang, $excursion;
 		
 		$md5pwd = md5($pwd);
 		$check_credentials = (bool)$db->query("SELECT id FROM members WHERE username = ? AND password = ? LIMIT 1", array($un, $md5pwd))->fetch();
-		
-		if (empty($un)) $error .= $lang['login_un_empty'].'<br />';
-		if (empty($pwd)) $error .= $lang['login_pwd_empty'].'<br />';
-		if (!$check_credentials) $error .= $lang['login_invalid'].'<br />';
-		
 		$u_id = $db->query("SELECT id FROM members WHERE username='$un'")->fetchColumn();
 		$group = $db->query("SELECT groupid FROM members WHERE username='$un'")->fetchColumn();
 		
-		if ($group == 1) $error = $lang['login_inactive'].'<br />';
-		if ($group == 2) $error = $lang['login_banned'].'<br />';
+		if (empty($un)) $excursion->reportError('login_un_empty');
+		if (empty($pwd)) $excursion->reportError('login_pwd_empty');
+		if (!$check_credentials) $excursion->reportError('login_invalid');
+		if ($group == 1) $excursion->reportError('login_inactive');
+		if ($group == 2) $excursion->reportError('login_banned');
 		
 		
-		if(empty($error))
+		if(!$excursion->error_found())
 		{
 		
 			$_SESSION['user_id'] = $u_id;
 			header('Location: index.php');
 		
-		}
-		else
-		{
-		
-			$xtpl->assign(array(
-				'ERRORS_TEXT' => $error
-			));
-			
-			$xtpl->parse('MAIN.ERRORS');
-			
 		}
 		
 	}
@@ -189,12 +168,12 @@ class Members {
 		$email_exists = (bool)$db->query("SELECT id FROM members WHERE email = ? LIMIT 1", array($email))->fetch();
 		$is_inactive = (bool)$db->query("SELECT groupid FROM members WHERE token = ? AND groupid = ? LIMIT 1", array($token, '1'))->fetch();
 		
-		if (!$email_exists) $error .= $lang['reg_email_exists'].'<br />';
-		if (!filter_var($email, FILTER_VALIDATE_EMAIL )) $error .= $lang['reg_email_format'].'<br />';
-		if ($user_group > 1) $error .= $lang['validation_active'].'<br />';
-		if (!strlen($token) == 16) $error = $lang['token_not_exist'].'<br />';	
+		if (!$email_exists) $excursion->reportError('reg_email_exists');
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL )) $excursion->reportError('reg_email_format');
+		if ($user_group > 1) $excursion->reportError('validation_active');
+		if (!strlen($token) == 16) $excursion->reportError('token_not_exist');
 		
-		if(empty($error))
+		if(!$excursion->error_found())
 		{
 		
 			$activate_url = $config['main_url'].'/users.php?action=validate&token='.$token;
@@ -212,16 +191,6 @@ class Members {
 			
 			header('Location: message.php?id=103');
 	
-		}
-		else
-		{
-		
-			$xtpl->assign(array(
-				'ERRORS_TEXT' => $error
-			));
-			
-			$xtpl->parse('MAIN.RECOVERY_OPTIONS.VALIDATION_ERRORS');
-		
 		}
 		
 	}
@@ -300,6 +269,210 @@ class Excursion {
 	
 	}
 
+	function check_messages($src = '', $class = '')
+	{
+		global $error_string;
+
+		if (empty($src) && empty($class))
+		{
+			return (is_array($_SESSION['ex_messages']) && count($_SESSION['ex_messages']) > 0)
+				|| !empty($error_string);
+		}
+
+		if (!is_array($_SESSION['ex_messages']))
+		{
+			return false;
+		}
+
+		if (empty($src))
+		{
+			foreach ($_SESSION['ex_messages'] as $src => $grp)
+			{
+				foreach ($grp as $msg)
+				{
+					if ($msg['class'] == $class)
+					{
+						return true;
+					}
+				}
+			}
+		}
+		elseif (empty($class))
+		{
+			return count($_SESSION['ex_messages'][$src]) > 0;
+		}
+		else
+		{
+			foreach ($_SESSION['ex_messages'][$src] as $msg)
+			{
+				if ($msg['class'] == $class)
+				{
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+	
+	function get_messages($src = 'default', $class = '')
+	{
+		$messages = array();
+		if (empty($src) && empty($class))
+		{
+			return $_SESSION['ex_messages'];
+		}
+
+		if (!is_array($_SESSION['ex_messages']))
+		{
+			return $messages;
+		}
+
+		if (empty($src))
+		{
+			foreach ($_SESSION['ex_messages'] as $src => $grp)
+			{
+				foreach ($grp as $msg)
+				{
+					if (!empty($class) && $msg['class'] != $class)
+					{
+						continue;
+					}
+					$messages[] = $msg;
+				}
+			}
+		}
+		elseif (is_array($_SESSION['ex_messages'][$src]))
+		{
+			if (empty($class))
+			{
+				return $_SESSION['ex_messages'][$src];
+			}
+			else
+			{
+				foreach ($_SESSION['ex_messages'][$src] as $msg)
+				{
+					if ($msg['class'] != $class)
+					{
+						continue;
+					}
+					$messages[] = $msg;
+				}
+			}
+		}
+		return $messages;
+	}
+	
+	function clear_messages($src = '', $class = '')
+	{
+		global $error_string;
+
+		if (empty($src) && empty($class))
+		{
+			unset($_SESSION['ex_messages']);
+			unset($error_string);
+		}
+
+		if (!is_array($_SESSION['ex_messages']))
+		{
+			return;
+		}
+
+		if (empty($src))
+		{
+			foreach ($_SESSION['ex_messages'] as $src => $grp)
+			{
+				$new_grp = array();
+				foreach ($grp as $msg)
+				{
+					if ($msg['class'] != $class)
+					{
+						$new_grp[] = $msg;
+					}
+				}
+				if (count($new_grp) > 0)
+				{
+					$_SESSION['ex_messages'][$src] = $new_grp;
+				}
+				else
+				{
+					unset($_SESSION['ex_messages'][$src]);
+				}
+			}
+		}
+		elseif (empty($class))
+		{
+			unset($_SESSION['ex_messages'][$src]);
+		}
+		else
+		{
+			$new_grp = array();
+			foreach ($_SESSION['ex_messages'][$src] as $msg)
+			{
+				if ($msg['class'] != $class)
+				{
+					$new_grp[] = $msg;
+				}
+			}
+			if (count($new_grp) > 0)
+			{
+				$_SESSION['ex_messages'][$src] = $new_grp;
+			}
+			else
+			{
+				unset($_SESSION['ex_messages'][$src]);
+			}
+		}
+	}
+	
+	function display_messages($tpl, $block = 'MAIN')
+	{
+		global $lang;
+		if (!$this->check_messages())
+		{
+			return;
+		}
+		$block = (!empty($block)) ? $block.'.' : '';
+		$errors = $this->get_messages('', 'error');
+		if (count($errors) > 0)
+		{
+			foreach ($errors as $msg)
+			{
+				$text = isset($lang[$msg['text']]) ? $lang[$msg['text']] : $msg['text'];
+				$tpl->assign('ROW_MSG', $text);
+				$tpl->parse($block.'MESSAGE.ROW');
+			}
+			$tpl->parse($block.'MESSAGE');
+		}
+		$this->clear_messages();
+	}
+	
+	function reportError($message, $src = 'default')
+	{
+		global $error;
+		$error ? $error++ : $error = 1;
+		$this->message($message, 'error', $src);
+	}
+	
+	function message($text, $class = 'ok', $src = 'default')
+	{
+		global $config;
+		if (!$config['msg_separate'])
+		{
+			$src = 'default';
+		}
+		$_SESSION['ex_messages'][$src][] = array(
+			'text' => $text,
+			'class' => $class
+		);
+	}
+
+	function error_found()
+	{
+		global $error, $error_string;
+		return (bool) $error || !empty($error_string);
+	}
+	
 	function install_config_replace(&$file_contents, $config_name, $config_value)
 	{
 		$file_contents = preg_replace("#^\\\$config\['$config_name'\]\s*=\s*'.*?';#m",
@@ -775,18 +948,18 @@ class Excursion {
 	
 	function rc($name, $params = array())
 	{
-		global $R, $L, $theme_reload;
+		global $R, $lang, $theme_reload;
 		if (isset($R[$name]) && is_array($theme_reload))
 		{
 			$R[$name] = (!empty($theme_reload['R'][$name]) && $theme_reload['R'][$name] != $R[$name]) ? $theme_reload['R'][$name] : $R[$name];
 		}
-		elseif (isset($L[$name]) && is_array($theme_reload))
+		elseif (isset($lang[$name]) && is_array($theme_reload))
 		{
-			$L[$name] = (!empty($theme_reload['L'][$name]) && $theme_reload['L'][$name] != $L[$name]) ? $theme_reload['L'][$name] : $L[$name];
+			$lang[$name] = (!empty($theme_reload['L'][$name]) && $theme_reload['L'][$name] != $lang[$name]) ? $theme_reload['L'][$name] : $lang[$name];
 		}
 		
 		$res = isset($R[$name]) ? $R[$name]
-			: (isset($L[$name]) ? $L[$name] : $name);
+			: (isset($lang[$name]) ? $lang[$name] : $name);
 		is_array($params) ? $args = $params : parse_str($params, $args);
 		if (preg_match_all('#\{\$(\w+)\}#', $res, $matches, PREG_SET_ORDER))
 		{
@@ -816,57 +989,9 @@ class Excursion {
 		return $attr_str;
 	}
 	
-	function get_messages($src = 'default', $class = '')
-	{
-		$messages = array();
-		if (empty($src) && empty($class))
-		{
-			return $_SESSION['messages'];
-		}
-
-		if (!is_array($_SESSION['messages']))
-		{
-			return $messages;
-		}
-
-		if (empty($src))
-		{
-			foreach ($_SESSION['messages'] as $src => $grp)
-			{
-				foreach ($grp as $msg)
-				{
-					if (!empty($class) && $msg['class'] != $class)
-					{
-						continue;
-					}
-					$messages[] = $msg;
-				}
-			}
-		}
-		elseif (is_array($_SESSION['messages'][$src]))
-		{
-			if (empty($class))
-			{
-				return $_SESSION['messages'][$src];
-			}
-			else
-			{
-				foreach ($_SESSION['messages'][$src] as $msg)
-				{
-					if ($msg['class'] != $class)
-					{
-						continue;
-					}
-					$messages[] = $msg;
-				}
-			}
-		}
-		return $messages;
-	}
-	
 	function implode_messages($src = 'default', $class = '')
 	{
-		global $R, $L, $error_string;
+		global $R, $lang, $error_string;
 		$res = '';
 
 		if (!is_array($_SESSION['messages']))
@@ -877,7 +1002,7 @@ class Excursion {
 		$messages = get_messages($src, $class);
 		foreach ($messages as $msg)
 		{
-			$text = isset($L[$msg['text']]) ? $L[$msg['text']] : $msg['text'];
+			$text = isset($lang[$msg['text']]) ? $lang[$msg['text']] : $msg['text'];
 			$res .= $this->rc('code_msg_line', array('class' => $msg['class'], 'text' => $text));
 		}
 

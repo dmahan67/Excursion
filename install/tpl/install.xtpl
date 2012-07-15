@@ -15,7 +15,7 @@
 		width:800px;
 		}
 		body {
-		padding-top: 60px;
+		padding-top: 20px;
 		padding-bottom: 40px;
 		}
 	</style>
@@ -26,25 +26,6 @@
 
 </head>
 <body>
-
-	<div class="navbar navbar-fixed-top">
-
-		<div class="navbar-inner">
-
-			<div class="container">
-
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
-				<a class="brand" href="#">Excursion</a>
-			
-			</div>
-
-		</div>
-
-	</div>
 
 	<div class="container">
 
@@ -57,94 +38,174 @@
 
 		</div>
 		
-		<form action="install.php" method="post" class="form-horizontal">
-		<!-- BEGIN: STEP_1 -->
+		<!-- BEGIN: MESSAGE -->
+		<div class="warning">
+			<ul>
+				<!-- BEGIN: ROW -->
+				<li>{ROW_MSG}</li>
+				<!-- END: ROW -->
+			</ul>
+		</div>
+		<!-- END: MESSAGE -->
+		
+		<!-- BEGIN: STEP1 -->
+		<form action="install.php?action=send" method="post">
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th colspan="2" class="centerall">Server Information</th>
+					<th colspan="2" class="title">Server Information</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td class="muted">PHP Version</td>
-					<td>{INSTALL_PHP_VER}</td>
-				</tr>
-				<tr>
-					<td class="muted">MySQL</td>
-					<td>{INSTALL_MYSQL}</td>
-				</tr>
-			</tbody>
+			<tr>
+				<th><span class="php">PHP</span></th>
+				<td class="align-right">{INSTALL_PHP_VER}</td>
+			</tr>
+			<tr>
+				<th><span class="mbstring">mbstring</span></th>
+				<td class="align-right">{INSTALL_MBSTRING}</td>
+			</tr>
+			<tr>
+				<th><span class="mbstring">hash</span></th>
+				<td class="align-right">{INSTALL_HASH}</td>
+			</tr>
+			<tr>
+				<th><span class="mysql">MySQL</span></th>
+				<td class="align-right">{INSTALL_MYSQL}</td>
+			</tr>
 			<thead>
 				<tr>
-					<th colspan="2" class="centerall">File/Folder Permission</th>
+					<th colspan="2" class="title">File/Folder Permissions</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td class="muted">assets/avatars</td>
-					<td class="span1">{INSTALL_AV_DIR}</td>
-				</tr>
-				<tr>
-					<td class="muted">config.php</td>
-					<td>{INSTALL_CONFIG}</td>
-				</tr>
-				<tr>
-					<td class="muted">install/install.sql</td>
-					<td>{INSTALL_SQL_FILE}</td>
-				</tr>
-			</tbody>
+			<tr>
+				<th><span class="file">./config.php</span></th>
+				<td class="align-right">{INSTALL_CONFIG}</td>
+			</tr>
+			<tr>
+				<th><span class="file">./install/install.sql</span></th>
+				<td class="align-right">{INSTALL_SQL_FILE}</td>
+			</tr>
+			<tr>
+				<th><span class="folder">./assets/avatars/</span></th>
+				<td class="align-right">{INSTALL_AV_DIR}</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					It's important to make sure that all of the above information is correct, and marked as valid (represented by green).
+					If not, your installation may fail, or present problems later on. If you are encountering problems during your installation,
+					check through our <a href="">knowledge database</a>, and if your answers are not located there you may contact an 
+					<a href="">Excursion Team Member</a> directly.
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><button type="submit" name="submit">Continue Installation</button></td>
+			</tr>
 		</table>
+		<!-- END: STEP1 -->
 		
-		<p class="note">Before continuing, please ensure all of the above settings are marked complete (denoted by green font).</p>
-		
-		<fieldset>
-			<div class="form-actions">
-				<button type="submit" class="btn btn-primary">Next</button>
-			</div>
-		</fieldset>
-		<!-- END: STEP_1 -->
-		
-		<!-- BEGIN: STEP_2 -->
-		<input type="hidden" name="step" value="2" />
-		
-			<fieldset>
-				<div class="control-group">
-					<label class="control-label">Database Host</label>
-					<div class="controls">
-						<input type="text" class="input-xlarge" value="{PHP.config.mysqlhost}" id="db_host" name="db_host">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Database Port</label>
-					<div class="controls">
-						<input type="text" class="input-xlarge" value="{PHP.config.mysqlport}" id="db_port" name="db_port">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Database User</label>
-					<div class="controls">
-						<input type="text" class="input-xlarge" value="{PHP.config.mysqluser}" id="db_user" name="db_user">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Database Password</label>
-					<div class="controls">
-						<input type="text" class="input-xlarge" value="{PHP.config.mysqlpassword}" id="db_pass" name="db_pass">
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label">Database Name</label>
-					<div class="controls">
-						<input type="text" class="input-xlarge" value="{PHP.config.mysqldb}" id="db_name" name="db_name">
-					</div>
-				</div>
-				<div class="form-actions">
-					<button type="submit" class="btn btn-primary">Next</button>
-				</div>
-			</fieldset>
-		<!-- END: STEP_2 -->
+		<!-- BEGIN: STEP2 -->
+		<form action="install.php?action=send" method="post">
+			<table class="table">
+				<tr>
+					<th>Database host</th>
+					<td><input type="text" name="db_host" value="{INSTALL_DB_HOST}" size="32" /></td>
+				</tr>
+				<tr>
+					<th>Database port</th>
+					<td><input type="text" name="db_port" value="{INSTALL_DB_PORT}" size="32" /><br />
+					<span class="help-block">Only if it is other than default</span></td>
+				</tr>
+				<tr>
+					<th>Database user</th>
+					<td><input type="text" name="db_user" value="{INSTALL_DB_USER}" size="32" /></td>
+				</tr>
+				<tr>
+					<th>Database password</th>
+					<td><input type="password" name="db_pass" size="32" /></td>
+				</tr>
+				<tr>
+					<th>Database name</th>
+					<td><input type="text" name="db_name" value="{INSTALL_DB_NAME}" size="32" /></td>
+				</tr>
+				<tr>
+					<td colspan="2">First you need to create a blank database with the above name on your server, if this user has no permission to create new databases.</td>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="submit" name="submit">Continue Installation</button></td>
+				</tr>
+			</table>
 		</form>
+		<!-- END: STEP2 -->
+		
+		<!-- BEGIN: STEP3 -->
+		<form action="install.php?action=send" method="post">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th style="width:32px;">&nbsp;</th>
+						<th><span class="plugin">Plugins</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- BEGIN: ROW -->
+					<tr>
+						<td class="centerall"><input type="checkbox" name="install_plugins[{CODE}]" {CHECKED} /></td>
+						<td>{NAME}<br /><small>{DESC}</small></td>
+					</tr>
+					<!-- END: ROW -->
+					<tr>
+						<td colspan="2"><button type="submit" name="submit">Continue Installation</button></td>
+					</tr>
+				<tbody>
+			</table>
+		</form>
+		<!-- END: STEP3 -->
+		
+		<!-- BEGIN: STEP4 -->
+		<form action="install.php?action=send" method="post">
+			<table class="table">
+				<thead>
+					<tr>
+						<th colspan="2" class="title">Create administrator account</th>
+					</tr>
+				</thead>
+				<tr>
+					<th>Username</th>
+					<td>{FORM_USERNAME}</td>
+				</tr>
+				<tr>
+					<th>Password</th>
+					<td>{FORM_PASSWORD}</td>
+				</tr>
+				<tr>
+					<th>Repeat Password</th>
+					<td>{FORM_REPEAT_PASSWORD}</td>
+				</tr>
+				<tr>
+					<th>Email</th>
+					<td>{FORM_EMAIL}</td>
+				</tr>
+				<tr>
+					<th>Security Question</th>
+					<td>{QUESTIONS}</td>
+				</tr>
+				<tr>
+					<th>Answer</th>
+					<td>{FORM_SQ_ANSWER}</td>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="submit" name="submit">Continue Installation</button></td>
+				</tr>
+			</table>
+		</form>
+		<!-- END: STEP4 -->
+		
+		<!-- BEGIN: STEP5 -->
+		<h3>Installation Complete!</h3>
+		<p>Excursion web installer is complete. Please remove install.php from your directory.</p>
+		<br />
+		<a href="login.php">Log-in to your account</a>
+		<!-- END: STEP5 -->
 
 		<hr>
 

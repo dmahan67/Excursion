@@ -47,4 +47,20 @@ $R['javascript'] = '<script src="{$value}" type="text/javascript"></script>';
 $R['css'] = '<link href="{$value}" rel="stylesheet">';
 $R['code_title_page_num'] = ' (' . $lang['Page'] . ' {$num})';
 
+/*
+ * Installer
+ */
+
+$R['install_code_available'] = '<span class="valid">'.$lang['Available'].'</span>';
+$R['install_code_found'] = '<span class="valid">'.$lang['Found'].'</span>';
+$R['install_code_invalid'] = '<span class="invalid">{$text}</span>';
+$R['install_code_not_available'] = '<span class="invalid">'.$lang['na'].'</span>';
+$R['install_code_not_found'] = '<span class="invalid">'.$lang['nf'].'</span>';
+$R['install_code_recommends'] = '<p class="recommends">'.$lang['install_recommends'].': '
+	.$lang['Modules'].' - {$modules_list}; '.$lang['Plugins'].' - {$plugins_list}</p>';
+$R['install_code_requires'] = '<p class="requires">'.$lang['install_requires'].': '
+	.$lang['Modules'].' - {$modules_list}; '.$lang['Plugins'].' - {$plugins_list}</p>';
+$R['install_code_valid'] = '<span class="valid">{$text}</span>';
+$R['install_code_writable'] = '<span class="valid">'.$lang['install_writable'].'</span>';
+
 ?>

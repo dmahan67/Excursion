@@ -7,11 +7,15 @@
 		<div class="content">
 			<div class="login" id="theme-my-login">
 			
-				<!-- BEGIN: ERRORS -->
-				<p class="error">
-					{ERRORS_TEXT}
-				</p>
-				<!-- END: ERRORS -->	
+				<!-- BEGIN: MESSAGE -->
+				<div class="alert-message block-messag" data-alert="alert">
+					<ul>
+						<!-- BEGIN: ROW -->
+						<li>{ROW_MSG}</li>
+						<!-- END: ROW -->
+					</ul>
+				</div>
+				<!-- END: MESSAGE -->	
 				<!-- BEGIN: MAINTENANCE -->
 				<p class="message">
 					<strong>{PHP.lang.maint}</strong><br />

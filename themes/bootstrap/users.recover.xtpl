@@ -14,7 +14,18 @@
 						<li class="active">Recovery Tools</li>
 					</ul>
 				</div>
-			
+				
+				<!-- BEGIN: MESSAGE -->
+				<div class="alert-message block-message info fade in" data-alert="alert">
+				<a class="close" href="#">&times;</a>
+					<ul>
+						<!-- BEGIN: ROW -->
+						<li>{ROW_MSG}</li>
+						<!-- END: ROW -->
+					</ul>
+				</div>
+				<!-- END: MESSAGE -->
+		
 				<!-- BEGIN: RECOVERY_OPTIONS -->
 				<div class="span7">
 				
@@ -41,13 +52,6 @@
 				</div>
 				
 				<div class="span7">
-				
-					<!-- BEGIN: VALIDATION_ERRORS -->
-					<div class="alert-message block-message error fade in" data-alert="alert" >
-						<a class="close" href="#">&times;</a>
-						<p>{ERRORS_TEXT}</p>
-					</div>
-					<!-- END: VALIDATION_ERRORS -->
 				
 					<h5>Resend account validation email</h5>
 					

@@ -4922,3 +4922,53 @@ button.close {
     overflow: visible !important;
   }
 }
+.table td.align-right {
+  text-align:right;
+}
+.table td.align-left {
+  text-align:left;
+}
+.table thead th.title {
+  text-align:center;
+  font-size:14px;
+}
+.table th.title {
+  vertical-align:top;
+}
+span.php {background: url(../img/icons.png) no-repeat 0 -32px;padding-left:20px;padding-bottom:2px;}
+span.mbstring {background: url(../img/icons.png) no-repeat 0 -48px;padding-left:20px;padding-bottom:2px;}
+span.mysql {background: url(../img/icons.png) no-repeat 0 -64px;padding-left:20px;padding-bottom:2px;}
+span.file {background: url(../img/icons.png) no-repeat 0 0;padding-left:20px;padding-bottom:2px;}
+span.folder {background: url(../img/icons.png) no-repeat 0 -16px;padding-left:20px;padding-bottom:2px;}
+span.plugin {background: url(../img/icons.png) no-repeat 0 -112px;padding-left:20px;padding-bottom:2px;}
+span.plugins {
+	background: url(../img/icons.png) no-repeat 0 -143px;
+	padding-left: 18px;
+}
+span.valid {color: #34A100;}
+span.invalid {color: #EA0000;}
+div.warning { 
+	color:#9f6000; 
+	background-color:#feefb3; 
+	background-image:url(../../../assets/images/warning.png); 
+	border:1px solid #9f6000;
+	line-height:2em; 
+	margin:20px 0; 
+	padding:10px 50px; 
+	background-position:15px 50%; 
+	background-repeat:no-repeat;
+	clear:both;
+}
+.warning { 
+	background-image:url(../../../assets/images/warning.png); 
+}
+div.warning ul li {
+	list-style: none;
+}
+div.warning ul {
+	padding:15px 0 0 0;
+}
+table.table td.centerall {
+	text-align:center;
+	vertical-align:center;
+}

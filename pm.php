@@ -30,25 +30,17 @@ if($m == 'send')
 		$insert['touser'] = $excursion->import('touser', 'P', 'INT');
 		$insert['fromuser'] = $user['id'];
 		
-		if (mb_strlen($insert['title']) < 2) $error .= $lang['page_error_title_length'].'<br />';
-		if (mb_strlen($insert['text']) < 4) $error .= $lang['page_error_text_length'].'<br />';
+		$user_exists = (bool)$db->query("SELECT id FROM members WHERE id = ? LIMIT 1", array($insert['touser']))->fetch();
 		
-		if(empty($error))
+		if (mb_strlen($insert['title']) < 2) $excursion->reportError('error_title_length');
+		if (mb_strlen($insert['text']) < 4) $excursion->reportError('error_text_length');
+		if (empty($insert['touser']) || !$user_exists) $excursion->reportError('pm_error_touser_notexist');
+		
+		if(!$excursion->error_found())
 		{
 		
-			$db->insert('pm', $insert);
-			$id = $db->lastInsertId();
-			
+			$db->insert('pm', $insert);			
 			header('Location: pm.php');
-			
-		}
-		if(!empty($error))
-		{
-		
-			$xtpl->assign(array(
-				'ERRORS_TEXT' => $error
-			));
-			$xtpl->parse('MAIN.ERRORS');
 			
 		}
 	
@@ -215,6 +207,8 @@ else
 	$xtpl->assign('PAGINATION', $navigation = $pagination->create_links());
 
 }
+
+$excursion->display_messages($xtpl);
 	
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');

@@ -14,6 +14,17 @@
 						<li><a href="list.php?c={CAT}">{CAT}</a> <span class="divider">/</span></li>
 						<li class="active">{TITLE}</li>
 					</ul>
+					
+					<!-- BEGIN: MESSAGE -->
+						<div class="alert-message block-message info fade in" data-alert="alert">
+						<a class="close" href="#">&times;</a>
+							<ul>
+								<!-- BEGIN: ROW -->
+								<li>{ROW_MSG}</li>
+								<!-- END: ROW -->
+							</ul>
+						</div>
+					<!-- END: MESSAGE -->
 				</div>
 			
 				<div class="span9">
@@ -69,12 +80,6 @@
 					</div>
 					
 					<a name="section"></a>
-					<!-- BEGIN: ERRORS -->
-					<div class="alert-message block-message error fade in" data-alert="alert" >
-						<a class="close" href="#">&times;</a>
-						<p>{ERRORS_TEXT}</p>
-					</div>
-					<!-- END: ERRORS -->
 
 					<!-- BEGIN: REPLY -->
 			

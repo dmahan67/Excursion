@@ -24,6 +24,8 @@ foreach ($excursion->Hook('index.tags') as $pl)
 }
 /* ===== */
 
+$excursion->display_messages($xtpl);
+
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');
 
