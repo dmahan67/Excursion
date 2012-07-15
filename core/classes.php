@@ -477,6 +477,7 @@ class Excursion {
 	{
 		$file_contents = preg_replace("#^\\\$config\['$config_name'\]\s*=\s*'.*?';#m",
 			"\$config['$config_name'] = '$config_value';", $file_contents);
+		file_put_contents('config.php', $file_contents);
 	}
 
 	function import_langfile($name, $type = 'plug', $default = 'en', $lang = null)

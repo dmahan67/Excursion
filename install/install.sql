@@ -1,3 +1,21 @@
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories` (
+	`id` mediumint NOT NULL auto_increment,
+	`code` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+	`path` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+	`title` varchar(128) collate utf8_unicode_ci NOT NULL,
+	`desc` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+	PRIMARY KEY  (`id`),
+	KEY `code` (`code`),
+	KEY `path` (`path`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `categories` (`id`, `code`, `path`, `title`, `desc`) VALUES
+	(1, 'news', 1, 'News', 'A list of all important updates'),
+	(2, 'articles', 2, 'Articles', 'Interesting reads around the web'),
+	(3, 'downloads', 3, 'Downloads', 'Files available for download');
+	
+DROP TABLE IF EXISTS `config`;
 CREATE TABLE IF NOT EXISTS `config` (
 	`part` varchar(24) collate utf8_unicode_ci NOT NULL default 'core',
 	`title` varchar(64) collate utf8_unicode_ci NOT NULL default '',
@@ -23,6 +41,22 @@ INSERT INTO `config` (`part`, `title`, `order`, `type`, `value`, `default`, `var
 	('core', 'maxpages', '10', '0', '10', '10', '', ''),
 	('core', 'admin_email', '11', '0', '', '', '', '');
 
+DROP TABLE IF EXISTS `groups`;
+CREATE TABLE IF NOT EXISTS `groups` (
+	`id` int NOT NULL auto_increment,
+	`title` varchar(64) collate utf8_unicode_ci NOT NULL default '',
+	`desc` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+	`icon` varchar(128) collate utf8_unicode_ci NOT NULL default '',
+	PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5;
+
+INSERT INTO `groups` (`id`, `title`, `desc`, `icon`) VALUES
+	(1, 'Inactive', 'Inactive', ''),
+	(2, 'Banned', 'Banned', ''),
+	(3, 'Members', 'Members', ''),
+	(4, 'Administrators', 'Administrators', '');
+	
+DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
 	`id` int NOT NULL auto_increment,
 	`groupid` int NOT NULL default '1',
@@ -43,47 +77,7 @@ CREATE TABLE IF NOT EXISTS `members` (
 	KEY `regdate` (`regdate`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `groups` (
-	`id` int NOT NULL auto_increment,
-	`title` varchar(64) collate utf8_unicode_ci NOT NULL default '',
-	`desc` varchar(255) collate utf8_unicode_ci NOT NULL default '',
-	`icon` varchar(128) collate utf8_unicode_ci NOT NULL default '',
-	PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5;
-
-INSERT INTO `groups` (`id`, `title`, `desc`, `icon`) VALUES
-	(1, 'Inactive', 'Inactive', ''),
-	(2, 'Banned', 'Banned', ''),
-	(3, 'Members', 'Members', ''),
-	(4, 'Administrators', 'Administrators', '');
-
-CREATE TABLE IF NOT EXISTS `plugins` (
-	`id` mediumint NOT NULL auto_increment,
-	`hook` varchar(64) collate utf8_unicode_ci NOT NULL default '',
-	`code` varchar(64) collate utf8_unicode_ci NOT NULL default '',
-	`owner` varchar(64) collate utf8_unicode_ci NOT NULL default 'core',
-	`part` varchar(32) collate utf8_unicode_ci NOT NULL default '',
-	`file` varchar(255) collate utf8_unicode_ci NOT NULL default '',
-	`active` tinyint unsigned NOT NULL default '1',
-	PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE IF NOT EXISTS `categories` (
-	`id` mediumint NOT NULL auto_increment,
-	`code` varchar(255) collate utf8_unicode_ci NOT NULL default '',
-	`path` varchar(255) collate utf8_unicode_ci NOT NULL default '',
-	`title` varchar(128) collate utf8_unicode_ci NOT NULL,
-	`desc` varchar(255) collate utf8_unicode_ci NOT NULL default '',
-	PRIMARY KEY  (`id`),
-	KEY `code` (`code`),
-	KEY `path` (`path`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-INSERT INTO `categories` (`id`, `code`, `path`, `title`, `desc`) VALUES
-	(1, 'news', 1, 'News', 'A list of all important updates'),
-	(2, 'articles', 2, 'Articles', 'Interesting reads around the web'),
-	(3, 'downloads', 3, 'Downloads', 'Files available for download');
-
+DROP TABLE IF EXISTS `pages`;
 CREATE TABLE IF NOT EXISTS `pages` (
 	`id` int(11) unsigned NOT NULL auto_increment,
 	`state` tinyint(1) unsigned NOT NULL default '0',
@@ -104,6 +98,34 @@ CREATE TABLE IF NOT EXISTS `pages` (
 INSERT INTO `pages` (`state`, `cat`, `title`, `desc`, `text`, `owner`, `date`, `page_file`, `page_url`) VALUES
 	(1, 'news', 'Welcome!', '', 'Congratulations! Your website has been successfully installed.', 1, UNIX_TIMESTAMP(), '', '');
 
+DROP TABLE IF EXISTS `plugins`;
+CREATE TABLE IF NOT EXISTS `plugins` (
+	`id` mediumint NOT NULL auto_increment,
+	`hook` varchar(64) collate utf8_unicode_ci NOT NULL default '',
+	`code` varchar(64) collate utf8_unicode_ci NOT NULL default '',
+	`owner` varchar(64) collate utf8_unicode_ci NOT NULL default 'core',
+	`part` varchar(32) collate utf8_unicode_ci NOT NULL default '',
+	`file` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+	`active` tinyint unsigned NOT NULL default '1',
+	PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `pm`;
+CREATE TABLE IF NOT EXISTS `pm` (
+	`id` int(11) unsigned NOT NULL auto_increment,
+	`date` int(11) NOT NULL default '0',
+	`fromuser` int(11) NOT NULL default '0',
+	`touser` int(11) NOT NULL default '0',
+	`title` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+	`text` text collate utf8_unicode_ci NOT NULL,
+	`fromstate` tinyint(2) NOT NULL default '0',
+	`tostate` tinyint(2) NOT NULL default '0',
+	PRIMARY KEY  (`id`),
+	KEY `fromuser` (`fromuser`),
+	KEY `touser` (`touser`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `security_questions`;
 CREATE TABLE IF NOT EXISTS `security_questions` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`question` varchar(255) NOT NULL,
@@ -119,16 +141,3 @@ INSERT INTO `security_questions` (`question`) VALUES
 	('What was the make/model of your first car?'),
 	('What is your favorite musician?');
 
-CREATE TABLE IF NOT EXISTS `pm` (
-	`id` int(11) unsigned NOT NULL auto_increment,
-	`date` int(11) NOT NULL default '0',
-	`fromuser` int(11) NOT NULL default '0',
-	`touser` int(11) NOT NULL default '0',
-	`title` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-	`text` text collate utf8_unicode_ci NOT NULL,
-	`fromstate` tinyint(2) NOT NULL default '0',
-	`tostate` tinyint(2) NOT NULL default '0',
-	PRIMARY KEY  (`id`),
-	KEY `fromuser` (`fromuser`),
-	KEY `touser` (`touser`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

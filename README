@@ -15,14 +15,10 @@ steps; your Excursion website will be up and running in no time.
 	2.	Create a MySQL database (or use a currently existing 
 		database), and run install.sql
 		
-	3.	Open the configuration file in the main directory. 
-		(excursion/config.php). Update the configuration 
-		settings to your likings.
-		
-	4.	Visit your website, and create an account. By default 
-		the first member account is given administrator rights.
+	3.	Visit your website URL, and you will be automatically
+		redirected to the install script.
 -------------------------------------------------------------------
-
+All configuration is done through the administration panel.
 -------------------------------------------------------------------
 Xtemplate 	- 	http://www.phpxtemplate.org/
 Bootstrap 	- 	http://twitter.github.com/bootstrap/
@@ -30,3 +26,5 @@ CKEditor 	- 	http://ckeditor.com/
 JQuery		-	http://jquery.com/
 Akismet		-	http://akismet.com/
 Gylphicon	-	http://glyphicons.com/
+WPTouch 	-	http://www.bravenewcode.com/
+simpleCart	-	http://simplecartjs.com/

@@ -150,7 +150,7 @@ elseif($step == 2)
 			$excursion->install_config_replace($config_contents, 'mysqluser', $db_user);
 			$excursion->install_config_replace($config_contents, 'mysqlpassword', $db_pass);
 			$excursion->install_config_replace($config_contents, 'mysqldb', $db_name);
-
+			
 			$sql_file = file_get_contents('install/install.sql');
 			$error = $db->runScript($sql_file);
 
