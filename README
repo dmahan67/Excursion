@@ -13,7 +13,7 @@ steps; your Excursion website will be up and running in no time.
 	1.	Upload the package to your web server
 	
 	2.	Create a MySQL database (or use a currently existing 
-		database), and run install.sql
+		database)
 		
 	3.	Visit your website URL, and you will be automatically
 		redirected to the install script.
