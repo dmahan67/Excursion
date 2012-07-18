@@ -10,15 +10,6 @@ session_start();
 
 require_once 'core/database.php';
 
-/* ========== INSTALL REDIRECT ========== */
-
-if($config['new_install'] < 5)
-{
-	header('Location: install.php');
-	exit;
-}
-
-
 /* ========== CONNECT TO DATABASE ========== */
 
 try

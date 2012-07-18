@@ -9,6 +9,9 @@
 	<meta name="keywords" content="{PHP.config.keywords}">
 	<meta name="author" content="Dyllon Mahan & Brock Burkholder">
 	
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	
 	<link href="{PHP.theme.dir}/css/bootstrap.min.css" rel="stylesheet">	
 	<link href="{PHP.theme.dir}/css/style.css" rel="stylesheet">
 	<script src="{PHP.theme.dir}/js/app.min.js" type="text/javascript" charset="utf-8"></script>
