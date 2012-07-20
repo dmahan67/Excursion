@@ -40,44 +40,10 @@
 					<li><a href="list.php?c=downloads">{PHP.lang.downloads}</a></li>
 				</ul>
 				
-				<!-- IF {PHP.config.cart.installed} -->
-				<ul>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle">
-							<i class="icon-shopping-cart icon-white"></i> Shopping Cart (<span class="simpleCart_quantity"></span>)
-						</a>
-						<ul class="dropdown-menu menu-cart">
-							<li class="cart-top">
-								<div><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></div>
-							</li>
-							<li>
-								<div class="simpleCart_items"></div>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<table class="main">
-									<tr>
-										<td>Shipping</td>
-										<td class="align-right"><span class="simpleCart_shipping"></span></td>
-									</tr>
-									<tr>
-										<td>Tax</td>
-										<td class="align-right"><span class="simpleCart_tax"></span></td>
-									</tr>
-								</table>
-							</li>
-							<li class="divider"></li>
-							<li>
-								<table class="main">
-									<tr>
-										<td><a href="javascript:;" class="simpleCart_checkout">Checkout</a></td>
-										<td class="align-right"><strong>Total:</strong> <span class="simpleCart_grandTotal"></span></td>
-									</tr>
-								</table>
-							</li>
-						</ul>
-					</li>
-				</ul>
+				<!-- IF {PHP.plugins.search.installed} -->
+				<form action="plugin.php?p=search" method="post" class="navbar-search pull-left">
+					<input type="text" name="query" class="search-query" placeholder="Search">
+				</form>
 				<!-- ENDIF -->
 				
 				<ul class="nav secondary-nav">

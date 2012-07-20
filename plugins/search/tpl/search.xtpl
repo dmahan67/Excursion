@@ -1,0 +1,79 @@
+<!-- BEGIN: MAIN -->
+		<div class="content">
+		
+			<div class="page-header">
+				<h1>{PHP.lang.search} <small>{PHP.lang.searchsub}</small></h1>
+			</div>
+			
+			<div class="row">
+			
+				<div class="span14">
+					<ul class="breadcrumb">
+						<li><img src="{PHP.theme.dir}/img/home.png" height="12" width="12" /></li>
+						<li><a href="index.php">{PHP.lang.home}</a> <span class="divider">/</span></li>
+						<li class="active">{PHP.lang.search}</li>
+					</ul>
+				
+				
+					<!-- BEGIN: MESSAGE -->
+					<div class="alert-message block-message info fade in" data-alert="alert">
+					<a class="close" href="#">&times;</a>
+						<ul>
+							<!-- BEGIN: ROW -->
+							<li>{ROW_MSG}</li>
+							<!-- END: ROW -->
+						</ul>
+					</div>
+					<!-- END: MESSAGE -->
+					
+					<div class="well-nopad">
+					
+						<h5>Search options</h5>
+					
+						<form action="{FORM_ACTION}" method="post">
+							{FORM_TEXT}
+							<input type="submit" name="submit" value="search">
+						</form>
+					
+					</div>
+					
+					<!-- BEGIN: RESULTS -->
+					
+					<h4>Results</h4>
+					
+					<table class="table zebra-striped" id="sortTable">
+						<thead>
+							<tr>
+								<th class="span1">#</th>
+								<th>{PHP.lang.title}</th>
+								<th class="span4">{PHP.lang.author}</th>
+								<th class="span4">{PHP.lang.date}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- BEGIN: ROW -->
+							<tr>
+								<td>{ID}</td>
+								<td><a href="page.php?id={ID}">{TITLE}</a></td>
+								<td>{OWNER}</td>
+								<td>{DATE}</td>
+							</tr>
+							<!-- END: ROW -->
+						
+							<!-- IF {COUNT} == '0' -->
+							<tr>
+								<td colspan="4" class="center">{PHP.lang.search_empty}</td>
+							</tr>
+							<!-- ENDIF -->
+						</tbody>
+					</table>					
+					<!-- END: RESULTS -->
+					
+					{PAGINATION}
+				
+				</div>
+				
+			</div>
+			
+		</div>
+<!-- END: MAIN -->

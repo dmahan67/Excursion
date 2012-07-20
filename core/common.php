@@ -95,6 +95,8 @@ if (!$plugins)
 	
 			$plugins[$row['hook']][] = $row;
 			$plugins_active[$row['code']] = true;
+			$plugins[$row['code']]['installed'] = true;
+			$plugins[$row['code']]['standalone'] = ($row['hook'] == 'standalone' ?  true : false);
 	
 		}
 	

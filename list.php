@@ -46,8 +46,6 @@ if(!empty($c))
 		/* ===== */
 		
 		$DateTime = new DateTime(date($config['date_medium'], $row['date']));
-		$shortMonth = array('JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC');
-		$numberMonth = array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
 
 		$xtpl->assign(array(
 			'ID' => (int) $row['id'],

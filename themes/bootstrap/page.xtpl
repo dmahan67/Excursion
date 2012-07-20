@@ -98,21 +98,6 @@
 				</div>
 				
 				<div class="span4n5">
-				
-					<!-- IF {CART_PRICE} > 0 -->
-					<div class="well simpleCart_shelfItem">
-										
-						<h5 class="item_name">{TITLE}</h5><span class="item_number hidden">{ID}</span>
-						Price: <span class="item_price">${CART_PRICE}</span><br /><br />
-						<table class="main">
-							<tr>
-								<td><input value="1" class="input-mini item_Quantity" type="text"></td>
-								<td><a class="item_add btn" href="javascript:;"><i class="icon-shopping-cart"></i> Add to Cart</a></td>
-							</tr>
-						</table>
-						
-					</div>
-					<!-- ENDIF -->
 					
 					<h4>{PHP.lang.pinfo}</h4>
 					

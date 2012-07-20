@@ -59,7 +59,9 @@ $lang['September_s'] = 'Sep';
 $lang['October_s'] = 'Oct';
 $lang['November_s'] = 'Nov';
 $lang['December_s'] = 'Dec';
- 
+$shortMonth = array('JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC');
+$numberMonth = array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12');
+
 /* ========== MESSAGES ========== */
 $lang['message_blank_title'] = 'Error';
 $lang['message_blank_subtitle'] = 'Fatal error encountered';
