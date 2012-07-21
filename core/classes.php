@@ -253,7 +253,8 @@ class Excursion {
 
 	function checkAuth($group, $section)
 	{
-	
+		global $db, $user, $config;
+		
 		if($group >= 3)
 		{
 		
@@ -472,13 +473,6 @@ class Excursion {
 		global $error, $error_string;
 		return (bool) $error || !empty($error_string);
 	}
-	
-	function install_config_replace(&$file_contents, $config_name, $config_value)
-	{
-		$file_contents = preg_replace("#^\\\$config\['$config_name'\]\s*=\s*'.*?';#m",
-			"\$config['$config_name'] = '$config_value';", $file_contents);
-		file_put_contents('config.php', $file_contents);
-	}
 
 	function import_langfile($name, $type = 'plug', $default = 'en', $lang = null)
 	{
@@ -519,35 +513,6 @@ class Excursion {
 				return "plugins/$name/lang/$name.lang.$default.php";
 			}
 		}
-	}
-	
-	function structure_children($area, $cat, $allsublev = true,  $firstcat = true, $sqlprep = true)
-	{
-		global $structure, $config, $db;
-
-		$mtch = $structure[$area][$cat]['path'].'.';
-		$mtchlen = mb_strlen($mtch);
-		$mtchlvl = mb_substr_count($mtch,".");
-
-		$catsub = array();
-		if ($cat != '' && $firstcat)
-		{
-			$catsub[] = $cat;
-		}
-
-		foreach ($structure[$area] as $i => $x)
-		{
-			if (($cat == '' || mb_substr($x['path'], 0, $mtchlen) == $mtch))
-			{
-				$subcat = mb_substr($x['path'], $mtchlen + 1);
-				if ($cat == '' || $allsublev || (!$allsublev && mb_substr_count($x['path'],".") == $mtchlvl))
-				{
-					$i = ($sqlprep) ? $db->prep($i) : $i;
-					$catsub[] = $i;
-				}
-			}
-		}
-		return($catsub);
 	}
 
 	function import_buffered($name, $value, $null = '')

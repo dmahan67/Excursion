@@ -142,14 +142,14 @@ elseif($step == 2)
 		if (!$excursion->error_found())
 		{
 			$config_contents = file_get_contents('config.php');
-			$excursion->install_config_replace($config_contents, 'mysqlhost', $db_host);
+			install_config_replace($config_contents, 'mysqlhost', $db_host);
 			if (!empty($db_port))
 			{
 				$excursion->install_config_replace($config_contents, 'mysqlport', $db_port);
 			}
-			$excursion->install_config_replace($config_contents, 'mysqluser', $db_user);
-			$excursion->install_config_replace($config_contents, 'mysqlpassword', $db_pass);
-			$excursion->install_config_replace($config_contents, 'mysqldb', $db_name);
+			install_config_replace($config_contents, 'mysqluser', $db_user);
+			install_config_replace($config_contents, 'mysqlpassword', $db_pass);
+			install_config_replace($config_contents, 'mysqldb', $db_name);
 			
 			$sql_file = file_get_contents('install/install.sql');
 			$error = $db->runScript($sql_file);
@@ -541,6 +541,12 @@ function plugin_install($name, $is_module = false, $update = false, $force_updat
 	}
 
 	return true;
+}
+function install_config_replace(&$file_contents, $config_name, $config_value)
+{
+	$file_contents = preg_replace("#^\\\$config\['$config_name'\]\s*=\s*'.*?';#m",
+		"\$config['$config_name'] = '$config_value';", $file_contents);
+	file_put_contents('config.php', $file_contents);
 }
  
 ?>

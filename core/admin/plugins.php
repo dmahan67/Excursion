@@ -249,8 +249,8 @@ switch($a)
 		
 		}
 		
-		$status_sql = $db->query("SELECT COUNT(*) FROM plugins WHERE code='$plugin' AND owner='plug' AND active='1' AND part='main' LIMIT 1")->fetchColumn();
-		$status = (($status_sql == '1') ? 'active' : 'inactive');
+		$status_sql = $db->query("SELECT COUNT(*) FROM plugins WHERE code='$plugin' AND owner='plug' AND active='1'")->fetchColumn();
+		$status = (($status_sql > 0) ? 'active' : 'inactive');
 		$icofile = 'plugins/' . $plugin . '/img/icon-' . $plugin . '.png';
 		
 		if($status=='active')
@@ -293,8 +293,8 @@ switch($a)
 			if (empty($info['Error']))
 			{
 		
-				$status_sql = $db->query("SELECT COUNT(*) FROM plugins WHERE code='$code' AND owner='plug' AND active='1' AND part='main' LIMIT 1")->fetchColumn();
-				$status = (($status_sql == '1') ? 'active' : 'inactive');
+				$status_sql = $db->query("SELECT COUNT(*) FROM plugins WHERE code='$code' AND owner='plug' AND active='1'")->fetchColumn();
+				$status = (($status_sql > 0) ? 'active' : 'inactive');
 				$icofile = 'plugins/' . $code . '/img/icon-' . $code . '.png';
 
 				$xtpl->assign(array(
