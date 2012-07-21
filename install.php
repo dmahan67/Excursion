@@ -216,6 +216,46 @@ elseif($step == 3)
 			$selected_plugins = install_extensions($selected_plugins, false);
 			foreach ($selected_plugins as $ext)
 			{
+			
+				$ext_config = 'plugins/' . $ext . '/' . $ext . '.config.php';
+				$config_exists = file_exists($ext_config);
+			
+				if ($config_exists)
+				{
+				
+					$info = $excursion->infoget($ext_config, 'PLUGIN_CONFIG');
+					$ins_auth = $excursion->authValue($info['Auth_members']);
+					$ins_lock = $excursion->authValue($info['Lock_members']);
+					
+					$insert_rows = array();
+					
+					$insert_rows[] = array(
+						'groupid' => 0,
+						'code' => 'plugin',
+						'area' => $info['Code'],
+						'rights' => $excursion->authValue($info['Auth_guests']),
+						'rights_lock' => $excursion->authValue($info['Lock_guests'])
+					);
+					
+					$sql = $db->query("SELECT * FROM groups ORDER BY id ASC");
+					foreach ($sql->fetchAll() as $row)
+					{
+						if($row['id'] == '1'){$ins_auth = 0; $ins_lock = 31;}
+						if($row['id'] == '2'){$ins_auth = 0; $ins_lock = 31;}
+						if($row['id'] == '4'){$ins_auth = 31; $ins_lock = 0;}
+						
+						$insert_rows[] = array(
+							'groupid' => $row['id'],
+							'code' => 'plugin',
+							'area' => $info['Code'],
+							'rights' => $ins_auth,
+							'rights_lock' => $ins_lock
+						);
+					}
+						
+					$db->insert('auth', $insert_rows);
+				
+				}
 				if (!plugin_install($ext, false))
 				{
 					$excursion->reportError("Installing $ext plugin has failed");
@@ -248,9 +288,9 @@ elseif($step == 3)
 			));
 			if (in_array($code, $auto_check, true)) {$xtpl->assign('CHECKED', 'checked="checked"');}
 			$xtpl->parse('MAIN.STEP3.ROW');
-			
+
 		}
-					
+
 	}
 
 	$xtpl->parse("MAIN.STEP3");

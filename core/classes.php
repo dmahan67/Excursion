@@ -251,22 +251,85 @@ class Members {
 
 class Excursion {
 
-	function checkAuth($group, $section)
+	function authValue($mask)
+	{
+		$mn['R'] = 1;
+		$mn['W'] = 10;
+		$mn['A'] = 20;
+
+		$res = 0;
+		$masks = str_split($mask);
+
+		foreach ($masks as $k)
+		{
+			$res += $mn[$k];
+		}
+		return $res;
+	}
+
+	function checkAuth($code, $area)
+	{
+		global $db, $user;
+
+		$mn['R'] = 1;
+		$mn['W'] = 10;
+		$mn['A'] = 20;
+
+		$res = array();
+
+		$res[] = (($user['auth'][$code][$area] & $mn['R']) == $mn['R']) ? TRUE : FALSE;
+		$res[] = (($user['auth'][$code][$area] & $mn['W']) == $mn['W']) ? TRUE : FALSE;
+		$res[] = (($user['auth'][$code][$area] & $mn['A']) == $mn['A']) ? TRUE : FALSE;
+			
+		return $res;
+	}
+
+	function buildAuth($userid, $groupid = 0)
+	{
+		global $db;
+
+		$authgrid = array();
+		$tmpgrid = array();
+
+		$sql = $db->query("SELECT * FROM auth WHERE groupid = $groupid ORDER BY code ASC, area ASC");
+
+		while ($row = $sql->fetch())
+		{
+			$authgrid[$row['code']][$row['area']] |= $row['rights'];
+		}
+		$sql->closeCursor();
+
+		return $authgrid;
+	
+	}
+	
+	function blockAuth($allowed)
+	{
+		if (!$allowed)
+		{
+			header('Location: message.php?id=105');
+		}
+		return FALSE;
+	}
+	
+	function addAuth($group, $section)
 	{
 		global $db, $user, $config;
 		
-		if($group >= 3)
-		{
+	
+	}
+	
+	function removeAuth($group, $section)
+	{
+		global $db, $user, $config;
 		
-			// null for now
+	
+	}
+	
+	function updateAuth($group, $section)
+	{
+		global $db, $user, $config;
 		
-		}
-		else
-		{
-		
-			header('Location: message.php?id=105');
-		
-		}
 	
 	}
 

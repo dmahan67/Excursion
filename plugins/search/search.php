@@ -5,6 +5,9 @@ Hooks=standalone
 [END_PLUGIN]
 ==================== */
 
+list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('plugin', 'search');
+$excursion->blockAuth($user['auth_read']);
+
 $query = $excursion->import('query', 'R', 'TXT');
 $query = $db->prep($query);
 
@@ -13,7 +16,7 @@ $pagination->setLink("plugin.php?p=search&page=%s");
 $pagination->setPage($page);
 $pagination->setSize($config['maxpages']);
 
-if(!empty($query))
+if(!empty($query) && $user['auth_write'])
 {
 
 	$words = explode(' ', $query);
@@ -78,7 +81,6 @@ if(!empty($query))
 }
 
 $pagination->setTotalRecords($items);
-
 $navigation = $pagination->create_links();
 
 $xtpl->assign(array(

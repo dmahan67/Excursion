@@ -44,6 +44,7 @@ $page = $excursion->import('page', 'G', 'INT');
 /* ========== Guest/User ========== */
 
 $user['id'] = 0;
+$user['group'] = 0;
 $user['theme'] = $config['default_theme'];
 $user['lang'] = $config['default_language'];
 $user['timezone'] = 0;
@@ -73,6 +74,7 @@ if (isset($_SESSION['user_id']))
 	}
 	
 }
+$user['auth'] = $excursion->buildAuth($user['id'], $user['group']);
 
 require_once $excursion->import_langfile('main', 'core', $user['lang']);
 require_once $excursion->import_langfile($user['theme'], 'theme', $user['lang']);

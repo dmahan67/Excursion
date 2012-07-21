@@ -1,3 +1,38 @@
+DROP TABLE IF EXISTS `auth`;
+CREATE TABLE IF NOT EXISTS `auth` (
+	`id` int NOT NULL auto_increment,
+	`groupid` int NOT NULL default '0',
+	`code` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+	`area` varchar(255) collate utf8_unicode_ci NOT NULL default '',
+	`rights` tinyint unsigned NOT NULL default '0',
+	`rights_lock` tinyint unsigned NOT NULL default '0',
+	PRIMARY KEY  (`id`),
+	KEY `groupid` (`groupid`),
+	KEY `code` (`code`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `auth` (`id`, `groupid`, `code`, `area`, `rights`, `rights_lock`) VALUES
+	(1, '0', 'page', 'news', '1', '30'),
+	(2, '0', 'page', 'articles', '1', '30'),
+	(3, '0', 'page', 'downloads', '1', '30'),
+	(4, '1', 'page', 'news', '0', '31'),
+	(5, '1', 'page', 'articles', '0', '31'),
+	(6, '1', 'page', 'downloads', '0', '31'),
+	(7, '2', 'page', 'news', '0', '31'),
+	(8, '2', 'page', 'articles', '0', '31'),
+	(9, '2', 'page', 'downloads', '0', '31'),
+	(10, '3', 'page', 'news', '11', '20'),
+	(11, '3', 'page', 'articles', '11', '20'),
+	(12, '3', 'page', 'downloads', '11', '20'),
+	(13, '4', 'page', 'news', '31', '0'),
+	(14, '4', 'page', 'articles', '31', '0'),
+	(15, '4', 'page', 'downloads', '31', '0'),
+	(16, '0', 'admin', 'a', '0', '31'),
+	(17, '1', 'admin', 'a', '0', '31'),
+	(18, '2', 'admin', 'a', '0', '31'),
+	(19, '3', 'admin', 'a', '0', '31'),
+	(20, '4', 'admin', 'a', '31', '0');
+
 DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
 	`id` mediumint NOT NULL auto_increment,

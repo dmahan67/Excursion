@@ -18,6 +18,7 @@ $lang['Plugin'] = 'Plugin';
 /* ========== GENERAL ERRORS ========== */
 $lang['error_title_length'] = 'Title is too short';
 $lang['error_text_length'] = 'Text is too short';
+$lang['error_insufficient_rights'] = 'You do not have permission to perform this action';
  
 /* ========== DATE/TIME ========== */
 
@@ -140,6 +141,7 @@ $lang['reset_email'] = 'Hi %1$s,<br /><br />
 						
 /* ========== PAGES ========== */
 $lang['page_error_cat_missing'] = 'Page category is missing';
+$lang['error_page_inactive'] = 'The page you are trying to add to the validation queue is already inactive';
 
 /* ========== PROFILE ========== */
 $lang['profile_error_nomatch'] = 'Your current password was incorrect';

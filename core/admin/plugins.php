@@ -148,6 +148,43 @@ switch($a)
 				
 			}
 			
+			if ($config_exists)
+			{
+			
+				$info = $excursion->infoget($ext_config, 'PLUGIN_CONFIG');
+				$ins_auth = $excursion->authValue($info['Auth_members']);
+				$ins_lock = $excursion->authValue($info['Lock_members']);
+				
+				$insert_rows = array();
+				
+				$insert_rows[] = array(
+					'groupid' => 0,
+					'code' => 'plugin',
+					'area' => $info['Code'],
+					'rights' => $excursion->authValue($info['Auth_guests']),
+					'rights_lock' => $excursion->authValue($info['Lock_guests'])
+				);
+				
+				$sql = $db->query("SELECT * FROM groups ORDER BY id ASC");
+				foreach ($sql->fetchAll() as $row)
+				{
+					if($row['id'] == '1'){$ins_auth = 0; $ins_lock = 31;}
+					if($row['id'] == '2'){$ins_auth = 0; $ins_lock = 31;}
+					if($row['id'] == '4'){$ins_auth = 31; $ins_lock = 0;}
+					
+					$insert_rows[] = array(
+						'groupid' => $row['id'],
+						'code' => 'plugin',
+						'area' => $info['Code'],
+						'rights' => $ins_auth,
+						'rights_lock' => $ins_lock
+					);
+				}
+					
+				$db->insert('auth', $insert_rows);
+			
+			}
+			
 			$dp = opendir($plugin_path);
 			while ($f = readdir($dp))
 			{
@@ -231,6 +268,7 @@ switch($a)
 			}
 			
 			$sql = $db->delete('plugins', "code='$plugin'");
+			$sql = $db->delete('auth', "area='$plugin'");
 			
 			header('Location: admin.php?m=plugins&a=details&plugin='.$plugin);
 		

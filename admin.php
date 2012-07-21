@@ -13,6 +13,38 @@ require_once 'core/common.php';
 
 $ex['location'] = 'admin';
 
-require_once 'core/admin/main.php';
+list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('admin', 'a');
+$excursion->blockAuth($user['auth_read']);
+
+require_once 'core/admin/header.php';
+ 
+switch ($m)
+	{
+	case 'plugins':
+	require('core/admin/plugins.php');
+	break;
+	
+	case 'config':
+	require('core/admin/config.php');
+	break;
+	
+	case 'pages':
+	require('core/admin/pages.php');
+	break;
+	
+	case 'members':
+	require('core/admin/members.php');
+	break;
+	
+	case 'queue':
+	require('core/admin/queue.php');
+	break;
+
+	default:
+	require('core/admin/home.php');
+	break;
+}
+
+require_once 'core/admin/footer.php';
 
 ?>

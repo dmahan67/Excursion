@@ -22,7 +22,7 @@ foreach ($excursion->Hook('page.actions') as $pl)
 }
 /* ===== */
 
-if($action == 'remove' && $user['group'] == 4)
+if($action == 'remove')
 {
 
 	/* === Hook === */
@@ -33,11 +33,15 @@ if($action == 'remove' && $user['group'] == 4)
 	/* ===== */
 
 	$page_cat = $db->query("SELECT cat FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
+	
+	list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $page_cat);
+	$excursion->blockAuth($user['auth_admin']);
+	
 	$sql_page_delete = $db->delete('pages', "id=$id");
 	header('Location: list.php?c='.$page_cat.'');
 
 }
-if($action == 'queue' && $user['group'] == 4)
+if($action == 'queue')
 {
 	
 	/* === Hook === */
@@ -49,8 +53,11 @@ if($action == 'queue' && $user['group'] == 4)
 
 	$page_state = $db->query("SELECT state FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
 	$page_cat = $db->query("SELECT cat FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
+	
+	list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $page_cat);
+	$excursion->blockAuth($user['auth_admin']);
 
-	if($page_state > 0)
+	if($page_state > 0 && $user['auth_admin'])
 	{
 	
 		/* === Hook === */
@@ -69,7 +76,7 @@ if($action == 'queue' && $user['group'] == 4)
 	else
 	{
 	
-		header('Location: message.php');
+		$excursion->reportError('error_page_inactive');
 	
 	}
 
@@ -77,7 +84,7 @@ if($action == 'queue' && $user['group'] == 4)
 
 require_once 'core/header.php';
 
-if($m == 'edit' && $user['group'] == 4)
+if($m == 'edit')
 {
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/page.edit.xtpl');
@@ -129,6 +136,9 @@ if($m == 'edit' && $user['group'] == 4)
 	$sql = $db->query("SELECT * FROM pages WHERE id = $id LIMIT 1");
 	$row = $sql->fetch();
 	
+	list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $row['cat']);
+	$excursion->blockAuth($user['auth_write']);
+	
 	$xtpl->assign(array(
 		'FORM_ACTION' => $excursion->url('page', 'id='.$id.'&m=edit&action=send'),
 		'FORM_TITLE' => $excursion->inputbox('text', 'title', $row['title'], array('size' => '64', 'maxlength' => '255')),
@@ -147,14 +157,17 @@ if($m == 'edit' && $user['group'] == 4)
 	/* ===== */
 
 }
-if($m == 'add' && $user['group'] == 4)
+if($m == 'add')
 {
+
+	list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $c);
+	$excursion->blockAuth($user['auth_write']);
 
 	$ex['location'] = 'page.add';
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/page.add.xtpl');
 
-	if($action == 'send' && $user['group'] == 4)
+	if($action == 'send' && $user['auth_write'])
 	{
 		
 		/* === Hook === */
@@ -189,12 +202,6 @@ if($m == 'add' && $user['group'] == 4)
 		}
 	
 	}
-	if($action == 'send' && $user['group'] != 4)
-	{
-	
-		header('Location: message.php?id=105');
-		
-	}	
 	
 	$xtpl->assign(array(
 		'FORM_ACTION' => $excursion->url('page', 'm=add&action=send'),
@@ -214,12 +221,6 @@ if($m == 'add' && $user['group'] == 4)
 	/* ===== */
 
 }
-if($m == 'add' && $user['group'] != 4)
-{
-	
-	header('Location: message.php?id=105');
-	
-}
 if((isset($id) && $id > 0) && empty($m))
 {
 
@@ -227,6 +228,9 @@ if((isset($id) && $id > 0) && empty($m))
 	
 	$sql = $db->query("SELECT * FROM pages WHERE id = $id LIMIT 1");
 	$row = $sql->fetch();
+	
+	list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $row['cat']);
+	$excursion->blockAuth($user['auth_read']);
 	
 	if($row['state'] == '0')
 	{
@@ -245,7 +249,7 @@ if((isset($id) && $id > 0) && empty($m))
 		'TITLE' => $row['title'],
 		'DESC' => $row['desc'],
 		'CAT' => $db->query("SELECT title FROM categories WHERE code='".$row['cat']."' LIMIT 1")->fetchColumn(),
-		'CAT_CODE' => $db->query("SELECT code FROM categories WHERE code='".$row['cat']."' LIMIT 1")->fetchColumn(),
+		'CAT_CODE' => $row['cat'],
 		'OWNER' => $excursion->generateUser($row['owner']),
 		'AVATAR' => $excursion->buildAvatar($row['owner'], 'avatar'),
 		'DATE' => date($config['date_medium'], $row['date']),
