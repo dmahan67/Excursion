@@ -23,8 +23,6 @@ switch($a)
 			$mask = array();
 			$auth = $excursion->import('auth', 'P', 'ARR');
 			
-			$db->update('auth', array('rights' => 0), "groupid=$grpid");
-			
 			foreach ($auth as $k => $v)
 			{
 				foreach ($v as $i => $j)
@@ -149,14 +147,12 @@ switch($a)
 
 			$rstructuretitle = $excursion->import('rstructuretitle', 'P', 'ARR');
 			$rstructuredesc = $excursion->import('rstructuredesc', 'P', 'ARR');
-			$rstructureicon = $excursion->import('rstructureicon', 'P', 'ARR');
 
 			foreach ($rstructuretitle as $i => $k)
 			{
 				$oldrow = $db->query("SELECT id FROM groups WHERE id=".(int)$i)->fetch();
 				$rstructure['title'] = $excursion->import($rstructuretitle[$i], 'D', 'TXT');
 				$rstructure['desc'] = $excursion->import($rstructuredesc[$i], 'D', 'TXT');
-				$rstructure['icon'] = $excursion->import($rstructureicon[$i], 'D', 'TXT');
 
 				$db->update(groups, $rstructure, "id=".(int)$i);
 			}
@@ -169,7 +165,6 @@ switch($a)
 
 			$insert['title'] = $excursion->import('title','P','TXT');
 			$insert['desc'] = $excursion->import('desc','P','TXT');
-			$insert['icon'] = $excursion->import('icon','P','TXT');
 
 			if (empty($insert['title'])) $error .= $lang['admin_error_title_missing'].'<br />';
 
@@ -244,7 +239,6 @@ switch($a)
 			
 				$xtpl->assign(array(
 					'FORM_DESC' => $excursion->inputbox('text', 'rstructuredesc['.$structure_id.']', $row['desc'], 'maxlength="64"'),
-					'FORM_ICON' => $excursion->inputbox('text', 'rstructureicon['.$structure_id.']', $row['icon'], 'maxlength="64"', 'input_text_medium'),
 					'ID' => $row['id'],
 					'TITLE' => $row['title'],
 					'DESC' => $row['desc'],
@@ -258,7 +252,6 @@ switch($a)
 		$xtpl->assign(array(
 			'FORM_ACTION_SAVE' => $excursion->url('admin', 'm=members&action=save'),
 			'FORM_ACTION_UPDATE' => $excursion->url('admin', 'm=members&action=update'),
-			'FORM_ICON' => $excursion->inputbox('text', 'icon', '', array('size' => 24, 'maxlength' => 64)),
 			'FORM_TITLE' => $excursion->inputbox('text', 'title', '', array('size' => 24, 'maxlength' => 64)),
 			'FORM_DESC' => $excursion->inputbox('text', 'desc', '', array('size' => 24, 'maxlength' => 64)),
 		));

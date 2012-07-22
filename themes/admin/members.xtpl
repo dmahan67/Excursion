@@ -101,8 +101,7 @@
 												<tr>
 													<th>Title</th>
 													<th>Description</th>
-													<th>Icon</th>
-													<th>Action</th>
+													<th class="span2">Action</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -110,19 +109,19 @@
 												<tr>
 													<td>{FORM_TITLE}</td>
 													<td>{FORM_DESC}</td>
-													<td>{FORM_ICON}</td>
-													<td class="action-td">
+													<td>
+														<a href="admin.php?m=members&a=permissions&grpid={ID}" alt="permissions" class="btn btn-small">
+															<i class="icon-pencil"></i>						
+														</a>&nbsp;
 														<a href="users.php?grpid={ID}" alt="open" target="_new" class="btn btn-small">
 															<i class="icon-share-alt"></i>							
 														</a>&nbsp;					
 														<!-- IF {ID} > 4 -->
 														<a href="admin.php?m=members&action=remove&id={ID}" onclick="return confirm_delete()" class="btn btn-small btn-danger">
 															<i class="icon-remove"></i>			
-														</a>&nbsp;
+														</a>
 														<!-- ENDIF -->
-														<a href="admin.php?m=members&a=permissions&grpid={ID}" alt="permissions" class="btn btn-small">
-															<i class="icon-pencil"></i>						
-														</a>&nbsp;
+														
 													</td>
 												</tr>
 												<!-- END: ROW -->
@@ -172,15 +171,6 @@
 												<label class="control-label" for="desc">Description</label>
 												<div class="controls">
 													{FORM_DESC}
-												</div>				
-											</div>
-
-											<br />
-
-											<div class="control-group">											
-												<label class="control-label" for="icon">Icon</label>
-												<div class="controls">
-													{FORM_ICON}
 												</div>				
 											</div>
 

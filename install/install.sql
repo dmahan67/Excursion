@@ -81,7 +81,6 @@ CREATE TABLE IF NOT EXISTS `groups` (
 	`id` int NOT NULL auto_increment,
 	`title` varchar(64) collate utf8_unicode_ci NOT NULL default '',
 	`desc` varchar(255) collate utf8_unicode_ci NOT NULL default '',
-	`icon` varchar(128) collate utf8_unicode_ci NOT NULL default '',
 	PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5;
 
