@@ -344,5 +344,4 @@ table .span1n5 {
   width: 94px;
   margin-left: 0;
 }
-table.table td.center {vertical-align:center;text-align:center;}
-
+table.table td.center, table.table th.center {vertical-align:center;text-align:center;}

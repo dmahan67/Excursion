@@ -1,6 +1,85 @@
 <!-- BEGIN: MAIN -->
 					<h1 class="page-title"><i class="icon-user"></i> Members</h1>
+					
+					<!-- BEGIN: PERMISSIONS -->
+					<div class="row">
+					
+						<div class="span9">
 				
+							<div class="widget">
+							
+								<div class="widget-header">
+								
+									<h3>Permissions</h3>
+							
+								</div>
+									
+								<div class="widget-content">
+								
+									<form action="{FORM_ACTION}" method="post">
+									
+										<table class="table borderless-table">
+											<thead>
+												<tr>
+													<th style="width:32px;"></th>
+													<th class="vertcenter">Page Categories</th>
+													<th class="span1 center"><img class="icon" src="assets/images/authentication/auth_r.png" alt="" title="Read" /></th>
+													<th class="span1 center"><img class="icon" src="assets/images/authentication/auth_w.png" alt="" title="Write" /></th>
+													<th class="span1 center"><img class="icon" src="assets/images/authentication/auth_a.png" alt="" title="Administrate" /></th>
+												</tr>
+											</thead>
+											<tbody>
+												<!-- BEGIN: PAGE_ROW -->
+												<tr>
+													<td class="center"><img src="{ICON}" /></td>
+													<td><a href="list.php?c={CAT_CODE}" target="_new">{CAT}</a></td>
+													<td class="center">{FORM_PAGE_R}</td>
+													<td class="center">{FORM_PAGE_W}</td>
+													<td class="center">{FORM_PAGE_A}</td>
+												</tr>
+												<!-- END: PAGE_ROW -->
+											</tbody>
+										</table>
+										
+										<table class="table borderless-table">
+											<thead>
+												<tr>
+													<th style="width:32px;"></th>
+													<th class="vertcenter">Plugins</th>
+													<th class="span1 center"><img class="icon" src="assets/images/auth_r.png" alt="" title="Read" /></th>
+													<th class="span1 center"><img class="icon" src="assets/images/auth_w.png" alt="" title="Write" /></th>
+													<th class="span1 center"><img class="icon" src="assets/images/auth_a.png" alt="" title="Administrate" /></th>
+												</tr>
+											</thead>
+											<tbody>
+												<!-- BEGIN: PLUGIN_ROW -->
+												<tr>
+													<td class="center"><img src="{ICON}" /></td>
+													<td><a href="admin.php?m=plugins&a=details&plugin={CODE}">{TITLE}</a></td>
+													<td class="center">{FORM_PLUGIN_R}</td>
+													<td class="center">{FORM_PLUGIN_W}</td>
+													<td class="center">{FORM_PLUGIN_A}</td>
+												</tr>
+												<!-- END: PLUGIN_ROW -->
+											</tbody>
+										</table>
+										
+										<div class="form-actions">
+											<button type="submit" class="btn btn-primary">Save</button> 
+										</div>
+										
+									</form>
+								
+								</div>
+							
+							</div>
+						
+						</div>
+					
+					</div>
+					<!-- END: PERMISSIONS -->
+				
+					<!-- BEGIN: DEFAULT -->
 					<div class="row">
 					
 						<div class="span9">
@@ -35,12 +114,15 @@
 													<td class="action-td">
 														<a href="users.php?grpid={ID}" alt="open" target="_new" class="btn btn-small">
 															<i class="icon-share-alt"></i>							
-														</a>&nbsp;						
+														</a>&nbsp;					
 														<!-- IF {ID} > 4 -->
 														<a href="admin.php?m=members&action=remove&id={ID}" onclick="return confirm_delete()" class="btn btn-small btn-danger">
 															<i class="icon-remove"></i>			
-														</a>
+														</a>&nbsp;
 														<!-- ENDIF -->
+														<a href="admin.php?m=members&a=permissions&grpid={ID}" alt="permissions" class="btn btn-small">
+															<i class="icon-pencil"></i>						
+														</a>&nbsp;
 													</td>
 												</tr>
 												<!-- END: ROW -->
@@ -117,4 +199,5 @@
 						</div>
 					
 					</div>
+					<!-- END: DEFAULT -->
 <!-- END: MAIN -->

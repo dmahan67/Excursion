@@ -152,8 +152,6 @@ switch($a)
 			{
 			
 				$info = $excursion->infoget($ext_config, 'PLUGIN_CONFIG');
-				$ins_auth = $excursion->authValue($info['Auth_members']);
-				$ins_lock = $excursion->authValue($info['Lock_members']);
 				
 				$insert_rows = array();
 				
@@ -169,8 +167,9 @@ switch($a)
 				foreach ($sql->fetchAll() as $row)
 				{
 					if($row['id'] == '1'){$ins_auth = 0; $ins_lock = 31;}
-					if($row['id'] == '2'){$ins_auth = 0; $ins_lock = 31;}
-					if($row['id'] == '4'){$ins_auth = 31; $ins_lock = 0;}
+					elseif($row['id'] == '2'){$ins_auth = 0; $ins_lock = 31;}
+					elseif($row['id'] == '4'){$ins_auth = 31; $ins_lock = 0;}
+					else{$ins_auth = $excursion->authValue($info['Auth_members']); $ins_lock = $excursion->authValue($info['Lock_members']);}
 					
 					$insert_rows[] = array(
 						'groupid' => $row['id'],
@@ -268,7 +267,7 @@ switch($a)
 			}
 			
 			$sql = $db->delete('plugins', "code='$plugin'");
-			$sql = $db->delete('auth', "area='$plugin'");
+			$sql = $db->delete('auth', "area='$plugin' AND code='plugin'");
 			
 			header('Location: admin.php?m=plugins&a=details&plugin='.$plugin);
 		

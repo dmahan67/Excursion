@@ -251,6 +251,14 @@ class Members {
 
 class Excursion {
 
+	function getAuth($rn)
+	{
+		$res = ($rn & 1) ? 'R' : '';
+		$res .= (($rn & 10) == 10) ? 'W' : '';
+		$res .= (($rn & 20) == 20) ? 'A' : '';
+		return $res;
+	}
+
 	function authValue($mask)
 	{
 		$mn['R'] = 1;
@@ -265,6 +273,13 @@ class Excursion {
 			$res += $mn[$k];
 		}
 		return $res;
+	}
+	
+	function reorderAuth()
+	{
+		global $db;
+
+		$sql = $db->query("ALTER TABLE auth ORDER BY code ASC, area ASC, groupid ASC, code ASC");
 	}
 
 	function checkAuth($code, $area)
@@ -310,27 +325,6 @@ class Excursion {
 			header('Location: message.php?id=105');
 		}
 		return FALSE;
-	}
-	
-	function addAuth($group, $section)
-	{
-		global $db, $user, $config;
-		
-	
-	}
-	
-	function removeAuth($group, $section)
-	{
-		global $db, $user, $config;
-		
-	
-	}
-	
-	function updateAuth($group, $section)
-	{
-		global $db, $user, $config;
-		
-	
 	}
 
 	function check_messages($src = '', $class = '')
