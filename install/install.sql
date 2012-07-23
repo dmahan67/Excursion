@@ -84,11 +84,11 @@ CREATE TABLE IF NOT EXISTS `groups` (
 	PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5;
 
-INSERT INTO `groups` (`id`, `title`, `desc`, `icon`) VALUES
-	(1, 'Inactive', 'Inactive', ''),
-	(2, 'Banned', 'Banned', ''),
-	(3, 'Members', 'Members', ''),
-	(4, 'Administrators', 'Administrators', '');
+INSERT INTO `groups` (`id`, `title`, `desc`) VALUES
+	(1, 'Inactive', 'Inactive'),
+	(2, 'Banned', 'Banned'),
+	(3, 'Members', 'Members'),
+	(4, 'Administrators', 'Administrators');
 	
 DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (

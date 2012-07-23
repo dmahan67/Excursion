@@ -251,6 +251,35 @@ class Members {
 
 class Excursion {
 
+	function structure_children($area, $cat, $allsublev = true,  $firstcat = true, $sqlprep = true)
+	{
+		global $structure, $config, $db;
+
+		$mtch = $structure[$area][$cat]['path'].'.';
+		$mtchlen = mb_strlen($mtch);
+		$mtchlvl = mb_substr_count($mtch,".");
+
+		$catsub = array();
+		if ($cat != '' && $firstcat)
+		{
+			$catsub[] = $cat;
+		}
+
+		foreach ($structure[$area] as $i => $x)
+		{
+			if (($cat == '' || mb_substr($x['path'], 0, $mtchlen) == $mtch))
+			{
+				$subcat = mb_substr($x['path'], $mtchlen + 1);
+				if ($cat == '' || $allsublev || (!$allsublev && mb_substr_count($x['path'],".") == $mtchlvl))
+				{
+					$i = ($sqlprep) ? $db->prep($i) : $i;
+					$catsub[] = $i;
+				}
+			}
+		}
+		return($catsub);
+	}
+
 	function getAuth($rn)
 	{
 		$res = ($rn & 1) ? 'R' : '';
