@@ -29,8 +29,14 @@ if($action == 'update')
 			$rstructure['desc'] = $excursion->import($rstructuredesc[$i], 'D', 'TXT');
 			$rstructure['path'] = $excursion->import($rstructurepath[$i], 'D', 'TXT');
 			$rstructure['code'] = $excursion->import($rstructurecode[$i], 'D', 'TXT');
-
+			
+			$auth_old = $db->query("SELECT code FROM categories WHERE id=".(int)$i)->fetch();
+			$auth['area'] = $rstructure['code'];
+			
 			$db->update(categories, $rstructure, "id=".(int)$i);
+			$db->update(auth, $auth, "code='page' AND area='".$auth_old[code]."'");
+			
+			$excursion->reorderAuth();
 		}
 
 		header('Location: admin.php?m=pages');
@@ -56,6 +62,7 @@ if($action == 'save')
 		$id = $db->lastInsertId();
 		
 		$excursion->newAuth('page', $insert['code']);
+		$excursion->reorderAuth();
 		
 		header('Location: admin.php?m=pages');
 	}
@@ -72,6 +79,7 @@ if($action == 'remove')
 		$page_code = $db->query("SELECT code FROM categories WHERE id='".$id."'")->fetchColumn();
 		$db->delete(categories, "id='".$db->prep($id)."'");
 		$db->delete(auth, "area='$page_code' AND code='page'");
+		$excursion->reorderAuth();
 
 		header('Location: admin.php?m=pages');
 	}
