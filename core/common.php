@@ -51,12 +51,10 @@ $user['timezone'] = 0;
 
 if (isset($_SESSION['user_id']))
 {
-
 	$sql = $db->query("SELECT * FROM members WHERE id = ".$_SESSION['user_id']);
 
 	if ($row = $sql->fetch())
 	{
-
 		$user['id'] = $row['id'];
 		$user['name'] = $row['username'];
 		$user['password'] = $row['password'];
@@ -70,10 +68,9 @@ if (isset($_SESSION['user_id']))
 		$user['birthdate'] = $row['birthdate'];
 		$user['avatar'] = $row['avatar'];
 		$user['avatar_built'] = $excursion->buildAvatar($row['id'], 'avatar');
-		
 	}
-	
 }
+
 $user['auth'] = $excursion->buildAuth($user['id'], $user['group']);
 
 require_once $excursion->import_langfile('main', 'core', $user['lang']);
@@ -85,40 +82,29 @@ require_once 'core/resources.php';
 
 if (!$plugins)
 {
-
 	$sql = $db->query("SELECT code, file, hook FROM plugins WHERE active = 1 ORDER BY hook ASC");
 	$plugins_active = array();
 	
 	if ($sql->rowCount() > 0)
 	{
-	
 		while ($row = $sql->fetch())
 		{
-	
 			$plugins[$row['hook']][] = $row;
 			$plugins_active[$row['code']] = true;
 			$plugins[$row['code']]['installed'] = true;
 			$plugins[$row['code']]['standalone'] = ($row['hook'] == 'standalone' ?  true : false);
-	
 		}
-	
 		$sql->closeCursor();
-	
 	}
-	
 }
 
 $sql_config = $db->query("SELECT * FROM plugins");
 while ($row = $sql_config->fetch())
 {
-
 	if(@file_exists("plugins/".$row['code']."/lang/".$row['code'].".lang.".$user['lang'].".php"))
 	{
-	
 		require_once $excursion->import_langfile($row['code'], 'plug', $user['lang']);
-		
 	}
-
 }
 
 $sql_config = $db->query("SELECT * FROM config");
@@ -126,18 +112,14 @@ while ($row = $sql_config->fetch())
 {
 	if ($row['part'] == 'core')
 	{
-	
 		$config[$row['title']] = $row['value'];
-		
 	}
 	else
 	{
-	
 		$config['plugin'][$row['part']][$row['title']] = $row['value'];
-		
 	}
-	
 }
+
 $sql_config->closeCursor();
 mb_internal_encoding('UTF-8');
 $excursion->load_pageStructure();
@@ -154,26 +136,20 @@ if($config['maintenance']=='yes' && $ex['location']!='login' && $user['group']!=
 
 if($user['id'] > 0 && $user['group'] == 1)
 {
-
-	if (isset($_SESSION['user_id'])){
-	
+	if (isset($_SESSION['user_id']))
+	{
 		session_destroy();
 		header('Location: index.php');
-		
 	}
-	
 }
 
 if($user['id'] > 0 && $user['group'] == 2)
 {
-
-	if (isset($_SESSION['user_id'])){
-	
+	if (isset($_SESSION['user_id']))
+	{
 		session_destroy();
 		header('Location: login.php');
-		
 	}
-	
 }
 
 /* ========== Global Tags ========== */

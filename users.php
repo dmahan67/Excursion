@@ -106,6 +106,13 @@ elseif($m == 'profile')
 	if($action == 'send')
 	{
 	
+		/* === Hook === */
+		foreach ($excursion->Hook('user.profile.send') as $pl)
+		{
+			include $pl;
+		}
+		/* ===== */
+	
 		$insert['theme'] = $excursion->import('themes','P','TXT');
 		$insert['gender'] = $excursion->import('gender','P','TXT');
 		$insert['birthdate'] = (int) $excursion->import_date('birthdate', false);
@@ -162,13 +169,7 @@ elseif($m == 'profile')
 			
 			}
 		
-			$db->update('members', array(
-				'theme' => $insert['theme'],
-				'gender' => $insert['gender'],
-				'birthdate' => $insert['birthdate'],
-				'avatar' => $insert['avatar']
-				
-			), "id='".$user['id']."'");
+			$db->update('members', $insert, "id='".$user['id']."'");
 			
 			header('Location: users.php?id='.$user['id']);
 		
@@ -186,6 +187,13 @@ elseif($m == 'profile')
 		'FORM_AVATAR' => $excursion->inputbox('file', 'avatar', '', array('size' => 24)),
 		'FORM_BIRTHDATE' => $excursion->selectbox_date($excursion->datetostamp($user['birthdate']), 'short', 'birthdate', $excursion->date('Y', $sys['now_offset']), $excursion->date('Y', $sys['now_offset']) - 77, false),
 	));
+	
+	/* === Hook === */
+	foreach ($excursion->Hook('user.profile.tags') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
 
 }
 elseif($m == 'edit' && $user['group'] == '4')
@@ -198,6 +206,13 @@ elseif($m == 'edit' && $user['group'] == '4')
 	
 	if($action == 'send')
 	{
+	
+		/* === Hook === */
+		foreach ($excursion->Hook('user.edit.send') as $pl)
+		{
+			include $pl;
+		}
+		/* ===== */
 	
 		$insert['theme'] = $excursion->import('themes','P','TXT');
 		$insert['username'] = $excursion->import('username','P','TXT');
@@ -256,15 +271,7 @@ elseif($m == 'edit' && $user['group'] == '4')
 			
 			}
 		
-			$db->update('members', array(
-				'theme' => $insert['theme'],
-				'gender' => $insert['gender'],
-				'birthdate' => $insert['birthdate'],
-				'avatar' => $insert['avatar'],
-				'email' => $insert['email'],
-				'username' => $insert['username'],
-				'groupid' => $insert['groupid']
-			), "id='".$row['id']."'");
+			$db->update('members', $insert, "id='".$row['id']."'");
 			
 			header('Location: users.php?id='.$row['id']);
 		
@@ -284,6 +291,13 @@ elseif($m == 'edit' && $user['group'] == '4')
 		'FORM_AVATAR' => $excursion->inputbox('file', 'avatar', '', array('size' => 24)),
 		'FORM_BIRTHDATE' => $excursion->selectbox_date($excursion->datetostamp($row['birthdate']), 'short', 'birthdate', $excursion->date('Y', $sys['now_offset']), $excursion->date('Y', $sys['now_offset']) - 77, false),
 	));
+	
+	/* === Hook === */
+	foreach ($excursion->Hook('user.edit.tags') as $pl)
+	{
+		include $pl;
+	}
+	/* ===== */
 
 }
 elseif(isset($action) && $action == 'recover')

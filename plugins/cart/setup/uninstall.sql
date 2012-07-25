@@ -1,1 +1,0 @@
-ALTER TABLE pages DROP COLUMN `cart_price`;

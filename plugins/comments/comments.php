@@ -5,7 +5,7 @@ Hooks=page.tags
 [END_PLUGIN]
 ==================== */
 
-list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('plugin', 'comments');
+list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('plugin', 'comments');
 if($user['auth_read'])
 {
 
@@ -27,6 +27,13 @@ if($user['auth_read'])
 			$com_admin = $excursion->rc('link_deletecom', array('url' => $delete_url));
 		
 		}
+		
+		/* === Hook === */
+		foreach ($excursion->Hook('comments.row') as $pl)
+		{
+			include $pl;
+		}
+		/* ===== */
 
 		$xtpl->assign(array(
 			'COM_ID' => (int) $com['id'],
@@ -86,10 +93,6 @@ if($user['auth_read'])
 		$insert['text'] = $excursion->import('text', 'P', 'HTM');
 		
 		if (mb_strlen($insert['text']) < 4) $excursion->reportError('error_text_length');
-		
-		$comment = array(
-			'body' => $insert['text']
-		);
 		
 		/* === Hook === */
 		foreach ($excursion->Hook('comments.send') as $pl)

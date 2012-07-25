@@ -1,10 +1,10 @@
 <?php
 /* ====================
 [BEGIN_PLUGIN]
-Hooks=page.tags
+Hooks=user.edit.send
 [END_PLUGIN]
 ==================== */
 
-$xtpl->assign('CART_PRICE', $row['cart_price']);
+$insert['gravatar'] = $excursion->import('gravatar','P','TXT');
 
 ?>

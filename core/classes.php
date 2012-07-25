@@ -160,7 +160,7 @@ class Members {
 	
 	function sendValidationEmail($email){
 	
-		global $lang, $db, $config, $xtpl;
+		global $lang, $db, $config, $xtpl, $excursion;
 		
 		$token = $db->query("SELECT token FROM members WHERE email='$email' LIMIT 1")->fetchColumn();
 		$username = $db->query("SELECT username FROM members WHERE email='$email' LIMIT 1")->fetchColumn();
@@ -278,6 +278,46 @@ class Excursion {
 			}
 		}
 		return($catsub);
+	}
+	
+	function newAuth($code, $area, $rights='11', $locked='20', $guest_rights='1', $guest_lock='30')
+	{
+		global $db;
+		
+		$insert_guest['groupid'] = 0;
+		$insert_guest['code'] = $code;
+		$insert_guest['area'] = $area;
+		$insert_guest['rights'] = $guest_rights;
+		$insert_guest['rights_lock'] = $guest_lock;
+		$db->insert('auth', $insert_guest);
+
+		$sql = $db->query("SELECT * FROM groups");
+		foreach ($sql->fetchAll() as $row)
+		{
+			$insert['groupid'] = $row['id'];
+			$insert['code'] = $code;
+			$insert['area'] = $area;
+			if($row['id'] == '1' || $row['id'] == '2')
+			{
+				$insert['rights'] = 0;
+				$insert['rights_lock'] = 31;
+			}
+			elseif($row['id'] == '4')
+			{
+				$insert['rights'] = 31;
+				$insert['rights_lock'] = 0;
+			}
+			else
+			{
+				$insert['rights'] = $rights;
+				$insert['rights_lock'] = $locked;
+			}
+			
+			$db->insert('auth', $insert);
+		}
+		
+		$this->reorderAuth();
+	
 	}
 
 	function getAuth($rn)

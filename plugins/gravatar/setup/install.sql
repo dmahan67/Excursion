@@ -1,0 +1,1 @@
+ALTER TABLE `members` ADD COLUMN `gravatar` VARCHAR(224) NOT NULL;

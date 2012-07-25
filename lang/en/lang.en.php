@@ -19,6 +19,7 @@ $lang['Plugin'] = 'Plugin';
 $lang['error_title_length'] = 'Title is too short';
 $lang['error_text_length'] = 'Text is too short';
 $lang['error_insufficient_rights'] = 'You do not have permission to perform this action';
+$lang['error_unknown'] = 'An unknown error has occurred';
  
 /* ========== DATE/TIME ========== */
 
@@ -155,6 +156,7 @@ $lang['admin_error_title_missing'] = 'Title is missing';
 $lang['admin_error_desc_missing'] = 'Description is missing';
 $lang['admin_error_path_missing'] = 'Path is missing';
 $lang['admin_error_code_missing'] = 'Code is missing';
+$lang['admin_error_required_groups'] = 'The requested group is required and may not be deleted';
 
 /* ========== INSTALL ========== */
 $lang['install_writable'] = 'Writable';

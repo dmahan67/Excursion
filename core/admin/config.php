@@ -23,19 +23,24 @@ if($action == 'save')
 	$insert['maxpages'] = $excursion->import('maxpages','P','INT');
 	$insert['admin_email'] = $excursion->import('admin_email','P','TXT');
 	
-	$db->update('config', array('value' => $insert['title']), "title='title'");
-	$db->update('config', array('value' => $insert['subtitle']), "title='subtitle'");
-	$db->update('config', array('value' => $insert['keywords']), "title='keywords'");
-	$db->update('config', array('value' => $insert['forcetheme']), "title='forcetheme'");
-	$db->update('config', array('value' => $insert['disablereg']), "title='disablereg'");
-	$db->update('config', array('value' => $insert['disableval']), "title='disableval'");
-	$db->update('config', array('value' => $insert['valnew']), "title='valnew'");
-	$db->update('config', array('value' => $insert['maintenance']), "title='maintenance'");
-	$db->update('config', array('text' => $insert['reason']), "title='maintenance'");
-	$db->update('config', array('value' => $insert['maxpages']), "title='maxpages'");
-	$db->update('config', array('value' => $insert['admin_email']), "title='admin_email'");
-	
-	header('Location: admin.php?m=config');
+	if (!$user['auth_write']) $excursion->reportError('error_insufficient_rights');
+
+	if(!$excursion->error_found())
+	{
+		$db->update('config', array('value' => $insert['title']), "title='title'");
+		$db->update('config', array('value' => $insert['subtitle']), "title='subtitle'");
+		$db->update('config', array('value' => $insert['keywords']), "title='keywords'");
+		$db->update('config', array('value' => $insert['forcetheme']), "title='forcetheme'");
+		$db->update('config', array('value' => $insert['disablereg']), "title='disablereg'");
+		$db->update('config', array('value' => $insert['disableval']), "title='disableval'");
+		$db->update('config', array('value' => $insert['valnew']), "title='valnew'");
+		$db->update('config', array('value' => $insert['maintenance']), "title='maintenance'");
+		$db->update('config', array('text' => $insert['reason']), "title='maintenance'");
+		$db->update('config', array('value' => $insert['maxpages']), "title='maxpages'");
+		$db->update('config', array('value' => $insert['admin_email']), "title='admin_email'");
+		
+		header('Location: admin.php?m=config');
+	}
 
 }
  
@@ -55,6 +60,8 @@ $xtpl->assign(array(
 	'FORM_MAXPAGES' => $excursion->inputbox('text', 'maxpages', $config['maxpages'], array('size' => 24, 'maxlength' => 64)),
 	'FORM_ADMIN_EMAIL' => $excursion->inputbox('text', 'admin_email', $config['admin_email'], array('size' => 24, 'maxlength' => 64))
 ));
+
+$excursion->display_messages($xtpl);
 
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');

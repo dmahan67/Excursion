@@ -1,6 +1,16 @@
 <!-- BEGIN: MAIN -->
 					<h1 class="page-title"><i class="icon-home"></i> Dashboard</h1>
 					
+					<!-- BEGIN: MESSAGE -->
+					<div class="alert-message block-message info fade in" data-alert="alert">
+						<ul>
+							<!-- BEGIN: ROW -->
+							<li>{ROW_MSG}</li>
+							<!-- END: ROW -->
+						</ul>
+					</div>
+					<!-- END: MESSAGE -->
+					
 					<div class="stat-container">
 
 						<div class="stat-holder">

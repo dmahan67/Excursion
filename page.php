@@ -34,7 +34,7 @@ if($action == 'remove')
 
 	$page_cat = $db->query("SELECT cat FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
 	
-	list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $page_cat);
+	list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('page', $page_cat);
 	$excursion->blockAuth($user['auth_admin']);
 	
 	$sql_page_delete = $db->delete('pages', "id=$id");
@@ -54,7 +54,7 @@ if($action == 'queue')
 	$page_state = $db->query("SELECT state FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
 	$page_cat = $db->query("SELECT cat FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
 	
-	list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $page_cat);
+	list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('page', $page_cat);
 	$excursion->blockAuth($user['auth_admin']);
 
 	if($page_state > 0 && $user['auth_admin'])
@@ -136,7 +136,7 @@ if($m == 'edit')
 	$sql = $db->query("SELECT * FROM pages WHERE id = $id LIMIT 1");
 	$row = $sql->fetch();
 	
-	list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $row['cat']);
+	list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('page', $row['cat']);
 	$excursion->blockAuth($user['auth_write']);
 	
 	$xtpl->assign(array(
@@ -160,14 +160,14 @@ if($m == 'edit')
 if($m == 'add')
 {
 
-	list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $c);
+	list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('page', $c);
 	$excursion->blockAuth($user['auth_write']);
 
 	$ex['location'] = 'page.add';
 
 	$xtpl = new XTemplate('themes/'.$user['theme'].'/page.add.xtpl');
 
-	if($action == 'send' && $user['auth_write'])
+	if($action == 'send')
 	{
 		
 		/* === Hook === */
@@ -229,7 +229,7 @@ if((isset($id) && $id > 0) && empty($m))
 	$sql = $db->query("SELECT * FROM pages WHERE id = $id LIMIT 1");
 	$row = $sql->fetch();
 	
-	list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $row['cat']);
+	list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('page', $row['cat']);
 	$excursion->blockAuth($user['auth_read']);
 	
 	if($row['state'] == '0')

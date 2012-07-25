@@ -33,7 +33,7 @@
 					
 					<p>Have your password reset, and emailed to you.</p>
 
-					<form action="users.php?action=recover&m=lostpass" method="post" class="form-stacked">
+					<form action="users.php?action=recover&amp;m=lostpass" method="post" class="form-stacked">
 						<fieldset>
 							<div class="clearfix">
 								<label for="email">Email Address</label>
@@ -57,7 +57,7 @@
 					
 					<p>Have an account validation email sent to you.</p>
 					
-					<form action="users.php?action=recover&m=validation" method="post" class="form-stacked">
+					<form action="users.php?action=recover&amp;m=validation" method="post" class="form-stacked">
 						<fieldset>
 							<div class="clearfix">
 								<label for="email">Email Address</label>
@@ -83,7 +83,7 @@
 					
 					<p>For your protection, we must ask that you enter the answer to your security question.</p>
 
-					<form action="users.php?action=recover&m=lostpass&step=2" method="post" class="form-stacked">
+					<form action="users.php?action=recover&amp;m=lostpass&amp;step=2" method="post" class="form-stacked">
 						<fieldset>
 							<div class="clearfix">
 								<label for="answer">{SECURITY_QUESTION}</label>

@@ -17,7 +17,7 @@
 			
 				<div class="span14">
 				
-					<!-- IF {PHP.user.auth_write} --><p class="pull-right padding10b"><a href="page.php?m=add&c={PHP.c}" class="btn">{PHP.lang.submitpage}</a></p><!-- ENDIF -->
+					<!-- IF {PHP.user.auth_write} --><p class="pull-right padding10b"><a href="page.php?m=add&amp;c={PHP.c}" class="btn">{PHP.lang.submitpage}</a></p><!-- ENDIF -->
 
 					<table class="table zebra-striped" id="sortTable">
 						<thead>

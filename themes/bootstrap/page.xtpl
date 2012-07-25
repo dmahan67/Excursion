@@ -48,7 +48,11 @@
 							<div class="span2">
 								<div class="comment_meta">
 									<p>
+										<!-- IF {PHP.plugins.gravatar.installed} -->
+										<img src="{COM_GRAVATAR}" />
+										<!-- ELSE -->
 										{COM_AVATAR}
+										<!-- ENDIF -->
 										<br />{PHP.lang.by} {COM_OWNER}          
 									</p>
 								</div>
@@ -99,7 +103,13 @@
 				
 				<div class="span4n5">
 					
-					<h4>{PHP.lang.pinfo}</h4>
+					<!-- IF {PHP.plugins.ratings.installed} -->
+					{RATINGS}
+					
+					<br />
+					<!-- ENDIF -->
+					
+					<h5>{PHP.lang.pinfo}</h5>
 					
 					<table class="borderless-table">
 						<tbody>
@@ -114,19 +124,21 @@
 						</tbody>
 					</table>	
 					
+					
+					
 					<!-- BEGIN: PAGE_FILE -->
-					<h4>{PHP.lang.download}</h4>
+					<h5>{PHP.lang.download}</h5>
 					
 					<p><a href="{FILE_URL}">{TITLE}</a></p>	
 					<!-- END: PAGE_FILE -->
 					
 					<!-- IF {PHP.user.group} == 4 -->
-					<h4>{PHP.lang.administration}</h4>
+					<h5>{PHP.lang.administration}</h5>
 					
 					<ul>
-						<li><a href="page.php?id={ID}&action=queue">{PHP.lang.pvq}</a></li>
-						<li><a href="page.php?id={ID}&m=edit">{PHP.lang.editpage}</a></li>
-						<li><a href="page.php?id={ID}&action=remove" onclick="return confirm_delete()">{PHP.lang.removepage}</a></li>
+						<li><a href="page.php?id={ID}&amp;action=queue">{PHP.lang.pvq}</a></li>
+						<li><a href="page.php?id={ID}&amp;m=edit">{PHP.lang.editpage}</a></li>
+						<li><a href="page.php?id={ID}&amp;action=remove" onclick="return confirm_delete()">{PHP.lang.removepage}</a></li>
 					</ul>
 					<!-- ENDIF -->
 				

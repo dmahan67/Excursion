@@ -60,7 +60,7 @@
 					
 					<hr />
 					
-					<p class="pull-right"><a href="pm.php?m=send&id={FROMUSER_ID}&title=Re: {TITLE}" class="btn">{PHP.lang.replytomessage}</a></p>
+					<p class="pull-right"><a href="pm.php?m=send&amp;id={FROMUSER_ID}&amp;title=Re: {TITLE}" class="btn">{PHP.lang.replytomessage}</a></p>
 					
 				</div>
 				

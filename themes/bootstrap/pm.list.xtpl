@@ -46,16 +46,16 @@
 									<td class="center"><input type="checkbox" class="checkbox" name="msg[{ID}]" /></td>
 									<!-- IF {PHP.f} == 'inbox' -->
 									<!-- IF {TOSTATE} == 0 -->
-									<td><a href="pm.php?m=details&id={ID}" class="strong">{TITLE}</a></td>
+									<td><a href="pm.php?m=details&amp;id={ID}" class="strong">{TITLE}</a></td>
 									<!-- ELSE -->
-									<td><a href="pm.php?m=details&id={ID}">{TITLE}</a></td>
+									<td><a href="pm.php?m=details&amp;id={ID}">{TITLE}</a></td>
 									<!-- ENDIF -->
 									<!-- ENDIF -->
 									<!-- IF {PHP.f} == 'sentbox' -->
 									<!-- IF {FROMSTATE} == 0 -->
-									<td><a href="pm.php?m=details&id={ID}" class="strong">{TITLE}</a></td>
+									<td><a href="pm.php?m=details&amp;id={ID}" class="strong">{TITLE}</a></td>
 									<!-- ELSE -->
-									<td><a href="pm.php?m=details&id={ID}">{TITLE}</a></td>
+									<td><a href="pm.php?m=details&amp;id={ID}">{TITLE}</a></td>
 									<!-- ENDIF -->
 									<!-- ENDIF -->
 									<td>{FROMUSER}</td>

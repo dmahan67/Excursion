@@ -11,6 +11,12 @@ require_once 'core/classes.php';
 require_once 'core/xtemplate.php';
 require_once 'core/common.php';
 
+if($_GET['do']=='rate'){
+	$ratings->rate();
+}else if($_GET['do']=='getrate'){
+	$ratings->getRating();
+}
+
 $ex['location'] = 'index';
 
 require_once 'core/header.php';

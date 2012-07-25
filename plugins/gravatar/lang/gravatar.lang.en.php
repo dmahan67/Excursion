@@ -6,6 +6,6 @@
  * @author Dyllon Mahan, Brock Burkholder
  */
  
-$lang['cart_price'] = 'Price';
+$lang['gravatar'] = 'Gravatar';
 
 ?>

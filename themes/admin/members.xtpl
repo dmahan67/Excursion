@@ -1,6 +1,16 @@
 <!-- BEGIN: MAIN -->
 					<h1 class="page-title"><i class="icon-user"></i> Members</h1>
 					
+					<!-- BEGIN: MESSAGE -->
+					<div class="alert-message block-message info fade in" data-alert="alert">
+						<ul>
+							<!-- BEGIN: ROW -->
+							<li>{ROW_MSG}</li>
+							<!-- END: ROW -->
+						</ul>
+					</div>
+					<!-- END: MESSAGE -->
+					
 					<!-- BEGIN: PERMISSIONS -->
 					<div class="row">
 					
@@ -17,7 +27,30 @@
 								<div class="widget-content">
 								
 									<form action="{FORM_ACTION}" method="post">
-									
+										
+										<table class="table borderless-table">
+											<thead>
+												<tr>
+													<th style="width:32px;"></th>
+													<th class="vertcenter">Administration</th>
+													<th class="span1 center"><img class="icon" src="assets/images/authentication/auth_r.png" alt="" title="Read" /></th>
+													<th class="span1 center"><img class="icon" src="assets/images/authentication/auth_w.png" alt="" title="Write" /></th>
+													<th class="span1 center"><img class="icon" src="assets/images/authentication/auth_a.png" alt="" title="Administrate" /></th>
+												</tr>
+											</thead>
+											<tbody>
+												<!-- BEGIN: ADMIN_ROW -->
+												<tr>
+													<td class="center"><img src="assets/images/icon-admin-default.png" /></td>
+													<td>Admin Panel</td>
+													<td class="center">{FORM_ADMIN_R}</td>
+													<td class="center">{FORM_ADMIN_W}</td>
+													<td class="center">{FORM_ADMIN_A}</td>
+												</tr>
+												<!-- END: ADMIN_ROW -->
+											</tbody>
+										</table>
+										
 										<table class="table borderless-table">
 											<thead>
 												<tr>
@@ -46,9 +79,9 @@
 												<tr>
 													<th style="width:32px;"></th>
 													<th class="vertcenter">Plugins</th>
-													<th class="span1 center"><img class="icon" src="assets/images/auth_r.png" alt="" title="Read" /></th>
-													<th class="span1 center"><img class="icon" src="assets/images/auth_w.png" alt="" title="Write" /></th>
-													<th class="span1 center"><img class="icon" src="assets/images/auth_a.png" alt="" title="Administrate" /></th>
+													<th class="span1 center"><img class="icon" src="assets/images/authentication/auth_r.png" alt="" title="Read" /></th>
+													<th class="span1 center"><img class="icon" src="assets/images/authentication/auth_w.png" alt="" title="Write" /></th>
+													<th class="span1 center"><img class="icon" src="assets/images/authentication/auth_a.png" alt="" title="Administrate" /></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -147,13 +180,6 @@
 								</div>
 									
 								<div class="widget-content">
-								
-									<!-- BEGIN: ERRORS -->
-									<div class="alert-message block-message error fade in" data-alert="alert" >
-										<a class="close" href="admin.php?m=members">&times;</a>
-										<p>{ERRORS_TEXT}</p>
-									</div>
-									<!-- END: ERRORS -->
 								
 									<form action="{FORM_ACTION_SAVE}" method="post" class="AdvancedForm form-horizontal">
 										<fieldset>

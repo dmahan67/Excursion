@@ -1,1 +1,0 @@
-ALTER TABLE `pages` ADD COLUMN `cart_price` DECIMAL(10,2) NOT NULL;

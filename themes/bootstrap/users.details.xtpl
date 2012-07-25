@@ -23,7 +23,11 @@
 						<div id="profile-elements" class="row">
 							
 							<div id="profile-avatar" class="span2">
+								<!-- IF {GRAVATAR} -->
+								<img id="profile-avatar-image" src="{GRAVATAR}">
+								<!-- ELSE -->
 								<img id="profile-avatar-image" src="{AVATAR}" alt="photo">
+								<!-- ENDIF -->
 							</div>
 							
 							<div id="profile-bio" class="span9">
@@ -31,7 +35,7 @@
 								<div id="profile-bio-content">
 								
 									<div id="profile-bio-name">{USERNAME}</div>
-									<div id="profile-bio-text"><a href="pm.php?m=send&id={ID}"><i class="icon-envelope"></i></a> {GROUP}</div>
+									<div id="profile-bio-text"><a href="pm.php?m=send&amp;id={ID}"><i class="icon-envelope"></i></a> {GROUP}</div>
 									
 								</div>
 								
@@ -43,7 +47,7 @@
 								
 									<div id="profile-follow-container">
 										
-										<!-- IF {PHP.user.group} == '4' --><a href="users.php?m=edit&id={ID}" class="btn small primary">{PHP.lang.edituser}</a><!-- ENDIF -->
+										<!-- IF {PHP.user.group} == '4' --><a href="users.php?m=edit&amp;id={ID}" class="btn small primary">{PHP.lang.edituser}</a><!-- ENDIF -->
 										
 									</div>
 									

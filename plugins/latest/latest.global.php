@@ -5,7 +5,7 @@ Hooks=global
 [END_PLUGIN]
 ==================== */
 
-list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('plugin', 'latest');
+list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('plugin', 'latest');
 if($user['auth_read'])
 {
 
@@ -51,7 +51,7 @@ if($user['auth_read'])
 		
 		foreach ($sql->fetchAll() as $pag)
 		{
-			list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $pag['cat']);
+			list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('page', $pag['cat']);
 			if($user['auth_read'])
 			{
 				$jj++;

@@ -13,6 +13,7 @@ $ex['location'] = 'plugin';
 require_once 'core/common.php';
 
 $p = $excursion->import('p', 'G', 'ALP', 24);
+$r = (isset($_POST['r'])) ? $excursion->import('r','P','ALP') : $excursion->import('r','G','ALP');
 
 if (!empty($p) && $plugins[$p]['installed'] && $plugins[$p]['standalone'])
 {
@@ -23,6 +24,15 @@ if (!empty($p) && $plugins[$p]['installed'] && $plugins[$p]['standalone'])
     {
         $path_skin = 'plugins/'.$extname.'/tpl/'.$extname.'.xtpl';
     }
+}
+elseif (!empty($r))
+{
+	$ajax_file = 'plugins/'.$r.'/'.$r.'.ajax.php';
+	
+	if (file_exists($ajax_file))
+	{
+		include $ajax_file;
+	}
 }
 else
 {

@@ -13,7 +13,7 @@ require_once 'core/common.php';
 
 $ex['location'] = 'list';
 
-list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $c);
+list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('page', $c);
 $excursion->blockAuth($user['auth_read']);
 
 require_once 'core/header.php';

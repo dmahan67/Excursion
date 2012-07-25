@@ -31,10 +31,17 @@
 								<th>{PHP.lang.gender}</th>
 								<td>{FORM_GENDER}</td>
 							</tr>
+							<!-- IF {PHP.plugins.gravatar.installed} -->
+							<tr>
+								<th>{PHP.lang.gravatar}</th>
+								<td>{FORM_GRAVATAR}</td>
+							</tr>
+							<!-- ELSE -->
 							<tr>
 								<th>{PHP.lang.avatar}</th>
 								<td><img id="profile-avatar-image" src="{PHP.user.avatar}"><br />{FORM_AVATAR}</td>
 							</tr>
+							<!-- ENDIF -->
 							<!-- IF {PHP.config.forcetheme} == 'no' -->
 							<tr>
 								<th>{PHP.lang.theme}</th>

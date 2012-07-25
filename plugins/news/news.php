@@ -5,7 +5,7 @@ Hooks=index.tags
 [END_PLUGIN]
 ==================== */
 
-list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('plugin', 'news');
+list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('plugin', 'news');
 if($user['auth_read'])
 {
 
@@ -44,7 +44,7 @@ if($user['auth_read'])
 	while ($row = $sql->fetch())
 	{
 
-		list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('page', $row['cat']);
+		list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('page', $row['cat']);
 		
 		if($user['auth_read'])
 		{

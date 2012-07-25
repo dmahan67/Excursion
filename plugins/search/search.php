@@ -5,7 +5,7 @@ Hooks=standalone
 [END_PLUGIN]
 ==================== */
 
-list($user['auth_read'], $user['auth_write'], $user['isadmin']) = $excursion->checkAuth('plugin', 'search');
+list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('plugin', 'search');
 $excursion->blockAuth($user['auth_read']);
 
 $query = $excursion->import('query', 'R', 'TXT');

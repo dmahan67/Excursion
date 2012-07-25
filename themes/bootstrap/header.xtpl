@@ -7,7 +7,7 @@
 	<title>{PHP.config.title} - {PHP.config.subtitle}</title>
 	<meta name="description" content="Open Source PHP Content Management System">
 	<meta name="keywords" content="{PHP.config.keywords}">
-	<meta name="author" content="Dyllon Mahan & Brock Burkholder">
+	<meta name="author" content="Dyllon Mahan, Brock Burkholder">
 	
 	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">

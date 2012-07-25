@@ -19,31 +19,34 @@ switch($a)
 	
 		if($action == 'send')
 		{
+			if (!$user['auth_admin']) $excursion->reportError('error_insufficient_rights');
 		
-			$mask = array();
-			$auth = $excursion->import('auth', 'P', 'ARR');
-			
-			foreach ($auth as $k => $v)
+			if(!$excursion->error_found())
 			{
-				foreach ($v as $i => $j)
+				$mask = array();
+				$auth = $excursion->import('auth', 'P', 'ARR');
+				
+				foreach ($auth as $k => $v)
 				{
-					if (is_array($j))
+					foreach ($v as $i => $j)
 					{
-						$mask = 0;
-						foreach ($j as $l => $m)
+						if (is_array($j))
 						{
-							$mask += $excursion->authValue($l);
+							$mask = 0;
+							foreach ($j as $l => $m)
+							{
+								$mask += $excursion->authValue($l);
+							}
+							$db->update('auth', array('rights' => $mask),
+								"groupid=? AND code=? AND area=?", array($grpid, $k, $i));
 						}
-						$db->update('auth', array('rights' => $mask),
-							"groupid=? AND code=? AND area=?", array($grpid, $k, $i));
 					}
 				}
+				
+				$excursion->reorderAuth();
+				
+				header('Location: admin.php?m=members&a=permissions&grpid=' . $grpid);
 			}
-			
-			$excursion->reorderAuth();
-			
-			header('Location: admin.php?m=members&a=permissions&grpid=' . $grpid);
-		
 		}
 	
 		$sql = $db->query("SELECT * FROM auth WHERE groupid = '".$grpid."' AND code = 'page' ORDER BY area ASC");
@@ -132,6 +135,39 @@ switch($a)
 			$xtpl->parse('MAIN.PERMISSIONS.PLUGIN_ROW');
 		}
 		
+		$sql3 = $db->query("SELECT * FROM auth WHERE groupid = '".$grpid."' AND code = 'admin' ORDER BY area ASC");
+		foreach ($sql3->fetchAll() as $row3)
+		{
+			$form_admin[$row3['area']]['R'] = false;
+			$form_admin[$row3['area']]['W'] = false;
+			$form_admin[$row3['area']]['A'] = false;
+			
+			$rights_admin = $excursion->getAuth($row3['rights']);
+			$masks_admin = str_split($rights_admin);
+			foreach ($masks_admin as $k_admin)
+			{
+				$form_admin[$row3['area']][$k_admin] = true;
+			}
+			$lock_admin = $excursion->getAuth($row3['rights_lock']);
+			$masks_admin = str_split($lock_admin);
+			foreach ($masks_admin as $k_admin)
+			{
+				$locked_admin[$row3['area']][$k_admin] = true;
+			}
+			
+			$form_admin_r = (!$locked_admin[$row3['area']]['R']) ? $excursion->checkbox($form_admin[$row3['area']]['R'], 'auth[admin]['.$row3['area'].'][R]') : '<img src="assets/images/authentication/auth_lock.png" />';
+			$form_admin_w = (!$locked_admin[$row3['area']]['W']) ? $excursion->checkbox($form_admin[$row3['area']]['W'], 'auth[admin]['.$row3['area'].'][W]') : '<img src="assets/images/authentication/auth_lock.png" />';
+			$form_admin_a = (!$locked_admin[$row3['area']]['A']) ? $excursion->checkbox($form_admin[$row3['area']]['A'], 'auth[admin]['.$row3['area'].'][A]') : '<img src="assets/images/authentication/auth_lock.png" />';
+							
+			$xtpl->assign(array(
+				'FORM_ADMIN_R' => $form_admin_r,
+				'FORM_ADMIN_W' => $form_admin_w,
+				'FORM_ADMIN_A' => $form_admin_a
+			));
+			
+			$xtpl->parse('MAIN.PERMISSIONS.ADMIN_ROW');
+		}
+		
 		$xtpl->assign('FORM_ACTION', $excursion->url('admin', 'm=members&a=permissions&grpid='.$grpid.'&action=send'));
 		
 		$xtpl->parse('MAIN.PERMISSIONS');
@@ -144,34 +180,37 @@ switch($a)
 	
 		if($action == 'update')
 		{
-
-			$rstructuretitle = $excursion->import('rstructuretitle', 'P', 'ARR');
-			$rstructuredesc = $excursion->import('rstructuredesc', 'P', 'ARR');
-
-			foreach ($rstructuretitle as $i => $k)
+			if (!$user['auth_write']) $excursion->reportError('error_insufficient_rights');
+			
+			if(!$excursion->error_found())
 			{
-				$oldrow = $db->query("SELECT id FROM groups WHERE id=".(int)$i)->fetch();
-				$rstructure['title'] = $excursion->import($rstructuretitle[$i], 'D', 'TXT');
-				$rstructure['desc'] = $excursion->import($rstructuredesc[$i], 'D', 'TXT');
+				$rstructuretitle = $excursion->import('rstructuretitle', 'P', 'ARR');
+				$rstructuredesc = $excursion->import('rstructuredesc', 'P', 'ARR');
 
-				$db->update(groups, $rstructure, "id=".(int)$i);
+				foreach ($rstructuretitle as $i => $k)
+				{
+					$oldrow = $db->query("SELECT id FROM groups WHERE id=".(int)$i)->fetch();
+					$rstructure['title'] = $excursion->import($rstructuretitle[$i], 'D', 'TXT');
+					$rstructure['desc'] = $excursion->import($rstructuredesc[$i], 'D', 'TXT');
+
+					$db->update(groups, $rstructure, "id=".(int)$i);
+				}
+
+				header('Location: admin.php?m=members');
 			}
-
-			header('Location: admin.php?m=members');
-
 		}
+		
 		if($action == 'save')
 		{
-
 			$insert['title'] = $excursion->import('title','P','TXT');
 			$insert['desc'] = $excursion->import('desc','P','TXT');
 
-			if (empty($insert['title'])) $error .= $lang['admin_error_title_missing'].'<br />';
+			if (empty($insert['title'])) $excursion->reportError('admin_error_title_missing');
+			if (!$user['auth_write']) $excursion->reportError('error_insufficient_rights');
 
-			if(empty($error))
+			if(!$excursion->error_found())
 			{
-			
-				$db->insert('groups', $insert);
+				$db->insert(groups, $insert);
 				$new_grpid = $db->lastInsertId();
 				
 				$sql = $db->query("SELECT * FROM auth WHERE groupid = '3' LIMIT 1");
@@ -181,73 +220,56 @@ switch($a)
 						Select ".$new_grpid.", code, area, rights, rights_lock from auth WHERE groupid = 3");
 				}
 				
+				$update_auth['rights'] = 0;
+				$update_auth['rights_lock'] = 0;
+				
+				$db->update(auth, $update_auth, "groupid='".$new_grpid."' AND code='admin'");
+				
 				$excursion->reorderAuth();
-
 				
 				header('Location: admin.php?m=members');
-				
 			}
-			if(!empty($error))
-			{
-			
-				$xtpl->assign(array(
-					'ERRORS_TEXT' => $error
-				));
-				$xtpl->parse('MAIN.ERRORS');
-				
-			}
-
 		}
+		
 		if($action == 'remove')
 		{
-
-			if($id <= 4)
-			{
+			if (!$user['auth_admin']) $excursion->reportError('error_insufficient_rights');
+			if ($id <= 4) $excursion->reportError('admin_error_required_groups');
+			if (empty($id)) $excursion->reportError('error_unknown');
 			
-				$error = 'true'; // cannot delete required groups (inactive, banned, members, administrators)
-				
-			}
-
-			if(!empty($id) && empty($error)){
-
+			if(!$excursion->error_found())
+			{
 				$db->delete(groups, "id='".$db->prep($id)."'");
+				$db->delete(auth, "groupid='".$db->prep($id)."'");
 
 				header('Location: admin.php?m=members');
-
 			}
-
 		}
 
 		$sql = $db->query("SELECT * FROM groups ORDER BY id ASC");
-		$jj = 0;
 		foreach ($sql->fetchAll() as $row)
-			{
+		{
 			$structure_id = $row['id'];
 			
-				if($row['id'] == '1' || $row['id'] == '2' || $row['id'] == '4')
-				{
-				
-					$xtpl->assign(array('FORM_TITLE' => $excursion->inputbox('text', 'rstructuretitle['.$structure_id.']', $row['title'], 'maxlength="64"', 'input_text_disabled')));
-				
-				}
-				else
-				{
-				
-					$xtpl->assign(array('FORM_TITLE' => $excursion->inputbox('text', 'rstructuretitle['.$structure_id.']', $row['title'], 'maxlength="64"', 'input_text_medium')));
-				
-				}
-			
-				$xtpl->assign(array(
-					'FORM_DESC' => $excursion->inputbox('text', 'rstructuredesc['.$structure_id.']', $row['desc'], 'maxlength="64"'),
-					'ID' => $row['id'],
-					'TITLE' => $row['title'],
-					'DESC' => $row['desc'],
-					'ICON' => $row['icon']
-				));
-				
-				$xtpl->parse('MAIN.DEFAULT.ROW');
-				
+			if($row['id'] == '1' || $row['id'] == '2' || $row['id'] == '4')
+			{
+				$xtpl->assign(array('FORM_TITLE' => $excursion->inputbox('text', 'rstructuretitle['.$structure_id.']', $row['title'], 'maxlength="64"', 'input_text_disabled')));
 			}
+			else
+			{
+				$xtpl->assign(array('FORM_TITLE' => $excursion->inputbox('text', 'rstructuretitle['.$structure_id.']', $row['title'], 'maxlength="64"', 'input_text_medium')));
+			}
+		
+			$xtpl->assign(array(
+				'FORM_DESC' => $excursion->inputbox('text', 'rstructuredesc['.$structure_id.']', $row['desc'], 'maxlength="64"'),
+				'ID' => $row['id'],
+				'TITLE' => $row['title'],
+				'DESC' => $row['desc'],
+				'ICON' => $row['icon']
+			));
+			
+			$xtpl->parse('MAIN.DEFAULT.ROW');
+		}
 
 		$xtpl->assign(array(
 			'FORM_ACTION_SAVE' => $excursion->url('admin', 'm=members&action=save'),
@@ -260,6 +282,8 @@ switch($a)
 		
 	break;
 }
+
+$excursion->display_messages($xtpl);
 
 $xtpl->parse('MAIN');
 $xtpl->out('MAIN');
