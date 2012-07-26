@@ -25,20 +25,23 @@ foreach ($excursion->Hook('page.actions') as $pl)
 if($action == 'remove')
 {
 
-	/* === Hook === */
-	foreach ($excursion->Hook('page.remove') as $pl)
-	{
-		include $pl;
-	}
-	/* ===== */
-
 	$page_cat = $db->query("SELECT cat FROM pages WHERE id='$id' LIMIT 1")->fetchColumn();
 	
 	list($user['auth_read'], $user['auth_write'], $user['auth_admin']) = $excursion->checkAuth('page', $page_cat);
 	$excursion->blockAuth($user['auth_admin']);
 	
-	$sql_page_delete = $db->delete('pages', "id=$id");
-	header('Location: list.php?c='.$page_cat.'');
+	if($user['auth_admin'])
+	{
+		/* === Hook === */
+		foreach ($excursion->Hook('page.remove') as $pl)
+		{
+			include $pl;
+		}
+		/* ===== */
+		
+		$sql_page_delete = $db->delete(pages, "id=$id");
+		header('Location: list.php?c='.$page_cat.'');	
+	}
 
 }
 if($action == 'queue')

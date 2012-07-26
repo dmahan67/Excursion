@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int NOT NULL auto_increment,
   `area` varchar(225) collate utf8_unicode_ci NOT NULL default '',

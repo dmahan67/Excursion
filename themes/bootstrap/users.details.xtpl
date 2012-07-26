@@ -73,7 +73,7 @@
 
 								<div id="my-tab-content" class="tab-content">
 							
-									<div class="active" id="info">
+									<div class="active row" id="info">
 									
 										<div id="no-odes-message" class="span9">
 
@@ -108,7 +108,24 @@
 												</tbody>
 											</table>
 										
-										</div>  
+										</div>
+										
+										<div class="span4n5">
+										
+											<!-- IF {PHP.plugins.useractivity.installed} -->
+											<h5>Recent activity</h5>
+											
+											<table class="table borderless-table">
+												<!-- BEGIN: ACTIVITY_ROW -->
+												<tr>
+													<td>{DATE}</td>
+													<td><a href="page.php?id={PAGE_ID}#com-{ID}">{TITLE}</a></td>
+												</tr>
+												<!-- END: ACTIVITY_ROW -->
+											</table>
+											<!-- ENDIF -->
+										
+										</div>
 										
 									</div>
 									
